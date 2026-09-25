@@ -9,6 +9,7 @@ import { Footer } from '@/components/footer';
 import { NoteMarkdown } from '@/components/markdown';
 import { ReaderControls } from '@/components/reader-controls';
 import { ComputerNetworksModule } from '@/components/computer-networks-module';
+import { ComputerNetworksUnitTwoModule } from '@/components/computer-networks-unit-two-module';
 
 type Props = { params: Promise<{ courseSlug: string; moduleSlug: string }> };
 export const dynamic = 'force-dynamic';
@@ -17,13 +18,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> { c
 export default async function NotePage({ params }: Props) {
   const { courseSlug, moduleSlug } = await params; const module = await getModule(courseSlug, moduleSlug); if (!module?.note) notFound();
   if (courseSlug === 'computer-networks' && moduleSlug === 'computer-networks-unit-1') return <ComputerNetworksModule />;
+  if (courseSlug === 'computer-networks' && moduleSlug === 'computer-networks-unit-2') return <ComputerNetworksUnitTwoModule />;
   const toc = getTableOfContents(module.note.markdown);
   const index = module.course.modules.findIndex(item => item.slug === moduleSlug);
   const previous = module.course.modules[index - 1], next = module.course.modules[index + 1];
   const tocLinks = toc.map(item => <a key={item.id} href={`#${item.id}`} data-depth={item.depth}>{item.text}</a>);
   return <>
     <nav className="breadcrumbs" aria-label="Breadcrumb"><Link href="/notes">Course notes</Link><ChevronRight size={12} aria-hidden="true" /><Link href={`/notes/${courseSlug}`}>{module.course.title}</Link><ChevronRight size={12} aria-hidden="true" /><span aria-current="page">Module {String(module.position).padStart(2, '0')}</span></nav>
-    <div className="reader-layout"><article className="reader-article"><header className="reader-heading"><div className="eyebrow">{module.course.code ?? module.course.subject} · Module {String(module.position).padStart(2, '0')}</div><h1>{module.note.title}</h1><p>{module.description}</p><div className="course-meta"><span><Clock3 size={13} aria-hidden="true" />{module.estimatedMinutes} min read</span><span><FileText size={13} aria-hidden="true" />Original study notes</span><span><PenLine size={13} aria-hidden="true" />Updated {new Intl.DateTimeFormat('en', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(module.note.updatedAt)}</span></div></header>
+    <div className="reader-layout"><article className="reader-article"><header className="reader-heading"><div className="eyebrow">{module.course.code ?? module.course.subject} · Module {String(module.position).padStart(2, '0')}</div><h1>{module.note.title}</h1><p>{module.description}</p><div className="course-meta"><span><Clock3 size={13} aria-hidden="true" />{module.estimatedMinutes} min read</span><span><FileText size={13} aria-hidden="true" />Original study notes</span><span><PenLine size={13} aria-hidden="true" />Updated {new Intl.DateTimeFormat('en', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(module.note.updatedAt)}</span></div><Link href={`/interactive?course=${encodeURIComponent(courseSlug)}&module=${encodeURIComponent(moduleSlug)}`} className="btn btn-secondary mt-4 inline-flex">Open this module’s interactive lab <ArrowRight size={14} aria-hidden="true" /></Link></header>
       <ReaderControls title={module.note.title} course={module.course.title} />
       {toc.length > 0 && <details className="mobile-toc"><summary>On this page · {toc.length} sections</summary><nav aria-label="Mobile table of contents">{tocLinks}</nav></details>}
       <div className="prose" id="note-content"><NoteMarkdown markdown={module.note.markdown} /></div>
