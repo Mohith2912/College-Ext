@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { Activity, Cable, CheckCircle2, ChevronLeft, ChevronRight, CircleAlert, Layers, Network, Pause, Play, Radio, RotateCcw, Server, ShieldCheck, Sliders, Tv, Wifi } from 'lucide-react';
+import { CheckCircle2, Network, Pause, Play, RotateCcw } from 'lucide-react';
 
 const hops = [
   ['Hostel laptop', 'The click: generating a request', 'Application data becomes a request for the first video segment.', 'The browser creates a manifest request. It knows the service endpoint, not the route or cable.'],
@@ -26,7 +26,6 @@ export function ComputerNetworksModule() {
   const [hop, setHop] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [bits, setBits] = useState('10110010');
-  const [topology, setTopology] = useState('star');
   const [layer, setLayer] = useState(5);
   const [fault, setFault] = useState<keyof typeof faults>('physical');
   const parsedBits = useMemo(() => bits.replace(/[^01]/g, '').slice(0, 16).split(''), [bits]);
