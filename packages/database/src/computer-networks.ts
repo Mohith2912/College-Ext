@@ -129,6 +129,22 @@ Fictional design studio Maple Arc reports that Wi-Fi shows connected, ping to th
 
 Record the test, result, timestamp, source location, and layer. Compare a working device with the failing device. Change one variable at a time, preserve the original evidence, and state what result would falsify your hypothesis.
 
+## Topology field guide
+
+Topology describes how links and devices are arranged; it does not by itself guarantee availability. A **bus** shares a backbone, so a damaged backbone can affect the segment and multiple devices share its medium. A **ring** links each node to its neighbours; a break can interrupt a simple single ring, while dual rings or bypass mechanisms can add recovery. A **star** gives each endpoint a separate link to a central switch, making faults easier to isolate but making that switch a critical dependency. A **mesh** adds alternate paths and resilience at the cost of more links and more complex forwarding. Real networks combine patterns and use redundancy, so always inspect the actual design before predicting an outage.
+
+**Case study: choosing a lab layout.** A teaching lab has 24 workstations and needs straightforward fault isolation. A switched star is selected: each workstation has a dedicated access link to a switch, and the switch has an uplink to the gateway. If one workstation cable fails, the other access links can remain usable; if the only switch fails, the lab loses its local switching. Adding a second switch or redundant uplinks can reduce some single points of failure, but only if the network is configured to use those alternate paths safely.
+
+## Self-check questions
+
+1. In a simple switched star, which failure can affect every attached endpoint? What evidence would confirm it?
+2. Why does a successful ping to the default gateway not prove that DNS or an application server is available?
+3. At a router, which address belongs to the current link frame, and which address is used for routed delivery?
+4. A service resolves and responds to ping, but a TCP connection to its HTTPS port times out. Which boundary should be investigated next?
+5. Compare a bus and a ring: what link failure could interrupt each simple layout, and what design change could improve resilience?
+
+**Answer guide:** (1) The central switch or its power/uplink; inspect switch health, port/link state, and reachability from more than one endpoint. (2) The gateway test proves only that a local IP path to that gateway works; test DNS, remote routing, transport, and the application separately. (3) The MAC addresses identify the current link frame; the destination IP identifies the routed endpoint, subject to any address translation. (4) Investigate the service listener, firewall, and transport path at that port. (5) A bus backbone fault can segment or stop the shared medium; a break in a simple ring can interrupt the cycle. Redundant media, dual rings, or alternate mesh paths can help, depending on the design and recovery mechanism.
+
 ## Recall and application
 
 1. Why can a retransmission improve correctness while increasing delay?
