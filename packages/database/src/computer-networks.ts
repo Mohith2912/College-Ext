@@ -157,6 +157,74 @@ Topology describes how links and devices are arranged; it does not by itself gua
 - Troubleshooting works best as a sequence of falsifiable tests.
 - Stop at the first failing boundary and collect evidence before applying a fix.
 `),
+    module('Subnetting, VLANs, translation, and routing', 'Plan efficient IPv4 networks, segment traffic, track address translation, and compare interior with internet-wide routing.', `
+## Learning objectives
+
+Plan IPv4 subnets with CIDR and VLSM; explain access and trunk ports and inter-VLAN routing; trace NAT/PAT state; distinguish OSPF inside an administrative domain from BGP between autonomous systems; and describe the role and limits of forwarding hardware.
+
+## Case study: the Northstar delivery network
+
+Northstar is a fictional delivery cooperative connecting handheld scanners, sorting equipment, staff workstations, and shared services across a small distribution centre. Its engineers need distinct broadcast domains, room for future devices, predictable gateway addresses, and resilient upstream routes. This example uses documentation-only addresses and does not describe a real provider or company network.
+
+## CIDR, subnetting, and VLSM
+
+An IPv4 address contains 32 bits. A CIDR prefix such as /26 identifies how many leading bits belong to the network; the remaining bits identify addresses within that subnet. A /26 contains 64 total addresses and conventionally supports 62 host addresses because the network and directed-broadcast addresses are reserved. Prefix /31 is a special case used for point-to-point links, so it does not use that general host-count rule.
+
+Variable Length Subnet Masking (VLSM) assigns differently sized subnets from one parent block. Start by listing each segment's host requirement, add room for growth, allocate the largest subnet first, and align each subnet boundary to its block size. For example, 10.24.0.0/22 contains 1,024 addresses. A /24 for 180 devices, /26 for 50 devices, /27 for 20 devices, and /30 for a conventional two-host point-to-point link fit without overlap when allocated on valid boundaries.
+
+The usable range for a conventional subnet is from network address + 1 through broadcast address - 1. A wrong prefix or misaligned boundary can create overlap or leave a subnet too small; always check the parent range and each boundary before assigning gateway addresses.
+
+## VLANs, trunks, and inter-VLAN routing
+
+A VLAN creates a separate Layer 2 broadcast domain. An access port normally assigns end-device traffic to one configured VLAN. A trunk carries frames for multiple VLANs between network devices; IEEE 802.1Q adds a VLAN tag to identify the frame's VLAN, with a native VLAN convention for untagged traffic where configured. Both ends need compatible trunk and native-VLAN settings, and the allowed-VLAN list should be limited to what the link needs.
+
+Hosts in different VLANs need a Layer 3 function to communicate. A router subinterface or a switch virtual interface (SVI) can provide a gateway for each VLAN and route between them subject to policy. VLAN membership alone is not a security boundary: access controls and firewall rules must also express which traffic is permitted.
+
+## NAT and PAT state
+
+Network Address Translation (NAT) changes address information at a network boundary. Port Address Translation (PAT) also maps transport ports so multiple private endpoints can share a public IPv4 address. A state table records the inside and outside address/port tuples and protocol; replies are associated with the matching live mapping. The table has finite resources, but it is misleading to assume a fixed universal number of sessions per public address: usable ports, protocol, implementation, timeouts, and other limits all matter.
+
+Translation can help conserve public IPv4 addresses, but it does not replace routing, application security, or firewall policy. Troubleshooting should compare the original flow, the translated tuple, the return path, and whether the mapping is still active.
+
+## OSPF inside a network; BGP between networks
+
+OSPF is a link-state interior gateway protocol used within an administrative routing domain. Routers exchange link-state information within areas, build a link-state database for their area, and use a shortest-path-first calculation to choose routes. Area 0 is the OSPF backbone; area design affects how topology information is exchanged and summarized.
+
+BGP exchanges reachability between autonomous systems and applies routing policy to advertised prefixes and paths. AS_PATH helps detect loops and is one of several attributes used in route selection; BGP is not simply “choose the fewest hops.” A company may use OSPF internally and eBGP with an upstream provider, but the choice and configuration depend on the network's design and policy.
+
+When a link fails, OSPF may recalculate routes inside its domain, while BGP may select another policy-acceptable route after detecting the peer or reachability change. Neither protocol guarantees instant recovery. Timers, topology, route policies, hardware, and the failure mode affect convergence.
+
+## Forwarding hardware and software
+
+Routers and switches can use specialized forwarding silicon such as ASICs and table structures such as TCAM for fast lookups. Control-plane software learns routes and programs forwarding state; the data plane applies that state to packets. Actual capabilities and performance vary by equipment and configuration. A fast forwarding lookup cannot correct an incorrect route, VLAN policy, or missing return path.
+
+## Applied lab: plan, tag, translate, recover
+
+1. Allocate non-overlapping subnets from 10.24.0.0/22 for 180 scanner devices, 50 staff devices, 20 management devices, and a two-host point-to-point link. Show each prefix and usable range.
+2. Place scanners and staff in separate VLANs. Identify which ports are access ports, which link is a trunk, and where Layer 3 gateways provide inter-VLAN routing.
+3. Trace a scanner connection from its private source address and port through a PAT gateway. Record the inside tuple, translated tuple, destination, and return mapping.
+4. Draw an OSPF area inside the cooperative's network and an eBGP connection to an upstream network. Mark which protocol reacts to an internal link failure and which exchanges reachability between autonomous systems.
+5. Simulate a failed primary upstream link. Verify the backup path is configured and permitted before claiming service continuity.
+
+## Self-check
+
+1. How many conventional usable host addresses fit in a /26, and why is /31 handled differently?
+2. What does an 802.1Q tag let a trunk's receiving device distinguish?
+3. Why can two VLANs not communicate through Layer 2 switching alone?
+4. Which fields does a PAT mapping need to associate a reply with the original flow?
+5. Why should an engineer avoid describing BGP as selecting only the shortest AS path?
+6. What is the distinction between control-plane route calculation and data-plane forwarding?
+
+**Answer guide:** (1) 62; a /31 is commonly used for point-to-point links and treats both addresses as endpoints. (2) The VLAN identity for a tagged frame. (3) They are separate Layer 2 broadcast domains and need a Layer 3 gateway plus an allowing policy. (4) At minimum the protocol and translated/original source and destination address/port tuple needed by that implementation. (5) BGP selection also depends on policy and multiple route attributes. (6) The control plane determines and installs forwarding information; the data plane uses it to handle packets.
+
+## Key takeaways
+
+- Allocate subnets by host need and valid boundaries, largest first.
+- VLANs separate Layer 2 domains; routing and policy govern inter-VLAN traffic.
+- NAT/PAT state supports return traffic but does not replace security policy.
+- OSPF is interior link-state routing; BGP exchanges inter-domain reachability under policy.
+- Forwarding hardware executes configured state; it does not make network design decisions for the operator.
+`),
   ],
 };
 
@@ -168,6 +236,11 @@ export const computerNetworks: SeedCourse = {
     slug: 'computer-networks-unit-1',
     title: 'Computer Networks · Unit 1 Interactive Case Study',
     description: 'Follow one request from a campus laptop through wireless access, switching, routing, transport, and diagnosis.',
-    markdown: computerNetworksSource.modules.map(item => `## ${item.title}\n\n${item.markdown}`).join('\n\n'),
+    markdown: computerNetworksSource.modules.slice(0, 4).map(item => `## ${item.title}\n\n${item.markdown}`).join('\n\n'),
+  }, {
+    slug: 'computer-networks-unit-2',
+    title: 'Computer Networks · Unit 2 Network Design Lab',
+    description: computerNetworksSource.modules.at(-1)?.description ?? 'Plan and troubleshoot segmented networks, address translation, and routing.',
+    markdown: computerNetworksSource.modules.at(-1)?.markdown ?? '',
   }],
 };

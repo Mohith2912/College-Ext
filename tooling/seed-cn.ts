@@ -14,16 +14,13 @@ try {
     await tx.course.upsert({ where: { id: courseId }, update: { title: course.title, description: course.description, subject: course.subject, code: course.code, status: 'PUBLISHED', deletedAt: null }, create: { id: courseId, organizationId: organization.id, slug: course.slug, title: course.title, description: course.description, subject: course.subject, code: course.code, status: 'PUBLISHED' } });
     await tx.courseOffering.upsert({ where: { id: stableId(`offering:${course.slug}`) }, update: { termId: term.id, deletedAt: null }, create: { id: stableId(`offering:${course.slug}`), organizationId: organization.id, courseId, termId: term.id, position: 5 } });
     const existingModules = await tx.module.findMany({ where: { courseId }, orderBy: { position: 'asc' }, include: { note: true } });
-    const primaryModule = existingModules[0];
-    for (const oldModule of existingModules.slice(1)) {
-      if (oldModule.note) await tx.noteDocument.update({ where: { id: oldModule.note.id }, data: { deletedAt: new Date(), status: 'ARCHIVED' } });
-      await tx.module.update({ where: { id: oldModule.id }, data: { deletedAt: new Date(), status: 'ARCHIVED' } });
-    }
     // Keep administrator-authored outline entries intact. Seeded headings are
-    // updated in place below; a content refresh must not erase custom sections.
+    // updated in place below; a content refresh must not erase custom sections
+    // or other published modules.
     for (const [position, item] of course.modules.entries()) {
-      const moduleId = primaryModule?.id ?? stableId(`module:${course.slug}:${item.slug}`);
-      const noteId = primaryModule?.note?.id ?? stableId(`note:${moduleId}`);
+      const matchingModule = existingModules.find(existing => existing.slug === item.slug);
+      const moduleId = matchingModule?.id ?? stableId(`module:${course.slug}:${item.slug}`);
+      const noteId = matchingModule?.note?.id ?? stableId(`note:${moduleId}`);
       await tx.module.upsert({ where: { id: moduleId }, update: { slug: item.slug, title: item.title, description: item.description, position: position + 1, estimatedMinutes: Math.max(4, Math.ceil(item.markdown.split(/\s+/g).length / 180)), status: 'PUBLISHED', deletedAt: null }, create: { id: moduleId, organizationId: organization.id, courseId, slug: item.slug, title: item.title, description: item.description, position: position + 1, estimatedMinutes: Math.max(4, Math.ceil(item.markdown.split(/\s+/g).length / 180)), status: 'PUBLISHED' } });
       await tx.noteDocument.upsert({ where: { id: noteId }, update: { title: item.title, markdown: item.markdown, status: 'PUBLISHED', license: 'CC BY 4.0', provenance: 'Original Aetheria Computer Networks material. Examples are fictional teaching scenarios.', publishedAt: new Date(), deletedAt: null }, create: { id: noteId, organizationId: organization.id, moduleId, title: item.title, markdown: item.markdown, status: 'PUBLISHED', license: 'CC BY 4.0', provenance: 'Original Aetheria Computer Networks material. Examples are fictional teaching scenarios.', publishedAt: new Date() } });
       await tx.noteVersion.upsert({ where: { noteDocumentId_version: { noteDocumentId: noteId, version: 1 } }, update: { markdown: item.markdown, checksum: checksum(item.markdown) }, create: { id: stableId(`version:${noteId}:1`), noteDocumentId: noteId, version: 1, title: item.title, markdown: item.markdown, checksum: checksum(item.markdown), changeSummary: 'Original Computer Networks edition' } });
