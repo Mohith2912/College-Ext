@@ -1,5 +1,6 @@
 import 'server-only';
 import { prisma } from '@aetheria/database';
+import { unstable_cache } from 'next/cache';
 import { organizationScope } from './library';
 
 export type DialogueTurn = { speaker: 'Mira' | 'Arun'; text: string };
@@ -72,7 +73,7 @@ function stepsFor(markdown: string, moduleTitle: string): InteractiveStep[] {
   return steps.slice(0, 8);
 }
 
-export async function getLearningStudio() {
+async function loadLearningStudio() {
   const terms = await prisma.academicTerm.findMany({
     where: { deletedAt: null, organization: organizationScope },
     orderBy: { number: 'asc' },
@@ -129,3 +130,5 @@ export async function getLearningStudio() {
   }
   return { terms: terms.map(term => ({ title: term.name, number: term.number })), episodes, modules };
 }
+
+export const getLearningStudio = unstable_cache(loadLearningStudio, ['aetheria-learning-studio'], { revalidate: 300, tags: ['aetheria-curriculum'] });
