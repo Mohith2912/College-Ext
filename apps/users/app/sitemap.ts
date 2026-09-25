@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
 import { prisma } from '@aetheria/database';
 import { organizationScope } from '@/lib/library';
+export const dynamic='force-dynamic';
 export default async function sitemap():Promise<MetadataRoute.Sitemap>{const origin=process.env.USERS_URL??'http://localhost:3000';const courses=await prisma.course.findMany({where:{status:'PUBLISHED',deletedAt:null,organization:organizationScope},select:{slug:true,updatedAt:true,modules:{where:{status:'PUBLISHED',deletedAt:null,note:{status:'PUBLISHED',deletedAt:null}},select:{slug:true,updatedAt:true}}}});return['','/notes','/podcasts','/interactive','/case-studies','/about','/privacy','/terms','/accessibility','/content-policy'].map(path=>({url:`${origin}${path}`,lastModified:new Date()})).concat(courses.flatMap(course=>[{url:`${origin}/notes/${course.slug}`,lastModified:course.updatedAt},...course.modules.map(module=>({url:`${origin}/notes/${course.slug}/${module.slug}`,lastModified:module.updatedAt}))]))}
