@@ -131,4 +131,4 @@ async function loadLearningStudio() {
   return { terms: terms.map(term => ({ title: term.name, number: term.number })), episodes, modules };
 }
 
-export const getLearningStudio = unstable_cache(loadLearningStudio, ['aetheria-learning-studio'], { revalidate: 300, tags: ['aetheria-curriculum'] });
+export const getLearningStudio = unstable_cache(loadLearningStudio, ['aetheria-learning-studio-v2'], { revalidate: 300, tags: ['aetheria-curriculum'] });

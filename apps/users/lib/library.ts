@@ -16,7 +16,7 @@ export async function getLibrary({ term, subject, q, availability }: { term?: st
     }),
     prisma.course.findMany({ where: publicCourse, select: { subject: true } }),
     prisma.module.count({ where: { ...publicModule, course: publicCourse } }),
-  ]), ['aetheria-library', term ?? '', subject ?? '', q ?? '', availability ?? ''], { revalidate: 60, tags: ['aetheria-curriculum'] });
+  ]), ['aetheria-library-v2', term ?? '', subject ?? '', q ?? '', availability ?? ''], { revalidate: 60, tags: ['aetheria-curriculum'] });
   const [terms, courses, allCourses, moduleCount] = await load();
   return { terms, courses, courseCount: allCourses.length, moduleCount, subjects: [...new Set(allCourses.map(course => course.subject))].sort() };
 }
