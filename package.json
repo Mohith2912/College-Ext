@@ -1,0 +1,52 @@
+{
+  "name": "aetheria-user-application",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "node --env-file=.env tooling/dev.mjs",
+    "build": "node --env-file=.env node_modules/turbo/bin/turbo run build",
+    "lint": "eslint .",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "turbo run build --filter=@aetheria/database --filter=@aetheria/validation --filter=@aetheria/auth --filter=@aetheria/ai && vitest run --config vitest.config.ts",
+    "test:e2e": "node --env-file=.env node_modules/@playwright/test/cli.js test",
+    "db:generate": "prisma generate",
+    "db:validate": "prisma validate",
+    "db:migrate": "prisma migrate deploy",
+    "db:seed": "node --env-file=.env --import tsx prisma/seed.ts",
+    "db:setup": "powershell -NoProfile -ExecutionPolicy Bypass -File tooling/mysql.ps1 -Action setup",
+    "db:start": "powershell -NoProfile -ExecutionPolicy Bypass -File tooling/mysql.ps1 -Action start",
+    "db:stop": "powershell -NoProfile -ExecutionPolicy Bypass -File tooling/mysql.ps1 -Action stop",
+    "mail": "node --env-file=.env tooling/mail.mjs",
+    "start": "node --env-file=.env tooling/start-production.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.11.1",
+    "@eslint/js": "9.39.5",
+    "@playwright/test": "1.63.0",
+    "@types/node": "22.20.4",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.2.3",
+    "@types/smtp-server": "3.5.13",
+    "eslint": "9.39.5",
+    "eslint-config-next": "15.5.26",
+    "globals": "16.5.0",
+    "mysql2": "3.24.4",
+    "prettier": "3.8.3",
+    "prisma": "6.19.0",
+    "smtp-server": "3.19.13",
+    "tsup": "8.5.1",
+    "tsx": "4.21.0",
+    "turbo": "2.11.3",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.57.1",
+    "vitest": "3.2.7",
+    "@prisma/client": "6.19.0"
+  }
+}

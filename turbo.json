@@ -1,0 +1,9 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalEnv": ["DATABASE_URL", "AUTH_SECRET", "USERS_URL", "ADMIN_URL", "ORGANIZATION_SLUG", "SMTP_HOST", "SMTP_PORT", "SMTP_FROM", "SMTP_USER", "SMTP_PASSWORD", "AI_BASE_URL", "AI_API_KEY", "AI_MODEL"],
+  "tasks": {
+    "build": { "dependsOn": ["^build"], "outputs": ["dist/**", ".next/**", "!.next/cache/**"] },
+    "typecheck": { "dependsOn": ["^build"], "outputs": [] },
+    "dev": { "cache": false, "persistent": true }
+  }
+}
