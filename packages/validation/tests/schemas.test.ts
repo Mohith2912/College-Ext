@@ -21,6 +21,6 @@ describe("request validation", () => {
   });
   it("fails closed without production secrets and HTTPS", () => {
     expect(() => requireRuntimeEnvironment({ NODE_ENV: "production" })).toThrow();
-    expect(() => requireRuntimeEnvironment({ NODE_ENV: "production", DATABASE_URL: "mysql://user:password@localhost/db", AUTH_SECRET: "a".repeat(40), USERS_URL: "http://example.com", ADMIN_URL: "https://admin.example.com" })).toThrow("HTTPS");
+    expect(() => requireRuntimeEnvironment({ NODE_ENV: "production", DATABASE_URL: "mysql://user:password@localhost/db", AUTH_SECRET: "a".repeat(40), USERS_URL: "http://example.com" })).toThrow("HTTPS");
   });
 });

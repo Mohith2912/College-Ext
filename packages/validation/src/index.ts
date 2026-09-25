@@ -38,7 +38,6 @@ export const environmentSchema = z.object({
   DATABASE_URL: optionalUrl,
   AUTH_SECRET: optionalString,
   USERS_URL: z.string().url().default("http://localhost:3000"),
-  ADMIN_URL: z.string().url().default("http://localhost:3001"),
   ORGANIZATION_SLUG: slugSchema.default("aetheria"),
   SMTP_HOST: optionalString,
   SMTP_PORT: z.coerce.number().int().min(1).max(65535).default(1025),
@@ -60,7 +59,7 @@ export function requireRuntimeEnvironment(source: Record<string, string | undefi
   const env = readEnvironment(source);
   if (!env.DATABASE_URL || !/^mysql:\/\//.test(env.DATABASE_URL)) throw new Error("A MySQL DATABASE_URL is required at runtime.");
   if (!env.AUTH_SECRET || env.AUTH_SECRET.length < 32) throw new Error("AUTH_SECRET must contain at least 32 characters.");
-  if (env.NODE_ENV === "production" && [env.USERS_URL,env.ADMIN_URL].some(value=>{const url=new URL(value);return url.protocol!=="https:"&&!["localhost","127.0.0.1","[::1]"].includes(url.hostname)})) throw new Error("Production application URLs must use HTTPS (except local loopback previews).");
+  if (env.NODE_ENV === "production") { const url=new URL(env.USERS_URL); if(url.protocol!=="https:"&&!["localhost","127.0.0.1","[::1]"].includes(url.hostname)) throw new Error("The production application URL must use HTTPS (except local loopback previews)."); }
   return { ...env, AUTH_SECRET: env.AUTH_SECRET, DATABASE_URL: env.DATABASE_URL };
 }
 

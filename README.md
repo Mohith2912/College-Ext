@@ -2,12 +2,7 @@
 
 Aetheria is an independent study companion for exploring original course notes, fictional case studies, and grounded AI-assisted explanations. It is not an official institutional platform.
 
-This repository contains two separate applications that share one MySQL database:
-
-- `apps/users` provides the learner-facing study experience.
-- `apps/admin` provides protected syllabus, review, publication, and audit workflows.
-
-Draft material remains private. When an administrator publishes a syllabus, the user application reads the published course and modules immediately.
+This repository contains the learner-facing application in `apps/users`, backed by MySQL.
 
 ## Features
 
@@ -20,7 +15,6 @@ Draft material remains private. When an administrator publishes a syllabus, the 
 - Generative study responses grounded in published notes with citations
 - Installable PWA support and offline fallback
 - MySQL persistence with Prisma
-- Role-protected administration with syllabus editing, publication history, and audit records
 
 ## Local setup
 
@@ -32,11 +26,10 @@ Copy-Item .env.example .env
 pnpm db:setup
 pnpm db:migrate
 pnpm db:seed
-pnpm admin:create
 pnpm dev
 ```
 
-Open the user application at `http://localhost:3000`, administration at `http://localhost:3001`, and the development email inbox at `http://localhost:8025`. The generated administrator credentials are written to the ignored `.local/admin-access.txt` file.
+Open the user application at `http://localhost:3000` and the development email inbox at `http://localhost:8025`.
 
 ## Generated study responses
 

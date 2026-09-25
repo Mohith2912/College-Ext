@@ -5,7 +5,6 @@ import { prisma } from "@aetheria/database";
 import { requireRuntimeEnvironment, signInSchema } from "@aetheria/validation";
 import { requestAddress, type AppSurface } from "./http";
 import { hashPassword, verifyPassword } from "./password";
-import { EDITORIAL_ROLES } from "./policy";
 import { consumeRateLimit } from "./rate-limit";
 
 declare module "next-auth" {
@@ -22,7 +21,7 @@ export function makeAuth(surface: AppSurface): NextAuthResult {
   return NextAuth(() => {
     // Auth.js lazy initialization allows static builds without injecting real secrets.
     const env = requireRuntimeEnvironment();
-    const baseUrl = new URL(surface === "admin" ? env.ADMIN_URL : env.USERS_URL);
+    const baseUrl = new URL(env.USERS_URL);
     const secure = baseUrl.protocol === "https:";
     const cookiePrefix = `${secure ? "__Secure-" : ""}aetheria.${surface}`;
     return {
@@ -48,7 +47,7 @@ export function makeAuth(surface: AppSurface): NextAuthResult {
           const passwordValid = await verifyPassword(parsed.data.password, passwordHash);
           if (!user || !passwordValid || user.deletedAt !== null || user.emailVerified === null) return null;
           const membership = await prisma.organizationMembership.findFirst({
-            where: { userId: user.id, deletedAt: null, revokedAt: null, organization: { slug: env.ORGANIZATION_SLUG, deletedAt: null }, ...(surface === "admin" ? { role: { in: [...EDITORIAL_ROLES] } } : {}) },
+            where: { userId: user.id, deletedAt: null, revokedAt: null, organization: { slug: env.ORGANIZATION_SLUG, deletedAt: null } },
           });
           if (!membership) return null;
           return { id: user.id, name: user.name, email: user.email, sessionVersion: user.sessionVersion };
@@ -61,7 +60,7 @@ export function makeAuth(surface: AppSurface): NextAuthResult {
           if (!currentToken.sub || currentToken.appSurface !== surface || typeof currentToken.sessionVersion !== "number") return null;
           const current = await prisma.user.findUnique({ where: { id: currentToken.sub }, select: { id: true, name: true, email: true, emailVerified: true, deletedAt: true, sessionVersion: true } });
           if (!current || current.deletedAt !== null || current.emailVerified === null || current.sessionVersion !== currentToken.sessionVersion) return null;
-          const membership = await prisma.organizationMembership.findFirst({ where: { userId: current.id, deletedAt: null, revokedAt: null, organization: { slug: env.ORGANIZATION_SLUG, deletedAt: null }, ...(surface === "admin" ? { role: { in: [...EDITORIAL_ROLES] } } : {}) } });
+          const membership = await prisma.organizationMembership.findFirst({ where: { userId: current.id, deletedAt: null, revokedAt: null, organization: { slug: env.ORGANIZATION_SLUG, deletedAt: null } } });
           if (!membership) return null;
           currentToken.name = current.name;
           currentToken.email = current.email;

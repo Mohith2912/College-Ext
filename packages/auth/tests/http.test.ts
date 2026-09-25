@@ -4,11 +4,10 @@ import { assertTrustedOrigin, parseJsonRequest } from "../src/http";
 
 afterEach(() => vi.unstubAllEnvs());
 describe("custom route security", () => {
-  it("requires the exact configured app origin and rejects the other surface", () => {
+  it("requires the exact configured application origin", () => {
     vi.stubEnv("USERS_URL", "https://study.example.com");
-    vi.stubEnv("ADMIN_URL", "https://admin.example.com");
     expect(() => assertTrustedOrigin(new Request("https://study.example.com/api", { headers: { origin: "https://study.example.com" } }))).not.toThrow();
-    expect(() => assertTrustedOrigin(new Request("https://study.example.com/api", { headers: { origin: "https://admin.example.com" } }))).toThrow();
+    expect(() => assertTrustedOrigin(new Request("https://study.example.com/api", { headers: { origin: "https://other.example.com" } }))).toThrow();
     expect(() => assertTrustedOrigin(new Request("https://study.example.com/api"))).toThrow();
   });
   it("limits streamed bodies even without content-length", async () => {

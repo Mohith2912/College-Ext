@@ -1,10 +1,10 @@
 import { readEnvironment, type z } from "@aetheria/validation";
 import { AccessError } from "./errors";
 
-export type AppSurface = "users" | "admin";
-export function assertTrustedOrigin(request: Request, surface: AppSurface = "users"): void {
+export type AppSurface = "users";
+export function assertTrustedOrigin(request: Request): void {
   const env = readEnvironment();
-  const expected = new URL(surface === "users" ? env.USERS_URL : env.ADMIN_URL).origin;
+  const expected = new URL(env.USERS_URL).origin;
   const origin = request.headers.get("origin");
   if (!origin || origin !== expected) throw new AccessError("ORIGIN_REJECTED", 403, "Open the form from this application and try again.");
   const fetchSite = request.headers.get("sec-fetch-site");

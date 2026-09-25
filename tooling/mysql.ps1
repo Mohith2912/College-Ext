@@ -66,7 +66,6 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '$rootPassword';
 DATABASE_URL="mysql://aetheria:$databasePassword@127.0.0.1:3307/aetheria"
 AUTH_SECRET="$authSecret"
 USERS_URL="http://localhost:3000"
-ADMIN_URL="http://localhost:3001"
 ORGANIZATION_SLUG="aetheria"
 SMTP_HOST="127.0.0.1"
 SMTP_PORT="1025"

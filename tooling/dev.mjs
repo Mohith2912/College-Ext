@@ -2,7 +2,7 @@ import { spawn } from 'node:child_process';
 import { createRequire } from 'node:module';
 const require=createRequire(import.meta.url);
 const children=[];
-for(const [app,port] of [['users','3000'],['admin','3001']]){
+for(const [app,port] of [['users','3000']]){
   const cli=require.resolve('next/dist/bin/next',{paths:[`${process.cwd()}/apps/${app}`]});
   children.push(spawn(process.execPath,[cli,'dev','--port',port],{cwd:`${process.cwd()}/apps/${app}`,env:process.env,stdio:'inherit',windowsHide:true}));
 }
