@@ -32,10 +32,13 @@ try {
       await tx.module.upsert({ where: { id: moduleId }, update: { slug: item.slug, title: item.title, description: item.description, position: position + 1, estimatedMinutes: Math.max(4, Math.ceil(item.markdown.split(/\s+/g).length / 180)), status: 'PUBLISHED', deletedAt: null }, create: { id: moduleId, organizationId: organization.id, courseId, slug: item.slug, title: item.title, description: item.description, position: position + 1, estimatedMinutes: Math.max(4, Math.ceil(item.markdown.split(/\s+/g).length / 180)), status: 'PUBLISHED' } });
       await tx.noteDocument.upsert({ where: { id: noteId }, update: { title: item.title, markdown: item.markdown, status: 'PUBLISHED', license: 'CC BY 4.0', provenance: 'Original Aetheria Computer Networks material. Examples are fictional teaching scenarios.', publishedAt: new Date(), deletedAt: null }, create: { id: noteId, organizationId: organization.id, moduleId, title: item.title, markdown: item.markdown, status: 'PUBLISHED', license: 'CC BY 4.0', provenance: 'Original Aetheria Computer Networks material. Examples are fictional teaching scenarios.', publishedAt: new Date() } });
       await tx.noteVersion.upsert({ where: { noteDocumentId_version: { noteDocumentId: noteId, version: 1 } }, update: { markdown: item.markdown, checksum: checksum(item.markdown) }, create: { id: stableId(`version:${noteId}:1`), noteDocumentId: noteId, version: 1, title: item.title, markdown: item.markdown, checksum: checksum(item.markdown), changeSummary: 'Original Computer Networks edition' } });
+      const usedSectionSlugs = new Set<string>();
       for (const [sectionPosition, heading] of [...item.markdown.matchAll(/^## (.+)$/gm)].entries()) {
         const sectionTitle = heading[1];
         const sectionId = stableId(`section:${moduleId}:${sectionPosition}`);
-        const sectionSlug = sectionTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        const baseSlug = sectionTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        const sectionSlug = usedSectionSlugs.has(baseSlug) ? `${baseSlug}-${sectionPosition + 1}` : baseSlug;
+        usedSectionSlugs.add(sectionSlug);
         await tx.moduleSection.upsert({ where: { id: sectionId }, update: { title: sectionTitle, position: sectionPosition + 1 }, create: { id: sectionId, moduleId, slug: sectionSlug, title: sectionTitle, position: sectionPosition + 1 } });
         await tx.topic.upsert({ where: { id: stableId(`topic:${sectionId}`) }, update: { title: sectionTitle }, create: { id: stableId(`topic:${sectionId}`), sectionId, slug: sectionSlug, title: sectionTitle, position: 1 } });
       }
