@@ -44,6 +44,9 @@ importers:
       mysql2:
         specifier: 3.24.4
         version: 3.24.4(@types/node@22.20.4)
+      next:
+        specifier: 15.5.26
+        version: 15.5.26(@playwright/test@1.63.0)(@types/node@22.20.4)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       prettier:
         specifier: 3.8.3
         version: 3.8.3
