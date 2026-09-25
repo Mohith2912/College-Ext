@@ -19,13 +19,8 @@ try {
       if (oldModule.note) await tx.noteDocument.update({ where: { id: oldModule.note.id }, data: { deletedAt: new Date(), status: 'ARCHIVED' } });
       await tx.module.update({ where: { id: oldModule.id }, data: { deletedAt: new Date(), status: 'ARCHIVED' } });
     }
-    if (primaryModule) {
-      const oldSections = await tx.moduleSection.findMany({ where: { moduleId: primaryModule.id }, select: { id: true } });
-      if (oldSections.length) {
-        await tx.topic.deleteMany({ where: { sectionId: { in: oldSections.map(section => section.id) } } });
-        await tx.moduleSection.deleteMany({ where: { id: { in: oldSections.map(section => section.id) } } });
-      }
-    }
+    // Keep administrator-authored outline entries intact. Seeded headings are
+    // updated in place below; a content refresh must not erase custom sections.
     for (const [position, item] of course.modules.entries()) {
       const moduleId = primaryModule?.id ?? stableId(`module:${course.slug}:${item.slug}`);
       const noteId = primaryModule?.note?.id ?? stableId(`note:${moduleId}`);
