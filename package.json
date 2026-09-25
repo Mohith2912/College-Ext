@@ -18,6 +18,7 @@
     "test:e2e": "node --env-file=.env node_modules/@playwright/test/cli.js test",
     "db:generate": "prisma generate",
     "db:validate": "prisma validate",
+    "db:create": "node tooling/ensure-database.mjs",
     "db:migrate": "prisma migrate deploy",
     "db:seed": "node --env-file=.env --import tsx prisma/seed.ts",
     "db:setup": "powershell -NoProfile -ExecutionPolicy Bypass -File tooling/mysql.ps1 -Action setup",

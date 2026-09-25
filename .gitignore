@@ -3,6 +3,7 @@ node_modules/
 dist/
 .turbo/
 .local/
+prisma/aiven-ca.pem
 .env
 .env.*
 !.env.example
