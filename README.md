@@ -14,6 +14,8 @@ Draft material remains private. When an administrator publishes a syllabus, the 
 - Responsive course library with 12 demonstration courses and 48 modules
 - Focused Markdown note reader with reading preferences
 - Original fictional case studies connected to course modules
+- Semester-based course podcasts presented as a two-host spoken conversation
+- Interactive step-by-step sessions generated from the latest published module content
 - Account registration, email verification, and private study workspace
 - Generative study responses grounded in published notes with citations
 - Installable PWA support and offline fallback

@@ -1,2 +1,2 @@
 import type { MetadataRoute } from 'next';
-export default function manifest():MetadataRoute.Manifest{return{name:'Aetheria Study Companion',short_name:'Aetheria',description:'An independent study companion for original course notes and practice.',start_url:'/notes',display:'standalone',background_color:'#f7f6f2',theme_color:'#235f53',icons:[{src:'/icon.svg',sizes:'any',type:'image/svg+xml'}]}}
+export default function manifest():MetadataRoute.Manifest{return{name:'Aetheria Study Companion',short_name:'Aetheria',description:'An independent study companion for notes, two-host course conversations, and interactive practice.',start_url:'/notes',display:'standalone',background_color:'#f7f6f2',theme_color:'#235f53',icons:[{src:'/icon.svg',sizes:'any',type:'image/svg+xml'}]}}
