@@ -1,8 +1,9 @@
 import { spawn } from 'node:child_process';
 import { createRequire } from 'node:module';
 const require=createRequire(import.meta.url);
-const app='users';
-const port='3000';
+const app=process.argv[2]??'users';
+if(!['users','admin'].includes(app))throw new Error('Choose users or admin.');
+const port=app==='users'?'3000':'3001';
 const cli=require.resolve('next/dist/bin/next',{paths:[`${process.cwd()}/apps/${app}`]});
 const child=spawn(process.execPath,[cli,'start','-p',process.env.PORT??port],{cwd:`${process.cwd()}/apps/${app}`,env:process.env,stdio:'inherit',windowsHide:true});
 child.on('exit',code=>process.exit(code??1));

@@ -1,0 +1,5 @@
+import { prisma } from '@aetheria/database';
+import { editorialContext } from '@/lib/access';
+import { AdminShell } from '@/components/shell';
+export const dynamic='force-dynamic';
+export default async function Audit(){const ctx=await editorialContext();const events=await prisma.auditLog.findMany({where:{organizationId:ctx.organization.id},orderBy:{createdAt:'desc'},take:100,include:{actor:{select:{name:true}}}});return <AdminShell name={ctx.user.name??ctx.user.email}><p className="admin-eyebrow">ACCOUNTABILITY</p><h1>Audit history</h1><p className="admin-muted">The latest 100 recorded actions in this organization.</p><section className="admin-panel"><div className="admin-table-wrap"><table className="admin-table"><thead><tr><th>Action</th><th>Actor</th><th>Recorded</th></tr></thead><tbody>{events.map(e=><tr key={e.id}><td>{e.action}</td><td>{e.actor?.name??'System'}</td><td>{e.createdAt.toLocaleString('en-IN')}</td></tr>)}</tbody></table></div>{!events.length&&<p>No administrative actions yet.</p>}</section></AdminShell>}

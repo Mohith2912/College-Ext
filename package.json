@@ -24,7 +24,10 @@
     "db:start": "powershell -NoProfile -ExecutionPolicy Bypass -File tooling/mysql.ps1 -Action start",
     "db:stop": "powershell -NoProfile -ExecutionPolicy Bypass -File tooling/mysql.ps1 -Action stop",
     "mail": "node --env-file=.env tooling/mail.mjs",
-    "start": "node --env-file=.env tooling/start-production.mjs"
+    "admin:create": "node --env-file=.env --import tsx tooling/create-admin.ts",
+    "start": "node --env-file=.env tooling/start-production.mjs users",
+    "start:users": "node --env-file=.env tooling/start-production.mjs users",
+    "start:admin": "node --env-file=.env tooling/start-production.mjs admin"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.11.1",
