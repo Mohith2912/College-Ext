@@ -14,7 +14,13 @@ export type PodcastEpisode = {
   minutes: number;
   dialogue: DialogueTurn[];
 };
-export type InteractiveStep = { label: string; title: string; description: string; details: string[] };
+export type InteractiveStep = {
+  label: string;
+  title: string;
+  description: string;
+  details: string[];
+  challenge: { question: string; options: string[]; answer: number; explanation: string };
+};
 export type InteractiveModule = {
   id: string;
   term: string;
@@ -70,7 +76,26 @@ function stepsFor(markdown: string, moduleTitle: string): InteractiveStep[] {
     const details = bullets.length ? bullets : plain(body).split(/(?<=[.!?])\s+/).filter(item => item.length > 25).slice(1, 5);
     return { label: `STEP ${index + 1} · PUBLISHED COURSE CONTENT`, title: heading, description, details: details.length ? details : [`Connect this idea to ${moduleTitle}.`, 'Describe one practical example in your own words.'] };
   });
-  return steps.slice(0, 8);
+  const visible = steps.slice(0, 8);
+  return visible.map((step, index) => {
+    const alternatives = visible.filter((_, other) => other !== index).map(other => `A different topic: ${other.title} — ${other.description}`);
+    const options = [
+      `${step.title}: ${step.description}`,
+      alternatives[0] ?? 'This idea is not part of the published module.',
+      alternatives[1] ?? 'This idea describes an unrelated responsibility not covered by the module.',
+    ];
+    const answer = index % options.length;
+    const ordered = options.map((_, optionIndex) => options[(optionIndex - answer + options.length) % options.length] ?? options[0] ?? '');
+    return {
+      ...step,
+      challenge: {
+        question: `Which summary best matches “${step.title}”?`,
+        options: ordered,
+        answer,
+        explanation: `The published explanation says: ${step.description}`,
+      },
+    };
+  });
 }
 
 async function loadLearningStudio() {
@@ -131,4 +156,4 @@ async function loadLearningStudio() {
   return { terms: terms.map(term => ({ title: term.name, number: term.number })), episodes, modules };
 }
 
-export const getLearningStudio = unstable_cache(loadLearningStudio, ['aetheria-learning-studio-v2'], { revalidate: 300, tags: ['aetheria-curriculum'] });
+export const getLearningStudio = unstable_cache(loadLearningStudio, ['aetheria-learning-studio-v3'], { revalidate: 300, tags: ['aetheria-curriculum'] });
