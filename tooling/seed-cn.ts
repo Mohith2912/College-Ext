@@ -17,6 +17,12 @@ try {
     // Keep administrator-authored outline entries intact. Seeded headings are
     // updated in place below; a content refresh must not erase custom sections
     // or other published modules.
+    // Move every existing entry out of the target range first. MySQL checks
+    // the unique (courseId, position) key for each write, so sequentially
+    // swapping seeded entries into positions 1..N can otherwise collide.
+    if (existingModules.length) {
+      await tx.module.updateMany({ where: { courseId }, data: { position: { increment: 10000 } } });
+    }
     for (const [position, item] of course.modules.entries()) {
       const matchingModule = existingModules.find(existing => existing.slug === item.slug);
       const moduleId = matchingModule?.id ?? stableId(`module:${course.slug}:${item.slug}`);
@@ -34,6 +40,11 @@ try {
         await tx.moduleSection.upsert({ where: { id: sectionId }, update: { title: sectionTitle, position: sectionPosition + 1 }, create: { id: sectionId, moduleId, slug: sectionSlug, title: sectionTitle, position: sectionPosition + 1 } });
         await tx.topic.upsert({ where: { id: stableId(`topic:${sectionId}`) }, update: { title: sectionTitle }, create: { id: stableId(`topic:${sectionId}`), sectionId, slug: sectionSlug, title: sectionTitle, position: 1 } });
       }
+    }
+    const seededSlugs = new Set(course.modules.map(item => item.slug));
+    const customModules = existingModules.filter(item => !seededSlugs.has(item.slug));
+    for (const [index, item] of customModules.entries()) {
+      await tx.module.update({ where: { id: item.id }, data: { position: course.modules.length + index + 1 } });
     }
   }, { timeout: 120000 });
   console.log('Computer Networks course published.');
