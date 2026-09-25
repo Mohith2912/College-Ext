@@ -7,7 +7,7 @@ const module = (title: string, description: string, markdown: string) => ({
   markdown: `${markdown.trim()}\n\n---\n\n*Original Computer Networks material for Aetheria Study Companion. Examples are fictional teaching scenarios.*`,
 });
 
-export const computerNetworks: SeedCourse = {
+const computerNetworksSource: SeedCourse = {
   slug: 'computer-networks',
   title: 'Computer Networks',
   subject: 'Computer Networks',
@@ -142,4 +142,16 @@ Record the test, result, timestamp, source location, and layer. Compare a workin
 - Stop at the first failing boundary and collect evidence before applying a fix.
 `),
   ],
+};
+
+// The public syllabus presents CN as one complete unit. The source sections are
+// kept together so the reader, podcast, and interactive lab share one module.
+export const computerNetworks: SeedCourse = {
+  ...computerNetworksSource,
+  modules: [{
+    slug: 'computer-networks-unit-1',
+    title: 'Computer Networks · Unit 1 Interactive Case Study',
+    description: 'Follow one request from a campus laptop through wireless access, switching, routing, transport, and diagnosis.',
+    markdown: computerNetworksSource.modules.map(item => `## ${item.title}\n\n${item.markdown}`).join('\n\n'),
+  }],
 };

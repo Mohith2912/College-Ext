@@ -8,6 +8,7 @@ import { Disclaimer } from '@/components/disclaimer';
 import { Footer } from '@/components/footer';
 import { NoteMarkdown } from '@/components/markdown';
 import { ReaderControls } from '@/components/reader-controls';
+import { ComputerNetworksModule } from '@/components/computer-networks-module';
 
 type Props = { params: Promise<{ courseSlug: string; moduleSlug: string }> };
 export const dynamic = 'force-dynamic';
@@ -15,6 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> { c
 
 export default async function NotePage({ params }: Props) {
   const { courseSlug, moduleSlug } = await params; const module = await getModule(courseSlug, moduleSlug); if (!module?.note) notFound();
+  if (courseSlug === 'computer-networks' && moduleSlug === 'computer-networks-unit-1') return <ComputerNetworksModule />;
   const toc = getTableOfContents(module.note.markdown);
   const index = module.course.modules.findIndex(item => item.slug === moduleSlug);
   const previous = module.course.modules[index - 1], next = module.course.modules[index + 1];
