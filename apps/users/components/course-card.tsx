@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowUpRight, BarChart3, BookOpen, Boxes, BriefcaseBusiness, Code2, Globe2, Landmark, Leaf, Megaphone, MessageSquare, PieChart, Rocket } from 'lucide-react';
+import { ArrowUpRight, BarChart3, BookOpen, Boxes, BriefcaseBusiness, Code2, Globe2, Landmark, Leaf, Megaphone, MessageSquare, Network, PieChart, Rocket } from 'lucide-react';
 import type { LibraryCourse } from '@/lib/library';
 
 function courseIcon(title: string) {
@@ -13,6 +13,7 @@ function courseIcon(title: string) {
   if (/marketing/i.test(title)) return Megaphone;
   if (/operations/i.test(title)) return Boxes;
   if (/sustainab/i.test(title)) return Leaf;
+  if (/network/i.test(title)) return Network;
   return BriefcaseBusiness;
 }
 

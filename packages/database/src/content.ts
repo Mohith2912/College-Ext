@@ -1,4 +1,5 @@
 /** Original educational demonstration material written for this independent project. */
+import { computerNetworks } from './computer-networks';
 export interface SeedModule {
   slug: string;
   title: string;
@@ -1052,4 +1053,5 @@ Rewrite “completely green service” as a specific, evidence-based statement. 
 Credible communication is proportional to evidence and makes meaningful limitations visible.`),
     ],
   },
+  computerNetworks,
 ];

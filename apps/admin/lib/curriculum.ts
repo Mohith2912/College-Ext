@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { z } from 'zod';
 import { prisma, Prisma, type Role } from '@aetheria/database';
 import { AccessError } from '@aetheria/auth/errors';
+import { revalidateTag } from 'next/cache';
 type Context={organization:{id:string};user:{id:string};membership:{role:Role}};
 const title=z.string().trim().min(3).max(180);
 const description=z.string().trim().min(10).max(10000);
@@ -21,7 +22,7 @@ export async function mutateCurriculum(context:Context,input:z.infer<typeof curr
   const required=input.action==='approveCourse'?['REVIEWER',...admins]:['publishCourse','archiveCourse','createTerm'].includes(input.action)?admins:editors;
   if(!required.includes(membership.role))throw new AccessError('FORBIDDEN',403,'Your role cannot perform this action.');
   const orgId=organization.id;
-  try{return await prisma.$transaction(async(tx)=>{
+  try{const result=await prisma.$transaction(async(tx)=>{
     let courseId:string|undefined;let entityId:string;let message='Changes saved.';
     if(input.action==='createTerm'){
       const term=await tx.academicTerm.create({data:{organizationId:orgId,name:input.name,number:input.number,slug:`term-${input.number}`}});entityId=term.id;message='Academic term added.';
@@ -63,5 +64,8 @@ export async function mutateCurriculum(context:Context,input:z.infer<typeof curr
     }
     await tx.auditLog.create({data:{organizationId:orgId,actorId:user.id,action:`curriculum.${input.action}`,entityType:'Curriculum',entityId,metadata:{courseId:courseId??null}}});
     return {courseId,message};
-  });}catch(error){if(error instanceof Prisma.PrismaClientKnownRequestError&&error.code==='P2002')throw new AccessError('VALIDATION_ERROR',409,'A term, course, or module with this name already exists. Choose a different name.');throw error;}
+  });
+  revalidateTag('aetheria-curriculum');
+  return result;
+  }catch(error){if(error instanceof Prisma.PrismaClientKnownRequestError&&error.code==='P2002')throw new AccessError('VALIDATION_ERROR',409,'A term, course, or module with this name already exists. Choose a different name.');throw error;}
 }
