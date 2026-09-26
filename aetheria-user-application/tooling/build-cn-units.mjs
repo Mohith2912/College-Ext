@@ -55,7 +55,9 @@ for (const unit of [1, 2, 3, 4, 5]) {
   await writeFile(path.join(output, 'app.css'), css.css);
   const html = (await readFile(path.join(source, 'index.html'), 'utf8'))
     .replace('</head>', '    <link rel="stylesheet" href="./app.css" />\n  </head>')
-    .replace('src="/src/main.tsx"', 'src="./app.js"');
+    .replace('src="/src/main.tsx"', 'src="./app.js"')
+    .replace('</body>', `${unit === 4 ? '<script src="./navigation.js" defer></script>' : ''}</body>`);
+  if (unit === 4) await writeFile(path.join(output, 'navigation.js'), await readFile(path.join(root, 'tooling/cn-navigation.js'), 'utf8'));
   await writeFile(path.join(output, 'index.html'), html);
   console.log(`Built original Computer Networks Unit ${unit}`);
 }

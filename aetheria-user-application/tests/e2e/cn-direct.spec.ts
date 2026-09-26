@@ -10,16 +10,19 @@ test('only CN remains in the course library, with all five units', async ({ page
 });
 
 for (const [index, repository] of repositories.entries()) {
-  test(`Unit ${index + 1} opens ${repository} directly without a wrapper`, async ({ page }) => {
+  test(`Unit ${index + 1} preserves ${repository} inside the website navigation`, async ({ page }) => {
     await page.goto('/notes/computer-networks');
     await page.locator('.module-row').nth(index).click();
-    await expect(page).toHaveURL(new RegExp(`/${repository}/index.html$`));
-    await expect(page.locator('h1')).toBeVisible();
-    await expect(page.locator('iframe, .sidebar, #note-content')).toHaveCount(0);
+    await expect(page).toHaveURL(new RegExp(`/computer-networks-unit-${index + 1}$`));
+    await expect(page.getByRole('navigation', { name: 'Main navigation' })).toBeVisible();
+    const frame = page.frameLocator('iframe');
+    await expect(page.locator('iframe')).toHaveAttribute('src', `/${repository}/index.html`);
+    await expect(frame.locator('h1')).toBeVisible();
+    await expect(page.locator('#note-content')).toHaveCount(0);
     const errors: string[] = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.reload();
-    await expect(page.locator('h1')).toBeVisible();
+    await expect(frame.locator('h1')).toBeVisible();
     expect(errors).toEqual([]);
   });
 }
@@ -28,6 +31,8 @@ test('Unit 4 original call and attack handlers work directly', async ({ page }, 
   test.skip(testInfo.project.name === 'mobile', 'Keep the original source responsive navigation unchanged.');
   await page.goto('/CN-unit-4/index.html');
   await page.getByRole('button', { name: 'Interactive Call Lab', exact: true }).click();
+  await expect(page).toHaveURL(/#live-call$/);
+  await expect(page.locator('#live-call')).toBeInViewport();
   await page.getByTitle('Turn off microphone', { exact: true }).click();
   await expect(page.getByText('[MIC] Muted. Sent silence indicator to SFU.', { exact: true })).toBeVisible();
   await page.getByTitle('Turn on microphone', { exact: true }).click();

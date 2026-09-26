@@ -1,7 +1,5 @@
-import { InteractiveWalkthrough } from '@/components/interactive-walkthrough';
+import { CnPracticeLabs } from '@/components/cn-practice-labs';
 import { getLearningStudio } from '@/lib/learning-studio';
-import { redirect } from 'next/navigation';
-import { cnRepositoryUrl } from '@/lib/cn-repositories';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Interactive study lab', description: 'Step through published course content with guided explanations and active concept maps.' };
@@ -11,15 +9,15 @@ export default async function InteractivePage({ searchParams }: { searchParams: 
   const { modules } = await getLearningStudio();
   const course = typeof params.course === 'string' ? params.course : undefined;
   const module = typeof params.module === 'string' ? params.module : undefined;
-  // Always open the actual CN repository, never generated summary checkpoints.
+  // Supplementary labs are distinct from the complete original CN modules.
   if (course === 'computer-networks') {
     const original = modules.find(item => item.courseSlug === course && item.moduleSlug === module);
     if (original && /^computer-networks-unit-[1-5]$/.test(original.moduleSlug)) {
-      redirect(cnRepositoryUrl(original.moduleSlug)!);
+      return <CnPracticeLabs initialUnit={Number(original.moduleSlug.slice(-1))}/>;
     }
   }
   if (!course && modules.length && modules.every(item => item.courseSlug === 'computer-networks')) {
-    redirect(cnRepositoryUrl(modules[0].moduleSlug)!);
+    return <CnPracticeLabs initialUnit={0}/>;
   }
-  return <><div className="page-heading"><div><p className="eyebrow">LEARN BY MOVING THROUGH THE IDEA</p><h1>Interactive study lab.</h1><p>Each published module has its own checkpoints, explanations, and source link. Choose a semester, course, and module to begin.</p></div></div><InteractiveWalkthrough modules={modules} initialCourse={course} initialModule={module}/></>;
+  return <CnPracticeLabs initialUnit={0}/>;
 }
