@@ -228,8 +228,7 @@ Routers and switches can use specialized forwarding silicon such as ASICs and ta
   ],
 };
 
-// The public syllabus presents CN as one complete unit. The source sections are
-// kept together so the reader, podcast, and interactive lab share one module.
+// Keep each reference activity in its corresponding numbered module.
 export const computerNetworks: SeedCourse = {
   ...computerNetworksSource,
   modules: [{
@@ -242,5 +241,50 @@ export const computerNetworks: SeedCourse = {
     title: 'Computer Networks · Unit 2 Network Design Lab',
     description: computerNetworksSource.modules.at(-1)?.description ?? 'Plan and troubleshoot segmented networks, address translation, and routing.',
     markdown: computerNetworksSource.modules.at(-1)?.markdown ?? '',
+  }, {
+    slug: 'computer-networks-unit-3',
+    title: 'Computer Networks · Unit 3 Transport Layer Case Study',
+    description: 'Explore the original Google network journey, transport protocols, congestion dynamics, and diagnostic activities.',
+    markdown: `## Transport protocols and the Google network journey
+
+The Unit 3 module presents the full interactive activity from https://github.com/mrithulavj/CN-Unit-3.
+
+## Protocols, congestion, and diagnosis
+
+Use the original transit walkthrough, protocol comparisons, transport experiments, and troubleshooting scenarios to investigate delivery, latency, retransmission, and congestion. All activities retain the source repository interface.
+
+## Knowledge checks
+
+Complete the source module's scenario activities and knowledge checks.`,
+  }, {
+    slug: 'computer-networks-unit-4',
+    title: 'Computer Networks · Unit 4 Network Security Case Study',
+    description: 'Follow the original Google Meet security journey through authentication, encryption, VPNs, firewalls, and diagnostic activities.',
+    markdown: `## Google Meet network security journey
+
+The Unit 4 module presents the full interactive activity from https://github.com/mrithulavj/CN-unit-4.
+
+## Authentication, encryption, and protected transit
+
+Explore AAA, TLS, DTLS-SRTP, IPsec, VPNs, firewalls, and intrusion detection using the source module's walkthroughs and packet inspectors.
+
+## Security diagnostic lab and knowledge checks
+
+Complete the original troubleshooting scenarios, matching exercises, and knowledge checks.`,
+  }, {
+    slug: 'computer-networks-unit-5',
+    title: 'Computer Networks · Unit 5 Interactive Case Study',
+    description: 'Explore the original Unit 5 modern networking journey, comparison matrix, simulators, and scenario checks.',
+    markdown: `## Modern networking case study
+
+The Unit 5 module presents the full interactive activity from https://github.com/mrithulavj/CN-Unit-5.
+
+## Transit stages and modern solutions
+
+Explore each original transit stage, syllabus explanation, and comparison matrix using the repository's interactive controls.
+
+## Diagnostic activities and knowledge checks
+
+Complete the source module's experiments and scenario checks.`,
   }],
 };
