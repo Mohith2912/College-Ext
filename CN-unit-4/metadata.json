@@ -1,0 +1,6 @@
+{
+  "name": "Google Meet Architecture & Network Security — CN Unit 4",
+  "description": "Interactive real-world case study exploring how a Google Meet call operates across AAA, TLS, DTLS-SRTP, IPsec VPNs, firewalls, and active intrusion defense.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

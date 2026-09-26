@@ -1,0 +1,6 @@
+{
+  "name": "WhatsApp Message Transit & Cloud Architecture — CN Unit 5",
+  "description": "An interactive computer networks learning module exploring modern networking technologies: 5G network slicing, NFV, cloud VPCs, load balancing, auto-scaling, spine-leaf data centers, and intelligent routing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

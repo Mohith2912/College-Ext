@@ -1,0 +1,6 @@
+{
+  "name": "Netflix Journey: Unit 1 Computer Networks Case Study",
+  "description": "An interactive masterclass and simulation platform dissecting 'What happens when you open Netflix?' across edge, core, topologies, signal encodings, layering, OSI vs TCP/IP, and diagnostic labs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

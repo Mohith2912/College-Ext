@@ -1,0 +1,6 @@
+{
+  "name": "Google Search Transport Dynamics",
+  "description": "Computer Networks Unit 3: Interactive learning module following a student's Google Search query from the user pressing enter, 3-way handshake, slow start, congestion control, packet loss recovery, to real-time video playback and 4-way teardown.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

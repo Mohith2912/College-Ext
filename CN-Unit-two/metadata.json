@@ -1,0 +1,6 @@
+{
+  "name": "NetTransit: Amazon Order Delivery & Network Routing Simulator",
+  "description": "Interactive Unit 2 EdTech learning module exploring the complete network flow of an Amazon order from phone Wi-Fi, VLANs, NAT/PAT, BGP transit, multi-area OSPF, ASIC Layer 3 switching, to physical fulfillment.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
