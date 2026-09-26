@@ -24,18 +24,18 @@ Generated output lives in `apps/users/public/<repository-folder>` and is recreat
 by both the build and development commands. The original configuration and
 manifests are retained unchanged; compilation uses the host's installed dependencies.
 
-Each numbered module redirects to the corresponding original application as a
-full-page document: `/CN-Unit/index.html`, `/CN-Unit-two/index.html`,
-`/CN-Unit-3/index.html`, `/CN-unit-4/index.html`, `/CN-Unit-5/index.html`.
-No course iframe or rewritten note-reader paragraphs are inserted into these pages.
-Older module URLs, including Unit 2's `view=notes`, redirect to the original app too.
+Each numbered module retains the website navigation and loads its complete
+original application in an isolated same-origin frame. A full-screen link also
+opens `/CN-Unit/index.html`, `/CN-Unit-two/index.html`, `/CN-Unit-3/index.html`,
+`/CN-unit-4/index.html`, or `/CN-Unit-5/index.html`. No rewritten note paragraphs
+replace the original apps. Unit 2's `view=notes` retains the same complete module.
 
-Computer Networks interactive-lab links and study-lab module selection open the
-complete reference activity rather than the generated markdown checkpoint guide.
-Computer Networks never opens the generated checkpoint guide, including old
-`view=checkpoints` links. The current CN-only study-lab entry opens Unit 1 directly.
-No unit-specific CSS overrides, replacement controls, or replacement simulation
-logic are added. The original mobile limitations are preserved too.
+The Interactive Lab page is a separate five-unit practice picker, not a redirect
+to Unit 1. Its supplemental exercises are implemented in `cn-practice-labs.tsx`.
+Unit 4's generated page includes the integration-only `cn-navigation.js` adapter:
+original section buttons scroll to their matching sections and update the URL
+hash for deep links and browser back. Original source files, simulation handlers,
+and CSS remain unchanged.
 
 `source-integrity.json` records SHA-256 hashes from the source checkouts. Builds
 verify all 52 imported files before generating activities and fail if a source
