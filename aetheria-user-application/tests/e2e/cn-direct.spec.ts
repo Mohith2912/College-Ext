@@ -16,7 +16,7 @@ for (const [index, repository] of repositories.entries()) {
     await expect(page).toHaveURL(new RegExp(`/computer-networks-unit-${index + 1}$`));
     await expect(page.getByRole('navigation', { name: 'Main navigation' })).toBeVisible();
     const frame = page.frameLocator('iframe');
-    await expect(page.locator('iframe')).toHaveAttribute('src', `/${repository}/index.html`);
+    await expect(page.locator('iframe')).toHaveAttribute('src', `/${repository}/index.html?embedded=sidebar-v2`);
     await expect(frame.locator('h1')).toBeVisible();
     await expect(page.locator('#note-content')).toHaveCount(0);
     const errors: string[] = [];
