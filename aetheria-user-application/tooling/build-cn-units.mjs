@@ -14,6 +14,7 @@ const { build } = createRequire(require.resolve('tsup'))('esbuild');
 const tailwind = appRequire('@tailwindcss/postcss');
 const postcss = createRequire(appRequire.resolve('@tailwindcss/postcss'))('postcss');
 const sourceIntegrity = JSON.parse(await readFile(path.join(appRoot, 'cn-units/source-integrity.json'), 'utf8'));
+const mobileOverrides = await readFile(path.join(appRoot, 'cn-units/mobile-overrides.css'), 'utf8');
 
 // Check the originals before building any unit. Never silently ship a shortened
 // or rewritten reference module. Ignore only checkout line-ending differences.
@@ -52,7 +53,7 @@ for (const unit of [1, 2, 3, 4, 5]) {
     // scanning the untouched source folder supplied by the user.
     from: path.join(appRoot, `cn-unit-${unit}.css`), to: path.join(output, 'app.css'),
   });
-  await writeFile(path.join(output, 'app.css'), css.css);
+  await writeFile(path.join(output, 'app.css'), `${css.css}\n${mobileOverrides}\n`);
   const html = (await readFile(path.join(source, 'index.html'), 'utf8'))
     .replace('</head>', '    <link rel="stylesheet" href="./app.css" />\n  </head>')
     .replace('src="/src/main.tsx"', 'src="./app.js"')

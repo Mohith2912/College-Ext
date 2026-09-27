@@ -1,0 +1,677 @@
+[
+  {
+    "id": "cn-u1-a-q1",
+    "unit": 1,
+    "unitTitle": "Foundations and architecture",
+    "part": "A",
+    "number": 1,
+    "question": "How a computer network functions by identifying its core components (nodes and links) and illustrating how they interact to facilitate data exchange.",
+    "answer": "A computer network is a collection of interconnected devices that can communicate and share resources. The two primary building blocks are the Network Edge and the Network Core."
+  },
+  {
+    "id": "cn-u1-a-q2",
+    "unit": 1,
+    "unitTitle": "Foundations and architecture",
+    "part": "A",
+    "number": 2,
+    "question": "How does a router explain or manage the movement of data packets between different networks like a local network and the internet?",
+    "answer": "The function of a router is to forward data packets between different computer networks, determining the best path for the data to travel from its source to its destination."
+  },
+  {
+    "id": "cn-u1-a-q3",
+    "unit": 1,
+    "unitTitle": "Foundations and architecture",
+    "part": "A",
+    "number": 3,
+    "question": "Classify the division of responsibilities in a layered model and summarize how each tier communicates with its corresponding peer on a remote system",
+    "answer": "Layering is a design approach that divides the complex functionality of a network into a vertical stack of independent layers. Each layer is responsible for a specific task and provides services to the layer above it, while using the services of the layer below it. This modularity simplifies design, development, and troubleshooting."
+  },
+  {
+    "id": "cn-u1-a-q4",
+    "unit": 1,
+    "unitTitle": "Foundations and architecture",
+    "part": "A",
+    "number": 4,
+    "question": "How many layers does the OSI Reference Model have, and describe about the topmost layer function.",
+    "answer": "The Application Layer serves as the direct interface between end-user software applications and the underlying network. Service Identification: It determines the identity and availability of communication partners for a specific data transfer. Resource Assessment: It verifies whether sufficient network resources exist to establish the requested connection."
+  },
+  {
+    "id": "cn-u1-a-q5",
+    "unit": 1,
+    "unitTitle": "Foundations and architecture",
+    "part": "A",
+    "number": 5,
+    "question": "Discriminate between a switch and a gateway based on their primary roles in a network.",
+    "answer": "A switch is a device that connects devices within the same network (a Local Area Network), forwarding data based on MAC addresses. A gateway is a device that connects two different networks that may use different protocols, translating data between them to enable communication."
+  },
+  {
+    "id": "cn-u1-a-q6",
+    "unit": 1,
+    "unitTitle": "Foundations and architecture",
+    "part": "A",
+    "number": 6,
+    "question": "Difference between a physical link and a transmission medium? Provide an example of each.",
+    "answer": "A physical link is the logical connection between two network devices, while the transmission medium is the physical material or channel through which the signal travels. Example of a physical link: A connection established between two routers. Example of a transmission medium: An optical fiber cable, or a wireless radio frequency."
+  },
+  {
+    "id": "cn-u1-a-q7",
+    "unit": 1,
+    "unitTitle": "Foundations and architecture",
+    "part": "A",
+    "number": 7,
+    "question": "State the role of a modem? Why is it necessary when connecting to an Internet Service Provider (ISP)?",
+    "answer": "A modem (Modulator-Demodulator) converts digital signals from a computer into analog signals for transmission over traditional analog mediums like telephone lines, and vice- versa. It is necessary to convert the digital data from the network to a form that can be transmitted over the physical medium provided by the ISP."
+  },
+  {
+    "id": "cn-u1-a-q8",
+    "unit": 1,
+    "unitTitle": "Foundations and architecture",
+    "part": "A",
+    "number": 8,
+    "question": "Describe \"Network Topology\" and provide an example.",
+    "answer": "Network topology refers to the physical or logical arrangement of devices and connections in a network. It defines how network nodes are linked together. An example is a Star topology, where all devices are connected to a central hub or switch."
+  },
+  {
+    "id": "cn-u1-a-q9",
+    "unit": 1,
+    "unitTitle": "Foundations and architecture",
+    "part": "A",
+    "number": 9,
+    "question": "State the primary purpose of the \"Network Edge\" in the \"Building a Network\" concept?",
+    "answer": "The Network Edge refers to the part of the network where end devices (like computers, smartphones, and servers) are located. It serves as the entry and exit point for data into the network core."
+  },
+  {
+    "id": "cn-u1-a-q10",
+    "unit": 1,
+    "unitTitle": "Foundations and architecture",
+    "part": "A",
+    "number": 10,
+    "question": "Brief the concept of \"Signal Encoding Techniques.\" Why are they important for physical layer communication?",
+    "answer": "Signal encoding techniques are methods used to convert digital data into a form that can be transmitted as a physical signal (e.g., electrical voltage, light pulses, or radio waves) over a transmission medium. They are crucial because they define how the 1s and 0s of data are represented on the medium, ensuring reliable and accurate transmission by managing issues like synchronization and error detection."
+  },
+  {
+    "id": "cn-u1-a-q11",
+    "unit": 1,
+    "unitTitle": "Foundations and architecture",
+    "part": "A",
+    "number": 11,
+    "question": "You are setting up a small office network and have one cable modem from your ISP. You need to connect 4 computers to the internet and allow them to share files locally. Which essential networking devices would you need, and what would be their primary roles?",
+    "answer": "You would need a router and a switch. The router would connect to the cable modem to share the internet connection with all devices and manage network traffic. The switch would allow all 4 computers to be physically connected to the local network and communicate with each other."
+  },
+  {
+    "id": "cn-u1-a-q12",
+    "unit": 1,
+    "unitTitle": "Foundations and architecture",
+    "part": "A",
+    "number": 12,
+    "question": "A company's internal network uses a physical Star topology. What happens to the entire network if the central switch in this topology fails? Justify your answer.",
+    "answer": "The entire network would go down. In a Star topology, all devices are directly connected to the central switch, which acts as the central point of communication. If the switch fails, none of the connected devices can communicate with each other or access the network."
+  },
+  {
+    "id": "cn-u1-a-q13",
+    "unit": 1,
+    "unitTitle": "Foundations and architecture",
+    "part": "A",
+    "number": 13,
+    "question": "Imagine you need to build a very simple, low-cost \"network\" between two devices using only their audio jacks and a standard 3.5mm audio cable. Which fundamental networking concept from transmission medium would you be applying at the physical level, and what would be the main challenge?",
+    "answer": "You would be applying the concept of Physical Links and Transmission Media. The main challenge would be Signal Encoding, as you would need to devise a custom way to encode digital data into audio tones (like a modem) to transmit information over the audio cable."
+  },
+  {
+    "id": "cn-u1-a-q14",
+    "unit": 1,
+    "unitTitle": "Foundations and architecture",
+    "part": "A",
+    "number": 14,
+    "question": "A new standard for flexible displays allows network cables to be printed on the surface of a wall. Accordingly, what are two categories of network \"devices\" this technology would replace, and what specific function would it still be performing?",
+    "answer": "This technology would replace the physical transmission media (like copper or fiber optic cables). It would also potentially eliminate the need for physical connectors. The function it would still be performing is to provide the physical links between devices for data transmission."
+  },
+  {
+    "id": "cn-u1-a-q15",
+    "unit": 1,
+    "unitTitle": "Foundations and architecture",
+    "part": "A",
+    "number": 15,
+    "question": "An engineer is troubleshooting a network and says, \"The physical layer is working fine, but the communication is failing.\" What does this statement imply about the state of the physical connections and the higher-layer protocols?",
+    "answer": "This statement implies that the physical connections (cables, wireless signals) and the hardware on the physical layer are functioning correctly (e.g., there is a connection). The problem must therefore lie within one of the higher layers (like the Data Link or Network layers), meaning there is an issue with the protocol logic, addressing, or data formatting for the communication to be successful."
+  },
+  {
+    "id": "cn-u2-a-q1",
+    "unit": 2,
+    "unitTitle": "Switching, routing and addressing",
+    "part": "A",
+    "number": 1,
+    "question": "How do VLANs resolve broadcast and security issues in a flat network with 3 departments and 300 users? Also, how do VLANs boost performance?",
+    "answer": "Create separate VLANs for Finance (VLAN 10), HR (VLAN 20), and Engineering (VLAN 30). Broadcasts from one VLAN are not forwarded to other VLANs. Inter-VLAN communication requires routing through a Layer 3 device"
+  },
+  {
+    "id": "cn-u2-a-q2",
+    "unit": 2,
+    "unitTitle": "Switching, routing and addressing",
+    "part": "A",
+    "number": 2,
+    "question": "For a single inter-switch link carrying VLANs 10, 20, and 30, describe the setup, the required IEEE standard, and the reason it's essential.",
+    "answer": "Configure the link as a VLAN Trunk using IEEE 802.1Q standard. Without trunking, each VLAN would require a separate physical cable between the switches, which is not scalable."
+  },
+  {
+    "id": "cn-u2-a-q3",
+    "unit": 2,
+    "unitTitle": "Switching, routing and addressing",
+    "part": "A",
+    "number": 3,
+    "question": "Why does OSPF performance degrade in a large single- area network with 600 routers? How do multiple OSPF areas improve convergence?",
+    "answer": "In a single OSPF area, every router maintains a complete Link-State Database (LSDB) of the entire network. Any topology change triggers an LSA flood to all routers, forcing every router to recomputed its SPF (Shortest Path First) tree. This causes high CPU usage and slow convergence."
+  },
+  {
+    "id": "cn-u2-a-q4",
+    "unit": 2,
+    "unitTitle": "Switching, routing and addressing",
+    "part": "A",
+    "number": 4,
+    "question": "An organization has a single public IP address provided by the ISP, offer internets for 200 devices. how NAT enables multiple devices to share a single public IP address. For this process state the role of NAT router?",
+    "answer": "NAT allows multiple private IP addresses (e.g., 192.168.1.x) to be translated to a single public IP address when accessing the internet. When a device sends a packet to the internet, the router replaces the private source IP with its public IP and assigns a unique port number"
+  },
+  {
+    "id": "cn-u2-a-q5",
+    "unit": 2,
+    "unitTitle": "Switching, routing and addressing",
+    "part": "A",
+    "number": 5,
+    "question": "State the concept of CIDR. How is it an innovative improvement over classful addressing?",
+    "answer": "CIDR eliminates fixed class boundaries (Class A, B, C) and uses variable-length subnet masks (VLSM). Addresses are represented as prefix lengths (e.g., /24, /25, /26)."
+  },
+  {
+    "id": "cn-u2-a-q6",
+    "unit": 2,
+    "unitTitle": "Switching, routing and addressing",
+    "part": "A",
+    "number": 6,
+    "question": "An organization has been allocated the IP block 200.10.0.0/24. It has 4 departments and with the 50,30,20 and 10 host requirements respectively: Is it possible to allocate subnets using classful addressing and how CIDR is necessary for this scenario.",
+    "answer": "Yes, it is possible to allocate these subnets using equal- sized classful subnetting (Fixed-Length Subnet Masking), but CIDR/VLSM is necessary to prevent severe IP address waste and to allow for future network growth. (CIDR) introduces Variable Length Subnet Masking (VLSM), allowing you to customize the subnet sizes to fit each department perfectly."
+  },
+  {
+    "id": "cn-u2-a-q7",
+    "unit": 2,
+    "unitTitle": "Switching, routing and addressing",
+    "part": "A",
+    "number": 7,
+    "question": "Explain the term \"subnet mask\" in the context of classless addressing. How does it help in identifying the network portion of an IP address?",
+    "answer": "A subnet mask is a 32-bit number that separates an IP address into network portion and host portion. In CIDR notation, it is represented as a prefix length (e.g., /24 means 255.255.255.0)."
+  },
+  {
+    "id": "cn-u2-a-q8",
+    "unit": 2,
+    "unitTitle": "Switching, routing and addressing",
+    "part": "A",
+    "number": 8,
+    "question": "Your boss, who once said “subnetting is just fancy math,” has given you the IP block 172.16.0.0/20 and demanded 8 equal subnets. He doesn't care about your feelings. He wants the new subnet mask and the number of usable hosts per subnet. Show your calculations before he asks you to explain it in IPv6.",
+    "answer": "Original prefix: /20 (16,384 total addresses) Need 8 subnets → 2³ = 8 → borrow 3 bits New prefix: /20 + 3 = /23 New Mask: 255.255.254.0 Host bits: 32 - 23 = 9 Usable hosts: 2⁹ - 2 = 510"
+  },
+  {
+    "id": "cn-u2-a-q9",
+    "unit": 2,
+    "unitTitle": "Switching, routing and addressing",
+    "part": "A",
+    "number": 9,
+    "question": "Distinguish between NAT (Network Address Translation) and CIDR. How do they complement each other in IPv4 networks?",
+    "answer": "NAT CIDR NAT translates private IP addresses to public IP addresses, allowing multiple devices to share a single public IP. CIDR efficiently allocates and aggregates IP address space, conserving IPv4 addresses. CIDR conserves public IP addresses by efficient allocation and route aggregation. NAT conserves public IP addresses by allowing private addressing internally."
+  },
+  {
+    "id": "cn-u2-a-q10",
+    "unit": 2,
+    "unitTitle": "Switching, routing and addressing",
+    "part": "A",
+    "number": 10,
+    "question": "Your network uses private IP addresses in the range 192.168.10.0/24. You need to connect to the internet through a single public IP provided by your ISP. Explain the role of NAT in this scenario. What are the limitations of using NAT?",
+    "answer": "NAT translates private IP addresses (192.168.10.x) to the single public IP address when devices access the internet. It maintains a NAT table mapping internal addresses to port numbers (PAT) for return traffic. Limitations: 1. Breaks End-to-End Connectivity: Some applications (e.g., peer-to-peer, VoIP) require direct public IP addresses. 2. Processing Overhead: NAT adds latency due to translation."
+  },
+  {
+    "id": "cn-u2-a-q11",
+    "unit": 2,
+    "unitTitle": "Switching, routing and addressing",
+    "part": "A",
+    "number": 11,
+    "question": "A company has two offices in different cities. Each office uses OSPF internally. They want to connect both offices to the internet and to each other. How BGP is used between the two offices rather than extending OSPF across both locations.",
+    "answer": "Border Gateway Protocol (BGP) is used to connect the two offices because it is designed to route traffic between independent networks (Autonomous Systems), whereas OSPF is only built to handle routing inside a single"
+  },
+  {
+    "id": "cn-u2-a-q12",
+    "unit": 2,
+    "unitTitle": "Switching, routing and addressing",
+    "part": "A",
+    "number": 12,
+    "question": "IPv4 addresses are running out globally. IPv6 was introduced as a long-term solution. Compare IPv4 and IPv6 in terms of address space and built-in security features.",
+    "answer": "The depletion of IPv4 addresses made the transition to IPv6 essential. The core differences between the two protocols lie in their scaling capacity and core security architectures. IPv4 IPv6 Address Space IPv4 Limit: Uses a 32-bit address format, capping the maximum number of unique addresses at 4.3 billion (2³²) IPv6 Capacity: Expands to a 128-bit hexadecimal format, yielding 340 undecillion unique addresses (2¹²⁸). Built-In Security Features IPv4 Security: Designed without native security; relies entirely on add-on protocols like IPsec or SSL/TLS configured at the application or network level. IPv6 Security: Built with IPsec support mandated in its base specification, meaning encryption and cryptographic identity verification are natively engineered into the protocol."
+  },
+  {
+    "id": "cn-u2-a-q13",
+    "unit": 2,
+    "unitTitle": "Switching, routing and addressing",
+    "part": "A",
+    "number": 13,
+    "question": "By Configuring a switch and need to separate traffic from different departments. You decide to use VLANs. State the difference between an Access Port and a Trunk Port on a switch as per scenario.",
+    "answer": "In your scenario, Access Ports connect the individual devices within a department to the switch, while Trunk Ports carry traffic for all departments simultaneously between switches. Access Port -Single Membership: An access port belongs to exactly one VLAN (e.g., Port 1 is assigned only to the HR department's VLAN). Trunk Port - Multiple Memberships: A trunk port carries traffic for multiple VLANs at the same time across a single physical link."
+  },
+  {
+    "id": "cn-u2-a-q14",
+    "unit": 2,
+    "unitTitle": "Switching, routing and addressing",
+    "part": "A",
+    "number": 14,
+    "question": "An organization is using a single router as the default gateway for all VLANs. The router is becoming overloaded, causing high latency. Explain how using a Layer 3 switch for inter-VLAN routing is a better alternative.",
+    "answer": "Using a Layer 3 switch for inter-VLAN routing is a better alternative because it moves the traffic-routing job from a single software-based router to dedicated, high-speed hardware chips inside the switch itself. This eliminates the bottleneck and dramatically lowers latency. Better"
+  },
+  {
+    "id": "cn-u2-a-q15",
+    "unit": 2,
+    "unitTitle": "Switching, routing and addressing",
+    "part": "A",
+    "number": 15,
+    "question": "A network administrator is using Wireshark to troubleshoot a network issue. The administrator captures packets and examines the headers. how protocol stack analysis with Wireshark helps in troubleshooting.",
+    "answer": "Protocol stack analysis with Wireshark helps in troubleshooting by breaking down a captured packet into its individual layers (from the physical wire up to the application), allowing you to pinpoint the exact level where a communication breakdown occurs."
+  },
+  {
+    "id": "cn-u3-a-q1",
+    "unit": 3,
+    "unitTitle": "Transport and congestion control",
+    "part": "A",
+    "number": 1,
+    "question": "Describe the transition between the CLOSED and ESTABLISHED states in the TCP state machine, including the intermediate states and the events that trigger each transition. Apply this to the scenario where a client initiates a connection to the server.",
+    "answer": "The TCP connection starts in the CLOSED state. When a client initiates a connection, it sends a SYN packet and enters the SYN-SENT state. The server, in the LISTEN state, responds with a SYN+ACK and moves to SYN- RECEIVED. The client replies with an ACK, completing the three-way handshake. Both client and server then enter the ESTABLISHED state, where reliable data transfer begins."
+  },
+  {
+    "id": "cn-u3-a-q2",
+    "unit": 3,
+    "unitTitle": "Transport and congestion control",
+    "part": "A",
+    "number": 2,
+    "question": "Differentiate between TCP Reno and TCP New Reno in terms of their recovery mechanisms. Which algorithm would you recommend for your company's order processing system and why?",
+    "answer": "TCP Reno TCP New Reno Retransmits only one lost packet per RTT. Retransmits multiple lost packets within the same recovery phase. Exits Fast Recovery after receiving a partial ACK. Remains in Fast Recovery until all lost packets are recovered. Less efficient when multiple packet losses occur. Better performance with multiple packet losses. Lower throughput under heavy congestion. Higher throughput and improved recovery efficiency."
+  },
+  {
+    "id": "cn-u3-a-q3",
+    "unit": 3,
+    "unitTitle": "Transport and congestion control",
+    "part": "A",
+    "number": 3,
+    "question": "In your office, the coffee machine is a shared resource. Employees are constantly sending requests (packets) to get coffee (data). How TCP Vegas differs from TCP Reno in detecting network congestion using this analogy. How does Vegas use RTT to predict congestion",
+    "answer": "TCP Reno detects congestion only after packet loss occurs, using duplicate ACKs or timeouts as indicators. In contrast, TCP Vegas predicts congestion before packet loss by measuring changes in Round-Trip Time (RTT). If RTT increases, Vegas assumes the network is becoming congested and reduces its sending rate proactively, resulting in fewer packet losses and better network utilization."
+  },
+  {
+    "id": "cn-u3-a-q4",
+    "unit": 3,
+    "unitTitle": "Transport and congestion control",
+    "part": "A",
+    "number": 4,
+    "question": "Summarize how Cubic TCP adjusts its congestion window growth compared to traditional AIMD.",
+    "answer": "Traditional AIMD increases the congestion window linearly and decreases it by half after packet loss. Cubic TCP uses a cubic mathematical function to grow the congestion window. It grows rapidly in high-speed networks, slows near the previous maximum window size, and then accelerates again, allowing better utilization of high-bandwidth, long-delay networks while maintaining fairness."
+  },
+  {
+    "id": "cn-u3-a-q5",
+    "unit": 3,
+    "unitTitle": "Transport and congestion control",
+    "part": "A",
+    "number": 5,
+    "question": "A network administrator is explaining TCP congestion control to a junior engineer. He describes the AIMD algorithm as a \"slow and cautious\" approach to managing the congestion window. How does the AIMD algorithm control congestion in TCP?",
+    "answer": "Additive Increase Multiplicative Decrease (AIMD) is a congestion control algorithm where: The congestion window (cwnd) increases gradually (typically by one MSS per RTT) when no congestion is detected. When congestion is detected through packet loss, the congestion window is reduced multiplicatively, usually to half of its current size. This approach balances efficient bandwidth utilization with network stability."
+  },
+  {
+    "id": "cn-u3-a-q6",
+    "unit": 3,
+    "unitTitle": "Transport and congestion control",
+    "part": "A",
+    "number": 6,
+    "question": "Describe how Slow Start increases the congestion window size during TCP connection startup.",
+    "answer": "During Slow Start, TCP initializes the congestion window with a small value (typically 1–10 MSS). For every ACK received, the congestion window increases by one MSS, causing it to double every RTT. This exponential growth continues until the congestion window reaches the slow- start threshold (ssthresh) or packet loss occurs, after which TCP switches to congestion avoidance."
+  },
+  {
+    "id": "cn-u3-a-q7",
+    "unit": 3,
+    "unitTitle": "Transport and congestion control",
+    "part": "A",
+    "number": 7,
+    "question": "TCP normally waits for a timeout to retransmit lost packets, which wastes time and reduces throughput. Fast Retransmit improves this by detecting loss earlier using duplicate ACKs. Explain the purpose of Fast Retransmit in TCP. How does it avoid waiting for a timeout",
+    "answer": "Fast Retransmit allows TCP to quickly retransmit a lost packet after receiving three duplicate ACKs, indicating that a packet is missing. Instead of waiting for the retransmission timeout (RTO), TCP immediately resends the lost packet, reducing recovery time and improving throughput."
+  },
+  {
+    "id": "cn-u3-a-q8",
+    "unit": 3,
+    "unitTitle": "Transport and congestion control",
+    "part": "A",
+    "number": 8,
+    "question": "Stop-and-Wait ARQ sends one packet and waits for an ACK before sending the next. Go-Back-N ARQ sends multiple packets before waiting for an ACK and retransmits all packets from the lost one.Compare Stop- and-Wait ARQ and Go-Back-N ARQ",
+    "answer": "Stop-and-Wait ARQ Go-Back-N ARQ Sends one frame at a time. Sends multiple frames continuously. Waits for ACK before sending the next frame. Uses a sliding window mechanism. Simple but inefficient on high-delay links. Higher efficiency and throughput. Retransmits only the lost frame. Retransmits the lost frame and all subsequent frames. Lower bandwidth utilization. Better bandwidth utilization."
+  },
+  {
+    "id": "cn-u3-a-q9",
+    "unit": 3,
+    "unitTitle": "Transport and congestion control",
+    "part": "A",
+    "number": 9,
+    "question": "Imagine you write answers for 12 questions even though only 10 are required. If the examiner loses 2 answers, you still get full marks because of the extra answers you included. How FEC works in data transfer. How does it recover lost data without retransmission?",
+    "answer": "Forward Error Correction (FEC) adds redundant error- correcting bits to transmitted data. The receiver uses these extra bits to detect and correct certain errors without requesting retransmission. Sender adds redundant data (extra answers) to the original message. Receiver uses redundant data to reconstruct lost/corrupted packets — no need to ask the sender to resend. Low latency — ideal for real-time apps"
+  },
+  {
+    "id": "cn-u3-a-q10",
+    "unit": 3,
+    "unitTitle": "Transport and congestion control",
+    "part": "A",
+    "number": 10,
+    "question": "Describe two key features of SCTP that distinguish it from TCP. How do these features benefit data transfer?",
+    "answer": "Two important features of SCTP (Stream Control Transmission Protocol) are:  Multi-streaming: Supports multiple independent data streams within a single connection, preventing head-of-line blocking.  Multi-homing: Allows an endpoint to use multiple IP addresses, improving fault tolerance by automatically switching to another path if one fails."
+  },
+  {
+    "id": "cn-u3-a-q11",
+    "unit": 3,
+    "unitTitle": "Transport and congestion control",
+    "part": "A",
+    "number": 11,
+    "question": "Imagine you are on a video call with your friend. RTP is the video and audio stream — the actual content of the call. RTCP is your friend periodically saying, \"Wait, you're lagging,\" \"Your video is pixelated,\" or \"I can barely hear you.\" This feedback helps the call quality adjust dynamically. How the relationship between RTP and RTCP in real-time media transmission.",
+    "answer": "RTP (Real-time Transport Protocol) carries real-time audio and video data between endpoints. RTCP (Real-time Transport Control Protocol) accompanies RTP by exchanging control information such as packet loss, delay, jitter, and synchronization data. RTP delivers the media, while RTCP monitors transmission quality and provides feedback for performance optimization."
+  },
+  {
+    "id": "cn-u3-a-q12",
+    "unit": 3,
+    "unitTitle": "Transport and congestion control",
+    "part": "A",
+    "number": 12,
+    "question": "In a video conference, packets arrive at irregular intervals, causing frozen frames and out-of-sync audio. Summarize how jitter affects real-time streaming quality and how it is managed.",
+    "answer": "Jitter is the variation in packet arrival times. High jitter causes:  Audio distortion or choppy voice.  Video freezing or frame skips.  Lip-sync problems between audio and video. Applications use jitter buffers to smooth packet arrival and improve playback quality."
+  },
+  {
+    "id": "cn-u3-a-q13",
+    "unit": 3,
+    "unitTitle": "Transport and congestion control",
+    "part": "A",
+    "number": 13,
+    "question": "You are browsing a website that loads images, text, and videos simultaneously. With TCP, if one element (e.g., an image) is delayed, the entire page stalls. With SCTP, each element can be delivered independently. Why SCTP supports multi-streaming and how this benefits applications like web browsing.",
+    "answer": "Multi-streaming enables SCTP to transmit multiple independent streams over one association. If packets are lost in one stream, only that stream is delayed, while others continue transmitting normally. This minimizes head-of-line blocking and improves performance for applications such as multimedia communication, web"
+  },
+  {
+    "id": "cn-u3-a-q14",
+    "unit": 3,
+    "unitTitle": "Transport and congestion control",
+    "part": "A",
+    "number": 14,
+    "question": "Describe how RTCP feedback (e.g., sender/receiver reports) helps monitor QoS in real-time sessions.",
+    "answer": "RTCP periodically exchanges Sender Reports (SR) and Receiver Reports (RR) containing:  Packet loss statistics  Jitter measurements  Round-trip delay  Throughput information  Synchronization timestamps This feedback allows applications to monitor Quality of Service (QoS) and adjust encoding rates or transmission parameters to maintain good audio/video quality."
+  },
+  {
+    "id": "cn-u3-a-q15",
+    "unit": 3,
+    "unitTitle": "Transport and congestion control",
+    "part": "A",
+    "number": 15,
+    "question": "Your office has two internet connections — one fiber and one backup 4G. If the fiber line goes down, the backup takes over without dropping active sessions. Explain the concept of \"multi-homing\" in SCTP and how it ensures uninterrupted connectivity.",
+    "answer": "SCTP (Stream Control Transmission Protocol) allows a single association (connection) to have multiple IP addresses assigned to each endpoint. One IP is designated as the primary path, and others are alternate paths. The SCTP association is established with two local IPs — one for the fiber connection and one for the 4G backup. - The fiber IP is set as the primary path. - The 4G IP is configured as an alternate path. - SCTP continuously monitors the primary path using heartbeat messages."
+  },
+  {
+    "id": "cn-u4-a-q1",
+    "unit": 4,
+    "unitTitle": "Network security",
+    "part": "A",
+    "number": 1,
+    "question": "A company's network faces two threats: Threat 1: Eavesdropping on traffic without altering it. Threat 2: Modifying data packets before they reach the destination. Identify which is an Active Attack and which is a Passive Attack. Differentiate between them with examples.",
+    "answer": "Active Attack Passive Attack 1. An active attack modifies, interrupts, or destroys data in a system. 1. A passive attack only observes or monitors data without changing it. 2. It affects the integrity and availability of information. 2. It mainly affects the confidentiality of information. 3. The attacker actively participates in the communication. 3. The attacker secretly listens to the communication. 4. It is usually easier to detect because system behavior changes. 4. It is difficult to detect since no changes are made to the data. 5. Prevention requires authentication, access control, and integrity checks. 5. Prevention mainly relies on encryption and secure communication. 6. Example: Modifying bank transaction details, Denial-of-Service (DoS) attack, data tampering. 6. Example: Eavesdropping, packet sniffing, traffic analysis."
+  },
+  {
+    "id": "cn-u4-a-q2",
+    "unit": 4,
+    "unitTitle": "Network security",
+    "part": "A",
+    "number": 2,
+    "question": "An attacker captures an authentication message during a video call and retransmits it later to gain unauthorized access to the system. What is a Replay Attack? How can it be prevented?",
+    "answer": "A Replay Attack is a type of cyberattack in which an attacker captures a valid data transmission, such as a login request or authentication message, and retransmits it later to gain unauthorized access or perform unauthorized actions. The attacker does not need to know the original message contents; they simply reuse the captured message. Example: An attacker records a user's online banking login request and replays it later to access the account without knowing the password. Countermeasures 1)Use Nonces 2) Use Timestamps, Use Session Tokens 3)Implement Challenge–Response Authentication 4)Use Secure Cryptographic Protocols:Protocols such as TLS/SSL help prevent replay attacks by protecting communication."
+  },
+  {
+    "id": "cn-u4-a-q3",
+    "unit": 4,
+    "unitTitle": "Network security",
+    "part": "A",
+    "number": 3,
+    "question": "A hacker positions themselves between a customer and their bank's website, intercepting all communication. The hacker captures the customer's login credentials and transaction details. Identify the MITM attack on data confidentiality.",
+    "answer": "A Man-in-the-Middle (MITM) attack occurs when an attacker secretly intercepts communication between two parties. This compromises data confidentiality because the attacker can read, capture, or steal sensitive information such as usernames, passwords, banking details, and personal data without the users' knowledge. Effects on Data Confidentiality: Unauthorized access to sensitive information. Theft of usernames, passwords, and financial data. Exposure of confidential personal or business information. Loss of privacy and trust in the communication system."
+  },
+  {
+    "id": "cn-u4-a-q4",
+    "unit": 4,
+    "unitTitle": "Network security",
+    "part": "A",
+    "number": 4,
+    "question": "A gaming server becomes unresponsive during a tournament due to a flood of requests from thousands of hijacked devices. State the purpose of a DDoS attack.",
+    "answer": "The purpose of a Distributed Denial-of-Service (DDoS) attack is to overload a target server, network, or website with a large volume of traffic from multiple compromised devices, making the service unavailable to legitimate users."
+  },
+  {
+    "id": "cn-u4-a-q5",
+    "unit": 4,
+    "unitTitle": "Network security",
+    "part": "A",
+    "number": 5,
+    "question": "Imagine your neighbor secretly listens to your phone calls and reads your messages. List any two types of information targeted in a MITM attack.",
+    "answer": "Any two of the following: Usernames and passwords Credit/Debit card or banking details Personal information (e.g., name, address, email) Session cookies or authentication tokens Confidential business data"
+  },
+  {
+    "id": "cn-u4-a-q6",
+    "unit": 4,
+    "unitTitle": "Network security",
+    "part": "A",
+    "number": 6,
+    "question": "A company is configuring a VPN to connect remote offices. The network engineer needs to choose the appropriate IPsec mode for securing the connection. Name the two operating modes of IPsec.",
+    "answer": "Mode Description Use Case Tunnel Mode Encrypts the entire IP packet (header + payload) and adds a new IP header. Gateway-to- Gateway VPNs, site- to-site VPNs. Transport Mode Encrypts only the payload (data) of the IP packet; original IP header is unchanged. End-to- End communication (host-to-host)."
+  },
+  {
+    "id": "cn-u4-a-q7",
+    "unit": 4,
+    "unitTitle": "Network security",
+    "part": "A",
+    "number": 7,
+    "question": "A customer logs into their online banking account. The browser shows a padlock icon, indicating that TLS is securing the connection. Describe the role of encryption in TLS in protecting this communication.",
+    "answer": "Encryption converts plaintext into ciphertext, ensuring that only authorized users can read the transmitted data and protecting it from attackers. TLS uses symmetric encryption (e.g., AES) to encrypt data after a secure handshake. The session keys are generated using asymmetric encryption (RSA/ECDHE) during the handshake."
+  },
+  {
+    "id": "cn-u4-a-q8",
+    "unit": 4,
+    "unitTitle": "Network security",
+    "part": "A",
+    "number": 8,
+    "question": "You are at a coffee shop using public Wi-Fi. You want to check your bank balance. The website uses HTTP for one site and HTTPS for another. Explore HTTPS site is more secure for your banking transaction.",
+    "answer": "HTTPS uses TLS/SSL to encrypt data exchanged between the client and server, protecting it from eavesdropping, tampering, and unauthorized access, whereas HTTP transmits data in plain text."
+  },
+  {
+    "id": "cn-u4-a-q9",
+    "unit": 4,
+    "unitTitle": "Network security",
+    "part": "A",
+    "number": 9,
+    "question": "An e-commerce platform processes thousands of transactions daily. It stores customer credit card details and personal information. The company must select a firewall to protect against both network-level and application-level attacks. Choose the appropriate firewall technique and justify your choice.",
+    "answer": "Stateful inspection is the appropriate choice because it monitors active sessions and allows only valid traffic, providing stronger protection than simple packet filtering."
+  },
+  {
+    "id": "cn-u4-a-q10",
+    "unit": 4,
+    "unitTitle": "Network security",
+    "part": "A",
+    "number": 10,
+    "question": "A company wants to allow SSH access (port 22) only from its internal network (192.168.1.0/24) and block all other external SSH attempts. Summarize the use of packet filtering to restrict access to this service.",
+    "answer": "Configure firewall rules to allow only the required service port (e.g., Port 24 for SMTP) and deny other unnecessary ports. Criteria Configuration Service SSH (port 22) Allowed Source 192.168.1.0/24 Blocked Source All other IPs Action ALLOW for internal; DROP for others Purpose Restrict SSH access to trusted network only"
+  },
+  {
+    "id": "cn-u4-a-q11",
+    "unit": 4,
+    "unitTitle": "Network security",
+    "part": "A",
+    "number": 11,
+    "question": "Imagine a security guard who checks your ID to ensure you are who you say you are (authentication). Another guard locks your bag (encryption) so no one can read your secrets. explore the role of AH and ESP in securing IP communication using this analogy.",
+    "answer": "AH verifies the authenticity and integrity of IP packets. ESP encrypts data and also provides authentication and integrity, ensuring secure communication."
+  },
+  {
+    "id": "cn-u4-a-q12",
+    "unit": 4,
+    "unitTitle": "Network security",
+    "part": "A",
+    "number": 12,
+    "question": "A user wants to access multiple services (email, file server, database) without entering their password each time. who handles this using a central server. Give your justification.",
+    "answer": "KDC – Key Distribution Center. The Key Distribution Center (KDC) verifies the identity of users and provides Ticket Granting Tickets (TGTs) and service tickets, enabling secure authentication without transmitting passwords over the network."
+  },
+  {
+    "id": "cn-u4-a-q13",
+    "unit": 4,
+    "unitTitle": "Network security",
+    "part": "A",
+    "number": 13,
+    "question": "Employees working from home access the company network via VPN. The company must verify their identity, control access to sensitive data, and log their activities. Identify the behind concept of this.",
+    "answer": "AAA ensures secure network access by verifying the user's identity (Authentication), determining access permissions (Authorization), and recording user activities (Accounting)."
+  },
+  {
+    "id": "cn-u4-a-q14",
+    "unit": 4,
+    "unitTitle": "Network security",
+    "part": "A",
+    "number": 14,
+    "question": "Your 80-year-old grandma just bought a laptop and calls you saying, \"Dear pappu, this website is asking for SSL! Is that a new type of pickle? Or should I restart the router?\"",
+    "answer": "Don't restart the router, Grandma! And no, it's not a pickle. It’s an SSL. SSL stands for Secure Sockets Layer. It is a cryptographic security protocol developed to establish a secure communication channel between a client and a server over a network. SSL provides: Confidentiality by encrypting data during transmission. Authentication by verifying the identity Data Integrity by ensuring that the transmitted data is not altered during communication."
+  },
+  {
+    "id": "cn-u4-a-q15",
+    "unit": 4,
+    "unitTitle": "Network security",
+    "part": "A",
+    "number": 15,
+    "question": "An e-commerce website uses two security tools: one that alerts administrators about attacks, and another that automatically blocks malicious traffic. Who does what and classify it.",
+    "answer": "E-commerce websites commonly use both IDS (alerts) and IPS (automatically blocks) for defense-in-depth. Intrusion Detection System (IDS) Intrusion Prevention System (IPS) Monitors network or system activities for suspicious behavior. Monitors and actively blocks malicious traffic. Detects and generates alerts about security threats. Detects, prevents, and stops attacks automatically. Functions as a detection mechanism. Functions as a prevention mechanism."
+  },
+  {
+    "id": "cn-u5-a-q1",
+    "unit": 5,
+    "unitTitle": "Cloud, IoT and 5G",
+    "part": "A",
+    "number": 1,
+    "question": "A telecom company wants to replace its expensive hardware-based network devices with virtualized software running on standard servers. How will you achieve.",
+    "answer": "NFV virtualizes network services such as firewalls and routers to run on software instead of dedicated hardware."
+  },
+  {
+    "id": "cn-u5-a-q2",
+    "unit": 5,
+    "unitTitle": "Cloud, IoT and 5G",
+    "part": "A",
+    "number": 2,
+    "question": "A company is migrating its IT infrastructure from on- premises data centers to the cloud. The network team needs to understand how networking works in the cloud. State which network to follow.",
+    "answer": "Cloud networking is the use of cloud infrastructure to deliver and manage network services over the internet."
+  },
+  {
+    "id": "cn-u5-a-q3",
+    "unit": 5,
+    "unitTitle": "Cloud, IoT and 5G",
+    "part": "A",
+    "number": 3,
+    "question": "Distinguish between load balancing and auto-scaling in cloud environments. Explain how they differ in purpose and function.",
+    "answer": "Load balancing distributes traffic across servers, while auto-scaling adjusts the number of servers based on demand."
+  },
+  {
+    "id": "cn-u5-a-q4",
+    "unit": 5,
+    "unitTitle": "Cloud, IoT and 5G",
+    "part": "A",
+    "number": 4,
+    "question": "A company is migrating from traditional hardware-based networking to virtual networking. The network team needs to present the benefits to management. List any five benefits of virtual networking.",
+    "answer": "Scalability, cost efficiency, resource optimization, fast recovery and flexibility."
+  },
+  {
+    "id": "cn-u5-a-q5",
+    "unit": 5,
+    "unitTitle": "Cloud, IoT and 5G",
+    "part": "A",
+    "number": 5,
+    "question": "Interpret the role of network slicing in 5G — what it is and why it is important.",
+    "answer": "It enables multiple virtual networks to run on a single physical infrastructure for different applications."
+  },
+  {
+    "id": "cn-u5-a-q6",
+    "unit": 5,
+    "unitTitle": "Cloud, IoT and 5G",
+    "part": "A",
+    "number": 6,
+    "question": "An e-commerce website experiences high traffic during flash sales. To prevent servers from crashing, the company uses a load balancer .Describe its function.",
+    "answer": "To distribute traffic evenly across servers to improve performance and reliability."
+  },
+  {
+    "id": "cn-u5-a-q7",
+    "unit": 5,
+    "unitTitle": "Cloud, IoT and 5G",
+    "part": "A",
+    "number": 7,
+    "question": "Describe the function of auto-scaling — why is it used in cloud environments?",
+    "answer": "Auto-scaling automatically increases or decreases computing resources based on workload demand."
+  },
+  {
+    "id": "cn-u5-a-q8",
+    "unit": 5,
+    "unitTitle": "Cloud, IoT and 5G",
+    "part": "A",
+    "number": 8,
+    "question": "Name any two platforms that support cloud networking and state their purpose.",
+    "answer": "AWS and Microsoft Azure are cloud computing platforms that provide virtual networking services, allowing users to build, manage, and scale network infrastructure over the internet."
+  },
+  {
+    "id": "cn-u5-a-q9",
+    "unit": 5,
+    "unitTitle": "Cloud, IoT and 5G",
+    "part": "A",
+    "number": 9,
+    "question": "Summarize the key features of 5G architecture — what are its main characteristics?",
+    "answer": "5G architecture supports high-speed, low-latency communication and massive connectivity."
+  },
+  {
+    "id": "cn-u5-a-q10",
+    "unit": 5,
+    "unitTitle": "Cloud, IoT and 5G",
+    "part": "A",
+    "number": 10,
+    "question": "List any two advantages of Network Function Virtualization (NFV) and briefly explain each.",
+    "answer": " Reduced hardware cost – Minimizes dependency on dedicated network devices.  Scalability – Network functions can be easily scaled based on demand."
+  },
+  {
+    "id": "cn-u5-a-q11",
+    "unit": 5,
+    "unitTitle": "Cloud, IoT and 5G",
+    "part": "A",
+    "number": 11,
+    "question": "Classify the cloud deployment models — what are the different types of cloud deployment and how do they differ?",
+    "answer": "Public cloud, Private cloud, Hybrid cloud."
+  },
+  {
+    "id": "cn-u5-a-q12",
+    "unit": 5,
+    "unitTitle": "Cloud, IoT and 5G",
+    "part": "A",
+    "number": 12,
+    "question": "State the main goal of virtual networking and briefly explain its purpose.",
+    "answer": "To create network resources using software instead of physical hardware."
+  },
+  {
+    "id": "cn-u5-a-q13",
+    "unit": 5,
+    "unitTitle": "Cloud, IoT and 5G",
+    "part": "A",
+    "number": 13,
+    "question": "How does load balancing work in cloud networking? Briefly explain its function.",
+    "answer": "The process of distributing incoming network traffic across multiple servers (or resources) to ensure no single server is overwhelmed, improving performance, availability, and reliability."
+  },
+  {
+    "id": "cn-u5-a-q14",
+    "unit": 5,
+    "unitTitle": "Cloud, IoT and 5G",
+    "part": "A",
+    "number": 14,
+    "question": "Mention any two features of 5G networks and briefly explain each.",
+    "answer": "High data speed – Enables ultra-fast data transmission. Low latency – Provides very minimal delay in communication."
+  },
+  {
+    "id": "cn-u5-a-q15",
+    "unit": 5,
+    "unitTitle": "Cloud, IoT and 5G",
+    "part": "A",
+    "number": 15,
+    "question": "A large telecommunications company needs to find the most efficient routes for data packets across its complex network. Traditional routing algorithms struggle with the network's size and dynamic conditions. How do genetic algorithms help find optimal routes in this scenario?",
+    "answer": "They optimize routing paths using evolutionary techniques to find efficient solutions."
+  }
+]

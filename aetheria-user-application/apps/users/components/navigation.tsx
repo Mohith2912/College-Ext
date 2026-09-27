@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Beaker, BookOpen, BriefcaseBusiness, ChevronRight, Headphones, House, Info, LogIn, Sparkles } from 'lucide-react';
+import { BookOpen, BrainCircuit, BriefcaseBusiness, ChevronRight, Headphones, House, Info, LogIn, Sparkles } from 'lucide-react';
 
 export function Navigation({ mobile = false, signedIn = false }: { mobile?: boolean; signedIn?: boolean }) {
   const pathname = usePathname();
@@ -10,10 +10,10 @@ export function Navigation({ mobile = false, signedIn = false }: { mobile?: bool
     { href: '/home', label: 'My workspace', mobile: 'Home', icon: House, mobileVisible: false },
     { href: '/notes', label: 'Course notes', mobile: 'Notes', icon: BookOpen },
     { href: '/podcasts', label: 'Course podcasts', mobile: 'Listen', icon: Headphones },
-    { href: '/interactive', label: 'Interactive lab', mobile: 'Lab', icon: Beaker },
+    { href: '/learn', label: 'Learn for a test', mobile: 'Learn', icon: BrainCircuit },
     { href: '/case-studies', label: 'Case studies', mobile: 'Cases', icon: BriefcaseBusiness },
     ...(signedIn ? [{ href: '/ai', label: 'AI study tutor', mobile: 'Tutor', icon: Sparkles }] : []),
-    { href: '/about', label: 'About Aetheria', mobile: 'About', icon: Info, mobileVisible: false },
+    { href: '/about', label: 'About Beyond Syllabus', mobile: 'About', icon: Info, mobileVisible: false },
     ...(!signedIn ? [{ href: '/login', label: 'Sign in', mobile: 'Sign in', icon: LogIn }] : []),
   ];
   return <nav className={mobile ? 'mobile-nav' : 'side-nav'} aria-label={mobile ? 'Mobile navigation' : 'Main navigation'}>

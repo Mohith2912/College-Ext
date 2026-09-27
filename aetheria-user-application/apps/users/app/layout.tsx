@@ -10,13 +10,13 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.USERS_URL ?? 'http://localhost:3000'),
-  title: { default: 'Aetheria — Independent Study Companion', template: '%s | Aetheria' },
-  description: 'A quiet place to understand more. Explore original course notes, clear explanations, and structured syllabi with Aetheria, your independent study companion.',
+  title: { default: 'Beyond Syllabus — Learn, Explore, Apply', template: '%s | Beyond Syllabus' },
+  description: 'Learn, explore, and apply with clear course notes, practical explanations, and interactive study tools from Beyond Syllabus.',
   icons: { icon: '/icon.svg', apple: '/icon.svg' },
-  openGraph: { title: 'Aetheria Study Companion', description: 'Original course notes. Thoughtful learning. An independent study companion.', type: 'website', siteName: 'Aetheria' },
-  twitter: { card: 'summary', title: 'Aetheria Study Companion', description: 'An independent home for thoughtful study.' },
+  openGraph: { title: 'Beyond Syllabus', description: 'Learn, explore, and apply beyond the syllabus.', type: 'website', siteName: 'Beyond Syllabus' },
+  twitter: { card: 'summary', title: 'Beyond Syllabus', description: 'Learn, explore, and apply beyond the syllabus.' },
 };
-export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#235f53' };
+export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#173b73' };
 export const dynamic = 'force-dynamic';
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
