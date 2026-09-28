@@ -7,6 +7,7 @@ import { Navigation } from '@/components/navigation';
 import { ThemePicker } from '@/components/preferences';
 import { PwaRegistration } from '@/components/pwa-registration';
 import { BackToTop } from '@/components/back-to-top';
+import { RouteLoader } from '@/components/route-loader';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -32,6 +33,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <div className="topbar-actions"><ThemePicker /><span className="topbar-divider" />{session?.user ? <><Link href="/home" className="text-link">{session.user.name?.split(' ')[0] ?? 'My workspace'}</Link><form action={async () => { 'use server'; await signOut({ redirectTo: '/notes' }); }}><button type="submit" className="btn btn-secondary">Sign out</button></form></> : <><Link href="/login" className="text-link">Sign in</Link><Link href="/register" className="btn btn-primary">Create account <ChevronRight size={13} aria-hidden="true" /></Link></>}</div>
       </header>
       <main id="main-content" className="page-container" tabIndex={-1}>{children}</main>
+      <RouteLoader />
       <BackToTop />
       <Navigation mobile signedIn={!!session} />
     </div>
