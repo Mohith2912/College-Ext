@@ -3,17 +3,6 @@ import { prisma } from '@aetheria/database';
 import { unstable_cache } from 'next/cache';
 import { organizationScope } from './library';
 
-export type DialogueTurn = { speaker: 'Mira' | 'Arun'; text: string };
-export type PodcastEpisode = {
-  id: string;
-  term: string;
-  termNumber: number;
-  course: string;
-  courseCode: string;
-  description: string;
-  minutes: number;
-  dialogue: DialogueTurn[];
-};
 export type InteractiveStep = {
   label: string;
   title: string;
@@ -47,23 +36,6 @@ function shortSummary(markdown: string, fallback: string) {
   const content = plain(markdown.replace(/^#.*$/gm, ''));
   const sentence = content.match(/^(.{35,260}?[.!?])(?:\s|$)/)?.[1];
   return sentence?.trim() || content.slice(0, 220) || fallback;
-}
-
-function dialogueFor(course: string, modules: { title: string; markdown: string }[]): DialogueTurn[] {
-  const turns: DialogueTurn[] = [
-    { speaker: 'Mira', text: `Welcome to our ${course} study conversation. We are going to connect the main ideas across this semester course.` },
-    { speaker: 'Arun', text: `And we will keep it practical. I will challenge the ideas while you explain why they matter, Mira.` },
-  ];
-  modules.forEach((module, index) => {
-    const summary = shortSummary(module.markdown, `This part introduces ${module.title}.`);
-    turns.push({ speaker: 'Mira', text: `Let us begin with ${module.title}. ${summary}` });
-    turns.push({ speaker: 'Arun', text: index === modules.length - 1
-      ? `So the useful question is: how would you apply ${module.title} alongside the earlier ideas when the situation changes?`
-      : `How does that connect to the next topic, and what should a learner watch for when applying it?` });
-  });
-  turns.push({ speaker: 'Mira', text: `That is the thread through ${course}: understand each idea, test the assumptions, and connect the modules before making a decision.` });
-  turns.push({ speaker: 'Arun', text: `Pause here and choose one module to revisit. Explain it in your own words before continuing.` });
-  return turns;
 }
 
 function stepsFor(markdown: string, moduleTitle: string): InteractiveStep[] {
@@ -121,23 +93,11 @@ async function loadLearningStudio() {
     },
   });
 
-  const episodes: PodcastEpisode[] = [];
   const modules: InteractiveModule[] = [];
   for (const term of terms) {
     for (const offering of term.offerings) {
       const courseModules = offering.course.modules.filter(module => module.note);
       if (!courseModules.length) continue;
-      const dialogue = dialogueFor(offering.course.title, courseModules.map(module => ({ title: module.title, markdown: module.note?.markdown ?? '' })));
-      episodes.push({
-        id: `${term.id}-${offering.course.id}`,
-        term: term.name,
-        termNumber: term.number,
-        course: offering.course.title,
-        courseCode: offering.course.code ?? 'COURSE',
-        description: offering.course.description,
-        minutes: Math.max(4, Math.ceil(dialogue.reduce((count, turn) => count + turn.text.split(/\s+/).length, 0) / 135)),
-        dialogue,
-      });
       for (const module of courseModules) {
         modules.push({
           id: module.id,
@@ -153,7 +113,7 @@ async function loadLearningStudio() {
       }
     }
   }
-  return { terms: terms.map(term => ({ title: term.name, number: term.number })), episodes, modules };
+  return { terms: terms.map(term => ({ title: term.name, number: term.number })), modules };
 }
 
-export const getLearningStudio = unstable_cache(loadLearningStudio, ['aetheria-learning-studio-v5'], { revalidate: 300, tags: ['aetheria-curriculum'] });
+export const getLearningStudio = unstable_cache(loadLearningStudio, ['aetheria-learning-studio-v6'], { revalidate: 300, tags: ['aetheria-curriculum'] });

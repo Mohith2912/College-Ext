@@ -1,84 +1,159 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { Headphones, Pause, Play, RotateCcw, Square } from 'lucide-react';
-import type { PodcastEpisode } from '@/lib/learning-studio';
+import { useEffect, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
+import {
+  Check,
+  Clock3,
+  Download,
+  Gauge,
+  Headphones,
+  Network,
+  Pause,
+  Play,
+  RotateCcw,
+  RotateCw,
+  Sparkles,
+} from 'lucide-react';
 
-export function PodcastStudio({ episodes }: { episodes: PodcastEpisode[] }) {
-  const terms = [...new Map(episodes.map(episode => [episode.termNumber, episode.term])).entries()];
-  const [term, setTerm] = useState(terms[0]?.[0] ?? 1);
-  const filtered = useMemo(() => episodes.filter(episode => episode.termNumber === term), [episodes, term]);
-  const [episodeId, setEpisodeId] = useState(filtered[0]?.id ?? '');
-  const episode = episodes.find(item => item.id === episodeId) ?? filtered[0];
-  const [turn, setTurn] = useState(0);
+const AUDIO_SOURCE = '/podcasts/computer-networks-unit-1-global-network-architecture.m4a';
+const AUDIO_DURATION = 52 * 60 + 59;
+const SPEEDS = [1, 1.25, 1.5, 1.75, 2];
+
+function formatTime(value: number) {
+  if (!Number.isFinite(value) || value < 0) return '00:00';
+  const minutes = Math.floor(value / 60);
+  const seconds = Math.floor(value % 60);
+  return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
+
+export function PodcastStudio() {
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
-  const [paused, setPaused] = useState(false);
-  const runRef = useRef(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(AUDIO_DURATION);
+  const [speed, setSpeed] = useState(1);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (!filtered.some(item => item.id === episodeId)) setEpisodeId(filtered[0]?.id ?? '');
-    setTurn(0);
-    setPlaying(false);
-    setPaused(false);
-    speechSynthesis.cancel();
-  }, [term]);
-
-  useEffect(() => () => speechSynthesis.cancel(), []);
-
-  function speakFrom(index: number) {
-    if (!episode || !('speechSynthesis' in window)) return;
-    const run = ++runRef.current;
-    speechSynthesis.cancel();
-    setPlaying(true);
-    setPaused(false);
-    const voices = speechSynthesis.getVoices();
-    const preferred = voices.filter(voice => /^en/i.test(voice.lang));
-    const speakTurn = (position: number) => {
-      if (run !== runRef.current || position >= episode.dialogue.length) {
-        if (run === runRef.current) setPlaying(false);
-        return;
-      }
-      setTurn(position);
-      const item = episode.dialogue[position];
-      const utterance = new SpeechSynthesisUtterance(item.text);
-      utterance.rate = item.speaker === 'Mira' ? 0.96 : 1.02;
-      utterance.pitch = item.speaker === 'Mira' ? 1.08 : 0.9;
-      utterance.voice = preferred[item.speaker === 'Mira' ? 0 : Math.min(1, preferred.length - 1)] ?? null;
-      utterance.onend = () => speakTurn(position + 1);
-      utterance.onerror = () => setPlaying(false);
-      speechSynthesis.speak(utterance);
+    const audio = audioRef.current;
+    if (!audio) return;
+    const updateTime = () => setCurrentTime(audio.currentTime);
+    const updateDuration = () => {
+      if (Number.isFinite(audio.duration)) setDuration(audio.duration);
+      setReady(true);
     };
-    speakTurn(index);
+    const stopPlaying = () => setPlaying(false);
+    const startPlaying = () => setPlaying(true);
+    audio.addEventListener('timeupdate', updateTime);
+    audio.addEventListener('loadedmetadata', updateDuration);
+    audio.addEventListener('canplay', updateDuration);
+    audio.addEventListener('ended', stopPlaying);
+    audio.addEventListener('pause', stopPlaying);
+    audio.addEventListener('play', startPlaying);
+    return () => {
+      audio.removeEventListener('timeupdate', updateTime);
+      audio.removeEventListener('loadedmetadata', updateDuration);
+      audio.removeEventListener('canplay', updateDuration);
+      audio.removeEventListener('ended', stopPlaying);
+      audio.removeEventListener('pause', stopPlaying);
+      audio.removeEventListener('play', startPlaying);
+    };
+  }, []);
+
+  async function togglePlayback() {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (audio.paused) await audio.play();
+    else audio.pause();
   }
 
-  function togglePause() {
-    if (paused) speechSynthesis.resume(); else speechSynthesis.pause();
-    setPaused(!paused);
+  function seek(value: number) {
+    const audio = audioRef.current;
+    if (!audio) return;
+    const next = Math.min(Math.max(value, 0), duration);
+    audio.currentTime = next;
+    setCurrentTime(next);
   }
 
-  function stop() {
-    runRef.current += 1;
-    speechSynthesis.cancel();
-    setPlaying(false);
-    setPaused(false);
+  function changeSpeed() {
+    const audio = audioRef.current;
+    const next = SPEEDS[(SPEEDS.indexOf(speed) + 1) % SPEEDS.length] ?? 1;
+    setSpeed(next);
+    if (audio) audio.playbackRate = next;
   }
 
-  if (!episode) return <div className="empty-state"><h2>Podcast conversations are being prepared.</h2><p>They appear when published course notes are available.</p></div>;
+  const progress = duration ? (currentTime / duration) * 100 : 0;
 
-  return <div className="podcast-studio">
-    <div className="term-switcher" role="tablist" aria-label="Choose semester">{terms.map(([number, label]) => <button key={number} role="tab" aria-selected={term === number} onClick={() => setTerm(number)}>{label}</button>)}</div>
-    <div className="podcast-layout">
-      <aside className="episode-list" aria-label={`${episode.term} episodes`}>
-        <p className="eyebrow">{episode.term.toUpperCase()} · COURSE CONVERSATIONS</p>
-        {filtered.map(item => <button key={item.id} className={item.id === episode.id ? 'active' : ''} onClick={() => { stop(); setEpisodeId(item.id); setTurn(0); }}><span>{item.courseCode}</span><strong>{item.course}</strong><small>{item.minutes} min · two hosts</small></button>)}
+  return <div className="podcast-hub">
+    <section className="podcast-hero">
+      <div className="podcast-hero-copy">
+        <span className="podcast-kicker"><Headphones size={15} aria-hidden="true" /> BEYOND SYLLABUS AUDIO</span>
+        <h1>Learn the unit.<br />Hear the bigger picture.</h1>
+        <p>A focused audio companion for Computer Networks, arranged unit by unit so listening stays connected to what you are studying.</p>
+        <div className="podcast-hero-meta"><span><Network size={15} aria-hidden="true" /> Computer Networks</span><span><Clock3 size={15} aria-hidden="true" /> 52:59</span></div>
+      </div>
+      <div className="podcast-signal" aria-hidden="true">
+        {[38, 70, 48, 86, 58, 96, 66, 44, 78, 54, 88, 36].map((height, index) => <i key={index} style={{ height: `${height}%` }} />)}
+      </div>
+    </section>
+
+    <div className="podcast-grid">
+      <aside className="podcast-units" aria-label="Computer Networks podcast units">
+        <div className="podcast-section-label"><span>COURSE SERIES</span><strong>Computer Networks</strong></div>
+        <ol>
+          <li className="active"><span className="unit-index">01</span><span><small>NOW PLAYING</small><strong>Global Network Architecture</strong></span><Check size={17} aria-hidden="true" /></li>
+          {[2, 3, 4, 5].map(unit => <li key={unit} className="upcoming"><span className="unit-index">0{unit}</span><span><small>COMING NEXT</small><strong>Unit {unit} podcast</strong></span></li>)}
+        </ol>
       </aside>
-      <section className="podcast-player">
-        <div className="podcast-cover"><Headphones aria-hidden="true"/><span>{episode.term}</span><strong>{episode.course}</strong><small>A conversation between Mira and Arun</small></div>
-        <div className="player-copy"><span className="course-code">{episode.courseCode} · TWO-SIDED STUDY PODCAST</span><h2>{episode.course}</h2><p>{episode.description}</p>
-          <div className="player-controls"><button className="round-control primary" onClick={() => speakFrom(turn)} aria-label={playing ? 'Restart from current speaker' : 'Play conversation'}>{playing ? <RotateCcw/> : <Play/>}</button><button className="round-control" onClick={togglePause} disabled={!playing} aria-label={paused ? 'Resume' : 'Pause'}>{paused ? <Play/> : <Pause/>}</button><button className="round-control" onClick={stop} disabled={!playing} aria-label="Stop"><Square/></button><span>{turn + 1} / {episode.dialogue.length} turns</span></div>
+
+      <section className="podcast-console" aria-labelledby="episode-title">
+        <audio ref={audioRef} preload="metadata" src={AUDIO_SOURCE} />
+        <div className="podcast-cover-new">
+          <div className="cover-orbit"><span /><span /><Network size={46} strokeWidth={1.35} aria-hidden="true" /></div>
+          <span>COMPUTER NETWORKS</span>
+          <strong>UNIT<br />ONE</strong>
+          <small>BEYOND SYLLABUS · PODCAST</small>
         </div>
-        <div className="dialogue-transcript" aria-live="polite">{episode.dialogue.map((item, index) => <button key={`${item.speaker}-${index}`} className={`${item.speaker.toLowerCase()} ${index === turn ? 'current' : ''}`} onClick={() => speakFrom(index)}><span className="speaker-avatar">{item.speaker[0]}</span><span><strong>{item.speaker}</strong><span>{item.text}</span></span></button>)}</div>
+
+        <div className="podcast-now-playing">
+          <div className="podcast-episode-label"><span>EPISODE 01</span><span className="audio-status">{playing ? 'PLAYING' : ready ? 'READY' : 'LOADING AUDIO'}</span></div>
+          <h2 id="episode-title">Anatomy of Global Network Architecture</h2>
+          <p>Unit 1 audio companion · Computer Networks</p>
+
+          <div className="podcast-timeline">
+            <input
+              type="range"
+              min="0"
+              max={duration || AUDIO_DURATION}
+              step="1"
+              value={Math.min(currentTime, duration || AUDIO_DURATION)}
+              onChange={event => seek(Number(event.target.value))}
+              aria-label="Podcast playback position"
+              style={{ '--podcast-progress': `${progress}%` } as CSSProperties}
+            />
+            <div><span>{formatTime(currentTime)}</span><span>-{formatTime(Math.max(duration - currentTime, 0))}</span></div>
+          </div>
+
+          <div className="podcast-controls">
+            <button type="button" className="podcast-skip" onClick={() => seek(currentTime - 15)} aria-label="Go back 15 seconds"><RotateCcw aria-hidden="true" /><span>15</span></button>
+            <button type="button" className="podcast-play" onClick={togglePlayback} aria-label={playing ? 'Pause podcast' : 'Play podcast'}>{playing ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}</button>
+            <button type="button" className="podcast-skip" onClick={() => seek(currentTime + 15)} aria-label="Go forward 15 seconds"><RotateCw aria-hidden="true" /><span>15</span></button>
+            <button type="button" className="podcast-speed" onClick={changeSpeed} aria-label={`Playback speed ${speed} times. Change speed`}><Gauge size={16} aria-hidden="true" /> {speed}×</button>
+          </div>
+
+          <div className="podcast-actions">
+            <span><Sparkles size={15} aria-hidden="true" /> Original Unit 1 recording</span>
+            <a href={AUDIO_SOURCE} download><Download size={15} aria-hidden="true" /> Download episode</a>
+          </div>
+        </div>
       </section>
     </div>
+
+    <section className="podcast-listen-note">
+      <div><span>01</span><p>Listen once for the full structure. Replay difficult sections while reviewing your Unit 1 notes.</p></div>
+      <div><span>02</span><p>Use the 15-second controls to revisit definitions, examples, and transitions without losing your place.</p></div>
+      <div><span>03</span><p>After listening, switch to Learn for a Test and check what you can recall without the audio.</p></div>
+    </section>
   </div>;
 }
