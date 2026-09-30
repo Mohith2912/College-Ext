@@ -167,12 +167,6 @@ export default function AboutPage() {
               desc: 'Unit-by-unit audio companions with seeking, speed control, and downloads — learn while you commute.',
               accent: '#0891b2',
             },
-            {
-              icon: Sparkles,
-              title: 'AI study tutor',
-              desc: 'Ask questions grounded in your published course notes. Get explanations, worked examples, and recall prompts.',
-              accent: '#d97706',
-            },
           ].map((feature) => (
             <article
               key={feature.title}
@@ -224,7 +218,7 @@ export default function AboutPage() {
         <h2>Start with a question.</h2>
         <p>
           Explore published notes as a guest, or create a free account to unlock
-          your personal study space, AI tutor, and saved progress.
+          your personal study space and saved progress.
         </p>
         <div className="about-cta__actions">
           <Link href="/notes" className="btn btn-primary">
