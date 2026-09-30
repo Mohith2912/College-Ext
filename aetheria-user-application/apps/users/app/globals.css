@@ -89,3 +89,135 @@ html[data-theme='dark'] .learn-arena{--learn-ink:#e8eef8;--learn-muted:#aab9ce;-
 @media(max-width:480px){.route-loader{padding:24px}.route-loader__content{width:min(320px,100%)}.route-loader__progress{margin-top:12px}}
 @media(prefers-reduced-motion:reduce){.route-loader,.route-loader__brand,.route-loader__progress span{animation:none}.route-loader__brand{clip-path:none}.route-loader__progress span{width:100%}}
 @media print{.route-loader{display:none!important}}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   About page: a rich, themeful introduction to Beyond Syllabus.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Shared ── */
+.about-kicker{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:800;letter-spacing:1.8px;color:var(--accent)}
+.about-section-header{text-align:center;max-width:580px;margin:0 auto 40px}
+.about-section-header h2{font-size:clamp(26px,3.5vw,38px);letter-spacing:-.8px;margin:12px 0 10px}
+.about-section-header>p:last-child{color:var(--muted);font-size:14px;margin:0}
+
+/* ── Hero ── */
+.about-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:40px;align-items:center;min-height:380px;padding:52px 52px 52px 56px;margin-bottom:32px;border:1px solid var(--border);border-radius:24px;background:radial-gradient(circle at 82% 20%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 36%),linear-gradient(135deg,var(--surface) 0%,color-mix(in srgb,var(--accent-soft) 65%,var(--surface)) 55%,color-mix(in srgb,var(--accent-soft) 40%,var(--surface)) 100%);isolation:isolate}
+.about-hero__content{position:relative;z-index:2}
+.about-hero h1{margin:14px 0 16px;font-size:clamp(38px,5vw,62px);line-height:1;letter-spacing:-2.5px}
+.about-hero__copy{max-width:560px;margin:0 0 28px;color:var(--muted);font-size:15px;line-height:1.8}
+.about-hero__actions{display:flex;gap:10px;flex-wrap:wrap}
+.about-btn-outline{border:1px solid var(--border)!important;background:color-mix(in srgb,var(--surface) 80%,transparent)!important;color:var(--text)!important;backdrop-filter:blur(6px)}
+.about-btn-outline:hover{background:var(--surface-2)!important;border-color:color-mix(in srgb,var(--accent) 40%,var(--border))!important}
+
+/* Orbital decorations */
+.about-hero__orbits{position:absolute;inset:0;z-index:0;pointer-events:none}
+.about-orbit{position:absolute;border:1px solid color-mix(in srgb,var(--accent) 18%,transparent);border-radius:50%}
+.about-orbit--1{width:500px;height:260px;top:-80px;right:-120px;transform:rotate(-12deg)}
+.about-orbit--2{width:380px;height:380px;bottom:-160px;right:60px;transform:rotate(25deg)}
+.about-orbit--3{width:200px;height:100px;bottom:40px;left:-60px;transform:rotate(-30deg)}
+.about-dot{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.35}
+.about-dot--1{top:20%;right:28%}.about-dot--2{top:60%;right:12%}.about-dot--3{bottom:25%;left:10%}
+
+/* Right-side orb */
+.about-hero__visual{position:relative;z-index:1;display:grid;place-items:center;min-height:260px}
+.about-orb{position:relative;display:grid;place-items:center;width:200px;height:200px}
+.about-orb__ring{position:absolute;border:1px solid color-mix(in srgb,var(--accent) 28%,transparent);border-radius:50%}
+.about-orb__ring--1{inset:0;animation:about-spin 18s linear infinite}
+.about-orb__ring--2{inset:20px;animation:about-spin 12s linear infinite reverse}
+.about-orb__core{display:grid;place-items:center;width:90px;height:90px;border-radius:50%;background:var(--surface);box-shadow:0 20px 50px color-mix(in srgb,var(--accent) 22%,transparent);color:var(--accent)}
+@keyframes about-spin{to{transform:rotate(360deg)}}
+
+/* ── Mission ── */
+.about-mission{display:flex;gap:24px;align-items:flex-start;padding:32px 36px;margin-bottom:32px;border:1px solid var(--border);border-radius:16px;background:var(--surface)}
+.about-mission__icon{display:grid;place-items:center;flex:0 0 52px;height:52px;border-radius:14px;background:var(--accent-soft);color:var(--accent)}
+.about-mission h2{font-size:clamp(20px,2.5vw,26px);letter-spacing:-.5px;margin:0 0 10px}
+.about-mission p{color:var(--muted);font-size:14px;line-height:1.85;margin:0;max-width:680px}
+
+/* ── Values ── */
+.about-values{margin-bottom:48px}
+.about-values__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.about-value-card{position:relative;padding:28px 26px;border:1px solid var(--border);border-radius:14px;background:var(--surface);transition:transform .18s,border-color .18s,box-shadow .18s}
+.about-value-card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 40%,var(--border));box-shadow:0 12px 32px color-mix(in srgb,var(--accent) 8%,transparent)}
+.about-value-card__icon{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--accent-soft);color:var(--accent);margin-bottom:18px}
+.about-value-card h3{font-size:16px;font-weight:600;margin:0 0 8px}
+.about-value-card p{color:var(--muted);font-size:12.5px;line-height:1.75;margin:0}
+
+/* ── Features ── */
+.about-features{margin-bottom:48px}
+.about-features__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.about-feature-card{position:relative;padding:32px 30px;border:1px solid var(--border);border-radius:16px;background:var(--surface);overflow:hidden;transition:transform .18s,box-shadow .18s}
+.about-feature-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--feature-accent,var(--accent));opacity:.7;border-radius:16px 16px 0 0}
+.about-feature-card:hover{transform:translateY(-2px);box-shadow:0 14px 35px color-mix(in srgb,var(--feature-accent,var(--accent)) 10%,transparent)}
+.about-feature-card__icon{display:grid;place-items:center;width:50px;height:50px;border-radius:14px;background:color-mix(in srgb,var(--feature-accent,var(--accent)) 12%,var(--surface));color:var(--feature-accent,var(--accent));margin-bottom:20px}
+.about-feature-card h3{font-size:18px;font-weight:600;margin:0 0 10px;letter-spacing:-.2px}
+.about-feature-card p{color:var(--muted);font-size:13px;line-height:1.75;margin:0}
+
+/* ── Philosophy ── */
+.about-philosophy{position:relative;text-align:center;padding:52px 40px 48px;margin-bottom:32px;border:1px solid var(--border);border-radius:20px;background:linear-gradient(145deg,color-mix(in srgb,var(--accent-soft) 50%,var(--surface)),var(--surface))}
+.about-philosophy blockquote{margin:0;padding:0;border:0}
+.about-philosophy blockquote p{font-family:var(--serif);font-size:clamp(20px,2.8vw,30px);line-height:1.55;letter-spacing:-.4px;max-width:700px;margin:0 auto 20px;color:var(--text)}
+.about-philosophy__author{font-size:12px;color:var(--muted);letter-spacing:.5px}
+
+/* ── Independence ── */
+.about-independence{display:flex;gap:20px;align-items:flex-start;padding:24px 28px;margin-bottom:32px;border:1px solid color-mix(in srgb,var(--amber) 20%,var(--border));border-radius:12px;background:var(--amber-soft)}
+.about-independence__badge{display:grid;place-items:center;flex:0 0 40px;height:40px;border-radius:10px;background:color-mix(in srgb,var(--amber) 18%,transparent);color:var(--amber)}
+.about-independence h3{font-size:15px;font-weight:600;margin:0 0 6px}
+.about-independence p{color:var(--muted);font-size:12.5px;line-height:1.8;margin:0}
+
+/* ── CTA ── */
+.about-cta{position:relative;overflow:hidden;text-align:center;padding:56px 40px 52px;margin-bottom:32px;border:1px solid var(--border);border-radius:20px;background:var(--surface)}
+.about-cta__glow{position:absolute;top:50%;left:50%;width:420px;height:420px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 10%,transparent),transparent 70%);pointer-events:none}
+.about-cta h2{position:relative;font-size:clamp(28px,4vw,42px);letter-spacing:-1.2px;margin:0 0 14px}
+.about-cta>p{position:relative;max-width:520px;margin:0 auto 28px;color:var(--muted);font-size:14px;line-height:1.8}
+.about-cta__actions{position:relative;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+
+/* ── Dark theme overrides ── */
+[data-theme='dark'] .about-hero{background:radial-gradient(circle at 82% 20%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 36%),linear-gradient(135deg,var(--surface) 0%,color-mix(in srgb,var(--accent-soft) 45%,var(--surface)) 55%,var(--surface) 100%)}
+[data-theme='dark'] .about-orbit{border-color:color-mix(in srgb,var(--accent) 14%,transparent)}
+[data-theme='dark'] .about-dot{opacity:.2}
+[data-theme='dark'] .about-orb__ring{border-color:color-mix(in srgb,var(--accent) 20%,transparent)}
+[data-theme='dark'] .about-orb__core{background:var(--surface-2);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+[data-theme='dark'] .about-philosophy{background:linear-gradient(145deg,color-mix(in srgb,var(--accent-soft) 30%,var(--surface)),var(--surface))}
+[data-theme='dark'] .about-cta__glow{background:radial-gradient(circle,color-mix(in srgb,var(--accent) 8%,transparent),transparent 70%)}
+
+/* ── Sepia overrides ── */
+[data-theme='sepia'] .about-hero{background:radial-gradient(circle at 82% 20%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 36%),linear-gradient(135deg,var(--surface),color-mix(in srgb,var(--accent-soft) 40%,var(--surface)))}
+
+/* ── Responsive ── */
+@media(max-width:1023px){
+  .about-hero{grid-template-columns:1fr 250px;gap:28px;padding:40px 36px}
+  .about-hero h1{font-size:42px}
+  .about-values__grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:767px){
+  .about-hero{grid-template-columns:1fr;min-height:0;padding:32px 24px;border-radius:18px}
+  .about-hero h1{font-size:38px;letter-spacing:-1.5px}
+  .about-hero__copy{font-size:13.5px}
+  .about-hero__visual{display:none}
+  .about-mission{flex-direction:column;gap:16px;padding:24px}
+  .about-mission h2{font-size:22px}
+  .about-values__grid{grid-template-columns:1fr}
+  .about-value-card{padding:22px 20px}
+  .about-features__grid{grid-template-columns:1fr}
+  .about-feature-card{padding:24px 22px}
+  .about-philosophy{padding:36px 24px}
+  .about-philosophy blockquote p{font-size:22px}
+  .about-independence{flex-direction:column;padding:20px}
+  .about-cta{padding:40px 24px}
+  .about-section-header{margin-bottom:28px}
+  .about-section-header h2{font-size:28px}
+}
+@media(max-width:479px){
+  .about-hero{padding:24px 18px}
+  .about-hero h1{font-size:33px;letter-spacing:-1.2px}
+  .about-hero__actions{flex-direction:column}
+  .about-hero__actions .btn{width:100%;justify-content:center}
+  .about-cta__actions{flex-direction:column}
+  .about-cta__actions .btn{width:100%;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){
+  .about-orb__ring{animation:none!important}
+  .about-value-card:hover,.about-feature-card:hover{transform:none}
+}
+@media print{.about-hero__orbits,.about-hero__visual,.about-cta__glow{display:none!important}.about-hero,.about-mission,.about-values,.about-features,.about-philosophy,.about-independence,.about-cta{border:0;padding:20px 0}.about-value-card,.about-feature-card{border:1px solid #ccc}}
+
