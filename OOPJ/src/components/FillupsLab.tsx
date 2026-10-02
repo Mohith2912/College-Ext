@@ -15,9 +15,14 @@ import {
 import { ALL_FILLUPS } from '../units/allUnitsData';
 import { FillupExercise, UnitId } from '../types/concept';
 
-export const FillupsLab: React.FC = () => {
+interface FillupsLabProps {
+  selectedUnit: UnitId | 'all';
+  locked?: boolean;
+}
+
+export const FillupsLab: React.FC<FillupsLabProps> = ({ selectedUnit, locked = false }) => {
   const [currentIdx, setCurrentIdx] = useState<number>(0);
-  const [selectedUnitFilter, setSelectedUnitFilter] = useState<UnitId | 'all'>('all');
+  const [selectedUnitFilter, setSelectedUnitFilter] = useState<UnitId | 'all'>(selectedUnit);
   const [selectedBloomsFilter, setSelectedBloomsFilter] = useState<string>('all');
 
   // Filtered exercises list
@@ -28,6 +33,13 @@ export const FillupsLab: React.FC = () => {
       return true;
     });
   }, [selectedUnitFilter, selectedBloomsFilter]);
+
+  React.useEffect(() => {
+    if (locked && selectedUnit !== 'all') {
+      setSelectedUnitFilter(selectedUnit);
+      setCurrentIdx(0);
+    }
+  }, [locked, selectedUnit]);
 
   // Active exercise safe fallback
   const exercise: FillupExercise = filteredExercises[currentIdx] || filteredExercises[0] || ALL_FILLUPS[0];
@@ -146,7 +158,7 @@ export const FillupsLab: React.FC = () => {
           </div>
 
           {/* Quick Filters */}
-          <div className="flex items-center gap-2 flex-wrap text-xs">
+          {!locked && <div className="flex items-center gap-2 flex-wrap text-xs">
             <div className="flex items-center bg-white p-1 rounded-lg border border-slate-200">
               <button
                 onClick={() => {
@@ -174,7 +186,7 @@ export const FillupsLab: React.FC = () => {
                 </button>
               ))}
             </div>
-          </div>
+          </div>}
         </div>
 
         {/* Exercise Jump Grid Strip */}

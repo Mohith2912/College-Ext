@@ -10,3 +10,8 @@ export function oopjEmbeddedUrl(moduleSlug: string): string | undefined {
   const unit = oopjUnit(moduleSlug);
   return unit ? `/OOPJ/index.html?unit=${unit}&embedded=course-v1` : undefined;
 }
+
+export function oopjStandaloneUrl(moduleSlug: string): string | undefined {
+  const unit = oopjUnit(moduleSlug);
+  return unit ? `/OOPJ/index.html?unit=${unit}` : undefined;
+}

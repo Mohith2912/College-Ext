@@ -11,11 +11,23 @@ import {
   Sparkles
 } from 'lucide-react';
 import { DRAG_DROP_CHALLENGES } from '../data/dragDropData';
-import { DragDropChallenge } from '../types/concept';
+import { DragDropChallenge, UnitId } from '../types/concept';
 
-export const DragDropStudio: React.FC = () => {
+interface DragDropStudioProps {
+  selectedUnit: UnitId | 'all';
+  locked?: boolean;
+}
+
+export const DragDropStudio: React.FC<DragDropStudioProps> = ({ selectedUnit, locked = false }) => {
+  const availableChallenges = locked && selectedUnit !== 'all'
+    ? DRAG_DROP_CHALLENGES.filter((item) => item.unit === selectedUnit)
+    : DRAG_DROP_CHALLENGES;
   const [currentChallengeIdx, setCurrentChallengeIdx] = useState<number>(0);
-  const challenge: DragDropChallenge = DRAG_DROP_CHALLENGES[currentChallengeIdx];
+  const challenge: DragDropChallenge = availableChallenges[currentChallengeIdx] ?? availableChallenges[0];
+
+  React.useEffect(() => {
+    setCurrentChallengeIdx(0);
+  }, [selectedUnit]);
 
   // slotId -> itemId map
   const [placedItems, setPlacedItems] = useState<Record<string, string>>({});
@@ -107,7 +119,7 @@ export const DragDropStudio: React.FC = () => {
 
   const handleNextChallenge = () => {
     handleReset();
-    setCurrentChallengeIdx((prev) => (prev + 1) % DRAG_DROP_CHALLENGES.length);
+    setCurrentChallengeIdx((prev) => (prev + 1) % availableChallenges.length);
   };
 
   return (
@@ -129,7 +141,7 @@ export const DragDropStudio: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            {DRAG_DROP_CHALLENGES.map((ch, idx) => (
+            {availableChallenges.map((ch, idx) => (
               <button
                 key={ch.id}
                 onClick={() => {

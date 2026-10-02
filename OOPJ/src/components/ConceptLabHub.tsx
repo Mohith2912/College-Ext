@@ -19,12 +19,14 @@ interface ConceptLabHubProps {
   currentUnit: UnitId | 'all';
   onSelectUnit: (unit: UnitId | 'all') => void;
   onOpenFillups?: () => void;
+  lockedUnit?: UnitId;
 }
 
 export const ConceptLabHub: React.FC<ConceptLabHubProps> = ({
   currentUnit,
   onSelectUnit,
-  onOpenFillups
+  onOpenFillups,
+  lockedUnit
 }) => {
   // If 'all' is selected, default to Unit-1 for the lab
   const [activeUnitLab, setActiveUnitLab] = useState<UnitId>(
@@ -75,9 +77,9 @@ export const ConceptLabHub: React.FC<ConceptLabHubProps> = ({
             <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
               <span>Anna University 2321CSC304R</span>
               <span aria-hidden="true">·</span>
-              <span className="font-semibold text-slate-700">Units 1 – 5 Labs</span>
+              <span className="font-semibold text-slate-700">{lockedUnit ? `${lockedUnit.replace('-', ' ')} Case Study` : 'Units 1 – 5 Labs'}</span>
               <span aria-hidden="true">·</span>
-              <span className="text-indigo-600 font-medium">Concept Understanding Simulators</span>
+              <span className="text-rose-600 font-medium">Concept Understanding Simulator</span>
             </div>
             <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
               {unitMetadata[activeUnitLab].title}
@@ -88,7 +90,7 @@ export const ConceptLabHub: React.FC<ConceptLabHubProps> = ({
           </div>
 
           {/* Unit Switcher Tabs */}
-          <div className="flex items-center gap-1.5 flex-wrap bg-white p-1 rounded-xl border border-slate-200 shadow-xs">
+          {!lockedUnit && <div className="flex items-center gap-1.5 flex-wrap bg-white p-1 rounded-xl border border-slate-200 shadow-xs">
             {(['Unit-1', 'Unit-2', 'Unit-3', 'Unit-4', 'Unit-5'] as const).map((unit) => {
               const isSelected = activeUnitLab === unit;
               return (
@@ -100,7 +102,7 @@ export const ConceptLabHub: React.FC<ConceptLabHubProps> = ({
                   }}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-indigo-600 text-white shadow-xs'
+                      ? 'bg-slate-900 text-white shadow-xs'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                   }`}
                 >
@@ -108,7 +110,7 @@ export const ConceptLabHub: React.FC<ConceptLabHubProps> = ({
                 </button>
               );
             })}
-          </div>
+          </div>}
         </div>
 
         {/* Active Concept Simulator View */}

@@ -4,7 +4,8 @@
  */
 
 import React, { useState } from 'react';
-import { TopNav, ActiveTab } from './components/TopNav';
+import { ActiveTab } from './components/TopNav';
+import { CourseTopNav } from './components/CourseTopNav';
 import { ConceptMapView } from './components/ConceptMapView';
 import { ConceptNodeModal } from './components/ConceptNodeModal';
 import { ConceptLabHub } from './components/ConceptLabHub';
@@ -21,8 +22,14 @@ function initialUnit(): UnitId | 'all' {
 }
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<ActiveTab>('concept_map');
-  const [selectedUnit, setSelectedUnit] = useState<UnitId | 'all'>(initialUnit);
+  const [lockedUnit] = useState<UnitId | undefined>(() => {
+    const unit = initialUnit();
+    return unit === 'all' ? undefined : unit;
+  });
+  const [activeTab, setActiveTab] = useState<ActiveTab>(() =>
+    lockedUnit ? 'concept_labs' : 'concept_map'
+  );
+  const [selectedUnit, setSelectedUnit] = useState<UnitId | 'all'>(() => lockedUnit ?? 'all');
   const [inspectedNode, setInspectedNode] = useState<ConceptNode | null>(null);
 
   const handleOpenCaseStudy = (caseId: string) => {
@@ -34,16 +41,20 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans">
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-['Plus_Jakarta_Sans',sans-serif]">
       {/* 3-Zone Top Navigation Bar with Unit Selector */}
-      <TopNav
+      <CourseTopNav
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         selectedUnit={selectedUnit}
-        setSelectedUnit={setSelectedUnit}
+        setSelectedUnit={(unit) => {
+          if (!lockedUnit) setSelectedUnit(unit);
+        }}
+        lockedUnit={lockedUnit}
       />
 
       {/* Hero / Quick Context Header */}
+      {!lockedUnit && (
       <div className="bg-slate-900 text-white border-b border-slate-800 relative overflow-hidden">
         {/* Subtle background image from asset with contrast scrim */}
         <div className="absolute inset-0 opacity-15 mix-blend-luminosity pointer-events-none overflow-hidden">
@@ -161,6 +172,7 @@ export default function App() {
           </div>
         </div>
       </div>
+      )}
 
       {/* Main Interactive Workspace */}
       <main className="flex-1 flex flex-col">
@@ -177,18 +189,20 @@ export default function App() {
             currentUnit={selectedUnit}
             onSelectUnit={setSelectedUnit}
             onOpenFillups={handleOpenFillups}
+            lockedUnit={lockedUnit}
           />
         )}
 
-        {activeTab === 'fillups' && <FillupsLab />}
+        {activeTab === 'fillups' && <FillupsLab selectedUnit={selectedUnit} locked={Boolean(lockedUnit)} />}
 
-        {activeTab === 'drag_drop' && <DragDropStudio />}
+        {activeTab === 'drag_drop' && <DragDropStudio selectedUnit={selectedUnit} locked={Boolean(lockedUnit)} />}
 
         {activeTab === 'exam_bank' && (
           <ExamQuestionBank
             onOpenCaseStudy={handleOpenCaseStudy}
             onOpenFillups={handleOpenFillups}
             selectedUnit={selectedUnit}
+            locked={Boolean(lockedUnit)}
           />
         )}
       </main>

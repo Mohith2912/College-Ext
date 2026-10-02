@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { 
   Search, 
   ChevronDown, 
@@ -9,27 +9,29 @@ import {
   ExternalLink,
   Code
 } from 'lucide-react';
-import { ALL_EXAM_QUESTIONS } from '../units/allUnitsData';
+import { COMPLETE_EXAM_QUESTIONS } from '../data/completeExamQuestions';
 import { ExamQuestion, UnitId } from '../types/concept';
 
 interface ExamQuestionBankProps {
   onOpenCaseStudy?: (caseId: string) => void;
   onOpenFillups?: () => void;
   selectedUnit: UnitId | 'all';
+  locked?: boolean;
 }
 
 export const ExamQuestionBank: React.FC<ExamQuestionBankProps> = ({
   onOpenCaseStudy,
   onOpenFillups,
-  selectedUnit
+  selectedUnit,
+  locked = false
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPart, setSelectedPart] = useState<string>('all');
   const [selectedBlooms, setSelectedBlooms] = useState<string>('all');
-  const [expandedId, setExpandedId] = useState<string | null>(ALL_EXAM_QUESTIONS[0]?.id || null);
+  const [expandedId, setExpandedId] = useState<string | null>(COMPLETE_EXAM_QUESTIONS[0]?.id || null);
 
   const filteredQuestions = useMemo(() => {
-    return ALL_EXAM_QUESTIONS.filter((q) => {
+    return COMPLETE_EXAM_QUESTIONS.filter((q) => {
       if (selectedUnit !== 'all' && q.unit !== selectedUnit) return false;
       if (selectedPart !== 'all' && q.part !== selectedPart) return false;
       if (selectedBlooms !== 'all' && q.blooms !== selectedBlooms) return false;
@@ -43,6 +45,12 @@ export const ExamQuestionBank: React.FC<ExamQuestionBankProps> = ({
       return true;
     });
   }, [selectedUnit, selectedPart, selectedBlooms, searchQuery]);
+
+  useEffect(() => {
+    if (filteredQuestions.length > 0 && !filteredQuestions.some((question) => question.id === expandedId)) {
+      setExpandedId(filteredQuestions[0].id);
+    }
+  }, [expandedId, filteredQuestions]);
 
   const toggleExpand = (id: string) => {
     setExpandedId((prev) => (prev === id ? null : id));
@@ -62,7 +70,7 @@ export const ExamQuestionBank: React.FC<ExamQuestionBankProps> = ({
               <span>R 2023-V 1.2</span>
             </div>
             <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
-              University Examination Question Bank & Rubrics
+              {locked && selectedUnit !== 'all' ? `${selectedUnit.replace('-', ' ')} Examination Question Bank` : 'University Examination Question Bank & Rubrics'}
             </h1>
           </div>
           <span className="text-xs font-mono text-slate-500">
@@ -114,7 +122,7 @@ export const ExamQuestionBank: React.FC<ExamQuestionBankProps> = ({
               <button
                 onClick={() => setSelectedPart('Part C')}
                 className={`px-2 py-1 rounded transition-colors ${
-                  selectedPart === 'Part C' ? 'bg-white font-medium text-indigo-700 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                  selectedPart === 'Part C' ? 'bg-white font-medium text-rose-700 shadow-xs' : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 Part C (15M Case)
@@ -129,7 +137,7 @@ export const ExamQuestionBank: React.FC<ExamQuestionBankProps> = ({
                   key={b}
                   onClick={() => setSelectedBlooms(b)}
                   className={`px-1.5 py-1 rounded transition-colors ${
-                    selectedBlooms === b ? 'bg-white font-semibold text-indigo-600 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                    selectedBlooms === b ? 'bg-white font-semibold text-rose-600 shadow-xs' : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
                   {b === 'all' ? 'All' : b}
@@ -160,7 +168,7 @@ export const ExamQuestionBank: React.FC<ExamQuestionBankProps> = ({
                       <span aria-hidden="true">·</span>
                       <span className="font-medium text-slate-600">{q.part}</span>
                       <span aria-hidden="true">·</span>
-                      <span className="font-mono text-indigo-600 font-bold">{q.blooms}</span>
+                      <span className="font-mono text-rose-600 font-bold">{q.blooms}</span>
                       <span aria-hidden="true">·</span>
                       <span className="font-mono font-medium text-slate-800">{q.marks} Marks</span>
                     </div>
@@ -181,8 +189,8 @@ export const ExamQuestionBank: React.FC<ExamQuestionBankProps> = ({
                     {/* Marking Scheme Breakdown */}
                     <div>
                       <h4 className="font-bold text-slate-900 mb-2 flex items-center gap-1.5">
-                        <Award className="w-4 h-4 text-indigo-600" />
-                        Official University Evaluation Scheme ({q.marks} Marks Total):
+                        <Award className="w-4 h-4 text-rose-600" />
+                        Question-bank answer coverage ({q.marks} Marks):
                       </h4>
                       <div className="bg-white border border-slate-200 rounded-lg overflow-hidden">
                         <table className="w-full text-left text-xs">
@@ -206,7 +214,7 @@ export const ExamQuestionBank: React.FC<ExamQuestionBankProps> = ({
                     {/* Model Answer */}
                     <div>
                       <h4 className="font-bold text-slate-900 mb-1.5 flex items-center gap-1.5">
-                        <BookOpen className="w-4 h-4 text-indigo-600" />
+                        <BookOpen className="w-4 h-4 text-rose-600" />
                         Model Solution & Key Points:
                       </h4>
                       <div className="bg-white p-3.5 rounded-lg border border-slate-200 text-slate-700 leading-relaxed whitespace-pre-line">
@@ -229,7 +237,7 @@ export const ExamQuestionBank: React.FC<ExamQuestionBankProps> = ({
                               onOpenCaseStudy('string_processor');
                             }
                           }}
-                          className="px-3.5 py-1.5 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-xs flex items-center gap-1.5 cursor-pointer"
+                          className="px-3.5 py-1.5 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg shadow-xs flex items-center gap-1.5 cursor-pointer"
                         >
                           <span>Launch Interactive Case Simulator</span>
                           <ExternalLink className="w-3.5 h-3.5" />

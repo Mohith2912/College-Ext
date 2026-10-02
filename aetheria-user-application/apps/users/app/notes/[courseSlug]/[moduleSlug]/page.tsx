@@ -9,7 +9,7 @@ import { Footer } from '@/components/footer';
 import { NoteMarkdown } from '@/components/markdown';
 import { ReaderControls } from '@/components/reader-controls';
 import { cnRepositoryUrl, cnEmbeddedUrl } from '@/lib/cn-repositories';
-import { oopjCourseSlug, oopjEmbeddedUrl, oopjRepositoryUrl, oopjUnit } from '@/lib/oopj-reference';
+import { oopjCourseSlug, oopjEmbeddedUrl, oopjStandaloneUrl, oopjUnit } from '@/lib/oopj-reference';
 
 type Props = { params: Promise<{ courseSlug: string; moduleSlug: string }>; searchParams: Promise<{ view?: string }> };
 export const dynamic = 'force-dynamic';
@@ -23,7 +23,7 @@ export default async function NotePage({ params }: Props) {
   }
   const javaUnit = courseSlug === oopjCourseSlug ? oopjUnit(moduleSlug) : undefined;
   if (javaUnit) {
-    return <><nav className="breadcrumbs" aria-label="Breadcrumb"><Link href="/notes">Course notes</Link><ChevronRight size={12}/><Link href={`/notes/${oopjCourseSlug}`}>Object Oriented Programming using Java</Link><ChevronRight size={12}/><span>Unit {javaUnit}</span></nav><div className="mb-4 flex flex-wrap gap-3"><Link className="btn btn-secondary" href={`/learn?course=${oopjCourseSlug}&module=${moduleSlug}`}>Learn Unit {javaUnit} for a test</Link><a className="btn btn-secondary" href={oopjRepositoryUrl} target="_blank" rel="noopener noreferrer">Open original course repository</a></div><iframe className="cn-unit-embed" title={`Complete Object Oriented Programming using Java Unit ${javaUnit}`} src={oopjEmbeddedUrl(moduleSlug)} /></>;
+    return <><nav className="breadcrumbs" aria-label="Breadcrumb"><Link href="/notes">Course notes</Link><ChevronRight size={12}/><Link href={`/notes/${oopjCourseSlug}`}>Object Oriented Programming using Java</Link><ChevronRight size={12}/><span>Unit {javaUnit}</span></nav><div className="mb-4 flex flex-wrap gap-3"><Link className="btn btn-secondary" href={`/learn?course=${oopjCourseSlug}&module=${moduleSlug}`}>Learn Unit {javaUnit} for a test</Link><a className="btn btn-secondary" href={oopjStandaloneUrl(moduleSlug)} target="_blank" rel="noopener noreferrer">Open original unit full screen</a></div><iframe className="cn-unit-embed" title={`Complete Object Oriented Programming using Java Unit ${javaUnit}`} src={oopjEmbeddedUrl(moduleSlug)} /></>;
   }
   const toc = getTableOfContents(module.note.markdown);
   const index = module.course.modules.findIndex(item => item.slug === moduleSlug);
