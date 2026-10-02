@@ -192,7 +192,7 @@ export const ConceptSim1: React.FC = () => {
                   <div className="flex gap-2">
                     <button
                       onClick={attemptDirectWrite}
-                      className="flex-1 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-300 rounded text-xs font-medium cursor-pointer"
+                      className="flex-1 py-1.5 bg-red-50 hover:bg-red-100 text-red-700 border border-red-300 rounded text-xs font-medium cursor-pointer"
                     >
                       acc.balance = 99999 (Illegal)
                     </button>
@@ -205,7 +205,7 @@ export const ConceptSim1: React.FC = () => {
                   </div>
 
                   <div className={`p-2.5 rounded font-mono text-[11px] ${
-                    directAccessAttempted ? 'bg-rose-100 text-rose-900 border border-rose-200' : 'bg-slate-100 text-slate-700'
+                    directAccessAttempted ? 'bg-red-100 text-red-900 border border-red-200' : 'bg-slate-100 text-slate-700'
                   }`}>
                     &gt; {encapLog}
                   </div>

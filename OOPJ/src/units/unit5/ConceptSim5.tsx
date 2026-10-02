@@ -159,7 +159,7 @@ export const ConceptSim5: React.FC = () => {
                 <button
                   onClick={() => setUseSynchronization(false)}
                   className={`px-3 py-1.5 rounded-lg font-bold flex items-center gap-1 cursor-pointer transition-colors ${
-                    !useSynchronization ? 'bg-rose-600 text-white' : 'bg-slate-100 text-slate-700'
+                    !useSynchronization ? 'bg-red-600 text-white' : 'bg-slate-100 text-slate-700'
                   }`}
                 >
                   <Unlock className="w-3.5 h-3.5" />
@@ -193,7 +193,7 @@ export const ConceptSim5: React.FC = () => {
                 <div className="text-right">
                   <span className="text-xs text-slate-400">Current Balance</span>
                   <div className={`text-2xl font-mono font-bold ${
-                    raceDetected ? 'text-rose-400 line-through' : 'text-emerald-400'
+                    raceDetected ? 'text-red-400 line-through' : 'text-emerald-400'
                   }`}>
                     ₹ {accountBalance}
                   </div>
@@ -228,10 +228,10 @@ export const ConceptSim5: React.FC = () => {
               </div>
 
               {/* Thread 2: Withdrawer */}
-              <div className="p-4 bg-rose-50/50 border border-rose-200 rounded-xl space-y-2 text-xs">
-                <div className="flex items-center justify-between font-bold text-rose-950 font-mono border-b border-rose-100 pb-1">
+              <div className="p-4 bg-red-50/50 border border-red-200 rounded-xl space-y-2 text-xs">
+                <div className="flex items-center justify-between font-bold text-red-950 font-mono border-b border-red-100 pb-1">
                   <span>Thread-2: Withdrawer (-₹300)</span>
-                  <span className="text-[10px] text-rose-700">Concurrent</span>
+                  <span className="text-[10px] text-red-700">Concurrent</span>
                 </div>
                 <div className="space-y-1 font-mono text-[11px] text-slate-700">
                   {withdrawerLogs.length === 0 ? (
@@ -245,8 +245,8 @@ export const ConceptSim5: React.FC = () => {
 
             {/* Pedagogical Outcome Banner */}
             {raceDetected && (
-              <div className="p-4 bg-rose-50 border border-rose-300 rounded-xl text-xs space-y-1 text-rose-900 animate-in fade-in">
-                <div className="font-bold flex items-center gap-1.5 text-rose-800">
+              <div className="p-4 bg-red-50 border border-red-300 rounded-xl text-xs space-y-1 text-red-900 animate-in fade-in">
+                <div className="font-bold flex items-center gap-1.5 text-red-800">
                   <AlertTriangle className="w-4 h-4" />
                   RACE CONDITION OCCURRED! Balance Corrupted to ₹{accountBalance}!
                 </div>

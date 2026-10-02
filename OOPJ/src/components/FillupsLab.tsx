@@ -126,7 +126,7 @@ export const FillupsLab: React.FC<FillupsLabProps> = ({ selectedUnit, locked = f
                 correct
                   ? 'bg-emerald-950 text-emerald-300 border-emerald-500 font-bold ring-1 ring-emerald-500'
                   : incorrect
-                  ? 'bg-rose-950 text-rose-300 border-rose-500'
+                  ? 'bg-red-950 text-red-300 border-red-500'
                   : 'bg-slate-800 text-amber-300 border-slate-700 hover:border-slate-500 focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400'
               }`}
             />
@@ -336,7 +336,7 @@ export const FillupsLab: React.FC<FillupsLabProps> = ({ selectedUnit, locked = f
             className={`p-5 rounded-xl border space-y-4 animate-in fade-in ${
               allCorrect
                 ? 'bg-emerald-50/50 border-emerald-300'
-                : 'bg-rose-50/50 border-rose-300'
+                : 'bg-red-50/50 border-red-300'
             }`}
           >
             <div className="flex items-center gap-2">
@@ -349,8 +349,8 @@ export const FillupsLab: React.FC<FillupsLabProps> = ({ selectedUnit, locked = f
                 </>
               ) : (
                 <>
-                  <XCircle className="w-5 h-5 text-rose-600" />
-                  <span className="text-sm font-bold text-rose-900">
+                  <XCircle className="w-5 h-5 text-red-600" />
+                  <span className="text-sm font-bold text-red-900">
                     Compilation / Logic Mismatch Detected
                   </span>
                 </>

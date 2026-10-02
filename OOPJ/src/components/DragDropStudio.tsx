@@ -207,7 +207,7 @@ export const DragDropStudio: React.FC<DragDropStudioProps> = ({ selectedUnit, lo
                         : isCorrect
                         ? 'border-emerald-500 bg-emerald-50/40'
                         : isIncorrect
-                        ? 'border-rose-500 bg-rose-50/40'
+                        ? 'border-red-500 bg-red-50/40'
                         : placedItem
                         ? 'border-indigo-200 bg-slate-50/70'
                         : selectedItemId
@@ -225,7 +225,7 @@ export const DragDropStudio: React.FC<DragDropStudioProps> = ({ selectedUnit, lo
                         <div>
                           <div className="font-bold text-xs text-slate-900 flex items-center gap-1.5">
                             {isCorrect && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}
-                            {isIncorrect && <XCircle className="w-3.5 h-3.5 text-rose-600" />}
+                            {isIncorrect && <XCircle className="w-3.5 h-3.5 text-red-600" />}
                             <span>{placedItem.label}</span>
                           </div>
                           {placedItem.sublabel && (
@@ -237,7 +237,7 @@ export const DragDropStudio: React.FC<DragDropStudioProps> = ({ selectedUnit, lo
                             e.stopPropagation();
                             handleUnplace(slot.id);
                           }}
-                          className="text-[11px] text-slate-400 hover:text-rose-600 px-2 py-0.5 rounded cursor-pointer"
+                          className="text-[11px] text-slate-400 hover:text-red-600 px-2 py-0.5 rounded cursor-pointer"
                         >
                           Remove
                         </button>

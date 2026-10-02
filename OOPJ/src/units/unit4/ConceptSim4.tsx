@@ -139,7 +139,7 @@ export const ConceptSim4: React.FC = () => {
                 {/* Frame 3: Deepest method where error triggers */}
                 <div className={`p-3.5 rounded-xl border font-mono text-xs transition-all ${
                   unwindingStep === 1
-                    ? 'bg-rose-50 border-rose-500 ring-2 ring-rose-400 text-rose-950 font-bold'
+                    ? 'bg-red-50 border-red-500 ring-2 ring-red-400 text-red-950 font-bold'
                     : unwindingStep > 1
                     ? 'bg-slate-100 border-slate-300 text-slate-400 line-through'
                     : 'bg-white border-slate-300 text-slate-800'
@@ -192,7 +192,7 @@ export const ConceptSim4: React.FC = () => {
                     <div className="text-slate-300">Program initialized. Click "Step Exception Propagation" to trigger failure.</div>
                   )}
                   {unwindingStep === 1 && (
-                    <div className="text-rose-400 font-bold">
+                    <div className="text-red-400 font-bold">
                       1. EXCEPTION THROWN: {errorScenarios[selectedError].type} in {errorScenarios[selectedError].throwLocation}!
                     </div>
                   )}
@@ -252,19 +252,19 @@ export const ConceptSim4: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Unbuffered */}
-              <div className="p-5 bg-rose-50/50 border border-rose-200 rounded-xl space-y-3">
-                <span className="font-bold text-xs text-rose-950 block">
+              <div className="p-5 bg-red-50/50 border border-red-200 rounded-xl space-y-3">
+                <span className="font-bold text-xs text-red-950 block">
                   1. Unbuffered Stream (FileInputStream)
                 </span>
                 <p className="text-xs text-slate-600 leading-relaxed">
                   Reads one byte at a time directly from magnetic / flash storage. Requires an OS interrupt and physical disk seek for every single byte.
                 </p>
-                <div className="p-3 bg-white border border-rose-200 rounded-lg space-y-1">
+                <div className="p-3 bg-white border border-red-200 rounded-lg space-y-1">
                   <div className="text-xs text-slate-500">Physical Disk I/O Operations:</div>
-                  <div className="text-lg font-mono font-bold text-rose-700 tabular-nums">
+                  <div className="text-lg font-mono font-bold text-red-700 tabular-nums">
                     {unbufferedSeeks.toLocaleString()} Disks Seeks
                   </div>
-                  <span className="text-[11px] text-rose-600 font-medium">Extremely high CPU & latency overhead</span>
+                  <span className="text-[11px] text-red-600 font-medium">Extremely high CPU & latency overhead</span>
                 </div>
               </div>
 

@@ -237,7 +237,7 @@ export const ExamQuestionBank: React.FC<ExamQuestionBankProps> = ({
                               onOpenCaseStudy('string_processor');
                             }
                           }}
-                          className="px-3.5 py-1.5 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg shadow-xs flex items-center gap-1.5 cursor-pointer"
+                          className="min-h-11 px-3.5 py-2 text-xs font-semibold text-white bg-indigo-700 hover:bg-indigo-800 rounded-lg shadow-xs flex items-center gap-1.5 cursor-pointer"
                         >
                           <span>Launch Interactive Case Simulator</span>
                           <ExternalLink className="w-3.5 h-3.5" />

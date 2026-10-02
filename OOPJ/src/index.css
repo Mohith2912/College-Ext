@@ -1,15 +1,77 @@
 @import "tailwindcss";
 
 :root {
-  --color-indigo-50: var(--color-rose-50);
-  --color-indigo-100: var(--color-rose-100);
-  --color-indigo-200: var(--color-rose-200);
-  --color-indigo-300: var(--color-rose-300);
-  --color-indigo-400: var(--color-rose-400);
-  --color-indigo-500: var(--color-rose-500);
-  --color-indigo-600: var(--color-rose-600);
-  --color-indigo-700: var(--color-rose-700);
-  --color-indigo-800: var(--color-rose-800);
-  --color-indigo-900: var(--color-rose-900);
-  --color-indigo-950: var(--color-rose-950);
+  /* Beyond Syllabus light theme. The imported course used rose as its brand
+     colour, so both legacy accent families resolve to the host product blue. */
+  --color-beyond-50: #f4f7fb;
+  --color-beyond-100: #e7eef8;
+  --color-beyond-200: #d9e0e9;
+  --color-beyond-300: #b7cae3;
+  --color-beyond-400: #83a5ce;
+  --color-beyond-500: #4d7eb7;
+  --color-beyond-600: #2f5f98;
+  --color-beyond-700: #173b73;
+  --color-beyond-800: #12315f;
+  --color-beyond-900: #10294f;
+  --color-beyond-950: #0b1d38;
+
+  --color-indigo-50: var(--color-beyond-50);
+  --color-indigo-100: var(--color-beyond-100);
+  --color-indigo-200: var(--color-beyond-200);
+  --color-indigo-300: var(--color-beyond-300);
+  --color-indigo-400: var(--color-beyond-400);
+  --color-indigo-500: var(--color-beyond-500);
+  --color-indigo-600: var(--color-beyond-700);
+  --color-indigo-700: var(--color-beyond-700);
+  --color-indigo-800: var(--color-beyond-800);
+  --color-indigo-900: var(--color-beyond-900);
+  --color-indigo-950: var(--color-beyond-950);
+
+  --color-rose-50: var(--color-beyond-50);
+  --color-rose-100: var(--color-beyond-100);
+  --color-rose-200: var(--color-beyond-200);
+  --color-rose-300: var(--color-beyond-300);
+  --color-rose-400: var(--color-beyond-400);
+  --color-rose-500: var(--color-beyond-500);
+  --color-rose-600: var(--color-beyond-700);
+  --color-rose-700: var(--color-beyond-700);
+  --color-rose-800: var(--color-beyond-800);
+  --color-rose-900: var(--color-beyond-900);
+  --color-rose-950: var(--color-beyond-950);
+}
+
+html {
+  background: #f7f8fa;
+  color: #182231;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #f7f8fa;
+}
+
+h1,
+h2 {
+  font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+  font-weight: 500;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 3px solid #173b73;
+  outline-offset: 3px;
+}
+
+::selection {
+  background: #e7eef8;
+  color: #173b73;
 }

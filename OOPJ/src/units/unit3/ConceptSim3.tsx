@@ -273,7 +273,7 @@ export const ConceptSim3: React.FC = () => {
                 <button
                   onClick={() => setResolutionChoice('unresolved')}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer ${
-                    resolutionChoice === 'unresolved' ? 'bg-rose-600 text-white font-bold' : 'bg-slate-100 text-slate-700'
+                    resolutionChoice === 'unresolved' ? 'bg-red-600 text-white font-bold' : 'bg-slate-100 text-slate-700'
                   }`}
                 >
                   No Override (Ambiguity Error)
@@ -299,12 +299,12 @@ export const ConceptSim3: React.FC = () => {
 
             <div className={`p-4 rounded-xl border text-xs leading-relaxed ${
               resolutionChoice === 'unresolved'
-                ? 'bg-rose-50 border-rose-200 text-rose-900'
+                ? 'bg-red-50 border-red-200 text-red-900'
                 : 'bg-emerald-50 border-emerald-200 text-emerald-900'
             }`}>
               {resolutionChoice === 'unresolved' ? (
                 <div>
-                  <div className="font-bold flex items-center gap-1.5 text-rose-800">
+                  <div className="font-bold flex items-center gap-1.5 text-red-800">
                     <AlertTriangle className="w-4 h-4" />
                     COMPILER ERROR (Diamond Conflict Detected):
                   </div>

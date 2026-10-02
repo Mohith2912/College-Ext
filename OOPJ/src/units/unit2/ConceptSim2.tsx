@@ -148,7 +148,7 @@ export const ConceptSim2: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setUseThisKeyword(false)}
-                  className={`px-3 py-1 rounded font-medium ${!useThisKeyword ? 'bg-rose-600 text-white' : 'bg-slate-100 text-slate-600'}`}
+                  className={`px-3 py-1 rounded font-medium ${!useThisKeyword ? 'bg-red-600 text-white' : 'bg-slate-100 text-slate-600'}`}
                 >
                   Without this (name = name Bug)
                 </button>
@@ -236,7 +236,7 @@ export const ConceptSim2: React.FC = () => {
                   </button>
 
                   <div className={`p-3 rounded-lg text-xs leading-relaxed ${
-                    useThisKeyword ? 'bg-emerald-50 text-emerald-900 border border-emerald-200' : 'bg-rose-50 text-rose-900 border border-rose-200'
+                    useThisKeyword ? 'bg-emerald-50 text-emerald-900 border border-emerald-200' : 'bg-red-50 text-red-900 border border-red-200'
                   }`}>
                     {useThisKeyword ? (
                       <div>
@@ -372,7 +372,7 @@ export const ConceptSim2: React.FC = () => {
                     <div
                       key={item.id}
                       className={`p-2 rounded font-mono text-xs border ${
-                        item.isLive ? 'bg-white text-slate-800 border-slate-200' : 'bg-rose-100 text-rose-800 border-rose-300 line-through'
+                        item.isLive ? 'bg-white text-slate-800 border-slate-200' : 'bg-red-100 text-red-800 border-red-300 line-through'
                       }`}
                     >
                       {item.name} {item.isLive ? '(Reachable)' : '(Unreachable)'}

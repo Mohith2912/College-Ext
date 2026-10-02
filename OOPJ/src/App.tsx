@@ -41,7 +41,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-['Plus_Jakarta_Sans',sans-serif]">
+    <div className="min-h-screen flex flex-col bg-[#f7f8fa] text-[#182231]">
       {/* 3-Zone Top Navigation Bar with Unit Selector */}
       <CourseTopNav
         activeTab={activeTab}
@@ -55,9 +55,9 @@ export default function App() {
 
       {/* Hero / Quick Context Header */}
       {!lockedUnit && (
-      <div className="bg-slate-900 text-white border-b border-slate-800 relative overflow-hidden">
+      <div className="bg-white text-[#182231] border-b border-[#d9e0e9] relative overflow-hidden">
         {/* Subtle background image from asset with contrast scrim */}
-        <div className="absolute inset-0 opacity-15 mix-blend-luminosity pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.06] mix-blend-luminosity pointer-events-none overflow-hidden">
           <img
             src={heroConceptMap}
             alt="Concept Mapping Canvas"
@@ -68,7 +68,7 @@ export default function App() {
             }}
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/95 to-slate-900/80 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-indigo-50/90 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 relative z-10">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -80,32 +80,32 @@ export default function App() {
                 <span aria-hidden="true">·</span>
                 <span>Regulations R 2023-V 1.2</span>
               </div>
-              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+              <h1 className="text-xl sm:text-2xl tracking-tight text-[#182231]">
                 Object Oriented Programming using JAVA (Units 1 – 5)
               </h1>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 Conceptual understanding engine with hands-on mental models for Polymorphism, Mutex Concurrency, Exception Stacks, and Generational Memory.
               </p>
             </div>
 
             {/* Quick Stats & Bloom's Taxonomy Summary */}
-            <div className="flex items-center gap-3 bg-white/5 border border-white/10 p-3 rounded-xl backdrop-blur-xs text-xs">
+            <div className="flex items-center gap-3 bg-indigo-50 border border-indigo-200 p-3 rounded-xl text-xs">
               <div className="space-y-0.5">
-                <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-mono">
+                <span className="text-[10px] text-slate-500 uppercase tracking-wider block font-mono">
                   Syllabus Coverage
                 </span>
-                <div className="flex items-center gap-1.5 text-slate-200">
-                  <span className="font-semibold text-emerald-400">CO1 to CO5</span>
+                <div className="flex items-center gap-1.5 text-slate-700">
+                  <span className="font-semibold text-emerald-700">CO1 to CO5</span>
                   <span aria-hidden="true">·</span>
-                  <span className="font-mono text-indigo-300">Bloom's K1 - K6</span>
+                  <span className="font-mono text-indigo-700">Bloom's K1 - K6</span>
                 </div>
               </div>
-              <div className="h-8 w-px bg-white/10 mx-1" />
+              <div className="h-8 w-px bg-indigo-200 mx-1" />
               <div className="space-y-0.5">
-                <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-mono">
+                <span className="text-[10px] text-slate-500 uppercase tracking-wider block font-mono">
                   Interactive Features
                 </span>
-                <span className="font-semibold text-white">
+                <span className="font-semibold text-slate-800">
                   5 Unit Simulators · 15+ Fill-ups
                 </span>
               </div>
@@ -113,13 +113,13 @@ export default function App() {
           </div>
 
           {/* Quick Module Navigation Buttons */}
-          <div className="mt-5 pt-4 border-t border-white/10 flex items-center gap-2 overflow-x-auto text-xs">
+          <div className="mt-5 pt-4 border-t border-slate-200 flex items-center gap-2 overflow-x-auto text-xs">
             <button
               onClick={() => setActiveTab('concept_map')}
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                 activeTab === 'concept_map'
                   ? 'bg-indigo-600 text-white'
-                  : 'bg-white/10 text-slate-300 hover:bg-white/15 hover:text-white'
+                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-indigo-50 hover:text-indigo-700'
               }`}
             >
               <Map className="w-3.5 h-3.5" />
@@ -130,7 +130,7 @@ export default function App() {
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                 activeTab === 'concept_labs'
                   ? 'bg-indigo-600 text-white'
-                  : 'bg-white/10 text-slate-300 hover:bg-white/15 hover:text-white'
+                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-indigo-50 hover:text-indigo-700'
               }`}
             >
               <Sparkles className="w-3.5 h-3.5" />
@@ -141,7 +141,7 @@ export default function App() {
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                 activeTab === 'fillups'
                   ? 'bg-indigo-600 text-white'
-                  : 'bg-white/10 text-slate-300 hover:bg-white/15 hover:text-white'
+                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-indigo-50 hover:text-indigo-700'
               }`}
             >
               <Terminal className="w-3.5 h-3.5" />
@@ -152,7 +152,7 @@ export default function App() {
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                 activeTab === 'drag_drop'
                   ? 'bg-indigo-600 text-white'
-                  : 'bg-white/10 text-slate-300 hover:bg-white/15 hover:text-white'
+                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-indigo-50 hover:text-indigo-700'
               }`}
             >
               <Shuffle className="w-3.5 h-3.5" />
@@ -163,7 +163,7 @@ export default function App() {
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
                 activeTab === 'exam_bank'
                   ? 'bg-indigo-600 text-white'
-                  : 'bg-white/10 text-slate-300 hover:bg-white/15 hover:text-white'
+                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-indigo-50 hover:text-indigo-700'
               }`}
             >
               <BookOpen className="w-3.5 h-3.5" />
@@ -221,7 +221,7 @@ export default function App() {
       <footer className="bg-white border-t border-slate-200 py-6 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-slate-700">JavaMap EDU</span>
+            <span className="font-semibold text-slate-700">Beyond Syllabus</span>
             <span aria-hidden="true">·</span>
             <span>Anna University B.E/B.Tech (AI&DS, CSE, AIML, IT) III Semester</span>
           </div>

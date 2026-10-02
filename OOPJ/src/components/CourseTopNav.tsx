@@ -38,8 +38,8 @@ export const CourseTopNav: React.FC<CourseTopNavProps> = ({
           className="flex shrink-0 items-center gap-3 text-left"
           aria-label="Open the unit overview"
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-sm font-bold text-white">
-            <span className="text-rose-500">J</span>{unitNumber}
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-700 text-sm font-bold text-white shadow-sm">
+            J{unitNumber}
           </span>
           <span className="hidden items-center gap-2 text-sm font-bold tracking-tight text-slate-900 sm:flex">
             <span>Object Oriented Programming</span>
@@ -69,7 +69,7 @@ export const CourseTopNav: React.FC<CourseTopNavProps> = ({
               <span className="hidden h-4 w-px bg-slate-200 xl:block" aria-hidden="true" />
               <button
                 onClick={() => setActiveTab('concept_labs')}
-                className="whitespace-nowrap rounded-lg bg-slate-900 px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-slate-800"
+                className="min-h-11 whitespace-nowrap rounded-lg bg-indigo-700 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-indigo-800"
               >
                 Unit {unitNumber} Simulator
               </button>
