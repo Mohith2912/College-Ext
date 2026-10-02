@@ -4,17 +4,19 @@ import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { BrainCircuit, Check, ChevronRight, CircleHelp, Edit3, Flame, Layers3, Minus, Plus, RotateCcw, Sparkles, Target, Trophy, X } from 'lucide-react';
 import { computerNetworksQuestionBank, questionBankSource, type QuestionBankItem } from '@/lib/question-bank';
+import { oopjQuestionBank, oopjQuestionBankSource } from '@/lib/oopj-question-bank';
 
 type ModuleOption = { id: string; course: string; courseCode: string; courseSlug: string; module: string; moduleSlug: string; termNumber: number };
 type AuthoredItem = QuestionBankItem & { authored: true };
 type Mode = 'quiz' | 'write' | 'flashcards' | 'author';
 
 const unitNames = ['Foundations and architecture', 'Switching, routing and addressing', 'Transport and congestion control', 'Network security', 'Cloud, IoT and 5G'];
+const oopjUnitNames = ['OOP and Java basics', 'Classes, methods and memory', 'Inheritance and interfaces', 'Exceptions and file streams', 'Threads, generics and JDBC'];
 const unitColors = ['violet', 'blue', 'amber', 'rose', 'cyan'] as const;
 const storageKey = 'beyond-syllabus-authored-question-bank-v1';
 
 function moduleUnit(moduleSlug: string) {
-  const match = /^computer-networks-unit-([1-5])$/.exec(moduleSlug);
+  const match = /(?:computer-networks|oopj)-unit-([1-5])$/.exec(moduleSlug);
   return match ? Number(match[1]) : undefined;
 }
 
@@ -22,7 +24,16 @@ function sourceQuestions(module: ModuleOption, authored: AuthoredItem[]) {
   const unit = moduleUnit(module.moduleSlug);
   const authoredForModule = authored.filter(item => item.id.startsWith(`${module.courseSlug}:${module.moduleSlug}:`));
   if (module.courseSlug === 'computer-networks' && unit) return [...computerNetworksQuestionBank.filter(item => item.unit === unit), ...authoredForModule];
+  if (module.courseSlug === 'object-oriented-programming-using-java' && unit) return [...oopjQuestionBank.filter(item => item.unit === unit), ...authoredForModule];
   return authoredForModule;
+}
+
+function sourceForCourse(courseSlug: string) {
+  return courseSlug === 'object-oriented-programming-using-java' ? oopjQuestionBankSource : questionBankSource;
+}
+
+function sourceFormat(item: QuestionBankItem) {
+  return item.id.startsWith('oopj-') ? 'DOC' : 'PDF';
 }
 
 function optionsFor(items: QuestionBankItem[], index: number) {
@@ -68,6 +79,8 @@ export function LearnForTest({ modules, initialCourse, initialModule }: { module
   const current = items[index] ?? items[0];
   const quizOptions = current ? optionsFor(items, index) : { options: [], answer: 0 };
   const unit = selectedModule ? moduleUnit(selectedModule.moduleSlug) : undefined;
+  const selectedUnitNames = courseSlug === 'object-oriented-programming-using-java' ? oopjUnitNames : unitNames;
+  const selectedSource = sourceForCourse(courseSlug);
   const color = unit ? unitColors[unit - 1] : 'violet';
   const answered = selected !== null;
 
@@ -117,7 +130,7 @@ export function LearnForTest({ modules, initialCourse, initialModule }: { module
 
   return <div className={`learn-arena learn-arena-${color}`}>
     <header className="learn-hero">
-      <div className="learn-hero-copy"><div className="learn-kicker"><BrainCircuit size={16} aria-hidden="true" /> LEARN FOR A TEST · ACTIVE RECALL ARENA</div><h1>Turn the question bank into momentum.</h1><p>Practice the exact Computer Networks question bank with quiz rounds, flip-to-recall flashcards, and your own authored prompts for every module.</p><div className="learn-hero-source"><span><Sparkles size={14} aria-hidden="true" /> Source-locked content</span><span>{questionBankSource}</span></div></div>
+      <div className="learn-hero-copy"><div className="learn-kicker"><BrainCircuit size={16} aria-hidden="true" /> LEARN FOR A TEST · ACTIVE RECALL ARENA</div><h1>Turn the question bank into momentum.</h1><p>Practice the exact {selectedModule?.course ?? 'course'} question bank with quiz rounds, flip-to-recall flashcards, and your own authored prompts for every module.</p><div className="learn-hero-source"><span><Sparkles size={14} aria-hidden="true" /> Source-locked content</span><span>{selectedSource}</span></div></div>
       <div className="learn-hero-orbit"><div className="orbit-ring orbit-ring-one" /><div className="orbit-ring orbit-ring-two" /><div className="orbit-core"><Target size={28} aria-hidden="true" /><strong>{progress}%</strong><small>mastered</small></div></div>
     </header>
 
@@ -125,7 +138,7 @@ export function LearnForTest({ modules, initialCourse, initialModule }: { module
 
     <nav className="learn-mode-tabs" aria-label="Practice modes"><button className={mode === 'quiz' ? 'active' : ''} onClick={() => resetSession('quiz')}><CircleHelp size={17} aria-hidden="true" /><span><strong>Quiz arena</strong><small>Choose, commit, learn</small></span></button><button className={mode === 'write' ? 'active' : ''} onClick={() => resetSession('write')}><Edit3 size={17} aria-hidden="true" /><span><strong>Write answer</strong><small>Recall, then compare</small></span></button><button className={mode === 'flashcards' ? 'active' : ''} onClick={() => resetSession('flashcards')}><Layers3 size={17} aria-hidden="true" /><span><strong>Flashcards</strong><small>Flip for recall</small></span></button><button className={mode === 'author' ? 'active' : ''} onClick={() => resetSession('author')}><Sparkles size={17} aria-hidden="true" /><span><strong>Write your own</strong><small>Build module memory</small></span></button></nav>
 
-    {unit && <div className="learn-unit-strip" aria-label="Computer Networks units">{unitNames.map((name, unitIndex) => <Link key={name} href={`/learn?course=computer-networks&module=computer-networks-unit-${unitIndex + 1}`} className={unit === unitIndex + 1 ? 'active' : ''}><span>0{unitIndex + 1}</span>{name}</Link>)}</div>}
+    {unit && <div className="learn-unit-strip" aria-label={`${selectedModule?.course ?? 'Course'} units`}>{selectedUnitNames.map((name, unitIndex) => <Link key={name} href={`/learn?course=${courseSlug}&module=${courseSlug === 'computer-networks' ? 'computer-networks' : 'oopj'}-unit-${unitIndex + 1}`} className={unit === unitIndex + 1 ? 'active' : ''}><span>0{unitIndex + 1}</span>{name}</Link>)}</div>}
 
     {!selectedModule || !items.length ? <section className="learn-empty"><Sparkles size={28} aria-hidden="true" /><h2>This module is ready for your questions.</h2><p>Choose “Write your own” to author a private question-and-answer set for this course module. Your cards stay in this browser.</p><button className="btn btn-primary" onClick={() => resetSession('author')}>Write the first card <ChevronRight size={14} aria-hidden="true" /></button></section> : mode === 'quiz' ? <QuizPanel current={current} options={quizOptions.options} answer={quizOptions.answer} selected={selected} onChoose={chooseAnswer} onNext={nextQuestion} index={index} total={items.length} /> : mode === 'write' ? <WrittenAnswerPanel current={current} index={index} total={items.length} response={writtenAnswer} setResponse={setWrittenAnswer} revealed={revealed} reveal={() => setRevealed(true)} onNext={nextQuestion} onKnown={markCurrentKnown} /> : mode === 'flashcards' ? <FlashcardPanel current={current} flipped={flipped} onFlip={() => setFlipped(value => !value)} onNext={nextQuestion} index={index} total={items.length} known={known.includes(current.id)} onKnown={markCurrentKnown} /> : <AuthorPanel question={draftQuestion} answer={draftAnswer} setQuestion={setDraftQuestion} setAnswer={setDraftAnswer} onSave={saveAuthoredQuestion} notice={savedNotice} authoredCount={authored.filter(item => selectedModule && item.id.startsWith(`${selectedModule.courseSlug}:${selectedModule.moduleSlug}:`)).length} />}
 
@@ -135,7 +148,7 @@ export function LearnForTest({ modules, initialCourse, initialModule }: { module
 
 function QuizPanel({ current, options, answer, selected, onChoose, onNext, index, total }: { current: QuestionBankItem; options: string[]; answer: number; selected: number | null; onChoose: (option: number) => void; onNext: () => void; index: number; total: number }) {
   const answered = selected !== null;
-  return <section className="learn-panel quiz-panel"><div className="panel-topline"><span className="panel-eyebrow">ROUND {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</span><span className="source-chip">PDF · UNIT {current.unit} · PART {current.part}</span></div><div className="quiz-progress"><span style={{ width: `${((index + 1) / total) * 100}%` }} /></div><div className="quiz-question"><span className="question-number">{current.part}{current.number}</span><h2>{current.question}</h2><p>Pick the explanation that best matches the source answer, then read the rationale.</p></div><div className="quiz-options">{options.map((option, optionIndex) => { const correct = optionIndex === answer; const wrong = selected === optionIndex && !correct; return <button key={`${option}-${optionIndex}`} className={`${selected !== null && correct ? 'correct' : ''} ${wrong ? 'wrong' : ''}`} onClick={() => onChoose(optionIndex)} disabled={answered}><span className="option-key">{String.fromCharCode(65 + optionIndex)}</span><span>{option}</span>{selected !== null && correct && <Check size={18} aria-hidden="true" />}{wrong && <X size={18} aria-hidden="true" />}</button>; })}</div>{answered && <div className={`quiz-feedback ${selected === answer ? 'is-correct' : 'is-review'}`}><div><strong>{selected === answer ? 'Locked in. Nice recall.' : 'Good review moment.'}</strong><p>{current.answer}</p></div><button className="btn btn-primary" onClick={onNext}>Next card <ChevronRight size={14} aria-hidden="true" /></button></div>}</section>;
+  return <section className="learn-panel quiz-panel"><div className="panel-topline"><span className="panel-eyebrow">ROUND {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</span><span className="source-chip">{sourceFormat(current)} · UNIT {current.unit} · PART {current.part}</span></div><div className="quiz-progress"><span style={{ width: `${((index + 1) / total) * 100}%` }} /></div><div className="quiz-question"><span className="question-number">{current.part}{current.number}</span><h2>{current.question}</h2><p>Pick the explanation that best matches the source answer, then read the rationale.</p></div><div className="quiz-options">{options.map((option, optionIndex) => { const correct = optionIndex === answer; const wrong = selected === optionIndex && !correct; return <button key={`${option}-${optionIndex}`} className={`${selected !== null && correct ? 'correct' : ''} ${wrong ? 'wrong' : ''}`} onClick={() => onChoose(optionIndex)} disabled={answered}><span className="option-key">{String.fromCharCode(65 + optionIndex)}</span><span>{option}</span>{selected !== null && correct && <Check size={18} aria-hidden="true" />}{wrong && <X size={18} aria-hidden="true" />}</button>; })}</div>{answered && <div className={`quiz-feedback ${selected === answer ? 'is-correct' : 'is-review'}`}><div><strong>{selected === answer ? 'Locked in. Nice recall.' : 'Good review moment.'}</strong><p>{current.answer}</p></div><button className="btn btn-primary" onClick={onNext}>Next card <ChevronRight size={14} aria-hidden="true" /></button></div>}</section>;
 }
 
 function FlashcardPanel({ current, flipped, onFlip, onNext, index, total, known, onKnown }: { current: QuestionBankItem; flipped: boolean; onFlip: () => void; onNext: () => void; index: number; total: number; known: boolean; onKnown: () => void }) {
@@ -145,7 +158,7 @@ function FlashcardPanel({ current, flipped, onFlip, onNext, index, total, known,
 }
 
 function WrittenAnswerPanel({ current, index, total, response, setResponse, revealed, reveal, onNext, onKnown }: { current: QuestionBankItem; index: number; total: number; response: string; setResponse: (value: string) => void; revealed: boolean; reveal: () => void; onNext: () => void; onKnown: () => void }) {
-  return <section className="learn-panel written-panel"><div className="panel-topline"><span className="panel-eyebrow">WRITE IT OUT · {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</span><span className="source-chip">PDF · UNIT {current.unit} · PART {current.part}</span></div><div className="written-prompt"><span className="question-number">{current.part}{current.number}</span><h2>{current.question}</h2></div><label className="written-field">Your answer<textarea value={response} onChange={event => setResponse(event.target.value)} placeholder="Close the model answer and explain it from memory..." rows={7} /></label>{revealed && <div className="written-model"><span className="panel-eyebrow">QUESTION BANK MODEL ANSWER</span><p>{current.answer}</p></div>}<div className="written-actions">{!revealed ? <button className="btn btn-primary" onClick={reveal} disabled={!response.trim()}>Compare with model answer <ChevronRight size={14} aria-hidden="true" /></button> : <><button className="btn btn-secondary" onClick={onNext}><RotateCcw size={14} aria-hidden="true" /> Review again</button><button className="btn btn-primary" onClick={onKnown}><Check size={14} aria-hidden="true" /> I know this</button></>}</div></section>;
+  return <section className="learn-panel written-panel"><div className="panel-topline"><span className="panel-eyebrow">WRITE IT OUT · {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</span><span className="source-chip">{sourceFormat(current)} · UNIT {current.unit} · PART {current.part}</span></div><div className="written-prompt"><span className="question-number">{current.part}{current.number}</span><h2>{current.question}</h2></div><label className="written-field">Your answer<textarea value={response} onChange={event => setResponse(event.target.value)} placeholder="Close the model answer and explain it from memory..." rows={7} /></label>{revealed && <div className="written-model"><span className="panel-eyebrow">QUESTION BANK MODEL ANSWER</span><p>{current.answer}</p></div>}<div className="written-actions">{!revealed ? <button className="btn btn-primary" onClick={reveal} disabled={!response.trim()}>Compare with model answer <ChevronRight size={14} aria-hidden="true" /></button> : <><button className="btn btn-secondary" onClick={onNext}><RotateCcw size={14} aria-hidden="true" /> Review again</button><button className="btn btn-primary" onClick={onKnown}><Check size={14} aria-hidden="true" /> I know this</button></>}</div></section>;
 }
 
 function AuthorPanel({ question, answer, setQuestion, setAnswer, onSave, notice, authoredCount }: { question: string; answer: string; setQuestion: (value: string) => void; setAnswer: (value: string) => void; onSave: () => void; notice: string; authoredCount: number }) {
