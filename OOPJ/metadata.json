@@ -1,0 +1,6 @@
+{
+  "name": "JavaMap EDU - Case Study Concept Mapping",
+  "description": "EdTech-level concept mapping with interactive visualizations, fill-ups, drag & drop labs, and real-world case studies for Object-Oriented Programming in Java.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
