@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node ../../tooling/build-cn-units.mjs && next dev --port 3000",
-    "build": "node ../../tooling/build-cn-units.mjs && next build",
+    "dev": "node ../../tooling/build-cn-units.mjs && node ../../tooling/build-oopj.mjs && next dev --port 3000",
+    "build": "node ../../tooling/build-cn-units.mjs && node ../../tooling/build-oopj.mjs && next build && node ../../tooling/publish-curriculum.mjs",
     "start": "next start --port 3000",
     "typecheck": "tsc --noEmit",
     "lint": "eslint ."
