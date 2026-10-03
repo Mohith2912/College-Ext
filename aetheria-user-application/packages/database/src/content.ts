@@ -1,6 +1,7 @@
 /** Original educational demonstration material written for this independent project. */
 import { computerNetworks } from './computer-networks';
 import { oopj } from './oopj';
+import { esd } from './esd';
 export interface SeedModule {
   slug: string;
   title: string;
@@ -1056,4 +1057,5 @@ Credible communication is proportional to evidence and makes meaningful limitati
   },
   computerNetworks,
   oopj,
+  esd,
 ];

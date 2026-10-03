@@ -10,6 +10,7 @@ import { NoteMarkdown } from '@/components/markdown';
 import { ReaderControls } from '@/components/reader-controls';
 import { cnRepositoryUrl, cnEmbeddedUrl } from '@/lib/cn-repositories';
 import { oopjCourseSlug, oopjEmbeddedUrl, oopjStandaloneUrl, oopjUnit } from '@/lib/oopj-reference';
+import { esdCourseSlug, esdEmbeddedUrl, esdStandaloneUrl, esdUnit } from '@/lib/esd-reference';
 
 type Props = { params: Promise<{ courseSlug: string; moduleSlug: string }>; searchParams: Promise<{ view?: string }> };
 export const dynamic = 'force-dynamic';
@@ -24,6 +25,10 @@ export default async function NotePage({ params }: Props) {
   const javaUnit = courseSlug === oopjCourseSlug ? oopjUnit(moduleSlug) : undefined;
   if (javaUnit) {
     return <><nav className="breadcrumbs" aria-label="Breadcrumb"><Link href="/notes">Course notes</Link><ChevronRight size={12}/><Link href={`/notes/${oopjCourseSlug}`}>Object Oriented Programming using Java</Link><ChevronRight size={12}/><span>Unit {javaUnit}</span></nav><div className="mb-4 flex flex-wrap gap-3"><Link className="btn btn-secondary" href={`/learn?course=${oopjCourseSlug}&module=${moduleSlug}`}>Learn Unit {javaUnit} for a test</Link><a className="btn btn-secondary" href={oopjStandaloneUrl(moduleSlug)} target="_blank" rel="noopener noreferrer">Open original unit full screen</a></div><iframe className="cn-unit-embed" title={`Complete Object Oriented Programming using Java Unit ${javaUnit}`} src={oopjEmbeddedUrl(moduleSlug)} /></>;
+  }
+  const embeddedUnit = courseSlug === esdCourseSlug ? esdUnit(moduleSlug) : undefined;
+  if (embeddedUnit) {
+    return <><nav className="breadcrumbs" aria-label="Breadcrumb"><Link href="/notes">Course notes</Link><ChevronRight size={12}/><Link href={`/notes/${esdCourseSlug}`}>Embedded System Design</Link><ChevronRight size={12}/><span>Unit {embeddedUnit}</span></nav><div className="mb-4 flex flex-wrap gap-3"><Link className="btn btn-secondary" href={`/learn?course=${esdCourseSlug}&module=${moduleSlug}`}>Learn Unit {embeddedUnit} for a test</Link><a className="btn btn-secondary" href={esdStandaloneUrl(moduleSlug)} target="_blank" rel="noopener noreferrer">Open original unit full screen</a></div><iframe className="cn-unit-embed" title={`Complete Embedded System Design Unit ${embeddedUnit}`} src={esdEmbeddedUrl(moduleSlug)} /></>;
   }
   const toc = getTableOfContents(module.note.markdown);
   const index = module.course.modules.findIndex(item => item.slug === moduleSlug);

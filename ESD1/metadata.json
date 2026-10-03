@@ -1,0 +1,6 @@
+{
+  "name": "Embedded System Design - Interactive Case Studies",
+  "description": "Interactive ed-tech platform mapping embedded systems concepts to real-life engineering case studies, featuring hardware simulators, FreeRTOS scheduling, bit manipulation, and TinyML pipelines.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

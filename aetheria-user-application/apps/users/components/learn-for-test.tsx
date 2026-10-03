@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { BrainCircuit, Check, ChevronRight, CircleHelp, Edit3, Flame, Layers3, Minus, Plus, RotateCcw, Sparkles, Target, Trophy, X } from 'lucide-react';
 import { computerNetworksQuestionBank, questionBankSource, type QuestionBankItem } from '@/lib/question-bank';
 import { oopjQuestionBank, oopjQuestionBankSource } from '@/lib/oopj-question-bank';
+import { esdQuestionBank, esdQuestionBankSource } from '@/lib/esd-question-bank';
 
 type ModuleOption = { id: string; course: string; courseCode: string; courseSlug: string; module: string; moduleSlug: string; termNumber: number };
 type AuthoredItem = QuestionBankItem & { authored: true };
@@ -12,11 +13,12 @@ type Mode = 'quiz' | 'write' | 'flashcards' | 'author';
 
 const unitNames = ['Foundations and architecture', 'Switching, routing and addressing', 'Transport and congestion control', 'Network security', 'Cloud, IoT and 5G'];
 const oopjUnitNames = ['OOP and Java basics', 'Classes, methods and memory', 'Inheritance and interfaces', 'Exceptions and file streams', 'Threads, generics and JDBC'];
+const esdUnitNames = ['Embedded-system foundations', 'Architecture and automotive control', 'Embedded C and firmware', 'RTOS and industrial control', 'Design, verification and Edge AI'];
 const unitColors = ['violet', 'blue', 'amber', 'rose', 'cyan'] as const;
 const storageKey = 'beyond-syllabus-authored-question-bank-v1';
 
 function moduleUnit(moduleSlug: string) {
-  const match = /(?:computer-networks|oopj)-unit-([1-5])$/.exec(moduleSlug);
+  const match = /(?:computer-networks|oopj|esd)-unit-([1-5])$/.exec(moduleSlug);
   return match ? Number(match[1]) : undefined;
 }
 
@@ -25,15 +27,26 @@ function sourceQuestions(module: ModuleOption, authored: AuthoredItem[]) {
   const authoredForModule = authored.filter(item => item.id.startsWith(`${module.courseSlug}:${module.moduleSlug}:`));
   if (module.courseSlug === 'computer-networks' && unit) return [...computerNetworksQuestionBank.filter(item => item.unit === unit), ...authoredForModule];
   if (module.courseSlug === 'object-oriented-programming-using-java' && unit) return [...oopjQuestionBank.filter(item => item.unit === unit), ...authoredForModule];
+  if (module.courseSlug === 'embedded-system-design' && unit) return [...esdQuestionBank.filter(item => item.unit === unit), ...authoredForModule];
   return authoredForModule;
 }
 
 function sourceForCourse(courseSlug: string) {
-  return courseSlug === 'object-oriented-programming-using-java' ? oopjQuestionBankSource : questionBankSource;
+  if (courseSlug === 'object-oriented-programming-using-java') return oopjQuestionBankSource;
+  if (courseSlug === 'embedded-system-design') return esdQuestionBankSource;
+  return questionBankSource;
 }
 
 function sourceFormat(item: QuestionBankItem) {
-  return item.id.startsWith('oopj-') ? 'DOC' : 'PDF';
+  if (item.id.startsWith('oopj-')) return 'DOC';
+  if (item.id.startsWith('esd-')) return 'SOURCE';
+  return 'PDF';
+}
+
+function modulePrefix(courseSlug: string) {
+  if (courseSlug === 'computer-networks') return 'computer-networks';
+  if (courseSlug === 'embedded-system-design') return 'esd';
+  return 'oopj';
 }
 
 function optionsFor(items: QuestionBankItem[], index: number) {
@@ -79,7 +92,7 @@ export function LearnForTest({ modules, initialCourse, initialModule }: { module
   const current = items[index] ?? items[0];
   const quizOptions = current ? optionsFor(items, index) : { options: [], answer: 0 };
   const unit = selectedModule ? moduleUnit(selectedModule.moduleSlug) : undefined;
-  const selectedUnitNames = courseSlug === 'object-oriented-programming-using-java' ? oopjUnitNames : unitNames;
+  const selectedUnitNames = courseSlug === 'object-oriented-programming-using-java' ? oopjUnitNames : courseSlug === 'embedded-system-design' ? esdUnitNames : unitNames;
   const selectedSource = sourceForCourse(courseSlug);
   const color = unit ? unitColors[unit - 1] : 'violet';
   const answered = selected !== null;
@@ -138,11 +151,11 @@ export function LearnForTest({ modules, initialCourse, initialModule }: { module
 
     <nav className="learn-mode-tabs" aria-label="Practice modes"><button className={mode === 'quiz' ? 'active' : ''} onClick={() => resetSession('quiz')}><CircleHelp size={17} aria-hidden="true" /><span><strong>Quiz arena</strong><small>Choose, commit, learn</small></span></button><button className={mode === 'write' ? 'active' : ''} onClick={() => resetSession('write')}><Edit3 size={17} aria-hidden="true" /><span><strong>Write answer</strong><small>Recall, then compare</small></span></button><button className={mode === 'flashcards' ? 'active' : ''} onClick={() => resetSession('flashcards')}><Layers3 size={17} aria-hidden="true" /><span><strong>Flashcards</strong><small>Flip for recall</small></span></button><button className={mode === 'author' ? 'active' : ''} onClick={() => resetSession('author')}><Sparkles size={17} aria-hidden="true" /><span><strong>Write your own</strong><small>Build module memory</small></span></button></nav>
 
-    {unit && <div className="learn-unit-strip" aria-label={`${selectedModule?.course ?? 'Course'} units`}>{selectedUnitNames.map((name, unitIndex) => <Link key={name} href={`/learn?course=${courseSlug}&module=${courseSlug === 'computer-networks' ? 'computer-networks' : 'oopj'}-unit-${unitIndex + 1}`} className={unit === unitIndex + 1 ? 'active' : ''}><span>0{unitIndex + 1}</span>{name}</Link>)}</div>}
+    {unit && <div className="learn-unit-strip" aria-label={`${selectedModule?.course ?? 'Course'} units`}>{selectedUnitNames.map((name, unitIndex) => <Link key={name} href={`/learn?course=${courseSlug}&module=${modulePrefix(courseSlug)}-unit-${unitIndex + 1}`} className={unit === unitIndex + 1 ? 'active' : ''}><span>0{unitIndex + 1}</span>{name}</Link>)}</div>}
 
     {!selectedModule || !items.length ? <section className="learn-empty"><Sparkles size={28} aria-hidden="true" /><h2>This module is ready for your questions.</h2><p>Choose “Write your own” to author a private question-and-answer set for this course module. Your cards stay in this browser.</p><button className="btn btn-primary" onClick={() => resetSession('author')}>Write the first card <ChevronRight size={14} aria-hidden="true" /></button></section> : mode === 'quiz' ? <QuizPanel current={current} options={quizOptions.options} answer={quizOptions.answer} selected={selected} onChoose={chooseAnswer} onNext={nextQuestion} index={index} total={items.length} /> : mode === 'write' ? <WrittenAnswerPanel current={current} index={index} total={items.length} response={writtenAnswer} setResponse={setWrittenAnswer} revealed={revealed} reveal={() => setRevealed(true)} onNext={nextQuestion} onKnown={markCurrentKnown} /> : mode === 'flashcards' ? <FlashcardPanel current={current} flipped={flipped} onFlip={() => setFlipped(value => !value)} onNext={nextQuestion} index={index} total={items.length} known={known.includes(current.id)} onKnown={markCurrentKnown} /> : <AuthorPanel question={draftQuestion} answer={draftAnswer} setQuestion={setDraftQuestion} setAnswer={setDraftAnswer} onSave={saveAuthoredQuestion} notice={savedNotice} authoredCount={authored.filter(item => selectedModule && item.id.startsWith(`${selectedModule.courseSlug}:${selectedModule.moduleSlug}:`)).length} />}
 
-    {selectedModule && <footer className="learn-footer"><span>Studying <strong>{selectedModule.module}</strong> · answers are adapted from the uploaded question bank.</span><Link href={`/notes/${selectedModule.courseSlug}/${selectedModule.moduleSlug}`}>Open the full module <ChevronRight size={14} aria-hidden="true" /></Link></footer>}
+    {selectedModule && <footer className="learn-footer"><span>Studying <strong>{selectedModule.module}</strong> · answers are adapted from the selected source material.</span><Link href={`/notes/${selectedModule.courseSlug}/${selectedModule.moduleSlug}`}>Open the full module <ChevronRight size={14} aria-hidden="true" /></Link></footer>}
   </div>;
 }
 
