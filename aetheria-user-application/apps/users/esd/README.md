@@ -20,7 +20,8 @@ what-if labs, or simulators:
    the OOPJ and Computer Networks modules.
 3. Section buttons jump directly to the story, architecture, concepts,
    simulator, checkpoint, and what-if lab.
-4. Learn for a Test uses 78 source-backed cards generated from the repository's
-   curriculum and interactive checkpoints. No separate official question-bank
-   document was present in the supplied repository.
+4. Learn for a Test uses all 125 questions from the official `2321CSS301J`
+   question-bank document: 15 Part A, 8 Part B, and 2 Part C questions for each
+   unit. The seven source rows without a written answer are completed from the
+   matching retained syllabus content so every practice mode remains usable.
 5. The full-screen action opens the selected unit directly on Beyond Syllabus.

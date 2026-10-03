@@ -39,7 +39,7 @@ function sourceForCourse(courseSlug: string) {
 
 function sourceFormat(item: QuestionBankItem) {
   if (item.id.startsWith('oopj-')) return 'DOC';
-  if (item.id.startsWith('esd-')) return 'SOURCE';
+  if (item.id.startsWith('esd-')) return 'DOC';
   return 'PDF';
 }
 
