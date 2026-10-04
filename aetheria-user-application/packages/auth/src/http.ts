@@ -38,8 +38,15 @@ export async function parseJsonRequest<T extends z.ZodTypeAny>(request: Request,
   return schema.parse(parsed);
 }
 
-/** TRUST_PROXY requires the ingress to strip and replace forwarded headers. */
+/** TRUST_PROXY requires the ingress to strip and replace forwarded headers.
+ * Vercel does this automatically and exposes the original address separately.
+ */
 export function requestAddress(request?: Request): string {
-  if (!request || !readEnvironment().TRUST_PROXY) return "untrusted-network";
-  return request.headers.get("x-forwarded-for")?.split(",")[0]?.trim().slice(0, 128) || "unknown";
+  if (!request) return "untrusted-network";
+  const runningOnVercel = process.env.VERCEL === "1";
+  if (!runningOnVercel && !readEnvironment().TRUST_PROXY) return "untrusted-network";
+  const forwarded = runningOnVercel
+    ? request.headers.get("x-vercel-forwarded-for") ?? request.headers.get("x-forwarded-for")
+    : request.headers.get("x-forwarded-for");
+  return forwarded?.split(",")[0]?.trim().slice(0, 128) || "unknown";
 }

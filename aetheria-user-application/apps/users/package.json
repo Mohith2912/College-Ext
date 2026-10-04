@@ -35,9 +35,9 @@
     "mdast-util-to-string": "4.0.0",
     "server-only": "0.0.1",
     "@aetheria/validation": "workspace:*",
-    "@node-rs/argon2": "2.0.2",
+    "@node-rs/argon2": "2.2.1",
     "@prisma/client": "6.19.0",
-    "nodemailer": "7.0.7"
+    "nodemailer": "10.0.14"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.3.3",
