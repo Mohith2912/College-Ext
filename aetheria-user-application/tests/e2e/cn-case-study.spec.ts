@@ -21,7 +21,7 @@ test('learner can complete the Computer Networks incident case study', async ({ 
   await expect(page.getByText('High-value evidence set.')).toBeVisible();
   await page.getByRole('button', { name: /Close checkpoint/ }).click();
 
-  await page.getByLabel('Correct the media queue policy').check();
+  await page.getByLabel(/Correct the media queue policy/).check();
   await page.getByRole('button', { name: 'Evaluate response' }).click();
   await expect(page.getByText('Proportional and testable.')).toBeVisible();
   await page.getByRole('button', { name: /Close checkpoint/ }).click();
