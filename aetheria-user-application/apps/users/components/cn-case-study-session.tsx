@@ -8,6 +8,7 @@ import {
   BookOpenCheck,
   Check,
   CheckCircle2,
+  ClipboardList,
   Clock3,
   Laptop,
   Network,
@@ -19,6 +20,7 @@ import {
 } from 'lucide-react';
 import {
   caseStages,
+  evidenceItems,
   learningGoals,
   networkHops,
   type CaseStage,
@@ -31,6 +33,7 @@ export function CnCaseStudySession() {
   const [completedStages, setCompletedStages] = useState<CaseStage['id'][]>([]);
   const [briefAnswer, setBriefAnswer] = useState<string | null>(null);
   const [selectedHop, setSelectedHop] = useState(0);
+  const [selectedEvidence, setSelectedEvidence] = useState<string[]>([]);
 
   const activeIndex = stageIndex(activeStage);
   const progress = Math.round((completedStages.length / caseStages.length) * 100);
@@ -52,6 +55,7 @@ export function CnCaseStudySession() {
     setCompletedStages([]);
     setBriefAnswer(null);
     setSelectedHop(0);
+    setSelectedEvidence([]);
   }
 
   return <div className="cn-case-shell">
@@ -148,7 +152,30 @@ export function CnCaseStudySession() {
           <div className="cn-case-coach"><strong>Investigator note</strong><span>{networkHops[selectedHop].status === 'warning' ? 'This point deserves a targeted measurement. A warning is a lead, not yet a root cause.' : 'Healthy evidence at this boundary helps shrink the search area. Do not ignore what is working.'}</span></div>
         </article>
       </div>}
-      {!['brief', 'path'].includes(activeStage) && <div className="cn-case-placeholder">Interactive checkpoint content</div>}
+      {activeStage === 'evidence' && <div className="cn-case-evidence">
+        <div className="cn-case-evidence__intro">
+          <span className="cn-case-label"><ClipboardList size={14} aria-hidden="true" /> Evidence board</span>
+          <h3>Choose the three readings that most sharply narrow the fault domain.</h3>
+          <p>Useful evidence discriminates between competing explanations. Select exactly three items; you can revise your set.</p>
+          <div><span>{selectedEvidence.length} / 3 selected</span><i><b style={{ width: `${selectedEvidence.length / 3 * 100}%` }} /></i></div>
+        </div>
+        <div className="cn-case-evidence__grid">
+          {evidenceItems.map(item => {
+            const selected = selectedEvidence.includes(item.id);
+            const disabled = !selected && selectedEvidence.length === 3;
+            return <button key={item.id} type="button" className={selected ? 'selected' : ''} aria-pressed={selected} disabled={disabled} onClick={() => setSelectedEvidence(current => selected ? current.filter(id => id !== item.id) : [...current, item.id])}>
+              <span><small>{item.source}</small>{selected && <Check size={14} aria-hidden="true" />}</span>
+              <strong>{item.reading}</strong>
+              <p>{item.interpretation}</p>
+            </button>;
+          })}
+        </div>
+        {selectedEvidence.length === 3 && <div className={selectedEvidence.every(id => evidenceItems.find(item => item.id === id)?.relevance === 'high') ? 'cn-case-feedback correct' : 'cn-case-feedback'} role="status">
+          <strong>{selectedEvidence.every(id => evidenceItems.find(item => item.id === id)?.relevance === 'high') ? 'High-value evidence set.' : 'Your set contains a weaker discriminator.'}</strong>
+          <span>{selectedEvidence.every(id => evidenceItems.find(item => item.id === id)?.relevance === 'high') ? 'Together, the gateway probe, queue telemetry, and external control isolate a reachable but impaired campus path.' : 'Look for readings that compare paths or directly measure the observed sustained-delivery failure.'}</span>
+        </div>}
+      </div>}
+      {!['brief', 'path', 'evidence'].includes(activeStage) && <div className="cn-case-placeholder">Interactive checkpoint content</div>}
       <footer><button className="btn btn-primary" onClick={() => completeStage(activeStage, caseStages[activeIndex + 1]?.id)}>Mark checkpoint complete <ArrowRight size={15} aria-hidden="true" /></button></footer>
     </section>
   </div>;
