@@ -9,12 +9,18 @@ import {
   Check,
   CheckCircle2,
   Clock3,
+  Laptop,
+  Network,
+  Radio,
   RotateCcw,
+  Router,
+  Server,
   ShieldAlert,
 } from 'lucide-react';
 import {
   caseStages,
   learningGoals,
+  networkHops,
   type CaseStage,
 } from '@/lib/cn-case-study-session';
 
@@ -24,6 +30,7 @@ export function CnCaseStudySession() {
   const [activeStage, setActiveStage] = useState<CaseStage['id']>('brief');
   const [completedStages, setCompletedStages] = useState<CaseStage['id'][]>([]);
   const [briefAnswer, setBriefAnswer] = useState<string | null>(null);
+  const [selectedHop, setSelectedHop] = useState(0);
 
   const activeIndex = stageIndex(activeStage);
   const progress = Math.round((completedStages.length / caseStages.length) * 100);
@@ -44,6 +51,7 @@ export function CnCaseStudySession() {
     setActiveStage('brief');
     setCompletedStages([]);
     setBriefAnswer(null);
+    setSelectedHop(0);
   }
 
   return <div className="cn-case-shell">
@@ -121,7 +129,26 @@ export function CnCaseStudySession() {
           </div>}
         </fieldset>
       </div>}
-      {activeStage !== 'brief' && <div className="cn-case-placeholder">Interactive checkpoint content</div>}
+      {activeStage === 'path' && <div className="cn-case-path">
+        <div className="cn-case-path__map" aria-label="Packet path from lecture laptop to media service">
+          {networkHops.map((hop, index) => {
+            const Icon = [Laptop, Radio, Network, Router, Server][index];
+            return <button key={hop.id} type="button" className={selectedHop === index ? 'active' : ''} aria-pressed={selectedHop === index} onClick={() => setSelectedHop(index)}>
+              <span className={`cn-hop-icon ${hop.status}`}><Icon size={19} aria-hidden="true" /></span>
+              <span><small>Hop {index + 1}</small><strong>{hop.name}</strong><em>{hop.role}</em></span>
+              {index < networkHops.length - 1 && <i aria-hidden="true" />}
+            </button>;
+          })}
+        </div>
+        <article className="cn-case-path__detail" aria-live="polite">
+          <div className="cn-case-detail-heading"><span>{networkHops[selectedHop].layer}</span><small className={networkHops[selectedHop].status}>{networkHops[selectedHop].status}</small></div>
+          <h3>{networkHops[selectedHop].name}</h3>
+          <p>{networkHops[selectedHop].observation}</p>
+          <dl><div><dt>Identity</dt><dd>{networkHops[selectedHop].address}</dd></div><div><dt>Responsibility</dt><dd>{networkHops[selectedHop].role}</dd></div></dl>
+          <div className="cn-case-coach"><strong>Investigator note</strong><span>{networkHops[selectedHop].status === 'warning' ? 'This point deserves a targeted measurement. A warning is a lead, not yet a root cause.' : 'Healthy evidence at this boundary helps shrink the search area. Do not ignore what is working.'}</span></div>
+        </article>
+      </div>}
+      {!['brief', 'path'].includes(activeStage) && <div className="cn-case-placeholder">Interactive checkpoint content</div>}
       <footer><button className="btn btn-primary" onClick={() => completeStage(activeStage, caseStages[activeIndex + 1]?.id)}>Mark checkpoint complete <ArrowRight size={15} aria-hidden="true" /></button></footer>
     </section>
   </div>;
