@@ -90,6 +90,18 @@ html[data-theme='dark'] .learn-arena{--learn-ink:#e8eef8;--learn-muted:#aab9ce;-
 @media(prefers-reduced-motion:reduce){.route-loader,.route-loader__brand,.route-loader__progress span{animation:none}.route-loader__brand{clip-path:none}.route-loader__progress span{width:100%}}
 @media print{.route-loader{display:none!important}}
 
+/* Computer Networks case study: guided evidence-based incident session. */
+.cn-case-shell{--case-ink:var(--text);--case-muted:var(--muted);--case-line:var(--border);--case-surface:var(--surface);--case-tint:var(--accent-soft);display:grid;gap:20px;max-width:1180px;margin:0 auto;padding-bottom:48px;color:var(--case-ink)}
+.cn-case-hero{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:44px;align-items:center;min-height:370px;padding:52px;border:1px solid var(--case-line);border-radius:24px;background:radial-gradient(circle at 82% 18%,color-mix(in srgb,var(--accent) 22%,transparent),transparent 30%),linear-gradient(135deg,var(--case-surface),color-mix(in srgb,var(--case-tint) 68%,var(--case-surface)));isolation:isolate}
+.cn-case-hero:after{content:"";position:absolute;z-index:-1;right:-140px;bottom:-220px;width:500px;height:500px;border:1px solid color-mix(in srgb,var(--accent) 20%,transparent);border-radius:50%}
+.cn-case-hero__copy{position:relative;z-index:1}.cn-case-kicker{display:flex;align-items:center;gap:8px;margin:0;color:var(--accent);font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase}
+.cn-case-hero h1{max-width:700px;margin:15px 0 16px;font-size:clamp(40px,5.2vw,64px);line-height:.98;letter-spacing:-2.7px}.cn-case-hero__copy>p:not(.cn-case-kicker){max-width:670px;margin:0;color:var(--case-muted);font-size:15px;line-height:1.8}
+.cn-case-hero__actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:28px}.cn-case-hero__actions .btn{display:inline-flex;align-items:center;gap:8px}.cn-case-hero__actions>span{display:inline-flex;align-items:center;gap:6px;color:var(--case-muted);font-size:10px;font-weight:650}
+.cn-case-hero__brief{position:relative;z-index:1;display:grid;gap:10px;padding:24px;border:1px solid color-mix(in srgb,var(--case-line) 75%,transparent);border-radius:18px;background:color-mix(in srgb,var(--case-surface) 88%,transparent);box-shadow:0 20px 45px color-mix(in srgb,var(--accent) 10%,transparent);backdrop-filter:blur(8px)}
+.cn-case-hero__brief>span{color:var(--accent);font-size:9px;font-weight:850;letter-spacing:1.5px}.cn-case-hero__brief>strong{font-family:var(--serif);font-size:24px;line-height:1.15}.cn-case-hero__brief dl{display:grid;gap:0;margin:8px 0 2px}.cn-case-hero__brief dl>div{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-top:1px solid var(--case-line);font-size:10px}.cn-case-hero__brief dt{color:var(--case-muted)}.cn-case-hero__brief dd{margin:0;font-weight:750}.cn-case-hero__brief small{color:var(--case-muted);font-size:9px}
+.cn-case-objectives{display:grid;grid-template-columns:250px minmax(0,1fr);gap:28px;align-items:center;padding:23px 26px;border:1px solid var(--case-line);border-radius:16px;background:var(--case-surface)}
+.cn-case-objectives>div{display:flex;align-items:center;gap:13px}.cn-case-objectives>div>svg{color:var(--accent)}.cn-case-objectives>div>span{display:grid;gap:3px}.cn-case-objectives small{color:var(--accent);font-size:8px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase}.cn-case-objectives strong{font-family:var(--serif);font-size:18px}.cn-case-objectives ul{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin:0;padding:0;list-style:none}.cn-case-objectives li{display:flex;align-items:flex-start;gap:7px;color:var(--case-muted);font-size:11px;line-height:1.5}.cn-case-objectives li svg{flex:0 0 auto;margin-top:1px;color:#178b5b}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    About page: a rich, themeful introduction to Beyond Syllabus.
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -220,4 +232,3 @@ html[data-theme='dark'] .learn-arena{--learn-ink:#e8eef8;--learn-muted:#aab9ce;-
   .about-value-card:hover,.about-feature-card:hover{transform:none}
 }
 @media print{.about-hero__orbits,.about-hero__visual,.about-cta__glow{display:none!important}.about-hero,.about-mission,.about-values,.about-features,.about-philosophy,.about-independence,.about-cta{border:0;padding:20px 0}.about-value-card,.about-feature-card{border:1px solid #ccc}}
-
