@@ -17,9 +17,11 @@ import {
   Router,
   Server,
   ShieldAlert,
+  Wrench,
 } from 'lucide-react';
 import {
   caseStages,
+  decisionOptions,
   evidenceItems,
   learningGoals,
   networkHops,
@@ -34,6 +36,8 @@ export function CnCaseStudySession() {
   const [briefAnswer, setBriefAnswer] = useState<string | null>(null);
   const [selectedHop, setSelectedHop] = useState(0);
   const [selectedEvidence, setSelectedEvidence] = useState<string[]>([]);
+  const [decision, setDecision] = useState<string | null>(null);
+  const [decisionChecked, setDecisionChecked] = useState(false);
 
   const activeIndex = stageIndex(activeStage);
   const progress = Math.round((completedStages.length / caseStages.length) * 100);
@@ -56,6 +60,8 @@ export function CnCaseStudySession() {
     setBriefAnswer(null);
     setSelectedHop(0);
     setSelectedEvidence([]);
+    setDecision(null);
+    setDecisionChecked(false);
   }
 
   return <div className="cn-case-shell">
@@ -174,8 +180,30 @@ export function CnCaseStudySession() {
           <strong>{selectedEvidence.every(id => evidenceItems.find(item => item.id === id)?.relevance === 'high') ? 'High-value evidence set.' : 'Your set contains a weaker discriminator.'}</strong>
           <span>{selectedEvidence.every(id => evidenceItems.find(item => item.id === id)?.relevance === 'high') ? 'Together, the gateway probe, queue telemetry, and external control isolate a reachable but impaired campus path.' : 'Look for readings that compare paths or directly measure the observed sustained-delivery failure.'}</span>
         </div>}
+        </div>}
+      {activeStage === 'decision' && <div className="cn-case-decision">
+        <aside>
+          <span className="cn-case-label"><Wrench size={14} aria-hidden="true" /> Working hypothesis</span>
+          <h3>A misapplied gateway queue policy is delaying and dropping sustained video traffic.</h3>
+          <p>The hypothesis predicts that correcting the policy will reduce queue delay and loss while DNS, routing, and radio measurements remain stable.</p>
+          <div><strong>Response rule</strong><span>Prefer the smallest reversible change that tests the hypothesis and preserves the live class.</span></div>
+        </aside>
+        <div className="cn-case-decision__options">
+          <fieldset>
+            <legend>What should the response lead do first?</legend>
+            {decisionOptions.map(option => <label key={option.id} className={decision === option.id ? 'selected' : ''}>
+              <input type="radio" name="incident-response" value={option.id} checked={decision === option.id} onChange={() => { setDecision(option.id); setDecisionChecked(false); }} />
+              <span><strong>{option.title}</strong><small>{option.action}</small></span>
+            </label>)}
+          </fieldset>
+          <button type="button" className="btn btn-secondary" disabled={!decision} onClick={() => setDecisionChecked(true)}>Evaluate response</button>
+          {decisionChecked && decision && <div className={decisionOptions.find(option => option.id === decision)?.isBest ? 'cn-case-feedback correct' : 'cn-case-feedback'} role="status">
+            <strong>{decisionOptions.find(option => option.id === decision)?.isBest ? 'Proportional and testable.' : 'The evidence does not support this as the first move.'}</strong>
+            <span>{decisionOptions.find(option => option.id === decision)?.consequence}</span>
+          </div>}
+        </div>
       </div>}
-      {!['brief', 'path', 'evidence'].includes(activeStage) && <div className="cn-case-placeholder">Interactive checkpoint content</div>}
+      {!['brief', 'path', 'evidence', 'decision'].includes(activeStage) && <div className="cn-case-placeholder">Interactive checkpoint content</div>}
       <footer><button className="btn btn-primary" onClick={() => completeStage(activeStage, caseStages[activeIndex + 1]?.id)}>Mark checkpoint complete <ArrowRight size={15} aria-hidden="true" /></button></footer>
     </section>
   </div>;
