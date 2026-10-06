@@ -3,9 +3,11 @@
 import { useMemo, useState } from 'react';
 import {
   Activity,
+  AlertCircle,
   ArrowRight,
   BookOpenCheck,
   Check,
+  CheckCircle2,
   Clock3,
   RotateCcw,
   ShieldAlert,
@@ -21,6 +23,7 @@ const stageIndex = (stage: CaseStage['id']) => caseStages.findIndex(item => item
 export function CnCaseStudySession() {
   const [activeStage, setActiveStage] = useState<CaseStage['id']>('brief');
   const [completedStages, setCompletedStages] = useState<CaseStage['id'][]>([]);
+  const [briefAnswer, setBriefAnswer] = useState<string | null>(null);
 
   const activeIndex = stageIndex(activeStage);
   const progress = Math.round((completedStages.length / caseStages.length) * 100);
@@ -40,6 +43,7 @@ export function CnCaseStudySession() {
   function resetSession() {
     setActiveStage('brief');
     setCompletedStages([]);
+    setBriefAnswer(null);
   }
 
   return <div className="cn-case-shell">
@@ -87,7 +91,37 @@ export function CnCaseStudySession() {
 
     <section id="case-workspace" className="cn-case-workspace" aria-labelledby="case-stage-title">
       <header><div><span>Checkpoint {activeIndex + 1} of {caseStages.length}</span><h2 id="case-stage-title">{stage.label}</h2></div><p>{stage.description}</p></header>
-      <div className="cn-case-placeholder">Interactive checkpoint content</div>
+      {activeStage === 'brief' && <div className="cn-case-briefing">
+        <div className="cn-case-briefing__story">
+          <span className="cn-case-label"><AlertCircle size={14} aria-hidden="true" /> Dispatch note · 10:12 IST</span>
+          <blockquote>“Wi-Fi shows connected, but the lecture stream pauses every 20–30 seconds in North Hall. Slides and chat still load.”</blockquote>
+          <p>The report describes what people experience, not where the failure is. Before changing the network, establish the scope and convert the report into testable statements.</p>
+          <dl>
+            <div><dt>Affected</dt><dd>North Hall viewers on VLAN 24</dd></div>
+            <div><dt>Unaffected</dt><dd>Recorded slides, text chat, other buildings</dd></div>
+            <div><dt>Recent change</dt><dd>Traffic policy updated at 09:40</dd></div>
+            <div><dt>Constraint</dt><dd>Do not interrupt the live lecture</dd></div>
+          </dl>
+        </div>
+        <fieldset className="cn-case-prompt">
+          <legend>Which is the best initial problem statement?</legend>
+          <p>Choose the statement that is specific, observable, and does not assume a cause.</p>
+          {[
+            ['wifi', 'North Hall Wi-Fi is broken.'],
+            ['provider', 'The media provider is overloaded.'],
+            ['observable', 'Viewers on VLAN 24 can connect, but sustained video delivery stalls while lighter services continue.'],
+          ].map(([value, label]) => <label key={value} className={briefAnswer === value ? 'selected' : ''}>
+            <input type="radio" name="brief-answer" value={value} checked={briefAnswer === value} onChange={() => setBriefAnswer(value)} />
+            <span>{label}</span>
+            {briefAnswer === value && (value === 'observable' ? <CheckCircle2 aria-label="Strong problem statement" /> : <AlertCircle aria-label="This statement assumes a cause" />)}
+          </label>)}
+          {briefAnswer && <div className={briefAnswer === 'observable' ? 'cn-case-feedback correct' : 'cn-case-feedback'} role="status">
+            <strong>{briefAnswer === 'observable' ? 'Strong framing.' : 'That jumps to a cause.'}</strong>
+            <span>{briefAnswer === 'observable' ? 'It defines who, what, and the boundary between working and failing traffic without diagnosing too early.' : 'Keep the observed impact separate from a hypothesis until measurements support it.'}</span>
+          </div>}
+        </fieldset>
+      </div>}
+      {activeStage !== 'brief' && <div className="cn-case-placeholder">Interactive checkpoint content</div>}
       <footer><button className="btn btn-primary" onClick={() => completeStage(activeStage, caseStages[activeIndex + 1]?.id)}>Mark checkpoint complete <ArrowRight size={15} aria-hidden="true" /></button></footer>
     </section>
   </div>;
