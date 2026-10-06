@@ -1,23 +1,11 @@
-import { BriefcaseBusiness } from 'lucide-react';
+import type { Metadata } from 'next';
+import { CnCaseStudySession } from '@/components/cn-case-study-session';
 
-export const metadata = {
-  title: 'Case studies',
-  description: 'Case studies for Beyond Syllabus are being updated.',
+export const metadata: Metadata = {
+  title: 'Computer Networks Case Study',
+  description: 'Investigate a fictional campus streaming incident through an interactive Computer Networks case study.',
 };
 
-export default function Cases() {
-  return <>
-    <div className="page-heading">
-      <div>
-        <p className="eyebrow">PRACTICE THROUGH DECISIONS</p>
-        <h1>Case studies.</h1>
-        <p>This section is being updated with new practice material.</p>
-      </div>
-    </div>
-    <div className="empty-state">
-      <BriefcaseBusiness size={32} strokeWidth={1.3} aria-hidden="true" />
-      <h2>New case studies are coming soon.</h2>
-      <p>The previous examples have been removed while this section is refreshed.</p>
-    </div>
-  </>;
+export default function CasesPage() {
+  return <CnCaseStudySession />;
 }
