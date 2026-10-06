@@ -6,6 +6,7 @@ import {
   AlertCircle,
   ArrowRight,
   BookOpenCheck,
+  BrainCircuit,
   Check,
   CheckCircle2,
   ClipboardList,
@@ -21,6 +22,7 @@ import {
 } from 'lucide-react';
 import {
   caseStages,
+  debriefQuestions,
   decisionOptions,
   evidenceItems,
   learningGoals,
@@ -38,6 +40,8 @@ export function CnCaseStudySession() {
   const [selectedEvidence, setSelectedEvidence] = useState<string[]>([]);
   const [decision, setDecision] = useState<string | null>(null);
   const [decisionChecked, setDecisionChecked] = useState(false);
+  const [debriefIndex, setDebriefIndex] = useState(0);
+  const [debriefAnswers, setDebriefAnswers] = useState<Record<string, number>>({});
 
   const activeIndex = stageIndex(activeStage);
   const progress = Math.round((completedStages.length / caseStages.length) * 100);
@@ -62,6 +66,8 @@ export function CnCaseStudySession() {
     setSelectedEvidence([]);
     setDecision(null);
     setDecisionChecked(false);
+    setDebriefIndex(0);
+    setDebriefAnswers({});
   }
 
   return <div className="cn-case-shell">
@@ -203,7 +209,28 @@ export function CnCaseStudySession() {
           </div>}
         </div>
       </div>}
-      {!['brief', 'path', 'evidence', 'decision'].includes(activeStage) && <div className="cn-case-placeholder">Interactive checkpoint content</div>}
+      {activeStage === 'debrief' && <div className="cn-case-debrief">
+        <aside>
+          <span className="cn-case-label"><BrainCircuit size={14} aria-hidden="true" /> Knowledge transfer</span>
+          <h3>Defend the diagnosis</h3>
+          <p>The incident is resolved only when you can explain why the evidence supports the conclusion.</p>
+          <ol>{debriefQuestions.map((question, index) => <li key={question.id} className={debriefIndex === index ? 'active' : ''}>
+            <button type="button" onClick={() => setDebriefIndex(index)} aria-label={`Open debrief question ${index + 1}`}><span>{debriefAnswers[question.id] === undefined ? index + 1 : debriefAnswers[question.id] === question.answer ? <Check size={13} aria-hidden="true" /> : '!'}</span><small>Question {index + 1}</small></button>
+          </li>)}</ol>
+        </aside>
+        <div className="cn-case-debrief__question">
+          <span>Question {debriefIndex + 1} of {debriefQuestions.length}</span>
+          <h3>{debriefQuestions[debriefIndex].prompt}</h3>
+          <div>{debriefQuestions[debriefIndex].options.map((option, index) => {
+            const answer = debriefAnswers[debriefQuestions[debriefIndex].id];
+            const answered = answer !== undefined;
+            const state = answered && index === debriefQuestions[debriefIndex].answer ? 'correct' : answered && index === answer ? 'wrong' : '';
+            return <button key={option} type="button" className={state} disabled={answered} onClick={() => setDebriefAnswers(current => ({ ...current, [debriefQuestions[debriefIndex].id]: index }))}><span>{String.fromCharCode(65 + index)}</span>{option}</button>;
+          })}</div>
+          {debriefAnswers[debriefQuestions[debriefIndex].id] !== undefined && <div className={debriefAnswers[debriefQuestions[debriefIndex].id] === debriefQuestions[debriefIndex].answer ? 'cn-case-feedback correct' : 'cn-case-feedback'} role="status"><strong>{debriefAnswers[debriefQuestions[debriefIndex].id] === debriefQuestions[debriefIndex].answer ? 'Correct reasoning.' : 'Revisit the evidence chain.'}</strong><span>{debriefQuestions[debriefIndex].explanation}</span></div>}
+          <div className="cn-case-debrief__nav"><button type="button" className="btn btn-secondary" disabled={debriefIndex === 0} onClick={() => setDebriefIndex(index => index - 1)}>Previous</button><button type="button" className="btn btn-secondary" disabled={debriefIndex === debriefQuestions.length - 1} onClick={() => setDebriefIndex(index => index + 1)}>Next question</button></div>
+        </div>
+      </div>}
       <footer><button className="btn btn-primary" onClick={() => completeStage(activeStage, caseStages[activeIndex + 1]?.id)}>Mark checkpoint complete <ArrowRight size={15} aria-hidden="true" /></button></footer>
     </section>
   </div>;
