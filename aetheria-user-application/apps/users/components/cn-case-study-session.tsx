@@ -5,6 +5,7 @@ import {
   Activity,
   AlertCircle,
   ArrowRight,
+  Award,
   BookOpenCheck,
   BrainCircuit,
   Check,
@@ -37,6 +38,7 @@ export function CnCaseStudySession() {
   const [completedStages, setCompletedStages] = useState<CaseStage['id'][]>([]);
   const [briefAnswer, setBriefAnswer] = useState<string | null>(null);
   const [selectedHop, setSelectedHop] = useState(0);
+  const [inspectedHops, setInspectedHops] = useState<number[]>([0]);
   const [selectedEvidence, setSelectedEvidence] = useState<string[]>([]);
   const [decision, setDecision] = useState<string | null>(null);
   const [decisionChecked, setDecisionChecked] = useState(false);
@@ -47,6 +49,12 @@ export function CnCaseStudySession() {
   const progress = Math.round((completedStages.length / caseStages.length) * 100);
   const stage = caseStages[activeIndex];
   const completed = useMemo(() => new Set(completedStages), [completedStages]);
+  const debriefScore = debriefQuestions.filter(question => debriefAnswers[question.id] === question.answer).length;
+  const canComplete = activeStage === 'brief' ? briefAnswer === 'observable'
+    : activeStage === 'path' ? inspectedHops.length === networkHops.length
+    : activeStage === 'evidence' ? selectedEvidence.length === 3
+    : activeStage === 'decision' ? decisionChecked
+    : Object.keys(debriefAnswers).length === debriefQuestions.length;
 
   function openStage(nextStage: CaseStage['id']) {
     setActiveStage(nextStage);
@@ -63,6 +71,7 @@ export function CnCaseStudySession() {
     setCompletedStages([]);
     setBriefAnswer(null);
     setSelectedHop(0);
+    setInspectedHops([0]);
     setSelectedEvidence([]);
     setDecision(null);
     setDecisionChecked(false);
@@ -149,7 +158,7 @@ export function CnCaseStudySession() {
         <div className="cn-case-path__map" aria-label="Packet path from lecture laptop to media service">
           {networkHops.map((hop, index) => {
             const Icon = [Laptop, Radio, Network, Router, Server][index];
-            return <button key={hop.id} type="button" className={selectedHop === index ? 'active' : ''} aria-pressed={selectedHop === index} onClick={() => setSelectedHop(index)}>
+            return <button key={hop.id} type="button" className={selectedHop === index ? 'active' : ''} aria-pressed={selectedHop === index} onClick={() => { setSelectedHop(index); setInspectedHops(current => current.includes(index) ? current : [...current, index]); }}>
               <span className={`cn-hop-icon ${hop.status}`}><Icon size={19} aria-hidden="true" /></span>
               <span><small>Hop {index + 1}</small><strong>{hop.name}</strong><em>{hop.role}</em></span>
               {index < networkHops.length - 1 && <i aria-hidden="true" />}
@@ -231,7 +240,15 @@ export function CnCaseStudySession() {
           <div className="cn-case-debrief__nav"><button type="button" className="btn btn-secondary" disabled={debriefIndex === 0} onClick={() => setDebriefIndex(index => index - 1)}>Previous</button><button type="button" className="btn btn-secondary" disabled={debriefIndex === debriefQuestions.length - 1} onClick={() => setDebriefIndex(index => index + 1)}>Next question</button></div>
         </div>
       </div>}
-      <footer><button className="btn btn-primary" onClick={() => completeStage(activeStage, caseStages[activeIndex + 1]?.id)}>Mark checkpoint complete <ArrowRight size={15} aria-hidden="true" /></button></footer>
+      <footer>
+        <span>{canComplete ? 'Checkpoint ready to close.' : activeStage === 'path' ? `Inspect ${networkHops.length - inspectedHops.length} more network ${networkHops.length - inspectedHops.length === 1 ? 'boundary' : 'boundaries'}.` : 'Complete the activity above to continue.'}</span>
+        <div>{activeIndex > 0 && <button className="btn btn-secondary" onClick={() => openStage(caseStages[activeIndex - 1].id)}>Previous checkpoint</button>}<button className="btn btn-primary" disabled={!canComplete} onClick={() => completeStage(activeStage, caseStages[activeIndex + 1]?.id)}>{activeIndex === caseStages.length - 1 ? 'Complete case study' : 'Close checkpoint'} <ArrowRight size={15} aria-hidden="true" /></button></div>
+      </footer>
     </section>
+    {completedStages.length === caseStages.length && <section className="cn-case-complete" aria-live="polite">
+      <span><Award size={28} aria-hidden="true" /></span>
+      <div><small>Session complete</small><h2>Incident contained. Reasoning documented.</h2><p>You traced the path, prioritised evidence, chose a proportionate response, and scored <strong>{debriefScore} / {debriefQuestions.length}</strong> in the debrief.</p></div>
+      <div><a className="btn btn-primary" href="/learn?course=computer-networks&module=computer-networks-unit-1">Practise CN questions</a><button type="button" className="btn btn-secondary" onClick={resetSession}><RotateCcw size={14} aria-hidden="true" /> Run again</button></div>
+    </section>}
   </div>;
 }
