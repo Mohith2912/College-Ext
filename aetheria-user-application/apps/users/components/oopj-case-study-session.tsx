@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import {
   AlertTriangle,
   ArrowRight,
+  Award,
   BookOpenCheck,
   BrainCircuit,
   Braces,
@@ -51,6 +52,16 @@ export function OopjCaseStudySession() {
   const activeStageData = oopjStages[activeIndex];
   const completed = useMemo(() => new Set(completedStages), [completedStages]);
   const progress = Math.round((completedStages.length / oopjStages.length) * 100);
+  const requirementsCorrect = selectedRequirements.length === 4 && ['identity', 'limits', 'atomic', 'failure'].every(id => selectedRequirements.includes(id));
+  const exceptionCorrect = exceptionOrder.length === exceptionSteps.length && exceptionOrder.every((id, index) => exceptionSteps.find(step => step.id === id)?.correctOrder === index);
+  const concurrencyCorrect = threadStep === unsafeThreadEvents.length && concurrencyFixes.find(fix => fix.id === concurrencyFix)?.correct === true;
+  const canComplete = activeStage === 'brief' ? requirementsCorrect
+    : activeStage === 'model' ? inspectedModels.length === modelCandidates.length && invariantOwner === 'book-copy'
+    : activeStage === 'dispatch' ? Object.keys(dispatchAnswers).length === dispatchTraces.length
+    : activeStage === 'resilience' ? exceptionCorrect
+    : activeStage === 'concurrency' ? concurrencyCorrect
+    : Object.keys(debriefAnswers).length === oopjQuestions.length;
+  const debriefScore = oopjQuestions.filter(question => debriefAnswers[question.id] === question.answer).length;
 
   function openStage(stage: OopjStage['id']) {
     setActiveStage(stage);
@@ -203,7 +214,8 @@ export function OopjCaseStudySession() {
         <aside><span className="oopj-case-label"><BrainCircuit size={14} aria-hidden="true" /> Architecture review</span><h3>Defend the design</h3><p>Explain why the repaired system is easier to extend, test, and trust.</p><ol>{oopjQuestions.map((question, index) => <li key={question.id} className={debriefIndex === index ? 'active' : ''}><button type="button" onClick={() => setDebriefIndex(index)} aria-label={`Open OOPJ debrief question ${index + 1}`}><span>{debriefAnswers[question.id] === undefined ? index + 1 : debriefAnswers[question.id] === question.answer ? <Check size={13} aria-hidden="true" /> : '!'}</span><small>Q{index + 1}</small></button></li>)}</ol></aside>
         <div className="oopj-debrief-question"><span>Question {debriefIndex + 1} of {oopjQuestions.length}</span><h3>{oopjQuestions[debriefIndex].prompt}</h3><div>{oopjQuestions[debriefIndex].options.map((option, index) => { const answer = debriefAnswers[oopjQuestions[debriefIndex].id]; const answered = answer !== undefined; const state = answered && index === oopjQuestions[debriefIndex].answer ? 'correct' : answered && index === answer ? 'wrong' : ''; return <button key={option} type="button" className={state} disabled={answered} onClick={() => setDebriefAnswers(current => ({ ...current, [oopjQuestions[debriefIndex].id]: index }))}><span>{String.fromCharCode(65 + index)}</span>{option}</button>; })}</div>{debriefAnswers[oopjQuestions[debriefIndex].id] !== undefined && <div className={debriefAnswers[oopjQuestions[debriefIndex].id] === oopjQuestions[debriefIndex].answer ? 'oopj-case-feedback correct' : 'oopj-case-feedback'} role="status"><strong>{debriefAnswers[oopjQuestions[debriefIndex].id] === oopjQuestions[debriefIndex].answer ? 'Correct design reasoning.' : 'Review the responsibility boundary.'}</strong><span>{oopjQuestions[debriefIndex].explanation}</span></div>}<footer><button type="button" className="btn btn-secondary" disabled={debriefIndex === 0} onClick={() => setDebriefIndex(index => index - 1)}>Previous</button><button type="button" className="btn btn-secondary" disabled={debriefIndex === oopjQuestions.length - 1} onClick={() => setDebriefIndex(index => index + 1)}>Next question</button></footer></div>
       </div>}
-      <footer><button type="button" className="btn btn-primary" onClick={() => completeStage(activeStage, oopjStages[activeIndex + 1]?.id)}>Mark checkpoint complete <ArrowRight size={15} aria-hidden="true" /></button></footer>
+      <footer><span>{canComplete ? 'Checkpoint ready to close.' : activeStage === 'model' && inspectedModels.length < modelCandidates.length ? `Inspect ${modelCandidates.length - inspectedModels.length} more classes.` : 'Complete the activity above to continue.'}</span><div>{activeIndex > 0 && <button type="button" className="btn btn-secondary" onClick={() => openStage(oopjStages[activeIndex - 1].id)}>Previous checkpoint</button>}<button type="button" className="btn btn-primary" disabled={!canComplete} onClick={() => completeStage(activeStage, oopjStages[activeIndex + 1]?.id)}>{activeIndex === oopjStages.length - 1 ? 'Complete case study' : 'Close checkpoint'} <ArrowRight size={15} aria-hidden="true" /></button></div></footer>
     </section>
+    {completedStages.length === oopjStages.length && <section className="oopj-case-complete" aria-live="polite"><span><Award size={28} aria-hidden="true" /></span><div><small>Design review complete</small><h2>The last copy is safe—and the model explains why.</h2><p>You separated responsibilities, traced dispatch, repaired failure handling, protected shared state, and scored <strong>{debriefScore} / {oopjQuestions.length}</strong> in the architecture review.</p></div><div><a className="btn btn-primary" href="/learn?course=object-oriented-programming-using-java&module=oopj-unit-1">Practise OOPJ questions</a><button type="button" className="btn btn-secondary" onClick={resetSession}><RotateCcw size={14} aria-hidden="true" /> Run again</button></div></section>}
   </div>;
 }
