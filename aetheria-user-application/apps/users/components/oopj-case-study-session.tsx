@@ -11,12 +11,14 @@ import {
   Clock3,
   Code2,
   Component,
+  GitBranch,
   RotateCcw,
 } from 'lucide-react';
 import {
   oopjLearningGoals,
   oopjStages,
   modelCandidates,
+  dispatchTraces,
   type OopjStage,
 } from '@/lib/oopj-case-study-session';
 
@@ -29,6 +31,8 @@ export function OopjCaseStudySession() {
   const [selectedModel, setSelectedModel] = useState(0);
   const [inspectedModels, setInspectedModels] = useState<number[]>([0]);
   const [invariantOwner, setInvariantOwner] = useState<string | null>(null);
+  const [dispatchIndex, setDispatchIndex] = useState(0);
+  const [dispatchAnswers, setDispatchAnswers] = useState<Record<string, number>>({});
 
   const activeIndex = getStageIndex(activeStage);
   const activeStageData = oopjStages[activeIndex];
@@ -52,6 +56,8 @@ export function OopjCaseStudySession() {
     setSelectedModel(0);
     setInspectedModels([0]);
     setInvariantOwner(null);
+    setDispatchIndex(0);
+    setDispatchAnswers({});
   }
 
   return <div className="oopj-case-shell">
@@ -133,7 +139,28 @@ export function OopjCaseStudySession() {
           {invariantOwner && <div className={invariantOwner === 'book-copy' ? 'oopj-case-feedback correct' : 'oopj-case-feedback'} role="status"><strong>{invariantOwner === 'book-copy' ? 'Cohesive ownership.' : 'Coordination is not ownership.'}</strong><span>{invariantOwner === 'book-copy' ? 'BookCopy owns availability, so its checkout() method can reject invalid transitions. The service coordinates the use case without exposing the field.' : 'The service or repository can call the operation, but BookCopy has the state and must defend its own invariant.'}</span></div>}
         </fieldset>
       </div>}
-      {!['brief', 'model'].includes(activeStage) && <div className="oopj-case-placeholder">Interactive checkpoint content</div>}
+      {activeStage === 'dispatch' && <div className="oopj-case-dispatch">
+        <aside>
+          <span className="oopj-case-label"><GitBranch size={14} aria-hidden="true" /> Runtime trace</span>
+          <h3>One reference type, three runtime objects.</h3>
+          <p>Predict the return value before revealing how dynamic method dispatch resolves the call.</p>
+          <div>{dispatchTraces.map((trace, index) => <button key={trace.id} type="button" className={dispatchIndex === index ? 'active' : ''} onClick={() => setDispatchIndex(index)}><span>{dispatchAnswers[trace.id] === undefined ? index + 1 : <Check size={13} aria-hidden="true" />}</span><span><strong>{trace.runtimeType.match(/new (\w+)/)?.[1]}</strong><small>{trace.call}</small></span></button>)}</div>
+        </aside>
+        <div className="oopj-dispatch-console">
+          <div className="oopj-code-window"><div><span /><span /><span /><small>DispatchLab.java</small></div><pre><code><i>Member</i> borrower = {dispatchTraces[dispatchIndex].runtimeType};{`\n`}int limit = borrower.<b>getLoanLimit()</b>;</code></pre><dl><div><dt>Declared type</dt><dd>{dispatchTraces[dispatchIndex].declaration}</dd></div><div><dt>Method call</dt><dd>{dispatchTraces[dispatchIndex].call}</dd></div></dl></div>
+          <fieldset>
+            <legend>What does <code>limit</code> receive?</legend>
+            {['2 books', '4 books', '10 books', 'Compile-time error'].map((option, index) => {
+              const answer = dispatchAnswers[dispatchTraces[dispatchIndex].id];
+              const correctIndex = [1, 2, 0][dispatchIndex];
+              const state = answer !== undefined && index === correctIndex ? 'correct' : answer === index ? 'wrong' : '';
+              return <button key={option} type="button" className={state} disabled={answer !== undefined} onClick={() => setDispatchAnswers(current => ({ ...current, [dispatchTraces[dispatchIndex].id]: index }))}><span>{String.fromCharCode(65 + index)}</span>{option}</button>;
+            })}
+          </fieldset>
+          {dispatchAnswers[dispatchTraces[dispatchIndex].id] !== undefined && <div className={dispatchAnswers[dispatchTraces[dispatchIndex].id] === [1, 2, 0][dispatchIndex] ? 'oopj-case-feedback correct' : 'oopj-case-feedback'} role="status"><strong>{dispatchAnswers[dispatchTraces[dispatchIndex].id] === [1, 2, 0][dispatchIndex] ? dispatchTraces[dispatchIndex].result : 'Follow the runtime object.'}</strong><span>{dispatchTraces[dispatchIndex].explanation}</span></div>}
+        </div>
+      </div>}
+      {!['brief', 'model', 'dispatch'].includes(activeStage) && <div className="oopj-case-placeholder">Interactive checkpoint content</div>}
       <footer><button type="button" className="btn btn-primary" onClick={() => completeStage(activeStage, oopjStages[activeIndex + 1]?.id)}>Mark checkpoint complete <ArrowRight size={15} aria-hidden="true" /></button></footer>
     </section>
   </div>;
