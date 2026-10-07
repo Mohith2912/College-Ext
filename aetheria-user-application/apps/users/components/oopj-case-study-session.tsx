@@ -13,6 +13,8 @@ import {
   Component,
   GitBranch,
   ListOrdered,
+  LockKeyhole,
+  Play,
   RotateCcw,
 } from 'lucide-react';
 import {
@@ -21,6 +23,8 @@ import {
   modelCandidates,
   dispatchTraces,
   exceptionSteps,
+  concurrencyFixes,
+  unsafeThreadEvents,
   type OopjStage,
 } from '@/lib/oopj-case-study-session';
 
@@ -36,6 +40,8 @@ export function OopjCaseStudySession() {
   const [dispatchIndex, setDispatchIndex] = useState(0);
   const [dispatchAnswers, setDispatchAnswers] = useState<Record<string, number>>({});
   const [exceptionOrder, setExceptionOrder] = useState<string[]>([]);
+  const [threadStep, setThreadStep] = useState(0);
+  const [concurrencyFix, setConcurrencyFix] = useState<string | null>(null);
 
   const activeIndex = getStageIndex(activeStage);
   const activeStageData = oopjStages[activeIndex];
@@ -62,6 +68,8 @@ export function OopjCaseStudySession() {
     setDispatchIndex(0);
     setDispatchAnswers({});
     setExceptionOrder([]);
+    setThreadStep(0);
+    setConcurrencyFix(null);
   }
 
   return <div className="oopj-case-shell">
@@ -177,7 +185,15 @@ export function OopjCaseStudySession() {
         </div>
         {exceptionOrder.length === exceptionSteps.length && <div className={exceptionOrder.every((id, index) => exceptionSteps.find(step => step.id === id)?.correctOrder === index) ? 'oopj-case-feedback correct' : 'oopj-case-feedback'} role="status"><strong>{exceptionOrder.every((id, index) => exceptionSteps.find(step => step.id === id)?.correctOrder === index) ? 'Failure path is explicit and safe.' : 'The execution order can leak intent or resources.'}</strong><span>{exceptionOrder.every((id, index) => exceptionSteps.find(step => step.id === id)?.correctOrder === index) ? 'Lookup precedes validation, the domain throws precisely, the boundary translates the error, and resource cleanup runs on every path.' : 'Begin with lookup, validate before mutation, throw from the domain, translate at the boundary, and guarantee cleanup.'}</span><button type="button" onClick={() => setExceptionOrder([])}>Rebuild order</button></div>}
       </div>}
-      {!['brief', 'model', 'dispatch', 'resilience'].includes(activeStage) && <div className="oopj-case-placeholder">Interactive checkpoint content</div>}
+      {activeStage === 'concurrency' && <div className="oopj-case-concurrency">
+        <div className="oopj-thread-stage">
+          <div className="oopj-thread-heading"><span className="oopj-case-label"><Play size={14} aria-hidden="true" /> Unsafe interleaving</span><div><button type="button" onClick={() => { setThreadStep(0); setConcurrencyFix(null); }}><RotateCcw size={13} aria-hidden="true" /> Reset trace</button><button type="button" disabled={threadStep === unsafeThreadEvents.length} onClick={() => setThreadStep(step => Math.min(step + 1, unsafeThreadEvents.length))}>{threadStep === 0 ? 'Run first event' : 'Run next event'} <ArrowRight size={13} aria-hidden="true" /></button></div></div>
+          <div className="oopj-shared-state"><span>shared field</span><code>availableCopies = {threadStep === 0 ? 1 : unsafeThreadEvents[threadStep - 1].sharedCopies}</code><strong className={threadStep === unsafeThreadEvents.length ? 'danger' : ''}>{threadStep === unsafeThreadEvents.length ? 'Invariant broken' : 'Trace running'}</strong></div>
+          <div className="oopj-thread-lanes">{(['Desk A', 'Desk B'] as const).map(desk => <section key={desk}><header><span>{desk}</span><small>issueBook("BK-204")</small></header><ol>{unsafeThreadEvents.map((event, index) => event.desk === desk ? <li key={event.id} className={threadStep > index ? 'visible' : ''}><b>{index + 1}</b><span><strong>{event.action}</strong><small>{event.risk}</small></span></li> : null)}</ol></section>)}</div>
+        </div>
+        <fieldset className="oopj-concurrency-fix"><legend><LockKeyhole size={18} aria-hidden="true" /> Choose the minimal correct repair</legend><p>Protect the invariant without relying on timing.</p><div>{concurrencyFixes.map(fix => <label key={fix.id} className={concurrencyFix === fix.id ? 'selected' : ''}><input type="radio" name="concurrency-fix" checked={concurrencyFix === fix.id} onChange={() => setConcurrencyFix(fix.id)} /><span><strong>{fix.title}</strong><small>{fix.detail}</small></span></label>)}</div>{concurrencyFix && <div className={concurrencyFixes.find(fix => fix.id === concurrencyFix)?.correct ? 'oopj-case-feedback correct' : 'oopj-case-feedback'} role="status"><strong>{concurrencyFixes.find(fix => fix.id === concurrencyFix)?.correct ? 'The critical section is protected.' : 'The race can still occur.'}</strong><span>{concurrencyFixes.find(fix => fix.id === concurrencyFix)?.detail}</span></div>}</fieldset>
+      </div>}
+      {!['brief', 'model', 'dispatch', 'resilience', 'concurrency'].includes(activeStage) && <div className="oopj-case-placeholder">Interactive checkpoint content</div>}
       <footer><button type="button" className="btn btn-primary" onClick={() => completeStage(activeStage, oopjStages[activeIndex + 1]?.id)}>Mark checkpoint complete <ArrowRight size={15} aria-hidden="true" /></button></footer>
     </section>
   </div>;
