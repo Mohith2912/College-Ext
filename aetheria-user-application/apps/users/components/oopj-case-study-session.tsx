@@ -12,6 +12,7 @@ import {
   Code2,
   Component,
   GitBranch,
+  ListOrdered,
   RotateCcw,
 } from 'lucide-react';
 import {
@@ -19,6 +20,7 @@ import {
   oopjStages,
   modelCandidates,
   dispatchTraces,
+  exceptionSteps,
   type OopjStage,
 } from '@/lib/oopj-case-study-session';
 
@@ -33,6 +35,7 @@ export function OopjCaseStudySession() {
   const [invariantOwner, setInvariantOwner] = useState<string | null>(null);
   const [dispatchIndex, setDispatchIndex] = useState(0);
   const [dispatchAnswers, setDispatchAnswers] = useState<Record<string, number>>({});
+  const [exceptionOrder, setExceptionOrder] = useState<string[]>([]);
 
   const activeIndex = getStageIndex(activeStage);
   const activeStageData = oopjStages[activeIndex];
@@ -58,6 +61,7 @@ export function OopjCaseStudySession() {
     setInvariantOwner(null);
     setDispatchIndex(0);
     setDispatchAnswers({});
+    setExceptionOrder([]);
   }
 
   return <div className="oopj-case-shell">
@@ -160,7 +164,20 @@ export function OopjCaseStudySession() {
           {dispatchAnswers[dispatchTraces[dispatchIndex].id] !== undefined && <div className={dispatchAnswers[dispatchTraces[dispatchIndex].id] === [1, 2, 0][dispatchIndex] ? 'oopj-case-feedback correct' : 'oopj-case-feedback'} role="status"><strong>{dispatchAnswers[dispatchTraces[dispatchIndex].id] === [1, 2, 0][dispatchIndex] ? dispatchTraces[dispatchIndex].result : 'Follow the runtime object.'}</strong><span>{dispatchTraces[dispatchIndex].explanation}</span></div>}
         </div>
       </div>}
-      {!['brief', 'model', 'dispatch'].includes(activeStage) && <div className="oopj-case-placeholder">Interactive checkpoint content</div>}
+      {activeStage === 'resilience' && <div className="oopj-case-resilience">
+        <div className="oopj-resilience-intro">
+          <span className="oopj-case-label"><ListOrdered size={14} aria-hidden="true" /> Exception pipeline</span>
+          <h3>Rebuild the unavailable-copy path.</h3>
+          <p>Select each step in execution order. The goal is a precise domain failure, a useful boundary message, and guaranteed resource cleanup.</p>
+          <div><strong>{exceptionOrder.length} / {exceptionSteps.length}</strong><span>steps placed</span></div>
+        </div>
+        <div className="oopj-resilience-board">
+          <section><span>Available steps</span><div>{['cleanup', 'lookup', 'throw', 'validate', 'handle'].map(id => exceptionSteps.find(step => step.id === id)!).map(step => <button key={step.id} type="button" disabled={exceptionOrder.includes(step.id)} onClick={() => setExceptionOrder(current => [...current, step.id])}><strong>{step.label}</strong><small>{step.detail}</small></button>)}</div></section>
+          <section><span>Execution path</span><ol>{exceptionOrder.map((id, index) => { const step = exceptionSteps.find(item => item.id === id)!; return <li key={id}><button type="button" onClick={() => setExceptionOrder(current => current.filter(item => item !== id))} aria-label={`Remove ${step.label} from position ${index + 1}`}><b>{index + 1}</b><span><strong>{step.label}</strong><small>{step.detail}</small></span></button></li>; })}</ol>{exceptionOrder.length === 0 && <p>Select a step to begin building the path.</p>}</section>
+        </div>
+        {exceptionOrder.length === exceptionSteps.length && <div className={exceptionOrder.every((id, index) => exceptionSteps.find(step => step.id === id)?.correctOrder === index) ? 'oopj-case-feedback correct' : 'oopj-case-feedback'} role="status"><strong>{exceptionOrder.every((id, index) => exceptionSteps.find(step => step.id === id)?.correctOrder === index) ? 'Failure path is explicit and safe.' : 'The execution order can leak intent or resources.'}</strong><span>{exceptionOrder.every((id, index) => exceptionSteps.find(step => step.id === id)?.correctOrder === index) ? 'Lookup precedes validation, the domain throws precisely, the boundary translates the error, and resource cleanup runs on every path.' : 'Begin with lookup, validate before mutation, throw from the domain, translate at the boundary, and guarantee cleanup.'}</span><button type="button" onClick={() => setExceptionOrder([])}>Rebuild order</button></div>}
+      </div>}
+      {!['brief', 'model', 'dispatch', 'resilience'].includes(activeStage) && <div className="oopj-case-placeholder">Interactive checkpoint content</div>}
       <footer><button type="button" className="btn btn-primary" onClick={() => completeStage(activeStage, oopjStages[activeIndex + 1]?.id)}>Mark checkpoint complete <ArrowRight size={15} aria-hidden="true" /></button></footer>
     </section>
   </div>;
