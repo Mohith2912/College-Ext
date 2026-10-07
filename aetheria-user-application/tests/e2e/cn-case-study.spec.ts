@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 test('learner can complete the Computer Networks incident case study', async ({ page }) => {
-  await page.goto('/case-studies');
+  await page.goto('/case-studies?course=cn');
 
   await expect(page.getByRole('heading', { name: 'The stream is live. The learning is not.' })).toBeVisible();
   await expect(page.getByText('Fictional practice scenario')).toBeVisible();
