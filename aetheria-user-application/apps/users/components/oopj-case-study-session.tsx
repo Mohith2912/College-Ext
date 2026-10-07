@@ -10,11 +10,13 @@ import {
   CheckCircle2,
   Clock3,
   Code2,
+  Component,
   RotateCcw,
 } from 'lucide-react';
 import {
   oopjLearningGoals,
   oopjStages,
+  modelCandidates,
   type OopjStage,
 } from '@/lib/oopj-case-study-session';
 
@@ -24,6 +26,9 @@ export function OopjCaseStudySession() {
   const [activeStage, setActiveStage] = useState<OopjStage['id']>('brief');
   const [completedStages, setCompletedStages] = useState<OopjStage['id'][]>([]);
   const [selectedRequirements, setSelectedRequirements] = useState<string[]>([]);
+  const [selectedModel, setSelectedModel] = useState(0);
+  const [inspectedModels, setInspectedModels] = useState<number[]>([0]);
+  const [invariantOwner, setInvariantOwner] = useState<string | null>(null);
 
   const activeIndex = getStageIndex(activeStage);
   const activeStageData = oopjStages[activeIndex];
@@ -44,6 +49,9 @@ export function OopjCaseStudySession() {
     setActiveStage('brief');
     setCompletedStages([]);
     setSelectedRequirements([]);
+    setSelectedModel(0);
+    setInspectedModels([0]);
+    setInvariantOwner(null);
   }
 
   return <div className="oopj-case-shell">
@@ -106,7 +114,26 @@ export function OopjCaseStudySession() {
           {selectedRequirements.length >= 4 && <div className={['identity', 'limits', 'atomic', 'failure'].every(id => selectedRequirements.includes(id)) && selectedRequirements.length === 4 ? 'oopj-case-feedback correct' : 'oopj-case-feedback'} role="status"><strong>{['identity', 'limits', 'atomic', 'failure'].every(id => selectedRequirements.includes(id)) && selectedRequirements.length === 4 ? 'The domain boundary is clear.' : 'Mixing design choices with requirements.'}</strong><span>{['identity', 'limits', 'atomic', 'failure'].every(id => selectedRequirements.includes(id)) && selectedRequirements.length === 4 ? 'These four statements describe identities, policies, invariants, and failure behaviour without dictating the interface or storage structure.' : 'Keep statements that remain true even if the interface colour or persistence technology changes.'}</span></div>}
         </fieldset>
       </div>}
-      {activeStage !== 'brief' && <div className="oopj-case-placeholder">Interactive checkpoint content</div>}
+      {activeStage === 'model' && <div className="oopj-case-model">
+        <div className="oopj-model-browser">
+          <div><span className="oopj-case-label"><Component size={14} aria-hidden="true" /> Responsibility map</span><strong>{inspectedModels.length} / {modelCandidates.length} inspected</strong></div>
+          <div>{modelCandidates.map((candidate, index) => <button key={candidate.id} type="button" className={selectedModel === index ? 'active' : ''} aria-pressed={selectedModel === index} onClick={() => { setSelectedModel(index); setInspectedModels(current => current.includes(index) ? current : [...current, index]); }}><span>{candidate.kind}</span><strong>{candidate.name}</strong><small>{candidate.responsibility}</small></button>)}</div>
+        </div>
+        <article className="oopj-model-detail" aria-live="polite">
+          <div><span>{modelCandidates[selectedModel].kind}</span><code>{modelCandidates[selectedModel].name}.java</code></div>
+          <h3>{modelCandidates[selectedModel].name}</h3>
+          <p>{modelCandidates[selectedModel].responsibility}</p>
+          <section><strong>Owns</strong><ul>{modelCandidates[selectedModel].owns.map(item => <li key={item}><Check size={13} aria-hidden="true" />{item}</li>)}</ul></section>
+          <section className="avoid"><strong>Keep outside</strong><p>{modelCandidates[selectedModel].shouldNotOwn}</p></section>
+        </article>
+        <fieldset className="oopj-model-decision">
+          <legend>Which object should protect the rule “an unavailable copy cannot be issued”?</legend>
+          <p>Choose the class that owns the state needed to enforce the invariant.</p>
+          {[['circulation', 'CirculationService'], ['book-copy', 'BookCopy'], ['repository', 'LoanRepository']].map(([id, label]) => <label key={id} className={invariantOwner === id ? 'selected' : ''}><input type="radio" name="invariant-owner" checked={invariantOwner === id} onChange={() => setInvariantOwner(id)} /><span>{label}</span></label>)}
+          {invariantOwner && <div className={invariantOwner === 'book-copy' ? 'oopj-case-feedback correct' : 'oopj-case-feedback'} role="status"><strong>{invariantOwner === 'book-copy' ? 'Cohesive ownership.' : 'Coordination is not ownership.'}</strong><span>{invariantOwner === 'book-copy' ? 'BookCopy owns availability, so its checkout() method can reject invalid transitions. The service coordinates the use case without exposing the field.' : 'The service or repository can call the operation, but BookCopy has the state and must defend its own invariant.'}</span></div>}
+        </fieldset>
+      </div>}
+      {!['brief', 'model'].includes(activeStage) && <div className="oopj-case-placeholder">Interactive checkpoint content</div>}
       <footer><button type="button" className="btn btn-primary" onClick={() => completeStage(activeStage, oopjStages[activeIndex + 1]?.id)}>Mark checkpoint complete <ArrowRight size={15} aria-hidden="true" /></button></footer>
     </section>
   </div>;
