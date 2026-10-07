@@ -2,10 +2,12 @@
 
 import { useMemo, useState } from 'react';
 import {
+  AlertTriangle,
   ArrowRight,
   BookOpenCheck,
   Braces,
   Check,
+  CheckCircle2,
   Clock3,
   Code2,
   RotateCcw,
@@ -21,6 +23,7 @@ const getStageIndex = (stage: OopjStage['id']) => oopjStages.findIndex(item => i
 export function OopjCaseStudySession() {
   const [activeStage, setActiveStage] = useState<OopjStage['id']>('brief');
   const [completedStages, setCompletedStages] = useState<OopjStage['id'][]>([]);
+  const [selectedRequirements, setSelectedRequirements] = useState<string[]>([]);
 
   const activeIndex = getStageIndex(activeStage);
   const activeStageData = oopjStages[activeIndex];
@@ -40,6 +43,7 @@ export function OopjCaseStudySession() {
   function resetSession() {
     setActiveStage('brief');
     setCompletedStages([]);
+    setSelectedRequirements([]);
   }
 
   return <div className="oopj-case-shell">
@@ -74,7 +78,35 @@ export function OopjCaseStudySession() {
 
     <section id="oopj-case-workspace" className="oopj-case-workspace" aria-labelledby="oopj-stage-title">
       <header><div><span>Checkpoint {activeIndex + 1} of {oopjStages.length}</span><h2 id="oopj-stage-title">{activeStageData.label}</h2></div><p>{activeStageData.description}</p></header>
-      <div className="oopj-case-placeholder">Interactive checkpoint content</div>
+      {activeStage === 'brief' && <div className="oopj-case-briefing">
+        <article>
+          <span className="oopj-case-label"><AlertTriangle size={14} aria-hidden="true" /> Service report · Exam week</span>
+          <blockquote>“Two issue desks approved the same last copy. One student left with a receipt; the other left with a loan record but no book.”</blockquote>
+          <p>The existing program stores most fields as public data and lets each screen update availability independently. Your team must redesign the flow without closing the library.</p>
+          <dl><div><dt>Actors</dt><dd>Students, faculty, librarians</dd></div><div><dt>Scale</dt><dd>2,400 members · 18,000 copies</dd></div><div><dt>Failure</dt><dd>Duplicate issue of barcode BK-204</dd></div><div><dt>Audit need</dt><dd>Every loan outcome must be explainable</dd></div></dl>
+        </article>
+        <fieldset>
+          <legend>Select the four domain requirements.</legend>
+          <p>Separate what the system must guarantee from premature implementation choices.</p>
+          {[
+            ['identity', 'Each physical copy has one stable barcode.', true],
+            ['limits', 'Borrowing limits vary by member type.', true],
+            ['atomic', 'A copy cannot be issued to two members.', true],
+            ['failure', 'An unavailable copy produces a precise recoverable failure.', true],
+            ['color', 'The issue button must be teal.', false],
+            ['arrays', 'All records must be stored in one public array.', false],
+          ].map(([id, label, required]) => {
+            const selected = selectedRequirements.includes(String(id));
+            return <label key={String(id)} className={selected ? 'selected' : ''}>
+              <input type="checkbox" checked={selected} onChange={() => setSelectedRequirements(current => selected ? current.filter(item => item !== String(id)) : [...current, String(id)])} />
+              <span>{label}</span>
+              {selected && (required ? <CheckCircle2 aria-label="Domain requirement" /> : <AlertTriangle aria-label="Implementation detail" />)}
+            </label>;
+          })}
+          {selectedRequirements.length >= 4 && <div className={['identity', 'limits', 'atomic', 'failure'].every(id => selectedRequirements.includes(id)) && selectedRequirements.length === 4 ? 'oopj-case-feedback correct' : 'oopj-case-feedback'} role="status"><strong>{['identity', 'limits', 'atomic', 'failure'].every(id => selectedRequirements.includes(id)) && selectedRequirements.length === 4 ? 'The domain boundary is clear.' : 'Mixing design choices with requirements.'}</strong><span>{['identity', 'limits', 'atomic', 'failure'].every(id => selectedRequirements.includes(id)) && selectedRequirements.length === 4 ? 'These four statements describe identities, policies, invariants, and failure behaviour without dictating the interface or storage structure.' : 'Keep statements that remain true even if the interface colour or persistence technology changes.'}</span></div>}
+        </fieldset>
+      </div>}
+      {activeStage !== 'brief' && <div className="oopj-case-placeholder">Interactive checkpoint content</div>}
       <footer><button type="button" className="btn btn-primary" onClick={() => completeStage(activeStage, oopjStages[activeIndex + 1]?.id)}>Mark checkpoint complete <ArrowRight size={15} aria-hidden="true" /></button></footer>
     </section>
   </div>;
