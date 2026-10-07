@@ -5,6 +5,7 @@ import {
   AlertTriangle,
   ArrowRight,
   BookOpenCheck,
+  BrainCircuit,
   Braces,
   Check,
   CheckCircle2,
@@ -25,6 +26,7 @@ import {
   exceptionSteps,
   concurrencyFixes,
   unsafeThreadEvents,
+  oopjQuestions,
   type OopjStage,
 } from '@/lib/oopj-case-study-session';
 
@@ -42,6 +44,8 @@ export function OopjCaseStudySession() {
   const [exceptionOrder, setExceptionOrder] = useState<string[]>([]);
   const [threadStep, setThreadStep] = useState(0);
   const [concurrencyFix, setConcurrencyFix] = useState<string | null>(null);
+  const [debriefIndex, setDebriefIndex] = useState(0);
+  const [debriefAnswers, setDebriefAnswers] = useState<Record<string, number>>({});
 
   const activeIndex = getStageIndex(activeStage);
   const activeStageData = oopjStages[activeIndex];
@@ -70,6 +74,8 @@ export function OopjCaseStudySession() {
     setExceptionOrder([]);
     setThreadStep(0);
     setConcurrencyFix(null);
+    setDebriefIndex(0);
+    setDebriefAnswers({});
   }
 
   return <div className="oopj-case-shell">
@@ -193,7 +199,10 @@ export function OopjCaseStudySession() {
         </div>
         <fieldset className="oopj-concurrency-fix"><legend><LockKeyhole size={18} aria-hidden="true" /> Choose the minimal correct repair</legend><p>Protect the invariant without relying on timing.</p><div>{concurrencyFixes.map(fix => <label key={fix.id} className={concurrencyFix === fix.id ? 'selected' : ''}><input type="radio" name="concurrency-fix" checked={concurrencyFix === fix.id} onChange={() => setConcurrencyFix(fix.id)} /><span><strong>{fix.title}</strong><small>{fix.detail}</small></span></label>)}</div>{concurrencyFix && <div className={concurrencyFixes.find(fix => fix.id === concurrencyFix)?.correct ? 'oopj-case-feedback correct' : 'oopj-case-feedback'} role="status"><strong>{concurrencyFixes.find(fix => fix.id === concurrencyFix)?.correct ? 'The critical section is protected.' : 'The race can still occur.'}</strong><span>{concurrencyFixes.find(fix => fix.id === concurrencyFix)?.detail}</span></div>}</fieldset>
       </div>}
-      {!['brief', 'model', 'dispatch', 'resilience', 'concurrency'].includes(activeStage) && <div className="oopj-case-placeholder">Interactive checkpoint content</div>}
+      {activeStage === 'debrief' && <div className="oopj-case-debrief">
+        <aside><span className="oopj-case-label"><BrainCircuit size={14} aria-hidden="true" /> Architecture review</span><h3>Defend the design</h3><p>Explain why the repaired system is easier to extend, test, and trust.</p><ol>{oopjQuestions.map((question, index) => <li key={question.id} className={debriefIndex === index ? 'active' : ''}><button type="button" onClick={() => setDebriefIndex(index)} aria-label={`Open OOPJ debrief question ${index + 1}`}><span>{debriefAnswers[question.id] === undefined ? index + 1 : debriefAnswers[question.id] === question.answer ? <Check size={13} aria-hidden="true" /> : '!'}</span><small>Q{index + 1}</small></button></li>)}</ol></aside>
+        <div className="oopj-debrief-question"><span>Question {debriefIndex + 1} of {oopjQuestions.length}</span><h3>{oopjQuestions[debriefIndex].prompt}</h3><div>{oopjQuestions[debriefIndex].options.map((option, index) => { const answer = debriefAnswers[oopjQuestions[debriefIndex].id]; const answered = answer !== undefined; const state = answered && index === oopjQuestions[debriefIndex].answer ? 'correct' : answered && index === answer ? 'wrong' : ''; return <button key={option} type="button" className={state} disabled={answered} onClick={() => setDebriefAnswers(current => ({ ...current, [oopjQuestions[debriefIndex].id]: index }))}><span>{String.fromCharCode(65 + index)}</span>{option}</button>; })}</div>{debriefAnswers[oopjQuestions[debriefIndex].id] !== undefined && <div className={debriefAnswers[oopjQuestions[debriefIndex].id] === oopjQuestions[debriefIndex].answer ? 'oopj-case-feedback correct' : 'oopj-case-feedback'} role="status"><strong>{debriefAnswers[oopjQuestions[debriefIndex].id] === oopjQuestions[debriefIndex].answer ? 'Correct design reasoning.' : 'Review the responsibility boundary.'}</strong><span>{oopjQuestions[debriefIndex].explanation}</span></div>}<footer><button type="button" className="btn btn-secondary" disabled={debriefIndex === 0} onClick={() => setDebriefIndex(index => index - 1)}>Previous</button><button type="button" className="btn btn-secondary" disabled={debriefIndex === oopjQuestions.length - 1} onClick={() => setDebriefIndex(index => index + 1)}>Next question</button></footer></div>
+      </div>}
       <footer><button type="button" className="btn btn-primary" onClick={() => completeStage(activeStage, oopjStages[activeIndex + 1]?.id)}>Mark checkpoint complete <ArrowRight size={15} aria-hidden="true" /></button></footer>
     </section>
   </div>;
