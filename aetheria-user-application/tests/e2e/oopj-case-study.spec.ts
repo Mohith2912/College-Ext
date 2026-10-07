@@ -14,17 +14,15 @@ test('learner can complete the OOPJ library design case study', async ({ page })
   ]) await page.getByLabel(requirement, { exact: true }).check();
   await page.getByRole('button', { name: /Close checkpoint/ }).click();
 
-  for (const className of ['Member', 'StudentMember', 'CirculationService', 'LoanRepository', 'BookUnavailableException']) {
-    await page.getByRole('button', { name: new RegExp(className) }).click();
-  }
+  for (let classIndex = 1; classIndex < 6; classIndex += 1) await page.locator('.oopj-model-browser button').nth(classIndex).click();
   await page.getByLabel('BookCopy', { exact: true }).check();
   await page.getByRole('button', { name: /Close checkpoint/ }).click();
 
-  await page.getByRole('button', { name: '4 books', exact: true }).click();
-  await page.getByRole('button', { name: /FacultyMember/ }).click();
-  await page.getByRole('button', { name: '10 books', exact: true }).click();
-  await page.getByRole('button', { name: /new Member/ }).click();
-  await page.getByRole('button', { name: '2 books', exact: true }).click();
+  await page.getByRole('button', { name: /4 books/ }).click();
+  await page.locator('.oopj-case-dispatch > aside button').nth(1).click();
+  await page.getByRole('button', { name: /10 books/ }).click();
+  await page.locator('.oopj-case-dispatch > aside button').nth(2).click();
+  await page.getByRole('button', { name: /2 books/ }).click();
   await page.getByRole('button', { name: /Close checkpoint/ }).click();
 
   for (const step of [
@@ -33,7 +31,7 @@ test('learner can complete the OOPJ library design case study', async ({ page })
     'Throw a precise domain exception',
     'Translate the failure at the boundary',
     'Close the persistence resource',
-  ]) await page.getByRole('button', { name: new RegExp(step) }).click();
+  ]) await page.locator('.oopj-resilience-board > section:first-of-type button').filter({ hasText: step }).click();
   await page.getByRole('button', { name: /Close checkpoint/ }).click();
 
   for (let event = 0; event < 4; event += 1) await page.getByRole('button', { name: /Run (first|next) event/ }).click();
