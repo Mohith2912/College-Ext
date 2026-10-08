@@ -14,9 +14,10 @@ test('learner can complete the ESD cold-chain case study', async ({ page }) => {
   ]) await page.getByLabel(requirement, { exact: true }).check();
   await page.getByRole('button', { name: /Close checkpoint/ }).click();
 
-  await page.getByRole('button', { name: 'I²C', exact: true }).click();
-  await page.getByRole('button', { name: 'UART', exact: true }).click();
-  await page.getByRole('button', { name: 'PWM', exact: true }).click();
+  const interfaceCards = page.locator('.esd-interface-cards fieldset');
+  await interfaceCards.nth(0).getByRole('button', { name: 'I²C', exact: true }).click();
+  await interfaceCards.nth(1).getByRole('button', { name: 'UART', exact: true }).click();
+  await interfaceCards.nth(2).getByRole('button', { name: 'PWM', exact: true }).click();
   await page.getByRole('button', { name: /Close checkpoint/ }).click();
 
   await page.getByLabel(/Assert safety alarm/).check();
