@@ -1,8 +1,8 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { AlertTriangle, ArrowRight, Award, BatteryCharging, Check, CheckCircle2, Clock3, Cpu, RotateCcw, Thermometer } from 'lucide-react';
-import { esdLearningGoals, esdStages, missionOptions, type EsdStageId } from '@/lib/esd-case-study-session';
+import { AlertTriangle, ArrowRight, Award, BatteryCharging, Check, CheckCircle2, CircuitBoard, Clock3, Cpu, RotateCcw, Thermometer } from 'lucide-react';
+import { esdLearningGoals, esdStages, interfaceChallenges, missionOptions, type EsdStageId } from '@/lib/esd-case-study-session';
 
 const stageIndex = (id: EsdStageId) => esdStages.findIndex(stage => stage.id === id);
 
@@ -15,7 +15,9 @@ export function EsdCaseStudySession() {
   const [stageReady, setStageReady] = useState<Record<EsdStageId, boolean>>({ mission: false, interfaces: false, timing: false, 'state-machine': false, power: false, debrief: false });
   const [missionAnswers, setMissionAnswers] = useState<string[]>([]);
   const missionCorrect = missionAnswers.length === 4 && missionOptions.filter(option => option.required).every(option => missionAnswers.includes(option.id));
-  const canComplete = activeStage === 'mission' ? missionCorrect : stageReady[activeStage];
+  const [interfaceAnswers, setInterfaceAnswers] = useState<Record<string, number>>({});
+  const interfacesCorrect = interfaceChallenges.every(challenge => interfaceAnswers[challenge.id] === challenge.answer);
+  const canComplete = activeStage === 'mission' ? missionCorrect : activeStage === 'interfaces' ? interfacesCorrect : stageReady[activeStage];
 
   function openStage(id: EsdStageId) {
     setActiveStage(id);
@@ -33,6 +35,7 @@ export function EsdCaseStudySession() {
     setCompletedStages([]);
     setStageReady({ mission: false, interfaces: false, timing: false, 'state-machine': false, power: false, debrief: false });
     setMissionAnswers([]);
+    setInterfaceAnswers({});
   }
 
   return <div className="esd-case-shell">
@@ -63,7 +66,7 @@ export function EsdCaseStudySession() {
       {activeStage === 'mission' ? <div className="esd-mission">
         <article><span className="esd-label"><AlertTriangle size={14} aria-hidden="true" /> Incident 08 · Rural outreach route</span><blockquote>“The carrier arrived warm, and the six-hour data gap means nobody can prove when the excursion began.”</blockquote><p>The unit continued showing a green status lamp after its sensor task stalled. The team needs requirements that can be tested on a bench before the next route.</p><dl><div><dt>Payload</dt><dd>120 vaccine doses</dd></div><div><dt>Expected range</dt><dd>2 °C to 8 °C</dd></div><div><dt>Route</dt><dd>14 hours off-grid</dd></div><div><dt>Battery</dt><dd>2,000 mAh</dd></div></dl></article>
         <fieldset><legend>Select the four measurable system requirements.</legend><p>Choose outcomes that remain valid even if the hardware platform changes.</p>{missionOptions.map(option => { const selected = missionAnswers.includes(option.id); return <label key={option.id} className={selected ? 'selected' : ''}><input type="checkbox" checked={selected} onChange={() => setMissionAnswers(current => selected ? current.filter(id => id !== option.id) : [...current, option.id])} /><span>{option.label}</span>{selected && (option.required ? <CheckCircle2 aria-label="Measurable requirement" /> : <AlertTriangle aria-label="Implementation assumption" />)}</label>; })}{missionAnswers.length >= 4 && <div className={`esd-feedback ${missionCorrect ? 'correct' : ''}`} role="status"><strong>{missionCorrect ? 'The mission is testable.' : 'Some choices are design assumptions.'}</strong><span>{missionCorrect ? 'Temperature, sampling, alarm latency, and runtime now give the team objective acceptance tests.' : 'Keep measurable safety outcomes; defer colour and processor selection until the workload is understood.'}</span></div>}</fieldset>
-      </div> : <div className="esd-stage-placeholder"><Cpu size={26} aria-hidden="true" /><h3>{esdStages[activeIndex].shortLabel} activity</h3><p>The interactive engineering workspace is ready for this checkpoint.</p><button type="button" className="btn btn-secondary" onClick={() => setStageReady(current => ({ ...current, [activeStage]: true }))}>Mark activity ready</button></div>}
+      </div> : activeStage === 'interfaces' ? <div className="esd-interfaces"><aside><span className="esd-label"><CircuitBoard size={14} aria-hidden="true" /> Peripheral map</span><h3>Give every signal a suitable path.</h3><p>Select an interface for each device. Use the electrical and data clues—not habit—to decide.</p><div className="esd-board-map"><span>MCU</span>{interfaceChallenges.map(challenge => <div key={challenge.id}><i /><strong>{challenge.device}</strong><small>{interfaceAnswers[challenge.id] === undefined ? 'unassigned' : challenge.options[interfaceAnswers[challenge.id]]}</small></div>)}</div></aside><div className="esd-interface-cards">{interfaceChallenges.map((challenge, challengeIndex) => { const answer = interfaceAnswers[challenge.id]; return <fieldset key={challenge.id}><legend><span>{challengeIndex + 1}</span>{challenge.device}</legend><p>{challenge.clue}</p><div>{challenge.options.map((option, optionIndex) => <button key={option} type="button" className={answer !== undefined && optionIndex === challenge.answer ? 'correct' : answer === optionIndex ? 'wrong' : ''} disabled={answer !== undefined} onClick={() => setInterfaceAnswers(current => ({ ...current, [challenge.id]: optionIndex }))}>{option}</button>)}</div>{answer !== undefined && <div className={`esd-feedback ${answer === challenge.answer ? 'correct' : ''}`} role="status"><strong>{answer === challenge.answer ? 'Interface matched.' : 'Revisit the signal clue.'}</strong><span>{challenge.explanation}</span></div>}</fieldset>; })}</div></div> : <div className="esd-stage-placeholder"><Cpu size={26} aria-hidden="true" /><h3>{esdStages[activeIndex].shortLabel} activity</h3><p>The interactive engineering workspace is ready for this checkpoint.</p><button type="button" className="btn btn-secondary" onClick={() => setStageReady(current => ({ ...current, [activeStage]: true }))}>Mark activity ready</button></div>}
       <footer><span>{canComplete ? 'Checkpoint ready to close.' : 'Complete the engineering activity to continue.'}</span><div>{activeIndex > 0 && <button type="button" className="btn btn-secondary" onClick={() => openStage(esdStages[activeIndex - 1].id)}>Previous checkpoint</button>}<button type="button" className="btn btn-primary" disabled={!canComplete} onClick={closeStage}>{activeIndex === esdStages.length - 1 ? 'Complete case study' : 'Close checkpoint'} <ArrowRight size={15} aria-hidden="true" /></button></div></footer>
     </section>
 
