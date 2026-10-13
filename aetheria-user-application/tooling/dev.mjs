@@ -3,6 +3,8 @@ import { createRequire } from 'node:module';
 const require=createRequire(import.meta.url);
 await import('./build-cn-units.mjs');
 await import('./build-oopj.mjs');
+await import('./build-esd.mjs');
+await import('./build-faiml.mjs');
 const children=[];
 for(const [app,port] of [['users','3000']]){
   const cli=require.resolve('next/dist/bin/next',{paths:[`${process.cwd()}/apps/${app}`]});
