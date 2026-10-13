@@ -29,7 +29,7 @@
 
 ## About the project
 
-Beyond Syllabus is an independent education platform built to make technical course material easier to understand, revise, and apply. The current release focuses on **Computer Networks** and connects five original interactive unit applications with a modern study experience.
+Beyond Syllabus is an independent education platform built to make technical course material easier to understand, revise, and apply. The current release includes **Computer Networks**, **Object Oriented Programming using Java**, **Embedded System Design**, and **Fundamentals of Artificial Intelligence and Machine Learning** in one modern study experience.
 
 The project goes beyond displaying static notes. Learners can move from structured explanations to question-bank practice, flashcards, authored recall, visual simulations, and long-form audio—all within one responsive interface.
 
@@ -46,6 +46,7 @@ The project goes beyond displaying static notes. Learners can move from structur
 | **Reading preferences** | Light, sepia, and dark themes with adjustable reading support |
 | **Responsive experience** | Desktop, tablet, and mobile layouts with accessible touch targets and navigation |
 | **Study assistance** | Grounded AI responses when an API provider is configured |
+| **FAIML case studio** | Guided checkpoints for search, preprocessing, evaluation, and clustering |
 | **Personal workspace** | Registration, email verification, authentication, and saved learner context |
 | **Offline support** | Installable PWA behavior with an offline fallback |
 
@@ -60,6 +61,10 @@ The project goes beyond displaying static notes. Learners can move from structur
 | 5 | `CN-Unit-5` | Available |
 
 The five source applications are compiled into the host project during the build. Their original educational content, controls, and simulation behavior remain separated from the surrounding Beyond Syllabus interface.
+
+### FAIML coverage
+
+The FAIML course is published as five syllabus modules aligned with course `2311CSC303J` and the supplied `FAIML Q BANK.docx.pdf`. Its revision flow includes source-aligned quiz cards, flashcards, written recall, private authored cards, and a responsive case studio at `/case-studies?course=faiml`.
 
 ## Technology
 
