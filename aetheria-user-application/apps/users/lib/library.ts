@@ -3,8 +3,7 @@ import { prisma } from '@aetheria/database';
 import { unstable_cache } from 'next/cache';
 
 export const organizationScope = { slug: process.env.ORGANIZATION_SLUG ?? 'aetheria', deletedAt: null };
-const removedCourseSlugs = new Set(['fundamentals-of-artificial-intelligence-and-machine-learning']);
-const publicCourse = { status: 'PUBLISHED' as const, deletedAt: null, slug: { notIn: [...removedCourseSlugs] }, organization: organizationScope };
+const publicCourse = { status: 'PUBLISHED' as const, deletedAt: null, organization: organizationScope };
 const publicModule = { status: 'PUBLISHED' as const, deletedAt: null, organization: organizationScope };
 
 export async function getLibrary({ term, subject, q, availability }: { term?: string; subject?: string; q?: string; availability?: string } = {}) {
@@ -23,7 +22,6 @@ export async function getLibrary({ term, subject, q, availability }: { term?: st
 }
 
 export async function getCourse(slug: string) {
-  if (removedCourseSlugs.has(slug)) return null;
   const load = unstable_cache(() => prisma.course.findFirst({
     where: { ...publicCourse, slug },
     include: {
@@ -35,7 +33,6 @@ export async function getCourse(slug: string) {
 }
 
 export async function getModule(courseSlug: string, moduleSlug: string) {
-  if (removedCourseSlugs.has(courseSlug)) return null;
   const load = unstable_cache(() => prisma.module.findFirst({
     where: { ...publicModule, slug: moduleSlug, course: { ...publicCourse, slug: courseSlug }, note: { status: 'PUBLISHED', deletedAt: null, organization: organizationScope } },
     include: { note: true, course: { include: { offerings: { where: { deletedAt: null, term: { deletedAt: null } }, include: { term: true } }, modules: { where: { ...publicModule, note: { status: 'PUBLISHED', deletedAt: null } }, select: { slug: true, title: true, position: true }, orderBy: { position: 'asc' } } } } },
