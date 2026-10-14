@@ -1,0 +1,1127 @@
+[
+  {
+    "id": "faiml-u1-a-1",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "A",
+    "number": 1,
+    "question": "Define Artificial Intelligence (AI).",
+    "answer": "Artificial Intelligence is the branch of computer science that develops systems capable of performing tasks that normally require human intelligence, such as learning, reasoning, and decision-making."
+  },
+  {
+    "id": "faiml-u1-a-2",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "A",
+    "number": 2,
+    "question": "State an intelligent agent.",
+    "answer": "An intelligent agent is an entity that perceives its environment through sensors and acts upon it using actuators to achieve its goals."
+  },
+  {
+    "id": "faiml-u1-a-3",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "A",
+    "number": 3,
+    "question": "Differentiate between informed and uninformed search.",
+    "answer": "• Uninformed search (Blind search): Uses no additional domain knowledge except the problem definition itself (e.g., BFS, DFS).\n• Informed search (Heuristic search): Uses problem-specific heuristic information h(n) to guide the search toward the goal more efficiently (e.g., A*, Greedy Best-First Search)."
+  },
+  {
+    "id": "faiml-u1-a-4",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "A",
+    "number": 4,
+    "question": "Define the environment in Artificial Intelligence.",
+    "answer": "The environment is everything outside the agent that it can perceive through sensors and interact with using actuators while performing tasks."
+  },
+  {
+    "id": "faiml-u1-a-5",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "A",
+    "number": 5,
+    "question": "State the definition of a search algorithm.",
+    "answer": "A search algorithm is a systematic method used by problem-solving agents to find a sequence of actions (a path or solution) that leads from an initial state to a desired goal state."
+  },
+  {
+    "id": "faiml-u1-a-6",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "A",
+    "number": 6,
+    "question": "Explain the limitations of the Depth-First Search (DFS) algorithm.",
+    "answer": "Limitations of DFS:\n1. Infinite Paths: DFS may get stuck exploring an infinite or cyclical branch and never terminate if no depth limit is enforced.\n2. Non-optimal: DFS does not guarantee finding the shortest or lowest-cost solution path."
+  },
+  {
+    "id": "faiml-u1-a-7",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "A",
+    "number": 7,
+    "question": "Identify the purpose of goal testing in the problem-solving process.",
+    "answer": "Goal testing evaluates whether the current state satisfies the desired goal condition, signaling the search algorithm to terminate and return the solution path."
+  },
+  {
+    "id": "faiml-u1-a-8",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "A",
+    "number": 8,
+    "question": "Define A* search.",
+    "answer": "A* search is an informed, best-first search algorithm that finds the optimal path from start to goal by evaluating nodes using the cost function: f(n) = g(n) + h(n), where g(n) is the exact cost from start to node n, and h(n) is an admissible heuristic estimate from node n to the goal."
+  },
+  {
+    "id": "faiml-u1-a-9",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "A",
+    "number": 9,
+    "question": "State the definition of a heuristic function.",
+    "answer": "A heuristic is a domain-specific rule, shortcut, or cost estimate h(n) that evaluates the promise of a state, guiding the search process toward the goal with reduced computational overhead."
+  },
+  {
+    "id": "faiml-u1-a-10",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "A",
+    "number": 10,
+    "question": "Classify any two uninformed search strategies.",
+    "answer": "1. Breadth-First Search (BFS): Explores nodes level by level using a First-In, First-Out (FIFO) queue data structure.\n2. Depth-First Search (DFS): Explores one branch completely down to its deepest node before backtracking, using a Last-In, First-Out (LIFO) stack data structure."
+  },
+  {
+    "id": "faiml-u1-a-11",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "A",
+    "number": 11,
+    "question": "Describe a real-world problem that can be solved using Artificial Intelligence.",
+    "answer": "Autonomous self-driving vehicles (e.g., Tesla Autopilot, Waymo) solve perception, localization, routing, and real-time obstacle avoidance by continuously processing sensor streams (cameras, LiDAR, radar) to execute safe driving controls. Other examples include medical diagnostic systems and speech recognition."
+  },
+  {
+    "id": "faiml-u1-a-12",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "A",
+    "number": 12,
+    "question": "State Constraint Satisfaction Problem (CSP).",
+    "answer": "A Constraint Satisfaction Problem (CSP) is a mathematical formulation where a problem is defined by a set of variables, each with a domain of possible values, and a set of constraints that specify allowable combinations of values. The goal is to find an assignment that satisfies all constraints simultaneously."
+  },
+  {
+    "id": "faiml-u1-a-13",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "A",
+    "number": 13,
+    "question": "Identify the problem formulation.",
+    "answer": "Problem formulation is the process of deciding what actions and states to consider, given a goal. It defines five formal components: Initial State, Actions, Transition Model, Goal Test, and Path Cost."
+  },
+  {
+    "id": "faiml-u1-a-14",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "A",
+    "number": 14,
+    "question": "List the components of a rational agent.",
+    "answer": "The components of a rational agent are captured by the PEAS framework:\n1. Performance measure: The external criteria for success.\n2. Environment: The task surroundings in which the agent operates.\n3. Actuators: The mechanism through which the agent performs actions.\n4. Sensors: The devices through which the agent perceives environmental states."
+  },
+  {
+    "id": "faiml-u1-a-15",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "A",
+    "number": 15,
+    "question": "Define the state space in Artificial Intelligence.",
+    "answer": "The state space is the set of all possible physical or abstract states that can be reached from the initial state through any sequence of valid actions, forming a graph where nodes are states and edges are transitions."
+  },
+  {
+    "id": "faiml-u1-b-1",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "B",
+    "number": 1,
+    "question": "Apply the concepts of intelligent agents to classify the agent operating in a self-driving car scenario, using suitable examples to support your classification.",
+    "answer": "1. Structure of an Intelligent Agent:\nAn intelligent agent perceives its environment through sensors and performs actions using actuators to achieve a specified goal.\nArchitecture flow:\nEnvironment → Sensors → Agent (Decision Making Core) → Actuators → Environment\n\n• Sensors: Collect raw contextual information (Cameras, LiDAR, Radar, GPS, Wheel odometry).\n• Agent: Processes sensory inputs, tracks world states, plans trajectories, and makes real-time decisions.\n• Actuators: Execute planned actions (Steering mechanism, Throttle/Accelerator, Braking system, Signal lights).\n\n2. Types of Intelligent Agents:\n• Simple Reflex Agent: Acts solely on current percept without history (Condition-Action rules). Example: Automatic sliding door.\n• Model-Based Reflex Agent: Maintains internal world state to handle partial observability. Example: Robot vacuum cleaner.\n• Goal-Based Agent: Evaluates sequences of actions to achieve an explicit destination or target. Example: Route navigation GPS.\n• Utility-Based Agent: Balances competing tradeoffs to maximize a utility function (comfort, fuel, speed). Example: Algorithmic stock trading system.\n• Learning Agent: Analyzes its past performance, discovers patterns, and improves policies over time. Example: Personalized content recommender.\n\n3. Self-Driving Car Agent Classification:\nA self-driving car represents an advanced Learning Agent integrated with Goal-Based and Utility-Based components:\n• Goal-Based: Safely reach the selected drop-off coordinate without violating traffic laws.\n• Utility-Based: Optimizes a multi-objective utility function (minimize transit time, minimize fuel/battery usage, maximize passenger ride comfort, minimize collision risk).\n• Learning Agent: Learns from petabytes of autonomous driving logs, continuously improving lane detection, edge-case object recognition, and driver intention prediction.\n\n4. Conclusion:\nAutonomous vehicles combine Learning, Goal-Based, and Utility-Based agent architectures to navigate dynamic, non-deterministic urban environments reliably."
+  },
+  {
+    "id": "faiml-u1-b-2",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "B",
+    "number": 2,
+    "question": "Apply the concept of a problem-solving agent to demonstrate its operation in a route-finding GPS system with a suitable example.",
+    "answer": "1. Introduction:\nA problem-solving agent is an intelligent entity that formulates a goal and search problem, finding an optimal sequence of actions to transition from an initial state to a goal state.\n\n2. Steps in Problem Solving:\n• Step 1: Goal Formulation\nDefines the final objective. Example: Reach Chennai from Coimbatore.\n\n• Step 2: Problem Formulation\nSpecifies the mathematical abstractions:\n- Initial State: Coimbatore\n- Goal State: Chennai\n- Actions: Drive along connected highways (NH544, NH48)\n- Path Cost: Total driving distance (km) or estimated travel time (hours)\n\n• Step 3: Search\nThe agent evaluates candidate road sequences using search algorithms:\n- Uninformed: Breadth-First Search (BFS), Depth-First Search (DFS), Uniform Cost Search (UCS)\n- Informed: A* Search with straight-line distance heuristic\n\n• Step 4: Solution\nThe search algorithm returns an optimal sequence of waypoints:\nCoimbatore → Salem → Vellore → Chennai\n\n• Step 5: Execution\nThe agent executes the plan step-by-step, providing turn-by-turn navigation instructions. If dynamic traffic congestion or road closures occur, it re-plans a route.\n\n3. Example Route Diagram:\nCoimbatore\n    │ (NH544, 160 km)\nSalem\n    │ (NH48, 205 km)\nVellore\n    │ (NH48, 140 km)\nChennai (Goal Reached! Total: 505 km)\n\n4. Conclusion:\nProblem-solving agents abstract physical road topologies into state spaces, using graph search techniques to optimize travel routes."
+  },
+  {
+    "id": "faiml-u1-b-3",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "B",
+    "number": 3,
+    "question": "Analyze the formulation of an AI problem by identifying its key components and illustrating them with a suitable example.",
+    "answer": "1. Introduction:\nProblem formulation is the rigorous process of defining a search problem prior to invoking a search algorithm. A well-formulated problem enables the agent to discover optimal solutions with minimal computational cost.\n\n2. Five Key Components of Problem Formulation:\n1. Initial State: The starting condition where the agent begins its search.\n   Example: Current city = Madurai.\n2. Actions: Set of applicable actions available at state s: Actions(s).\n   Example: Travel to connected neighboring cities {Trichy, Dindigul, Virudhunagar}.\n3. Transition Model: Formal description of the outcome of action a taken in state s: Result(s, a).\n   Example: Result(Madurai, GoToTrichy) = Trichy.\n4. Goal Test: Boolean check determining if the state satisfies target criteria.\n   Example: State == Chennai.\n5. Path Cost: Function c(s, a, s') assigning numerical cost to taking action a from state s to state s'. Total path cost is the sum of step costs.\n   Example: Total distance (km) or toll fees from Madurai to Chennai.\n\n3. Route-Finding Problem Example:\nRoute Pathway:\nMadurai ──(135 km)──> Trichy ──(195 km)──> Villupuram ──(160 km)──> Chennai\n\n• Initial State: Madurai\n• Goal State: Chennai\n• Actions: Drive to neighboring connected cities\n• Transition Model: Result(Madurai, DriveToTrichy) = Trichy\n• Goal Test: Is current city == Chennai?\n• Path Cost: Sum of road distances = 135 + 195 + 160 = 490 km.\n\n4. Conclusion:\nExplicit problem formulation allows algorithms (BFS, UCS, A*) to operate systematically over the state space without domain-specific hardcoding."
+  },
+  {
+    "id": "faiml-u1-b-4",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "B",
+    "number": 4,
+    "question": "Analyze the execution of the Breadth-First Search (BFS) algorithm in solving a given problem and illustrate the search process.",
+    "answer": "1. Introduction:\nBreadth-First Search (BFS) is an uninformed search algorithm that explores nodes level-by-level. It expands the shallowest unexpanded node first, utilizing a First-In, First-Out (FIFO) Queue.\n\n2. Example Tree:\n        A (Level 0)\n       / \\\n      B   C (Level 1)\n     / \\ / \\\n    D  E F  G (Level 2)\n\n3. BFS Traversal Order:\nA → B → C → D → E → F → G\n\n4. Step-by-Step FIFO Queue Operations:\nStep 1: Enqueue Root A. Queue = [A]. Visited = [A].\nStep 2: Dequeue A. Expand children B, C. Queue = [B, C]. Visited = [A].\nStep 3: Dequeue B. Expand children D, E. Queue = [C, D, E]. Visited = [A, B].\nStep 4: Dequeue C. Expand children F, G. Queue = [D, E, F, G]. Visited = [A, B, C].\nStep 5: Dequeue D (leaf). Queue = [E, F, G]. Visited = [A, B, C, D].\nStep 6: Dequeue E (leaf). Queue = [F, G]. Visited = [A, B, C, D, E].\nStep 7: Dequeue F (leaf). Queue = [G]. Visited = [A, B, C, D, E, F].\nStep 8: Dequeue G (leaf). Queue = []. Visited = [A, B, C, D, E, F, G].\n\n5. Algorithmic Properties:\n• Completeness: Yes, if the branching factor b is finite.\n• Optimality: Yes, guaranteed to find the shallowest goal state when all edge costs are identical (c = 1).\n• Time Complexity: O(b^d), where b is branching factor and d is depth of shallowest solution.\n• Space Complexity: O(b^d), high memory overhead because every node at depth d must be retained in the frontier queue."
+  },
+  {
+    "id": "faiml-u1-b-5",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "B",
+    "number": 5,
+    "question": "Evaluate the effectiveness of Depth-First Search (DFS) and Breadth-First Search (BFS) for maze navigation, justifying which algorithm is more suitable in different scenarios.",
+    "answer": "1. Introduction:\nBFS and DFS represent fundamental uninformed search strategies for graph traversal and maze solving. BFS explores outward uniformly across levels, whereas DFS plunges down individual paths until a dead end forces backtracking.\n\n2. Comparative Matrix:\n• Data Structure: BFS uses FIFO Queue; DFS uses LIFO Stack (or recursion).\n• Search Pattern: BFS explores level-by-level; DFS explores deep first along branches.\n• Shortest Path: BFS guarantees shortest path (for equal step costs); DFS does not guarantee shortest path.\n• Space Complexity: BFS requires O(b^d) memory (high); DFS requires O(b*m) memory (low, where m is maximum depth).\n• Completeness: BFS is complete for finite b; DFS is incomplete in infinite-depth spaces with cycles.\n\n3. Example Tree Traversal:\n        A\n       / \\\n      B   C\n     / \\   \\\n    D   E   F\n\n• BFS Traversal: A → B → C → D → E → F\n• DFS Traversal: A → B → D → E → C → F\n\n4. Memory Efficiency Justification:\nDFS is substantially more memory efficient than BFS:\nIn a tree with branching factor b = 10 and depth d = 5:\n- BFS must store b^d = 100,000 nodes simultaneously in its queue.\n- DFS stores only the current path plus unexpanded siblings: b * m = 10 * 5 = 50 nodes.\n\n5. Maze Navigation Recommendation:\n• Use BFS when finding the guaranteed shortest escape path is critical, or when the goal is known to be near the starting point.\n• Use DFS when memory is heavily constrained, all paths lead to acceptable solutions, or in deep mazes where exploring whole corridors quickly is required."
+  },
+  {
+    "id": "faiml-u1-b-6",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "B",
+    "number": 6,
+    "question": "Evaluate the effectiveness of A* Search Algorithm with a suitable example.",
+    "answer": "1. Introduction:\nA* (A-Star) search is an informed, best-first search algorithm combining actual accumulated path cost g(n) with an estimated heuristic cost h(n). It selects the node in the priority queue with the lowest overall evaluation score f(n).\n\n2. Evaluation Formula:\nf(n) = g(n) + h(n)\n• g(n): Cost incurred from the start node to current node n.\n• h(n): Admissible heuristic estimate from node n to the goal state.\n• f(n): Estimated total cost of the cheapest solution passing through n.\n\n3. Example Search Graph:\n        S (Start)\n       / \\\n (2)  A   B  (4)\n      |    \\\n (3)  C ──  G (Goal, cost 7 from S via B, or via C)\n\nNode Evaluation Table:\n• Start Node S: g(S) = 0, h(S) = 7, f(S) = 0 + 7 = 7\n• Node A: g(A) = 2, h(A) = 5, f(A) = 2 + 5 = 7\n• Node B: g(B) = 4, h(B) = 2, f(B) = 4 + 2 = 6\n• Goal Node G: g(G) = 7, h(G) = 0, f(G) = 7 + 0 = 7\n\nExecution Step:\nAmong candidate frontiers {A, B}, Node B has the lowest f(n) = 6 compared to Node A with f(n) = 7. Thus, the algorithm prioritizes expanding Node B, reaching Goal G directly with optimal evaluation.\n\n4. Advantages of A* Search:\n• Completeness: Guaranteed to find a solution if one exists.\n• Optimality: Provably optimal when h(n) is admissible (for tree search) or consistent/monotonic (for graph search).\n• Efficiency: Heuristic pruning eliminates large swaths of suboptimal branches."
+  },
+  {
+    "id": "faiml-u1-b-7",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "B",
+    "number": 7,
+    "question": "Apply heuristic functions in an informed search algorithm to solve a given problem, using a suitable example.",
+    "answer": "1. Introduction:\nA heuristic function h(n) injects domain-specific knowledge into informed search algorithms. It computes an estimate of the remaining path cost from node n to the nearest goal state, transforming an uninformed blind search into an efficient, directed traversal.\n\n2. Purpose and Impact:\n• Guides Search: Prioritizes expansion toward nodes closer to the destination.\n• Prunes Search Space: Reduces unnecessary node expansions along unpromising detours.\n• Accelerates Convergence: Reaches goal states significantly faster than blind algorithms.\n\n3. Route-Finding Example (Madurai to Chennai):\nRoute Topology:\nMadurai ──> Trichy ──> Villupuram ──> Chennai\n\n• Initial State: Madurai\n• Goal State: Chennai\n• Heuristic Function h(n): Straight-Line Euclidean Distance (SLD) to Chennai.\nBecause a straight line is the shortest possible physical distance between two geographical points, SLD is guaranteed never to overestimate real road distance, making it strictly admissible.\n• Algorithm Execution: A* uses f(n) = g(n) + h_SLD(n), consistently guiding the search northeast toward Chennai.\n\n4. Uninformed vs Informed Search Comparison:\n• Uninformed: Discovers nodes uniformly in all directions regardless of destination.\n• Informed: Guided directly toward the goal node, expanding only a focused corridor."
+  },
+  {
+    "id": "faiml-u1-b-1",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "B",
+    "number": 1,
+    "question": "Illustrate the application of the PEAS framework for modeling an intelligent agent in a Smart Home Energy Management System.",
+    "answer": "1. Introduction:\nThe PEAS framework (Performance measure, Environment, Actuators, Sensors) is the standard AI methodology used to formally specify the task environment of an intelligent rational agent.\n\n2. PEAS Specification for Smart Home Energy Agent:\n• Performance Measure (P):\n  - Minimize electricity consumption (kWh) and utility costs.\n  - Maintain optimal resident thermal and lighting comfort levels.\n  - Maximize equipment lifespan and peak-load grid shaving.\n• Environment (E):\n  - House floorplan, rooms, corridors.\n  - Electrical appliances (HVAC, water heater, refrigerator, smart plugs).\n  - External weather conditions (ambient temperature, solar irradiance).\n  - Time-of-use variable electricity tariff rates.\n• Actuators (A):\n  - Smart thermostat temperature controller.\n  - Solid-state appliance relays and smart plug on/off switches.\n  - Motorized window blinds and LED dimmer controllers.\n• Sensors (S):\n  - PIR motion/occupancy sensors in every room.\n  - Temperature and humidity sensors.\n  - Ambient lux light sensors.\n  - Smart bidirectional digital energy meters.\n\n3. Agent Operation Workflow:\n1. Sense: Detects that Room 3 has had zero occupancy for 15 minutes, temperature is 24°C, and electricity tariff is at peak rate.\n2. Decide: Compares current state against comfort policy; infers that maintaining AC in unoccupied room wastes energy.\n3. Act: Dispatches signal via actuator to toggle AC to eco-mode and turn off ambient lighting.\n4. Result: 28% reduction in hourly energy consumption without compromising user convenience."
+  },
+  {
+    "id": "faiml-u1-c-1",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "C",
+    "number": 1,
+    "question": "Design an intelligent agent to operate in the Vacuum Cleaner World environment. Clearly outline the agent's percepts, actions, and internal architecture. Justify your choice of agent type and explain how it adapts to partially observable or stochastic environments.",
+    "answer": "1. Problem Specification:\nThe Vacuum Cleaner World is a canonical AI testbed consisting of two discrete rooms [A, B] that may be either Clean or Dirty. The agent's goal is to keep both rooms clean while minimizing total moves and energy expended.\n\n2. Percepts & Actions:\n• Percepts: Tuple [Location, Dirt Status]\n  Example: [Room A, Dirty]\n• Actions: {Move Left, Move Right, Suck (Clean), No-Operation (NoOp)}\n\n3. Internal Agent Architecture:\nThe optimal design is a Model-Based Reflex Agent:\nEnvironment → Sensors → Percept [Loc, Status]\nAgent maintains an Internal State:\n- WorldModel: {Room_A: Clean/Dirty/Unknown, Room_B: Clean/Dirty/Unknown, CurrentLoc: A/B}\n- Update State Rule: When Suck executed in current location, set WorldModel[CurrentLoc] = Clean.\n- Decision Policy:\n  If current room is Dirty → Return Suck\n  Else if other room is Dirty or Unknown → Move to other room\n  Else if both rooms are Clean → Return NoOp\n\n4. Adapting to a Partially Observable Environment:\nIn a partially observable setting, the agent cannot perceive the status of unvisited rooms simultaneously.\n• Memory Mechanism: The agent retains internal state representations of past room observations.\n• Belief State Maintenance: If Room B was observed Clean 3 minutes ago, it maintains a belief probability that it remains clean unless dirt generation rates suggest re-inspection.\n\n5. Adapting to a Stochastic Environment:\nIn stochastic conditions:\n1. Suck action fails 10% of the time (leaves dirt behind).\n2. Dirt randomly reappears in previously cleaned rooms.\n• Closed-Loop Verification: The agent does not blindly assume Suck succeeded; it re-senses the current room status immediately post-action. If status remains Dirty, it re-applies Suck.\n• Periodic Patrol: When both rooms are believed Clean, the agent schedules low-frequency exploratory sweeps to detect newly deposited dirt."
+  },
+  {
+    "id": "faiml-u1-c-2",
+    "unit": 1,
+    "unitTitle": "Unit 1",
+    "part": "C",
+    "number": 2,
+    "question": "Develop a goal of finding the shortest path in a dynamic urban environment (e.g., autonomous car navigation), compare and critically evaluate the effectiveness of BFS, DFS, UCS, and A* search.",
+    "answer": "1. Urban Navigation Problem Formulation:\nAutonomous vehicle pathfinding in an urban street grid requires navigating from an Origin to a Destination through dynamic intersections with varying road segment lengths, variable traffic congestion, speed limits, and sudden roadblocks.\n\n2. Comparative Evaluation Matrix of Candidate Search Algorithms:\n• Breadth-First Search (BFS):\n  - Data Structure: FIFO Queue\n  - Strategy: Level-by-level outward expansion\n  - Time: O(b^d), Space: O(b^d)\n  - Critical Assessment: Optimal ONLY if all road segments have identical cost. In urban grids where avenues are 5 km and alleys are 200 m, BFS chooses routes with fewer intersections even if total distance is vastly higher. Unviable for urban road networks.\n\n• Depth-First Search (DFS):\n  - Data Structure: LIFO Stack\n  - Strategy: Plunges along one corridor until reaching a dead end\n  - Time: O(b^m), Space: O(b*m)\n  - Critical Assessment: Non-optimal. Will guide a vehicle into a 50 km circuitous rural detour if explored first, completely missing a direct 3 km arterial avenue. Severe risk of getting trapped in cyclical road networks.\n\n• Uniform Cost Search (UCS / Dijkstra):\n  - Data Structure: Min-Priority Queue ordered by path cost g(n)\n  - Strategy: Expands frontier node with lowest cumulative travel cost g(n)\n  - Time & Space: O(b^(1 + C*/epsilon))\n  - Critical Assessment: Provably optimal for arbitrary positive edge costs. However, it expands search frontiers radially in all directions (including away from the destination), causing excessive memory consumption and high computational latency in large urban street graphs.\n\n• A* Search Algorithm:\n  - Data Structure: Min-Priority Queue ordered by f(n) = g(n) + h(n)\n  - Strategy: Directs search toward the destination using Euclidean straight-line distance heuristic h_SLD(n).\n  - Critical Assessment: Provably optimal when h(n) is admissible (h(n) <= true distance). Focuses search within an elliptical cone directly toward the destination. Reduces examined intersections by over 80% compared to UCS while guaranteeing the globally optimal route.\n\n3. Adaptation to Dynamic Urban Environments:\nIn dynamic navigation, edge weights change in real time due to traffic accidents or signal timings. A* adapts via:\n• Dynamic Re-planning (e.g., D* Lite): Reuses previously computed search trees, updating only edges affected by congestion rather than recalculating the entire graph from scratch.\n\n4. Final Conclusion:\nA* Search is the unequivocally superior algorithm for autonomous urban navigation, offering the ideal balance of mathematical optimality and computational efficiency."
+  },
+  {
+    "id": "faiml-u2-a-1",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "A",
+    "number": 1,
+    "question": "Define game playing.",
+    "answer": "Game playing in AI is the process of making intelligent, strategic decisions in adversarial environments to achieve victory by selecting the best possible move against an opponent using search algorithms."
+  },
+  {
+    "id": "faiml-u2-a-2",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "A",
+    "number": 2,
+    "question": "State Mini-Max Strategy.",
+    "answer": "The Mini-Max strategy is a recursive decision-making algorithm used in two-player zero-sum games. It chooses the move that maximizes the utility for the active player (MAX) under the assumption that the adversary (MIN) will play optimally to minimize that utility."
+  },
+  {
+    "id": "faiml-u2-a-3",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "A",
+    "number": 3,
+    "question": "Identify the concept of knowledge representation.",
+    "answer": "Knowledge representation is the formal study of translating real-world information into structured computational formats so that AI systems can reason and solve complex tasks. Methods include:\n• Propositional and First-Order Logic\n• Semantic Networks\n• Frames\n• Production Rules\n• Ontologies"
+  },
+  {
+    "id": "faiml-u2-a-4",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "A",
+    "number": 4,
+    "question": "Summarize Propositional Logic.",
+    "answer": "Propositional Logic is a formal declarative system that represents knowledge through propositions—atomic sentences that evaluate strictly to True or False. Sentences are combined using logical connectives: AND (∧), OR (∨), NOT (¬), IMPLIES (→), and BICONDITIONAL (↔).\nExample: P = \"It is raining\", Q = \"The road is wet\", Rule = P → Q."
+  },
+  {
+    "id": "faiml-u2-a-5",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "A",
+    "number": 5,
+    "question": "Explain in detail about Resolution.",
+    "answer": "Resolution is an inference rule and refutation-complete proof technique in AI used to prove statements by contradiction.\nSteps:\n1. Convert all knowledge base axioms and premises into Conjunctive Normal Form (CNF).\n2. Negate the target query/goal and add it to the clause set.\n3. Repeatedly resolve pairs of clauses containing complementary literals (P and ¬P).\n4. If the empty clause (□ / contradiction) is derived, the original theorem is proved."
+  },
+  {
+    "id": "faiml-u2-a-6",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "A",
+    "number": 6,
+    "question": "Enumerate the limitations of Propositional Logic.",
+    "answer": "Limitations of Propositional Logic:\n1. Inability to represent individual objects, properties, and relationships.\n2. Inability to express quantified statements (e.g., \"All humans are mortal\" requires writing a separate rule for every single individual).\n3. Combinatorial explosion in knowledge base size for complex worlds.\n4. Low expressive power for relational and spatial domains."
+  },
+  {
+    "id": "faiml-u2-a-7",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "A",
+    "number": 7,
+    "question": "Define pruning.",
+    "answer": "Pruning is the process of eliminating unpromising or provably irrelevant branches in a search tree to prevent exhaustive evaluation and drastically reduce computational time. Alpha-Beta pruning is the standard optimization applied to Mini-Max game trees."
+  },
+  {
+    "id": "faiml-u2-a-8",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "A",
+    "number": 8,
+    "question": "Explain the PEAS description of the Wumpus World problem.",
+    "answer": "PEAS Specification for Wumpus World:\n• Performance Measure: +1000 for picking up Gold, -1000 for falling into a Pit or being eaten by the Wumpus, -1 per move, -10 for shooting the arrow.\n• Environment: 4×4 grid of rooms containing pits, the Wumpus, and gold, bounded by walls.\n• Actuators: Move Forward, Turn Left, Turn Right, Grab (Gold), Shoot (Arrow), Climb (Exit cave).\n• Sensors: [Stench, Breeze, Glitter, Bump, Scream]."
+  },
+  {
+    "id": "faiml-u2-a-9",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "A",
+    "number": 9,
+    "question": "List out the basic elements of First-Order Logic.",
+    "answer": "The basic syntactic elements of First-Order Logic (FOL) are:\n1. Constants: Objects in the universe (e.g., Socrates, Chennai, John).\n2. Variables: Placeholders for objects (e.g., x, y, z).\n3. Predicates: Relations or properties holding over objects (e.g., Human(x), Adjacent(x, y)).\n4. Functions: Mappings returning objects (e.g., FatherOf(x), MotherOf(y)).\n5. Quantifiers: Universal (∀) and Existential (∃).\n6. Logical Connectives: ∧, ∨, ¬, →, ↔."
+  },
+  {
+    "id": "faiml-u2-a-10",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "A",
+    "number": 10,
+    "question": "Name the two types of quantifiers and explain with an example.",
+    "answer": "1. Universal Quantifier (∀): Denotes \"for all\" or \"for every\" object in the domain.\n   Example: ∀x (Human(x) → Mortal(x)) — \"All humans are mortal.\"\n2. Existential Quantifier (∃): Denotes \"there exists\" at least one object in the domain.\n   Example: ∃x (Student(x) ∧ ScoredCentum(x)) — \"There exists a student who scored 100%.\""
+  },
+  {
+    "id": "faiml-u2-a-11",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "A",
+    "number": 11,
+    "question": "Distinguish Forward and Backward Chaining.",
+    "answer": "Forward Chaining is data-driven, starting with known ground facts in the knowledge base and chaining through inference rules to discover new conclusions or goals.\nBackward Chaining is goal-driven, starting from the desired hypothesis/goal and querying backward through rule premises to verify if supporting ground facts exist."
+  },
+  {
+    "id": "faiml-u2-a-12",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "A",
+    "number": 12,
+    "question": "Discuss the Resolution Inference Rule with its equation.",
+    "answer": "The Resolution Inference Rule takes two clauses containing complementary literals (one positive, one negated) and combines them into a resolvent clause containing all remaining literals.\nEquation: (P ∨ Q) ∧ (¬P ∨ R) ⊢ (Q ∨ R)\nExample: Premise 1: \"It is sunny OR we stay indoors\" (P ∨ Q); Premise 2: \"It is NOT sunny OR we go swimming\" (¬P ∨ R); Resolvent: \"We stay indoors OR we go swimming\" (Q ∨ R)."
+  },
+  {
+    "id": "faiml-u2-a-13",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "A",
+    "number": 13,
+    "question": "Explain the concept of Neuro-Fuzzy Inference and describe how it combines Neural Networks and Fuzzy Logic.",
+    "answer": "Neuro-Fuzzy Inference (such as ANFIS) integrates the learning and pattern-recognition capabilities of Artificial Neural Networks with the interpretable, rule-based uncertainty-handling of Fuzzy Logic.\n• Neural Networks: Learn connection weights and adapt parameters automatically from training data.\n• Fuzzy Logic: Represents qualitative, imprecise human linguistic rules (e.g., IF Temperature is HIGH THEN Fan Speed is FAST).\nSynergy: The neural network tunes membership functions and rule weights automatically, while the fuzzy layer preserves human interpretability."
+  },
+  {
+    "id": "faiml-u2-a-14",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "A",
+    "number": 14,
+    "question": "Interpret Neural Network in AI. How does it mimic the human brain?",
+    "answer": "A Neural Network is a computational framework inspired by biological neurological networks. It consists of layers of interconnected processing units (artificial neurons) organized into Input, Hidden, and Output layers.\nIt mimics the brain through:\n1. Synaptic Weights: Numerical weights represent synaptic strengths.\n2. Activation Functions: Non-linear thresholds (Sigmoid, ReLU) mimic biological action potential firing.\n3. Learning via Experience: Uses backpropagation and gradient descent to update weights based on prediction errors.\n4. Distributed Representation: Stores knowledge across distributed network connections rather than isolated memory addresses."
+  },
+  {
+    "id": "faiml-u2-a-15",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "A",
+    "number": 15,
+    "question": "Discuss the semantics of a Bayesian Network.",
+    "answer": "A Bayesian Network is a probabilistic graphical model represented by a Directed Acyclic Graph (DAG) that models random variables and their conditional dependencies.\nSemantics:\n1. Nodes: Represent discrete or continuous random variables X_i.\n2. Directed Edges: Represent direct conditional dependencies or causal relationships.\n3. Conditional Probability Tables (CPT): Quantifies the conditional probability P(X_i | Parents(X_i)) for each node.\n4. Joint Probability Distribution: Factored as the product of all local conditional probabilities:\nP(X_1, X_2, ..., X_n) = ∏ P(X_i | Parents(X_i))."
+  },
+  {
+    "id": "faiml-u2-b-1",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "B",
+    "number": 1,
+    "question": "Compute the optimal move using the Mini-Max algorithm for the game scenario.",
+    "answer": "1. Definition:\nThe Mini-Max algorithm is an adversarial search algorithm for two-player deterministic zero-sum games. It assumes MAX plays to maximize the utility and MIN plays to minimize it. Backtracking propagates payoffs upward from leaf nodes to root.\n\n2. Given Game Tree Leaf Node Utility Payoffs:\n• Leaves under M: S = 1, T = 2\n• Leaf under E: L = 9\n• Leaf under B: F = 7\n• Leaves under C: G = 5, H = 3\n• Leaves under N: U = 1, V = 2, W = 9\n• Leaf under I: O = 2\n• Leaf under D: J = 6\n• Leaves under K: P = 8, Q = 3, R = 9\n\n3. Step-by-Step Level Evaluation:\nStep 1: Evaluate Sub-MAX Nodes (Level 4):\n• Node M = MAX(S, T) = MAX(1, 2) = 2\n• Node N = MAX(U, V, W) = MAX(1, 2, 9) = 9\n• Node K = MAX(P, Q, R) = MAX(8, 3, 9) = 9\n\nStep 2: Evaluate MIN Nodes (Level 3):\n• Node E = MIN(L, M) = MIN(9, 2) = 2\n• Node I = MIN(N, O) = MIN(9, 2) = 2\n\nStep 3: Evaluate MAX Nodes (Level 2):\n• Node B = MAX(E, F) = MAX(2, 7) = 7\n• Node C = MAX(G, H) = MAX(5, 3) = 5\n• Node D = MAX(I, J, K) = MAX(2, 6, 9) = 9\n\nStep 4: Evaluate Root Node A (MIN):\n• Root Node A is a MIN node:\n  A = MIN(B, C, D) = MIN(7, 5, 9) = 5\n\n4. Optimal Move and Conclusion:\n• The optimal utility value at the root is 5.\n• Optimal decision path: A → C → G.\n• The Mini-Max strategy guarantees this outcome against an opponent who plays optimally."
+  },
+  {
+    "id": "faiml-u2-b-2",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "B",
+    "number": 2,
+    "question": "Apply the Alpha-Beta (α-β) Pruning Algorithm to obtain the solution.",
+    "answer": "1. Definition:\nAlpha-Beta Pruning is an optimization technique that computes the exact same minimax decision as standard Mini-Max while skipping branches that cannot influence the final decision.\n• α (Alpha): Best (highest) value achieved so far for MAX along the path.\n• β (Beta): Best (lowest) value achieved so far for MIN along the path.\n• Pruning Condition: Prune whenever α ≥ β.\n\n2. Given Tree Structure:\nRoot Node A (MAX)\n├── Node B (MIN)\n│   ├── Node D (MAX): Leaves (2, 3)\n│   └── Node E (MAX): Leaves (5, 9)\n└── Node C (MIN)\n    ├── Node F (MAX): Leaves (0, 1)\n    └── Node G (MAX): Leaves (7, 5)\n\n3. Step-by-Step Execution:\nStep 1: Evaluate Node D under B\n- Node D = MAX(2, 3) = 3.\n- Backtracks to Node B (MIN): β at B becomes 3.\n\nStep 2: Evaluate Node E under B\n- First leaf of E evaluates to 5.\n- Since E is MAX, value of E is at least 5 (α = 5).\n- At parent B, β = 3.\n- Pruning Check: α (5) ≥ β (3) → Condition satisfied!\n- The remaining child leaf (9) of Node E is PRUNED.\n- Node B returns MIN(3, 5) = 3.\n\nStep 3: Update Root Node A (MAX)\n- Root A receives 3 from B.\n- Therefore, α at root becomes 3.\n\nStep 4: Evaluate Node C (MIN) under Root A\n- Path α = 3 passed to C.\n- Subtree Node F evaluates: MAX(0, 1) = 1.\n- At Node C (MIN), β becomes 1.\n- Pruning Check: β (1) ≤ α (3) → Condition satisfied!\n- The entire subtree Node G (7, 5) is completely PRUNED without inspecting any of its leaves.\n- Node C returns 1.\n\nStep 5: Final Root Decision at A (MAX)\n- Root A = MAX(B, C) = MAX(3, 1) = 3.\n\n4. Pruned Nodes Summary:\n• Leaf 9 under Node E\n• Entire subtree G (leaves 7 and 5)\n• Total nodes evaluated: 6 leaves inspected out of 8 (25% pruning savings).\n• Optimal move: A → B → D with final utility 3."
+  },
+  {
+    "id": "faiml-u2-b-3",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "B",
+    "number": 3,
+    "question": "Analyze the types of inference rules using appropriate examples and truth tables.",
+    "answer": "1. Definition:\nInference rules are formal syntactic patterns used to derive valid new conclusions from existing premises in knowledge-based systems.\n\n2. Modus Ponens (Affirming the Antecedent):\nRule: If P → Q and P are True, then Q is True.\n• Example:\n  P: \"It is raining\"\n  P → Q: \"If it is raining, the road is wet\"\n  Conclusion Q: \"The road is wet\"\n• Truth Table Verification:\n  P = T, Q = T: P → Q is T, P is T → Both premises true only in row 1, where Q is T. Valid.\n\n3. Modus Tollens (Denying the Consequent):\nRule: If P → Q and ¬Q are True, then ¬P is True.\n• Example:\n  P → Q: \"If it is raining, the road is wet\"\n  ¬Q: \"The road is not wet\"\n  Conclusion ¬P: \"It did not rain\"\n\n4. And Introduction (Conjunction):\nRule: If P is True and Q is True, then (P ∧ Q) is True.\n• Example:\n  P: \"Ram studies\"\n  Q: \"Ram attends class\"\n  Conclusion: \"Ram studies AND attends class\" (P ∧ Q)\n\n5. Resolution Rule:\nRule: From (A ∨ B) and (¬A ∨ C), derive (B ∨ C).\n• Example:\n  (P ∨ Q) ∧ (¬P ∨ R) ⊢ (Q ∨ R)\nEliminates complementary literals A and ¬A. Essential for automated theorem proving."
+  },
+  {
+    "id": "faiml-u2-b-4",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "B",
+    "number": 4,
+    "question": "Examine the Wumpus World problem and prove it using Knowledge Representation.",
+    "answer": "1. Definition:\nThe Wumpus World is a 4×4 grid testbed modeling an agent navigating an uncertain cave environment requiring formal knowledge representation and logical deduction.\n\n2. Components of Wumpus World:\n• Wumpus: Beast that eats the agent if in the same room. Can be killed with an arrow.\n• Pits: Bottomless pits causing fatal falls.\n• Gold: Treasure to be retrieved.\n• Agent: Starts at [1, 1], facing right.\n\n3. Sensors:\n• Stench: In rooms directly adjacent to the Wumpus (Von Neumann neighborhood).\n• Breeze: In rooms directly adjacent to a Pit.\n• Glitter: In the exact square containing the Gold.\n• Bump: When walking into a boundary wall.\n• Scream: Heard globally across the cave when the Wumpus dies.\n\n4. Logical Rules (Knowledge Base):\n• Rule 1: Breeze(x, y) ↔ ∃(dx, dy) Adjacent(x, y, dx, dy) ∧ Pit(dx, dy)\n• Rule 2: Stench(x, y) ↔ ∃(dx, dy) Adjacent(x, y, dx, dy) ∧ Wumpus(dx, dy)\n\n5. Logical Deduction Proof:\n• At [1, 1]: Agent percepts = [None, None, None, None, None].\n  - Knowledge Base Deduction:\n    ¬Breeze(1, 1) ⊢ ¬Pit(1, 2) ∧ ¬Pit(2, 1).\n    ¬Stench(1, 1) ⊢ ¬Wumpus(1, 2) ∧ ¬Wumpus(2, 1).\n    Conclusion: Both [1, 2] and [2, 1] are provably SAFE!\n• Agent moves to [2, 1]:\n  - Percept = [None, Breeze, None, None, None].\n  - Breeze(2, 1) implies a Pit is in [2, 2] or [3, 1].\n• Agent backtracks safely to [1, 1] and explores [1, 2]:\n  - Percept = [Stench, None, None, None, None].\n  - Stench(1, 2) implies Wumpus in [1, 3] or [2, 2].\n  - But ¬Stench(2, 1) proved ¬Wumpus in [2, 2].\n  - Therefore, by Resolution: Wumpus must be strictly at [1, 3]!\n  - Furthermore, ¬Breeze(1, 2) proves ¬Pit in [2, 2].\n  - From Breeze(2, 1), Pit was in [2, 2] or [3, 1]. Since ¬Pit(2, 2), Pit is definitively at [3, 1]!\n• Result: Room [2, 2] is completely SAFE to enter without risk!"
+  },
+  {
+    "id": "faiml-u2-b-5",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "B",
+    "number": 5,
+    "question": "Interpret FOL inference rules for quantifiers with an example.",
+    "answer": "1. Definition:\nFirst-Order Logic quantifier inference rules allow manipulation of quantified sentences to derive ground conclusions about individuals or generalize assertions across entire domains.\n\n2. Four Fundamental Quantifier Rules:\n1. Universal Instantiation (UI):\n   Rule: From ∀x P(x), infer P(c) for any ground constant term c.\n   Example:\n   Premise: ∀x (Human(x) → Mortal(x)) (\"All humans are mortal\")\n   Instantiation: Human(Socrates) → Mortal(Socrates)\n\n2. Existential Instantiation (EI):\n   Rule: From ∃x P(x), infer P(k) for a brand-new Skolem constant k that does not appear anywhere else in the knowledge base.\n   Example:\n   Premise: ∃x (Student(x) ∧ TopRank(x))\n   Instantiation: Student(Ravi_01) ∧ TopRank(Ravi_01)\n\n3. Universal Generalization (UG):\n   Rule: If P(a) is proven for an arbitrary, unconstrained object a, then infer ∀x P(x).\n   Condition: a must not appear in any unsatisfied premises.\n\n4. Existential Generalization (EG):\n   Rule: If P(c) is True for a specific constant c, then infer ∃x P(x).\n   Example:\n   Premise: Human(Ram)\n   Conclusion: ∃x Human(x) (\"There exists an x such that x is Human\")."
+  },
+  {
+    "id": "faiml-u2-b-6",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "B",
+    "number": 6,
+    "question": "Evaluate Forward Chaining along with its proof.",
+    "answer": "1. Definition:\nForward Chaining is an inference algorithm that operates forward from known facts. It triggers rules whose antecedents match active facts, asserts their consequents as newly discovered facts, and repeats until the target goal is derived.\n\n2. Forward Chaining Algorithm:\n1. Initialize Working Memory with known base facts.\n2. For each rule in the rule base:\n   - Check if all premises (antecedents) are present in Working Memory.\n   - If satisfied and conclusion is not already known, fire rule and add conclusion to Working Memory.\n3. Repeat step 2 until either:\n   - The goal is asserted in Working Memory (Success).\n   - No new facts can be generated (Fail).\n\n3. Step-by-Step Proof:\n• Given Knowledge Base:\n  Fact: P\n  Rule 1: P → Q\n  Rule 2: Q → R\n• Target Goal: R\n\nProof Execution Trace:\n- Step 1: Base state Working Memory = {P}.\n- Step 2: Evaluate Rule 1 (P → Q). Premise P is in Working Memory.\n  - Action: Fire Rule 1.\n  - New Fact Generated: Q.\n  - Working Memory = {P, Q}.\n- Step 3: Evaluate Rule 2 (Q → R). Premise Q is in Working Memory.\n  - Action: Fire Rule 2.\n  - New Fact Generated: R.\n  - Working Memory = {P, Q, R}.\n- Step 4: Check goal condition: R ∈ Working Memory → PROVED!\n\n4. Strengths & Limitations:\n• Advantages: Complete for Horn clauses, simple data-driven pipeline, derives all possible implications.\n• Limitations: May compute many irrelevant facts unrelated to the target query."
+  },
+  {
+    "id": "faiml-u2-b-7",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "B",
+    "number": 7,
+    "question": "Outline the inference process of Backward Chaining and demonstrate its proof using an appropriate example.",
+    "answer": "1. Definition:\nBackward Chaining is a top-down, goal-directed inference technique. It begins with the hypothesis or query to be proven and searches backward through rules whose consequents match the goal, establishing sub-goals until ground facts confirm the chain.\n\n2. Backward Chaining Algorithm:\n1. Push target Goal onto Subgoal Stack.\n2. If Goal is already a known ground fact, pop and return Success.\n3. Find all rules with Conclusion == Goal.\n4. For each matched rule, recursively prove all premises as subgoals.\n5. If all premises of a rule succeed, Goal is verified. Otherwise, backtrack to alternate rules.\n\n3. Step-by-Step Proof:\n• Given:\n  Goal to prove: R\n  Rule 1: Q → R\n  Rule 2: P → Q\n  Fact: P\n\nInference Trace:\n- Level 1: Need to prove R.\n  - Search rules producing R: Rule 1 (Q → R).\n  - New Subgoal generated: Need Q.\n- Level 2: Need to prove Q.\n  - Search rules producing Q: Rule 2 (P → Q).\n  - New Subgoal generated: Need P.\n- Level 3: Need to prove P.\n  - Check facts: P exists as a base ground fact!\n  - Subgoal P succeeds.\n- Level 2 resolution: Since P is True, Rule 2 validates that Q is True.\n- Level 1 resolution: Since Q is True, Rule 1 validates that R is True.\nConclusion: Goal R is successfully proved.\n\n4. Evaluation:\n• Highly efficient for targeted queries because it evaluates only rules relevant to the goal.\n• Foundation of Prolog and diagnostic expert systems."
+  },
+  {
+    "id": "faiml-u2-b-8",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "B",
+    "number": 8,
+    "question": "Examine the applicability of the Resolution inference method in the given First-Order Logic problem and justify each resolution step used to derive the conclusion.",
+    "answer": "1. Problem Definition:\nGiven:\nPremise 1: ∀x (Human(x) → Mortal(x)) (\"All humans are mortal\")\nPremise 2: Human(Socrates) (\"Socrates is human\")\nGoal to Prove: Mortal(Socrates)\n\n2. Step 1: Conversion to Conjunctive Normal Form (CNF):\n• Eliminate Implication: Human(x) → Mortal(x) becomes ¬Human(x) ∨ Mortal(x).\n• Standardize variables and drop quantifier: Clause 1 = ¬Human(x) ∨ Mortal(x).\n• Clause 2 (Fact) = Human(Socrates).\n\n3. Step 2: Refutation Proof by Contradiction:\n• Negate the target goal:\n  ¬Goal = ¬Mortal(Socrates).\n• Set of clauses to resolve:\n  C1: ¬Human(x) ∨ Mortal(x)\n  C2: Human(Socrates)\n  C3: ¬Mortal(Socrates) (Negated Goal)\n\n4. Step 3: Resolution & Unification:\n• Resolve Clause 1 with Clause 3:\n  - C1: ¬Human(x) ∨ Mortal(x)\n  - C3: ¬Mortal(Socrates)\n  - Unifier substitution: θ = {x / Socrates}.\n  - Instantiated C1: ¬Human(Socrates) ∨ Mortal(Socrates).\n  - Complementary literals Mortal(Socrates) and ¬Mortal(Socrates) resolve:\n  - Resolvent C4: ¬Human(Socrates).\n\n• Resolve Resolvent C4 with Clause 2:\n  - C4: ¬Human(Socrates)\n  - C2: Human(Socrates)\n  - Complementary literals ¬Human(Socrates) and Human(Socrates) resolve:\n  - Resolvent: Empty Clause (□).\n\n5. Conclusion:\nDeriving the empty clause (□ / contradiction) proves that ¬Mortal(Socrates) is unsatisfiable. Therefore, the original theorem Mortal(Socrates) is logically entailed."
+  },
+  {
+    "id": "faiml-u2-c-1",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "C",
+    "number": 1,
+    "question": "Interpret in detail about Applications of Bayesian Network in AI.",
+    "answer": "1. Definition and Mathematical Foundation:\nA Bayesian Network is a probabilistic graphical model representing a set of random variables and their conditional dependencies via a Directed Acyclic Graph (DAG).\nJoint probability formula:\nP(X_1, X_2, ..., X_n) = ∏_{i=1}^n P(X_i | Parents(X_i))\n\n2. Core Applications of Bayesian Networks in AI:\n1. Medical Diagnostics:\n   - Models symptoms (Fever, Cough, Dyspnea), risk factors (Smoking), and underlying pathologies (COVID-19, Pneumonia, Bronchitis).\n   - Informs differential diagnosis by computing posterior probabilities P(Disease | Symptoms).\n2. Autonomous Vehicles:\n   - Models sensor uncertainty, weather visibility, and road obstacle trajectory estimation.\n3. Spam Email Filtering (Naive Bayes Classifiers):\n   - Calculates probability of an email being spam based on token co-occurrence probabilities.\n4. Industrial Fault Diagnostics:\n   - Correlates telemetry readings (vibration, temperature, oil pressure) to predict turbine or pump failures.\n5. Robotics & SLAM (Simultaneous Localization and Mapping):\n   - Computes belief states over robot poses given noisy LIDAR and wheel odometer readings.\n6. Financial Credit Risk & Fraud Detection:\n   - Evaluates probability of loan default given debt-to-income ratio, credit bureau history, and spending velocity.\n\n3. Diagnostic Reasoning Example:\nNetwork Topology:\nSmoking (S) ──> Lung Cancer (L) ──> Dyspnea (D)\n            ──> Bronchitis (B)   ──> Dyspnea (D)\n            ──> Cough (C)\n\nGiven evidence Dyspnea = True, Bayesian inference propagates evidence backward (abductive reasoning) to compute P(Smoking | Dyspnea=True), updating beliefs systematically."
+  },
+  {
+    "id": "faiml-u2-c-2",
+    "unit": 2,
+    "unitTitle": "Unit 2",
+    "part": "C",
+    "number": 2,
+    "question": "Assess Forward and Backward Chaining with appropriate example.",
+    "answer": "1. Introduction:\nInference engines deduce new facts and verify goals using rule bases. The two foundational deduction paradigms are Forward Chaining (data-driven) and Backward Chaining (goal-driven).\n\n2. Architectural Comparison:\n• Forward Chaining:\n  - Direction: Data-driven (antecedent to consequent).\n  - Mechanism: Matches available facts against rule IF clauses, firing active rules to populate working memory.\n  - Suitable for: Synthesis, planning, real-time monitoring, state forecasting.\n• Backward Chaining:\n  - Direction: Goal-driven (consequent to antecedent).\n  - Mechanism: Formulates subgoals matching rule THEN clauses, exploring depth-first backward until base facts are proven.\n  - Suitable for: Diagnostics, verification, theorem proving.\n\n3. Worked Scenario Example:\nGiven Rules:\nR1: P → Q\nR2: Q → R\nR3: R → S\nFact: P\nTarget Goal: S\n\n• Forward Chaining Execution:\n  1. Working Memory = {P}.\n  2. Fire R1: P matches → assert Q. Memory = {P, Q}.\n  3. Fire R2: Q matches → assert R. Memory = {P, Q, R}.\n  4. Fire R3: R matches → assert S. Memory = {P, Q, R, S}.\n  5. S achieved!\n\n• Backward Chaining Execution:\n  1. Stack: [Need S].\n  2. R3 has consequent S → New subgoal: [Need R].\n  3. R2 has consequent R → New subgoal: [Need Q].\n  4. R1 has consequent Q → New subgoal: [Need P].\n  5. Fact P exists in KB → Subgoal P succeeds!\n  6. Backtrack unwind: P true → Q true → R true → S true. Goal S proved!\n\n4. Critical Assessment:\nUse Forward Chaining when data is plentiful and many unpredictable conclusions may emerge. Use Backward Chaining when a specific hypothesis must be tested against targeted questions."
+  },
+  {
+    "id": "faiml-u3-a-1",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "A",
+    "number": 1,
+    "question": "Define Machine Learning. How does it differ from traditional programming?",
+    "answer": "Machine Learning (ML) is a branch of Artificial Intelligence that enables computer systems to learn patterns autonomously from empirical data and improve performance through experience without explicit rule programming.\nDifference:\n• Traditional Programming: Takes Data + Rules (code written by humans) → Produces Answers.\n• Machine Learning: Takes Data + Answers (labels/outcomes) → Automatically Learns the Rules/Model."
+  },
+  {
+    "id": "faiml-u3-a-2",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "A",
+    "number": 2,
+    "question": "Describe any two types of machine learning with one suitable example for each.",
+    "answer": "1. Supervised Learning: The algorithm is trained using labeled datasets where both input features (X) and ground-truth targets (y) are provided.\n   Example: Email Spam Detection (features: email text/headers; label: Spam or Not Spam).\n2. Unsupervised Learning: The algorithm discovers latent structures, groupings, or patterns in unlabeled datasets with no predefined outputs.\n   Example: Customer Segmentation in e-commerce based on purchasing frequency and total expenditure."
+  },
+  {
+    "id": "faiml-u3-a-3",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "A",
+    "number": 3,
+    "question": "Explain the role of a training dataset in supervised learning.",
+    "answer": "A training dataset contains pairs of input features and corresponding ground-truth target labels. During training, the machine learning algorithm iteratively adjusts its internal parameters (weights and biases) to minimize empirical loss between predictions and true labels, learning the underlying mapping function f(X) ≈ y."
+  },
+  {
+    "id": "faiml-u3-a-4",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "A",
+    "number": 4,
+    "question": "List any two real-life applications of Machine Learning.",
+    "answer": "1. Email Spam Filtering: Automatically classifies incoming emails as legitimate or junk based on token probabilities.\n2. Facial Recognition: Identifies or verifies human faces in digital images and video surveillance streams for biometric authentication."
+  },
+  {
+    "id": "faiml-u3-a-5",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "A",
+    "number": 5,
+    "question": "Define supervised learning with an example.",
+    "answer": "Supervised Learning is a paradigm of machine learning where models are trained on datasets containing labeled input-output pairs (X, y). The model learns an inductive function that can accurately predict outputs for new, unseen input instances.\nExample: Predicting house prices given square footage, number of bedrooms, age, and location."
+  },
+  {
+    "id": "faiml-u3-a-6",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "A",
+    "number": 6,
+    "question": "List any two algorithms used in supervised learning.",
+    "answer": "1. Decision Tree: Hierarchical rule-based tree model that partitions feature space based on Information Gain or Gini Impurity.\n2. K-Nearest Neighbors (KNN): Non-parametric instance-based algorithm that classifies queries based on the majority label among k nearest neighbors in feature space."
+  },
+  {
+    "id": "faiml-u3-a-7",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "A",
+    "number": 7,
+    "question": "Differentiate between supervised and unsupervised learning.",
+    "answer": "Supervised learning trains on labeled data (inputs mapped to ground-truth targets) to predict future outputs. Unsupervised learning processes unlabeled data to identify natural clusters, latent dimensions, or underlying statistical distributions without human feedback."
+  },
+  {
+    "id": "faiml-u3-a-8",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "A",
+    "number": 8,
+    "question": "Explain the role of labeled data in supervised learning.",
+    "answer": "Labeled data acts as the supervisory ground truth. It establishes the mathematical benchmark against which the loss function computes model error, directing the optimization algorithm (e.g., gradient descent) to adjust model parameters until predictions match the true labels closely."
+  },
+  {
+    "id": "faiml-u3-a-9",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "A",
+    "number": 9,
+    "question": "Discuss any two real-life applications of supervised learning.",
+    "answer": "1. Medical Disease Diagnosis: Classifying patient electronic health records and diagnostic scans as Benign or Malignant to assist oncologists.\n2. Credit Card Fraud Detection: Classifying financial transactions as Legitimate or Fraudulent in real-time based on spending velocity, geographical anomalies, and transaction amount."
+  },
+  {
+    "id": "faiml-u3-a-10",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "A",
+    "number": 10,
+    "question": "State the purpose of training data in supervised learning.",
+    "answer": "The primary purpose of training data is to allow the algorithm to learn mathematical representations of patterns and relationships between input variables and outputs, enabling the resulting model to generalize accurately to unseen future data."
+  },
+  {
+    "id": "faiml-u3-a-11",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "A",
+    "number": 11,
+    "question": "Define classification in the context of supervised learning.",
+    "answer": "Classification is a supervised machine learning task where the target output variable is qualitative and categorical (discrete class labels). The model maps input features to one of several mutually exclusive or multi-label classes.\nExample: Classifying email as {Spam, Not Spam}."
+  },
+  {
+    "id": "faiml-u3-a-12",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "A",
+    "number": 12,
+    "question": "Summarize the purpose of regression in machine learning with an appropriate example.",
+    "answer": "Regression is a supervised learning technique used to model relationships between continuous independent features and a continuous numerical target variable. Its purpose is to predict real-valued quantities.\nExample: Predicting the continuous market value ($) of residential real estate based on square footage, location coordinates, and construction year."
+  },
+  {
+    "id": "faiml-u3-a-13",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "A",
+    "number": 13,
+    "question": "List two key differences between classification and regression.",
+    "answer": "1. Target Variable Type: Classification predicts discrete categorical class labels (e.g., Cat vs Dog, Yes vs No), whereas Regression predicts continuous quantitative numerical values (e.g., Temperature, Price).\n2. Evaluation Metrics: Classification models are evaluated using Accuracy, Precision, Recall, and F1-Score; Regression models are evaluated using Mean Absolute Error (MAE), Mean Squared Error (MSE), and R² Score."
+  },
+  {
+    "id": "faiml-u3-a-14",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "A",
+    "number": 14,
+    "question": "Differentiate between underfitting and overfitting with respect to model performance.",
+    "answer": "• Underfitting: Occurs when a model is excessively simple (high bias) and fails to capture the underlying data patterns, resulting in poor performance on both training and testing datasets.\n• Overfitting: Occurs when a model is excessively complex (high variance) and memorizes noise and idiosyncrasies in the training set, achieving near-perfect training accuracy but degrading sharply on unseen test data."
+  },
+  {
+    "id": "faiml-u3-a-15",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "A",
+    "number": 15,
+    "question": "Describe generalization in machine learning and explain its significance in model performance.",
+    "answer": "Generalization is the capability of a trained machine learning model to make accurate predictions on novel, previously unseen data drawn from the same underlying distribution. Its significance is paramount because the ultimate objective of machine learning is not memorizing historical training samples, but making reliable inferences on future real-world inputs."
+  },
+  {
+    "id": "faiml-u3-b-1",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "B",
+    "number": 1,
+    "question": "Apply the concepts of Machine Learning to illustrate its overall workflow using a suitable diagram, and classify different types of Machine Learning by identifying their appropriate applications, advantages, and disadvantages.",
+    "answer": "1. Definition:\nMachine Learning (ML) is an engineering and scientific discipline within AI that develops algorithms capable of learning empirical relationships from data. Rather than adhering to fixed procedural routines, ML models adapt parameter weights to optimize predictive performance.\n\n2. Machine Learning Workflow:\nRaw Data ──> Data Preprocessing ──> Split (Train/Test) ──> ML Algorithm Selection ──> Model Training ──> Model Evaluation ──> Deployment & Inference\n\n• Data Collection: Sourcing tabular, image, or text records from operational databases.\n• Data Preprocessing: Imputing missing values, removing duplicates, scaling features, encoding categorical attributes.\n• Model Training: Optimizing parameter weights to minimize loss on training splits.\n• Evaluation: Measuring generalization using validation metrics on hold-out testing data.\n• Deployment: Serving predictions via REST APIs or batch inference pipelines.\n\n3. Taxonomy of Machine Learning:\n1. Supervised Learning:\n   - Nature: Trains on labeled inputs (X) paired with ground truth (y).\n   - Applications: Fraud detection, medical diagnosis, housing price prediction.\n   - Advantages: High predictive accuracy, straightforward metric evaluation.\n   - Disadvantages: Labeling datasets is manual, expensive, and time-consuming.\n\n2. Unsupervised Learning:\n   - Nature: Discovers latent clusters, associations, and projections from unlabeled data.\n   - Applications: Customer market segmentation, anomaly detection, genomic clustering.\n   - Advantages: Requires no expensive data labeling; reveals unexpected structures.\n   - Disadvantages: Subjective evaluation; susceptible to noise.\n\n3. Reinforcement Learning:\n   - Nature: Software agent learns optimal behavioral policies through trial-and-error interaction with a dynamic environment via rewards and penalties.\n   - Applications: Autonomous vehicle control, robotic dexterity, game-playing AI (AlphaGo).\n   - Advantages: Excels in sequential decision-making without human demonstrations.\n   - Disadvantages: Sample-inefficient; computationally expensive simulation requirements."
+  },
+  {
+    "id": "faiml-u3-b-2",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "B",
+    "number": 2,
+    "question": "Illustrate how to apply supervised learning techniques to a dataset for developing and evaluating a predictive model.",
+    "answer": "1. Systematic Development Methodology:\nDeveloping an enterprise-grade predictive supervised learning model requires a structured sequence of engineering stages to safeguard against data leakage and overfitting.\n\n2. Step-by-Step Implementation Pipeline:\n• Step 1: Data Collection & Audit\n  Acquire relevant historical tabular records (e.g., Housing dataset containing Area, Bedrooms, Age, Location, Sale Price).\n• Step 2: Data Preprocessing\n  - Clean missing values using median/mode imputation.\n  - Remove duplicate observations.\n  - Scale numerical features via Min-Max or Standard scaling.\n  - One-hot encode nominal categorical features (e.g., Location).\n• Step 3: Dataset Splitting\n  Partition dataset into 80% Training Set and 20% Testing Set. The testing set is quarantined to evaluate unbiased generalization.\n• Step 4: Algorithm Selection\n  Select candidate model class based on problem topology:\n  - Regression: Linear Regression, Decision Tree Regressor, Random Forest.\n  - Classification: Logistic Regression, Support Vector Machine (SVM), XGBoost.\n• Step 5: Model Training\n  Fit model parameters on the 80% training set using cost optimization (e.g., Ordinary Least Squares or Gradient Descent).\n• Step 6: Validation & Hyperparameter Tuning\n  Apply K-Fold Cross Validation (e.g., K=5) and Grid Search to tune hyperparameters without test-set contamination.\n• Step 7: Performance Evaluation\n  Evaluate the finalized model against the quarantined 20% test set using rigorous metrics:\n  - Classification: Accuracy, Precision, Recall, F1-Score, ROC-AUC.\n  - Regression: Mean Absolute Error (MAE), Mean Squared Error (MSE), Root Mean Squared Error (RMSE), R² Score.\n• Step 8: Deployment & Monitoring\n  Containerize the model for production API scoring, logging drift over time."
+  },
+  {
+    "id": "faiml-u3-b-3",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "B",
+    "number": 3,
+    "question": "Differentiate Classification and Regression techniques by analyzing their characteristics, use cases, and limitations with suitable examples.",
+    "answer": "1. Introduction:\nSupervised machine learning bifurcates into Classification and Regression based on the mathematical domain of the target dependent variable y.\n\n2. Classification Analysis:\n• Definition: Predicts discrete categorical class labels Y ∈ {C_1, C_2, ..., C_k}.\n• Output: Discrete probability distribution over classes or discrete class assignment.\n• Canonical Algorithms: Decision Trees (CART), Support Vector Machines (SVM), K-Nearest Neighbors (KNN), Naive Bayes, Logistic Regression.\n• Practical Use Cases: Spam email filtering, credit card fraud detection, tumor classification (Benign vs Malignant).\n• Evaluation Metrics: Accuracy, Precision, Recall, F1-Score, ROC-AUC, Confusion Matrix.\n• Limitations: Susceptible to severe performance collapse on imbalanced class distributions if improper metrics are evaluated.\n\n3. Regression Analysis:\n• Definition: Predicts continuous numerical real-valued quantities Y ∈ ℝ.\n• Output: Infinite continuous range of numeric scalar values.\n• Canonical Algorithms: Simple/Multiple Linear Regression, Ridge/Lasso Regularized Regression, Support Vector Regression (SVR), Random Forest Regressor.\n• Practical Use Cases: Residential real estate appraisal, daily temperature forecasting, retail sales demand volume forecasting.\n• Evaluation Metrics: Mean Absolute Error (MAE), Mean Squared Error (MSE), Root Mean Squared Error (RMSE), Coefficient of Determination (R²).\n• Limitations: Highly sensitive to extreme numerical outliers; assumes specific functional relationships (e.g., linearity unless polynomial kernels are applied)."
+  },
+  {
+    "id": "faiml-u3-b-4",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "B",
+    "number": 4,
+    "question": "Analyze Overfitting and Underfitting on machine learning model and recommend appropriate strategies to achieve an optimal bias–variance trade-off.",
+    "answer": "1. Introduction:\nThe Bias-Variance Trade-off governs the generalization capacity of all predictive learning models. Total Expected Test Error decomposes into:\nExpected Error = Bias² + Variance + Irreducible Noise (σ²)\n\n2. Underfitting (High Bias):\n• Definition: Occurs when an overly simplistic hypothesis class fails to capture the underlying structure of the data.\n• Symptoms: High error on training data AND equally high error on testing data (e.g., Training Acc = 60%, Test Acc = 58%).\n• Root Cause: High inductive bias, insufficient features, or overly restrictive model assumptions.\n• Solutions:\n  - Increase model expressive capacity (e.g., higher polynomial degree, deeper trees).\n  - Add relevant domain features (Feature Engineering).\n  - Train for more epochs / iterations.\n\n3. Overfitting (High Variance):\n• Definition: Occurs when a model is excessively complex and fits random statistical noise and idiosyncratic outliers in the training set.\n• Symptoms: Exceptional training performance but degraded test performance (e.g., Training Acc = 99%, Test Acc = 70%).\n• Root Cause: Excessive parameters relative to training sample size.\n• Solutions:\n  - Apply Regularization (L1 Lasso, L2 Ridge) to penalize excessive parameter magnitudes.\n  - Employ Tree Pruning to remove spurious decision splits.\n  - Apply Dropout in neural architectures.\n  - Use K-Fold Cross Validation.\n  - Collect more training samples.\n\n4. The Bias-Variance Trade-Off Balance:\nAn optimal machine learning model operates at the sweet spot where total generalization error is minimized, achieving low bias without inflating model variance."
+  },
+  {
+    "id": "faiml-u3-b-5",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "B",
+    "number": 5,
+    "question": "Evaluate the mathematical and algorithmic indicators of overfitting, and justify the effectiveness of different generalization techniques for improving model performance.",
+    "answer": "1. Indicators of Overfitting:\n• Mathematical Indicator:\n  Training Error ≪ Testing Error (Large Generalization Gap)\n  Example: Train Error = 1%, Test Error = 25%.\n• Algorithmic Indicators:\n  - Decision trees growing to extreme depth where leaf nodes contain only 1–2 samples.\n  - Linear/logistic regression coefficient magnitudes exploding to massive values (+10^4, -10^4).\n  - Learning curves diverging: Training loss approaches zero while validation loss reverses and starts climbing upward.\n\n2. Generalization Techniques & Justification:\n1. Cross-Validation (K-Fold):\n   - Mechanism: Rotates training and testing across K equal subsets.\n   - Justification: Assesses model performance across multiple splits, ensuring models do not benefit from a single lucky train-test split.\n2. Regularization (L1 and L2):\n   - L1 (Lasso): Adds penalty λ ∑|w_i| to loss function. Drives non-essential weights to exactly zero, performing built-in feature selection.\n   - L2 (Ridge): Adds penalty λ ∑w_i² to loss function. Smooths weight magnitudes, preventing individual features from dominating predictions.\n3. Decision Tree Pruning:\n   - Mechanism: Cuts back branches that fail to provide statistically significant information gain on validation data.\n   - Justification: Replaces complex subtrees with leaf nodes, preserving only robust parent decision rules.\n4. Dropout:\n   - Mechanism: Randomly zeroes out a percentage of neuron activations during forward passes.\n   - Justification: Breaks co-adaptation of features in deep networks.\n5. Early Stopping:\n   - Mechanism: Monitors validation set error during iterative training and halts epochs as soon as validation loss begins to rise."
+  },
+  {
+    "id": "faiml-u3-b-6",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "B",
+    "number": 6,
+    "question": "Assess the role of evaluation metrics and learning curves in identifying underfitting, and justify their suitability for improving model performance.",
+    "answer": "1. Definition of Underfitting:\nUnderfitting occurs when a model lacks sufficient mathematical expressive power to learn the relationship between features and target labels, resulting in poor fit across all datasets.\n\n2. Diagnostic Role of Evaluation Metrics:\n• Symptom: Both Training Accuracy and Testing Accuracy are stubbornly low.\n  Example: Training Accuracy = 60%, Testing Accuracy = 58%.\n• Contrast with Overfitting: In overfitting, training accuracy is 99% while testing is 70%. In underfitting, the model cannot even master the training data itself.\n\n3. Diagnostic Role of Learning Curves:\nA Learning Curve plots model error (or accuracy) as a function of the number of training samples.\n• Underfitting Learning Curve Signature:\n  - The training performance curve and validation performance curve converge early to a low score and plateau horizontally.\n  - Adding more training data fails to raise performance!\n  - Diagnoses immediately that the bottleneck is model complexity, not dataset size.\n\n4. Remedies for Underfitting:\n• Increase Model Complexity: Upgrade from a linear model to a polynomial model, or increase tree max-depth.\n• Add Informative Features: Construct interaction terms or add domain-specific features.\n• Decrease Regularization: Reduce penalty parameter λ (e.g., lower Ridge alpha)."
+  },
+  {
+    "id": "faiml-u3-b-7",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "B",
+    "number": 7,
+    "question": "Evaluate the components of a supervised learning pipeline and justify the selection of appropriate techniques for each stage.",
+    "answer": "1. Introduction:\nA supervised learning pipeline is a cohesive, reproducible software framework coordinating the end-to-end transformation of raw data into production predictions.\n\n2. Core Pipeline Components:\n1. Data Ingestion & Quality Cleaning:\n   - Identifies and replaces missing records; handles outliers and duplicates.\n2. Feature Transformation & Encoding:\n   - One-hot encoding for nominal categories; Min-Max/Standard scaling for numerical features to ensure equal distance weighting.\n3. Train-Test Split (80:20):\n   - Partitions data prior to transformations to strictly prevent data leakage from test distributions into training.\n4. Model Selection:\n   - Selects algorithms suited to the underlying problem topology (e.g., Tree-based for tabular non-linearities, Linear models for fast interpretable baselines).\n5. Hyperparameter Tuning:\n   - Employs Grid Search or Random Search paired with K-Fold Cross-Validation to locate optimal hyperparameter sets.\n6. Evaluation & Benchmarking:\n   - Calculates comprehensive metric scores (Accuracy, Precision, Recall, F1 for classification; MAE, MSE, R² for regression).\n7. Deployment:\n   - Serializes trained pipelines for low-latency scoring."
+  },
+  {
+    "id": "faiml-u3-b-8",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "B",
+    "number": 8,
+    "question": "Justify the suitability of Decision Tree, SVM, and KNN algorithms by evaluating their performance, accuracy, and computational complexity for classification tasks.",
+    "answer": "1. Comparative Evaluation of Classical Supervised Classifiers:\n\n1. Decision Tree:\n• Working Principle: Recursively partitions feature space using axis-aligned orthogonal splits that maximize Information Gain or minimize Gini Impurity.\n• Complexity: Training is O(n · d · log n); Prediction is O(depth) ≈ O(log n).\n• Strengths: Highly interpretable (\"white box\"); handles mixed categorical and numerical features; requires minimal scaling.\n• Weaknesses: High variance; prone to overfitting without depth pruning.\n\n2. Support Vector Machine (SVM):\n• Working Principle: Identifies the optimal maximum-margin hyperplane that separates classes in original or kernel-projected feature space, supported by boundary vectors.\n• Complexity: Training is approximately O(n² · d) to O(n³); Prediction is O(n_support_vectors · d).\n• Strengths: Highly accurate in high-dimensional feature spaces; robust to overfitting when margin parameters (C, γ) are properly tuned.\n• Weaknesses: Computationally expensive on large datasets; sensitive to feature scaling and kernel selection.\n\n3. K-Nearest Neighbors (KNN):\n• Working Principle: Instance-based \"lazy learner\" that does not fit an explicit model during training. At query time, computes distance to all training samples and takes majority vote among k closest neighbors.\n• Complexity: Training is O(1) (instant); Prediction is O(n · d) (expensive per query).\n• Strengths: Intuitive; zero training phase; adapts seamlessly as new training instances are logged.\n• Weaknesses: Prediction latency degrades on large datasets; suffers severely from the Curse of Dimensionality."
+  },
+  {
+    "id": "faiml-u3-c-1",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "C",
+    "number": 1,
+    "question": "Design a machine learning model to predict future customer purchases using a dataset of customer purchasing behaviour, and justify your design choices.",
+    "answer": "1. Problem Definition & Objectives:\nE-commerce retail platforms utilize customer transaction histories to predict future purchase propensity (Binary: Will Purchase within 30 days? Y/N) and recommend tailored product categories to maximize customer lifetime value (LTV).\n\n2. End-to-End System Architecture:\nDataset Ingestion ──> Preprocessing & Encoding ──> Feature Selection ──> Train-Test Split (80:20) ──> Classifier Selection (Random Forest / Logistic Regression) ──> Evaluation (F1 / Precision / Recall) ──> Recommendation Engine\n\n3. Step-by-Step Design Justification:\n• Step 1: Feature Inventory\n  - Demographics: Age, Gender, Geography.\n  - Behavioral History: Purchase Frequency (transactions/month), Total Spending ($), Average Order Value (AOV), Days Since Last Purchase (Recency), Preferred Category.\n• Step 2: Data Preprocessing\n  - Impute missing demographics using mode; impute numerical gaps using median.\n  - Apply One-Hot Encoding to nominal categories (Gender, Preferred Category).\n  - Apply RobustScaler to Total Spending and Frequency to mitigate outlier leverage.\n• Step 3: Feature Selection\n  - Use Random Forest Feature Importance and Correlation Analysis to drop collinear variables, isolating the top predictors: Recency, Frequency, and Monetary value (RFM metrics).\n• Step 4: Algorithm Justification\n  - Primary Model: Random Forest Classifier.\n  - Justification: Combines an ensemble of de-correlated decision trees; inherently models non-linear interactions between recency and spending; resistant to overfitting; provides native feature importance rankings.\n• Step 5: Model Evaluation Framework\n  - Because active buyers may represent a minority class (e.g., 15% conversion rate), standard Accuracy is misleading.\n  - Primary Metric: Precision-Recall AUC and F1-Score. High Precision avoids spamming uninterested shoppers; high Recall captures revenue opportunities.\n• Step 6: Commercial Recommendation Integration\n  - When P(Purchase > threshold), trigger targeted marketing vouchers for the customer's preferred product catalog."
+  },
+  {
+    "id": "faiml-u3-c-2",
+    "unit": 3,
+    "unitTitle": "Unit 3",
+    "part": "C",
+    "number": 2,
+    "question": "Create a regression model that predicts house prices from features such as house size, number of bedrooms, age, and location, and justify your implementation approach.",
+    "answer": "1. Problem Statement:\nDevelop a multivariate continuous regression model that predicts the residential sale price ($) based on property attributes: House Size (sq ft), Number of Bedrooms, Age of House (years), and Location (neighborhood).\n\n2. Mathematical Formulation:\ny_pred = w_0 + w_1 · Size + w_2 · Bedrooms + w_3 · Age + ∑ w_loc_i · Location_i\n\n3. Methodological Pipeline:\n• Step 1: Data Collection & Schema Audit\n  - Target Variable: SalePrice (continuous ℝ).\n  - Numerical Features: Size (500–5000 sq ft), Bedrooms (1–6), Age (0–60 years).\n  - Categorical Feature: Location (e.g., Urban, Suburban, Rural).\n• Step 2: Preprocessing & Leakage Prevention\n  - One-Hot Encode Location into binary columns [Location_Urban, Location_Suburban, Location_Rural].\n  - Standardize continuous variables using Z-score scaling: x' = (x - μ) / σ.\n  - Split dataset into 80% Training and 20% Testing before scaling fit.\n• Step 3: Model Formulation & Training\n  - Baseline: Multiple Linear Regression with Ordinary Least Squares (OLS) to establish an interpretable linear benchmark.\n  - Regularized Model: Ridge Regression (L2 penalty) to avoid multicollinearity between Size and Bedrooms.\n  - Cost Function: J(w) = (1/2m) ∑ (y_pred - y_true)² + λ ∑ w_i².\n• Step 4: Model Evaluation Metrics\n  - MAE (Mean Absolute Error): Average absolute dollar error ($|y - y_hat|), intuitive for realtors.\n  - RMSE (Root Mean Squared Error): Penalizes severe price estimation errors heavily.\n  - R² Score: Proportion of variance in property prices explained by features (Target: R² ≥ 0.85).\n• Step 5: Interpretation & Deployment\n  - Positive coefficients for Size indicate marginal value per square foot.\n  - Negative coefficient for Age reflects property depreciation."
+  },
+  {
+    "id": "faiml-u4-a-1",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "A",
+    "number": 1,
+    "question": "Identify the benefits of unsupervised learning in machine learning.",
+    "answer": "Benefits of unsupervised learning:\n1. Operates on massive volumes of raw, unlabeled data without human annotation.\n2. Discovers unexpected latent patterns, customer groupings, and hidden structures.\n3. Enables dimensionality reduction and data compression (e.g., PCA).\n4. Essential for exploratory data analysis, anomaly/fraud detection, and representation learning."
+  },
+  {
+    "id": "faiml-u4-a-2",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "A",
+    "number": 2,
+    "question": "Define manifold learning.",
+    "answer": "Manifold learning is an approach to non-linear dimensionality reduction based on the assumption that high-dimensional observational data lies on an embedded lower-dimensional non-linear manifold within the higher-dimensional ambient space (e.g., Swiss Roll). Algorithms include Isomap, LLE, and t-SNE."
+  },
+  {
+    "id": "faiml-u4-a-3",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "A",
+    "number": 3,
+    "question": "Explain the difference between normalization and standardization in data preprocessing.",
+    "answer": "• Normalization (Min-Max Scaling): Rescales feature values into a bounded range, typically [0, 1]. Formula: x_norm = (x - min) / (max - min). Best for algorithms sensitive to bounded scale when data does not follow a Gaussian distribution.\n• Standardization (Z-Score Scaling): Centers data to have zero mean (μ = 0) and unit variance (σ = 1). Formula: z = (x - μ) / σ. Best when features follow normal distributions or for models assuming Gaussian priors (e.g., PCA, SVM)."
+  },
+  {
+    "id": "faiml-u4-a-4",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "A",
+    "number": 4,
+    "question": "Describe the advantages of Hierarchical Clustering.",
+    "answer": "Advantages of Hierarchical Clustering:\n1. No Predefined K: Does not require specifying the number of clusters in advance.\n2. Visual Dendrogram: Produces a rich, interpretable hierarchical tree (dendrogram) showing nested cluster relationships.\n3. Arbitrary Granularity: Allows users to cut the dendrogram at any distance threshold to obtain any desired number of clusters.\n4. Preserves Taxonomy: Ideal for biological phylogenetics and taxonomy modeling."
+  },
+  {
+    "id": "faiml-u4-a-5",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "A",
+    "number": 5,
+    "question": "Name the applications of feature extraction and its purpose.",
+    "answer": "Purpose: To transform high-dimensional raw observations into a reduced set of informative, non-redundant numerical features that preserve the critical variance and discriminative signal of the original data.\nApplications:\n• Computer Vision / Image Recognition (edges, textures, CNN embeddings)\n• Speech & Audio Processing (MFCC spectral features)\n• Text Mining / NLP (TF-IDF, word embeddings, topic modeling)\n• Medical Diagnostics (ECG/EEG wave decomposition)"
+  },
+  {
+    "id": "faiml-u4-a-6",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "A",
+    "number": 6,
+    "question": "Choose a suitable dimensionality reduction technique for a high-dimensional dataset and justify your choice.",
+    "answer": "Principal Component Analysis (PCA) is the primary recommendation for high-dimensional tabular datasets. It identifies orthogonal axes of maximal variance (eigenvectors of the covariance matrix) and projects the data onto top principal components. This compresses feature dimensionality while retaining the majority of data variance, eliminating multicollinearity and enabling 2D/3D visualization."
+  },
+  {
+    "id": "faiml-u4-a-7",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "A",
+    "number": 7,
+    "question": "Describe the purpose of the Silhouette Score in clustering evaluation.",
+    "answer": "The Silhouette Score measures how well-separated and cohesive clusters are, evaluating how similar an individual data point is to its own cluster (intra-cluster compactness a(i)) compared to other neighboring clusters (nearest-cluster separation b(i)). Values range from -1 to +1, where values close to +1 indicate tight, distinct clusters."
+  },
+  {
+    "id": "faiml-u4-a-8",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "A",
+    "number": 8,
+    "question": "List some common challenges in unsupervised learning.",
+    "answer": "Common challenges in unsupervised learning:\n1. Absence of ground-truth target labels for objective performance verification.\n2. Difficulty in objectively validating cluster quality without domain experts.\n3. Determining the optimal number of clusters (K).\n4. Sensitivity to feature scaling, measurement units, noise, and outliers.\n5. High computational complexity O(n² or n³) on massive datasets (e.g., Hierarchical Clustering)."
+  },
+  {
+    "id": "faiml-u4-a-9",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "A",
+    "number": 9,
+    "question": "State the advantages of hierarchical clustering over K-means.",
+    "answer": "1. No need to specify the number of clusters (K) a priori.\n2. Produces a complete hierarchical tree (dendrogram) revealing nested sub-clusters.\n3. Deterministic: Yields the exact same clustering on every run (no random centroid initialization issues).\n4. Capable of discovering clusters of varying granularities."
+  },
+  {
+    "id": "faiml-u4-a-10",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "A",
+    "number": 10,
+    "question": "State the advantage of using PCA for dimensionality reduction.",
+    "answer": "Advantages of PCA:\n1. Compresses high-dimensional datasets while retaining the maximum possible variance.\n2. Removes multicollinearity by transforming correlated variables into completely uncorrelated orthogonal components.\n3. Reduces computational training latency for downstream algorithms.\n4. Enables intuitive 2D and 3D visual projection of complex high-dimensional spaces."
+  },
+  {
+    "id": "faiml-u4-a-11",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "A",
+    "number": 11,
+    "question": "Differentiate between K-Means and DBSCAN.",
+    "answer": "K-Means is a centroid-based partitioning algorithm that divides data into K predefined spherical clusters by minimizing within-cluster sum of squares. DBSCAN is a density-based algorithm that discovers clusters of arbitrary non-spherical shapes based on local point density, automatically isolating sparse noise points as outliers without requiring K."
+  },
+  {
+    "id": "faiml-u4-a-12",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "A",
+    "number": 12,
+    "question": "Discuss how different algorithms affect the outcome of unsupervised learning tasks.",
+    "answer": "Different clustering algorithms make distinct geometric and statistical assumptions about the underlying data manifold:\n• K-Means assumes convex, isotropic, spherical clusters of roughly equal variance.\n• DBSCAN assumes clusters are dense regions separated by sparse noise.\n• Hierarchical clustering assumes nested tree-like taxonomies.\nSelecting an algorithm incompatible with the data distribution (e.g., using K-Means on concentric ring shapes) causes severe misclustering."
+  },
+  {
+    "id": "faiml-u4-a-13",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "A",
+    "number": 13,
+    "question": "Select an appropriate clustering algorithm to segment customers based on their buying behaviour and justify your selection.",
+    "answer": "K-Means Clustering is the recommended algorithm for customer segmentation when transaction datasets are large and business teams have a target number of customer tiers (e.g., VIP, Regular, Occasional, Inactive). Its computational efficiency O(n · K · i) processes tens of thousands of records rapidly, generating compact, easily interpretable centroid profiles for targeted marketing."
+  },
+  {
+    "id": "faiml-u4-a-14",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "A",
+    "number": 14,
+    "question": "Explain how the Davies–Bouldin Index (DBI) is used to evaluate clustering results.",
+    "answer": "The Davies-Bouldin Index (DBI) is an internal cluster evaluation metric that measures the average similarity between each cluster and its most similar counterpart. Similarity combines the dispersion (compactness) of each cluster with the separation distance between centroids.\nLower DBI values indicate superior clustering, signifying that clusters are both internally compact and well-separated from one another."
+  },
+  {
+    "id": "faiml-u4-a-15",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "A",
+    "number": 15,
+    "question": "Compute the Silhouette coefficient for point P1.",
+    "answer": "Given:\n• Mean intra-cluster distance a(P1) = 2\n• Distances to points in the nearest neighbor cluster = 7 and 8\nCalculation:\n• Mean nearest-cluster distance b(P1) = (7 + 8) / 2 = 7.5\n• Formula: S(P1) = (b(P1) - a(P1)) / max(a(P1), b(P1))\n• S(P1) = (7.5 - 2) / max(2, 7.5) = 5.5 / 7.5 = 0.733\nConclusion: The Silhouette Coefficient for P1 is 0.733, indicating that point P1 is well-clustered."
+  },
+  {
+    "id": "faiml-u4-b-1",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "B",
+    "number": 1,
+    "question": "Apply the clustering technique to group users of a social media platform based on their content interaction patterns for targeted advertising.",
+    "answer": "1. Introduction:\nSocial media platforms process high-dimensional telemetry streams of user engagement. Clustering groups users exhibiting analogous consumption behaviors into target cohorts for advertisers.\n\n2. Feature Engineering from Raw Telemetry:\nExtract numerical features reflecting engagement intensity and genre preferences:\n1. Total Likes Count: Measures positive sentiment and engagement volume.\n2. Shares / Reposts: Measures affinity for disseminating content to peer networks.\n3. Comments Count: Measures high-effort active participation.\n4. Dwell Time (seconds/post): High-fidelity indicator of genuine attention.\n5. Daily Scroll Depth: Distinguishes heavy power users from casual browsers.\n6. Click-Through Rate (CTR): Direct measure of ad responsiveness.\n7. Login Frequency: Measures retention and platform stickiness.\n8. Category Distribution Vector: Relative % of time spent on {Sports, Tech, Fashion, Gaming, News}.\n\n3. Preprocessing & Scaling:\n• Apply Z-score standardization so high-volume counts (e.g., 500 likes) do not dominate low-range features (e.g., 0.04 CTR).\n\n4. Algorithm Selection & Trade-Off Analysis:\n• Option A: K-Means Clustering\n  - Best when business requirements mandate a fixed number of advertising tiers (e.g., K = 5 personas: Influencers, Lurkers, Active Creators, Casual Consumers, News Buffs).\n  - High computational throughput on millions of active accounts.\n• Option B: DBSCAN\n  - Best when user behavior includes bot traffic, spam accounts, or rare outliers that must be filtered out rather than forced into legitimate user personas.\n\n5. Business Recommendation:\nUse K-Means with K determined by the Elbow method and Silhouette score. Deliver customized programmatic ad campaigns to each distinct cluster profile."
+  },
+  {
+    "id": "faiml-u4-b-2",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "B",
+    "number": 2,
+    "question": "Use Principal Component Analysis (PCA) to perform dimensionality reduction on a dataset.",
+    "answer": "1. Introduction:\nPrincipal Component Analysis (PCA) is an unsupervised linear transformation technique that reduces high-dimensional datasets to a smaller set of orthogonal, uncorrelated variables called Principal Components, preserving maximal data variance.\n\n2. Step-by-Step PCA Mathematical Workflow:\nStep 1: Standardize the Feature Matrix\nCompute z = (x - μ) / σ to ensure zero mean and unit variance across all features.\nStep 2: Construct the Covariance Matrix\nCompute the d × d covariance matrix Σ = (1/n) X^T X.\nStep 3: Compute Eigenvectors and Eigenvalues\nSolve the characteristic equation: det(Σ - λI) = 0.\n- Eigenvalues λ_i represent the variance explained along each axis.\n- Eigenvectors v_i represent the principal component directions.\nStep 4: Rank and Select Top k Components\nSort eigenvalues in descending order: λ_1 ≥ λ_2 ≥ ... ≥ λ_d. Select top k components whose cumulative explained variance exceeds threshold (e.g., ≥ 90%).\nStep 5: Project Original Data\nTransform data into lower-dimensional subspace: Z = X · W_k.\n\n3. Advantages of PCA:\n• Drastically reduces memory and storage requirements.\n• Eliminates multicollinearity between features.\n• Accelerates convergence of subsequent machine learning models.\n• Enables 2D and 3D visualization of high-dimensional datasets.\n\n4. Limitations:\n• Linear assumption: Cannot capture non-linear relationships (use Manifold learning instead).\n• Loss of interpretability: Principal components are linear combinations of features and lose raw physical units."
+  },
+  {
+    "id": "faiml-u4-b-3",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "B",
+    "number": 3,
+    "question": "Analyze the effectiveness of manifold learning techniques for dimensionality reduction and feature extraction in a dataset with a complex underlying structure.",
+    "answer": "1. Introduction:\nWhen datasets possess non-linear geometric structures (such as a Swiss Roll or concentric rings), linear PCA fails because it measures Euclidean straight-line distance across empty space. Manifold learning algorithms preserve non-linear geodesic distances along the manifold surface.\n\n2. Prominent Manifold Learning Paradigms:\n• Isomap (Isometric Feature Mapping):\n  - Constructs a k-nearest neighbor graph connecting adjacent points.\n  - Computes all-pairs shortest path geodesic distances using Dijkstra's algorithm.\n  - Applies Classical Multidimensional Scaling (MDS) to preserve geodesic distances in low-dimensional space.\n• Locally Linear Embedding (LLE):\n  - Characterizes local geometry by representing each point as a linear combination of its neighbors.\n  - Finds low-dimensional coordinates that preserve these exact neighborhood reconstruction weights.\n• t-SNE (t-Distributed Stochastic Neighbor Embedding):\n  - Converts pairwise Euclidean distances into conditional probabilities representing similarities.\n  - Minimizes Kullback-Leibler (KL) divergence between high- and low-dimensional probability distributions. Exceptional for exploratory 2D visualization.\n\n3. Strengths:\n• Unfolds complex non-linear structures that completely baffle linear PCA.\n• Preserves fine-grained local neighborhood relationships.\n\n4. Computational Limitations:\n• High time and space complexity: Isomap requires O(n³) for all-pairs shortest paths.\n• Does not provide an out-of-sample projection function for new incoming data points."
+  },
+  {
+    "id": "faiml-u4-b-4",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "B",
+    "number": 4,
+    "question": "Examine the role of various clustering evaluation metrics in measuring clustering quality.",
+    "answer": "1. Purpose of Clustering Evaluation:\nBecause unsupervised clustering operates without ground-truth labels, internal validation indices are required to quantify cluster compactness (low within-cluster variance) and separation (high distance between distinct clusters).\n\n2. Three Primary Clustering Evaluation Metrics:\n\n1. Silhouette Coefficient:\n• Measures the balance between intra-cluster cohesion a(i) and inter-cluster separation b(i).\n• Formula: S(i) = (b(i) - a(i)) / max(a(i), b(i))\n• Range: -1 to +1.\n• Interpretation: Scores near +1 indicate dense, clearly segregated clusters; 0 denotes overlapping clusters; negative values indicate misclustered points.\n\n2. Davies–Bouldin Index (DBI):\n• Computes the average similarity between each cluster and its most similar rival, based on the ratio of within-cluster scatter to centroid separation.\n• Formula: DBI = (1/k) ∑ max_{j≠i} [ (s_i + s_j) / d(c_i, c_j) ]\n• Range: [0, ∞).\n• Interpretation: LOWER values are superior. A smaller DBI proves clusters are tight and centroids are widely separated.\n\n3. Calinski–Harabasz Index (CHI / Variance Ratio Criterion):\n• Computes the ratio of between-cluster dispersion (separation) to within-cluster dispersion (compactness).\n• Formula: CHI = [ Trace(B_k) / (k - 1) ] / [ Trace(W_k) / (n - k) ]\n• Range: [0, ∞).\n• Interpretation: HIGHER values indicate superior clustering quality.\n\n3. Comparative Utility:\nRelying on multiple metrics concurrently provides robust validation: a clustering configuration with peak Silhouette score, minimal DBI, and maximal CHI confirms the optimal number of clusters K."
+  },
+  {
+    "id": "faiml-u4-b-5",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "B",
+    "number": 5,
+    "question": "Assess the effectiveness of K-Means, DBSCAN, and Hierarchical Clustering in clustering datasets with varying densities and noise levels.",
+    "answer": "1. Introduction:\nClustering performance depends heavily on dataset topology, density variations, and contamination with noise/outliers.\n\n2. Detailed Algorithmic Assessment:\n• K-Means:\n  - Working Principle: Partitions n samples into K clusters by iteratively updating centroids to minimize within-cluster sum of squares.\n  - Varying Densities: Fails. Centroids get pulled into high-density regions, improperly splitting low-density clusters.\n  - Noise & Outliers: Extremely sensitive. Outliers drag centroids away from true cluster cores.\n  - Cluster Shapes: Assumes spherical/isotropic shapes.\n\n• DBSCAN (Density-Based Spatial Clustering of Applications with Noise):\n  - Working Principle: Expands clusters where point density exceeds MinPts within radius Eps; labels sparse isolated points as noise (-1).\n  - Varying Densities: Struggles when clusters have drastically different densities, because a single global (Eps, MinPts) threshold cannot fit both tight and diffuse regions simultaneously.\n  - Noise & Outliers: Exceptional. Automatically segregates noise without skewing cluster boundaries.\n  - Cluster Shapes: Discovers arbitrary, elongated, crescent, and concave geometries.\n\n• Hierarchical Clustering (Agglomerative):\n  - Working Principle: Builds a bottom-up dendrogram by iteratively merging closest cluster pairs using linkage criteria (Single, Complete, Average, Ward).\n  - Varying Densities: Moderate (Ward linkage favors compact clusters; Single linkage suffers from chaining).\n  - Noise & Outliers: Single linkage is sensitive to noise bridges; Complete/Ward are more resilient.\n  - Scalability: Poor on large datasets due to O(n³) time and O(n²) memory complexity.\n\n3. Verdict:\n• For noisy datasets with arbitrary shapes: DBSCAN is superior.\n• For massive datasets with clean, spherical distributions: K-Means is optimal.\n• For small datasets requiring taxonomic hierarchies: Hierarchical clustering is best."
+  },
+  {
+    "id": "faiml-u4-b-6",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "B",
+    "number": 6,
+    "question": "Critically evaluate the challenges of handling high-dimensional data in unsupervised learning and justify how dimensionality reduction techniques address these challenges.",
+    "answer": "1. The Curse of Dimensionality in Unsupervised Learning:\nAs the number of feature dimensions d grows, the volume of feature space increases exponentially, scattering data points across an immense, sparse space.\n\n2. Critical Challenges:\n1. Distance Metric Concentration:\n   - In high dimensions, the ratio between the distance to the nearest neighbor and the distance to the farthest neighbor approaches 1:\n     lim_{d→∞} (dist_max - dist_min) / dist_min = 0.\n   - All pairwise Euclidean distances become uniformly large, rendering distance-based clustering (K-Means, KNN, DBSCAN) meaningless.\n2. Exponential Sparsity:\n   - Data points become isolated in corners of the hyperspace, making density estimation unfeasible.\n3. Computational and Memory Bottlenecks:\n   - Distance matrix calculations scale with O(n² · d), saturating memory bandwidth.\n4. Noise & Redundancy:\n   - Irrelevant noise attributes mask true clustering signals.\n\n3. Justification of Dimensionality Reduction Solutions:\n• Principal Component Analysis (PCA):\n  - Filters out low-variance noise axes, concentrating dataset energy into the top principal components.\n  - Restores meaningful Euclidean distance contrasts among data points.\n• Manifold Learning (Isomap, t-SNE):\n  - Unrolls complex non-linear relationships, projecting data onto its intrinsic lower-dimensional manifold.\n  - Drastically accelerates downstream clustering runtimes and eliminates the curse of dimensionality."
+  },
+  {
+    "id": "faiml-u4-b-7",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "B",
+    "number": 7,
+    "question": "Given a dataset, apply normalization and standardization techniques and explain their effect on the performance of an unsupervised learning model.",
+    "answer": "1. The Necessity of Feature Scaling in Unsupervised Learning:\nUnsupervised distance-based algorithms (such as K-Means, Hierarchical Clustering, and DBSCAN) calculate pairwise distances using metrics like Euclidean distance:\nd(p, q) = √[ ∑ (p_i - q_i)² ]\nIf features are not scaled, an attribute measured in large numerical units (e.g., Annual Income: $50,000) will dominate the distance calculation over an attribute with a smaller scale (e.g., Age: 25 years), rendering the smaller feature effectively invisible to the algorithm.\n\n2. Applied Scaling Techniques:\n• Technique A: Min-Max Normalization\n  Formula: x' = (x - min) / (max - min)\n  - Transforms all variables into the strict range [0, 1].\n  - Effect: Gives every feature equal maximum possible contribution (range = 1). Best when features have known bounded distributions and no extreme outliers.\n• Technique B: Z-Score Standardization\n  Formula: z = (x - μ) / σ\n  - Rescales features to have zero mean and unit standard deviation.\n  - Effect: Centers the data around origin. Preserves outlier information while ensuring features with wide spreads do not disproportionately distort centroid positioning.\n\n3. Impact on Model Performance:\n• Unscaled Data: Clustering groups data almost exclusively along the axis with the highest raw magnitude.\n• Scaled Data: Clustering identifies meaningful multivariate relationships across all attributes simultaneously, improving Silhouette scores from near 0 to > 0.70."
+  },
+  {
+    "id": "faiml-u4-b-8",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "B",
+    "number": 8,
+    "question": "A retail company wants to group its customers based on their purchase frequency, total spending, and preferred product categories. The dataset contains 10,000 records.\na) Demonstrate how to preprocess the dataset before applying a clustering algorithm.\nb) Select and justify a suitable clustering algorithm.",
+    "answer": "1. Case Background:\nA retail enterprise with 10,000 customer records seeks customer segmentation across three attributes: Purchase Frequency (transactions/year), Total Spending ($), and Preferred Product Categories (Electronics, Apparel, Groceries, Home).\n\n2. Part (a): Data Preprocessing Pipeline:\n• Step 1: De-duplication & Missing Value Imputation\n  - Remove duplicate customer IDs.\n  - Impute missing spending values with column median to prevent outlier distortion.\n• Step 2: Outlier Detection and Treatment\n  - Identify extreme corporate buyers (e.g., $500,000 spending) using the Interquartile Range (IQR = Q3 - Q1). Cap outliers at 99th percentile to prevent centroid skewing.\n• Step 3: Categorical Feature Encoding\n  - Convert Preferred Category into numerical representation using One-Hot Encoding: [Is_Electronics, Is_Apparel, Is_Groceries, Is_Home].\n• Step 4: Numerical Feature Standardization\n  - Apply StandardScaler to Purchase Frequency and Total Spending so dollars (thousands) and frequencies (units) have equal weight in distance calculations.\n\n3. Part (b): Clustering Algorithm Selection & Justification:\n• Recommended Algorithm: K-Means Clustering.\n• Justification:\n  1. Computational Efficiency: With 10,000 records, K-Means runs in O(n · K · i) time, converging in fractions of a second, whereas Hierarchical Clustering requires O(n²) memory (~100 million pairwise distance pairs), which can cause memory exhaustion.\n  2. Distinct Business Tiers: K-Means produces compact, interpretable cluster centroids that translate cleanly into marketing personas (e.g., High Frequency / High Spend = VIPs; Low Frequency / Low Spend = Churn Risk).\n  3. Actionable Personas: Enables marketing teams to assign every incoming transaction to a specific customer cluster via nearest-centroid calculation."
+  },
+  {
+    "id": "faiml-u4-c-1",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "C",
+    "number": 1,
+    "question": "Develop a clustering-based model to categorize students using attendance, participation, internal marks, and assignment submissions, and propose how the resulting groups can be used to improve academic performance.",
+    "answer": "1. Educational Problem Context:\nHigher education institutions need proactive student support systems to detect at-risk students before final examinations, without relying on subjective instructor bias or manual auditing.\n\n2. Student Feature Representation:\n• Attendance Rate (%): Quantitative continuous [0–100].\n• Forum & Classroom Participation Score: Normalized discrete score [0–10].\n• Internal Assessment Marks (%): Quantitative continuous [0–100].\n• Assignment Submission Timeliness & Quality (%): Quantitative continuous [0–100].\n\n3. Methodology Pipeline:\n• Preprocessing: Detect duplicate student IDs, impute missing assignment grades, and apply Z-score Standardization across all academic metrics.\n• Optimal K Selection: Evaluate K ∈ [2, 6] using the Elbow method (Inertia) and Silhouette analysis. K = 4 emerges as the optimal configuration.\n• Clustering Engine: K-Means clustering partitions the student population into 4 actionable performance cohorts.\n\n4. Derived Student Clusters & Tailored Educational Interventions:\n• Cluster 1: High Achievers (Exemplars)\n  - Profile: High Attendance (95%), High Marks (88%), Timely Submissions (98%), Active Participation.\n  - Intervention: Peer tutoring leadership opportunities, undergraduate research fellowships, advanced honors modules.\n• Cluster 2: Diligent Strugglers\n  - Profile: High Attendance (92%), Consistent Submissions (90%), but Low Internal Marks (45%).\n  - Diagnosis: Attends classes and completes homework but struggles with conceptual comprehension or exam anxiety.\n  - Intervention: Remedial tutoring, concept revision workshops, tailored office-hour mentoring.\n• Cluster 3: Disengaged At-Risk Students\n  - Profile: Low Attendance (52%), Low Submissions (40%), Low Internal Marks (38%).\n  - Diagnosis: Severe academic risk of course failure and institutional dropout.\n  - Intervention: Immediate academic counseling, parental alerts, attendance monitoring, and structured catch-up study plans.\n• Cluster 4: Capable Procrastinators\n  - Profile: Moderate Attendance (72%), High Marks (82%), but Late/Missing Submissions (55%).\n  - Diagnosis: High innate aptitude but poor time management or workload balancing.\n  - Intervention: Time-management coaching, milestone-based assignment check-ins, and study group accountability.\n\n5. Educational Impact:\nThis proactive clustering approach shifts academic advising from reactive post-exam damage control to early-semester supportive interventions."
+  },
+  {
+    "id": "faiml-u4-c-2",
+    "unit": 4,
+    "unitTitle": "Unit 4",
+    "part": "C",
+    "number": 2,
+    "question": "Develop a complete clustering-based solution for a real-world unsupervised learning problem. Explain the preprocessing steps, clustering method, evaluation approach, and techniques for overcoming potential challenges.",
+    "answer": "1. Problem Definition:\nDesign an enterprise-grade customer segmentation engine for an omnichannel retailer to discover behavioral cohorts across purchase frequency, monetary spending, channel preference, and returns rate.\n\n2. End-to-End Architectural Blueprint:\nRaw Transaction Logs ──> Aggregation & Feature Engineering ──> Preprocessing & Robust Scaling ──> PCA Dimensionality Reduction ──> Multi-Algorithm Clustering (K-Means / DBSCAN) ──> Metric Benchmarking (Silhouette / DBI / CHI) ──> Actionable Cohort Activation\n\n3. Technical Implementation Stages:\n• Stage 1: Feature Engineering\n  - Recency (days since last purchase)\n  - Frequency (orders per quarter)\n  - Monetary Value (gross spend $)\n  - Product Diversity (count of distinct categories purchased)\n  - Return Rate (% of orders returned)\n• Stage 2: Preprocessing & Scaling\n  - Financial data exhibits right-skewed heavy tails; apply log-transformation: x' = log(1 + x).\n  - Apply StandardScaler to ensure zero mean and unit variance.\n• Stage 3: Dimensionality Reduction\n  - Apply PCA to condense 12 engineered interaction features down to 3 principal components retaining 88% of total variance, mitigating feature correlation.\n• Stage 4: Clustering Execution\n  - Implement K-Means as the baseline model for business tiers.\n  - Run DBSCAN in parallel with spatial indexing to flag anomalous fraudulent accounts and bot scrapers as noise.\n• Stage 5: Evaluation & Validation\n  - Sweep K from 2 to 10.\n  - Calculate Silhouette Coefficient, Davies-Bouldin Index (DBI), and Calinski-Harabasz Index (CHI).\n  - Select K that maximizes Silhouette and minimizes DBI simultaneously.\n• Stage 6: Challenge Mitigation\n  - Challenge 1: Outliers pulling K-Means centroids → Filter out DBSCAN noise points prior to K-Means fit.\n  - Challenge 2: Cluster drift over time → Schedule monthly re-clustering jobs to detect shifting customer spending habits."
+  },
+  {
+    "id": "faiml-u5-a-1",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "A",
+    "number": 1,
+    "question": "State the meaning of categorical variables in machine learning.",
+    "answer": "Categorical variables are input or target features that represent discrete qualitative groups, classes, or labels rather than continuous numerical measurements. Examples include Gender {Male, Female}, City {Chennai, Mumbai, Delhi}, and Education Level {High School, UG, PG}."
+  },
+  {
+    "id": "faiml-u5-a-2",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "A",
+    "number": 2,
+    "question": "Define feature selection.",
+    "answer": "Feature selection is the process of selecting a subset of the most relevant, informative, and non-redundant features from the original feature set. It eliminates irrelevant noise variables, combats the Curse of Dimensionality, reduces overfitting, and improves model interpretability."
+  },
+  {
+    "id": "faiml-u5-a-3",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "A",
+    "number": 3,
+    "question": "Differentiate between One-Hot Encoding and Label Encoding.",
+    "answer": "• One-Hot Encoding: Creates a separate binary (0 or 1) dummy column for each distinct category. Best for nominal variables with no natural order (e.g., Color: Red, Blue, Green), preventing false numerical hierarchy.\n• Label Encoding: Assigns a unique sequential integer (0, 1, 2, ...) to each category. Best for ordinal variables that possess an intrinsic ranking (e.g., Low=0, Medium=1, High=2)."
+  },
+  {
+    "id": "faiml-u5-a-4",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "A",
+    "number": 4,
+    "question": "State the purpose of automatic feature selection.",
+    "answer": "The purpose of automatic feature selection is to algorithmically isolate the most statistically significant predictors without manual trial-and-error. It reduces model complexity, shortens training latency, prevents overfitting on spurious correlations, and enhances generalization accuracy."
+  },
+  {
+    "id": "faiml-u5-a-5",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "A",
+    "number": 5,
+    "question": "Explain cross-validation.",
+    "answer": "Cross-validation is a statistical resampling technique used to evaluate how well a machine learning model generalizes to an independent dataset. It partitions the dataset into multiple subsets (folds), iteratively training on K-1 folds and validating on the remaining fold to provide an unbiased estimate of generalization error."
+  },
+  {
+    "id": "faiml-u5-a-6",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "A",
+    "number": 6,
+    "question": "Interpret the role of Grid Search in machine learning.",
+    "answer": "Grid Search is an exhaustive hyperparameter optimization technique. It systematically evaluates every combination in a user-defined grid of hyperparameter values (e.g., Learning Rate ∈ {0.01, 0.1}, Max Depth ∈ {5, 10}) using cross-validation to identify the parameter set that delivers the highest validation score."
+  },
+  {
+    "id": "faiml-u5-a-7",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "A",
+    "number": 7,
+    "question": "Describe model evaluation.",
+    "answer": "Model evaluation is the formal process of assessing a trained machine learning model's predictive performance, robustness, and reliability on unseen test data using domain-appropriate quantitative metrics (e.g., Accuracy, Precision, Recall, F1-Score, ROC-AUC, MAE, R²)."
+  },
+  {
+    "id": "faiml-u5-a-8",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "A",
+    "number": 8,
+    "question": "List any four evaluation metrics used for classification models.",
+    "answer": "1. Accuracy: (TP + TN) / (TP + TN + FP + FN)\n2. Precision: TP / (TP + FP)\n3. Recall (Sensitivity): TP / (TP + FN)\n4. F1-Score: 2 · (Precision · Recall) / (Precision + Recall)"
+  },
+  {
+    "id": "faiml-u5-a-9",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "A",
+    "number": 9,
+    "question": "Differentiate between Accuracy and Precision.",
+    "answer": "• Accuracy: Measures the overall proportion of correct predictions (both positive and negative) across all test samples: (TP + TN) / Total. Can be misleading on imbalanced datasets.\n• Precision: Measures the proportion of true positives among all instances predicted as positive: TP / (TP + FP). Reflects the reliability of positive predictions."
+  },
+  {
+    "id": "faiml-u5-a-10",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "A",
+    "number": 10,
+    "question": "Illustrate the concept of overfitting and summarize ways to reduce it.",
+    "answer": "Overfitting occurs when a model fits training data too closely, learning random noise and peculiarities rather than general patterns. As a result, training error is near zero while test error is high.\nTechniques to reduce overfitting:\n1. Automatic feature selection to remove non-informative features.\n2. L1 / L2 Regularization to penalize large parameter weights.\n3. K-Fold Cross Validation to ensure stable evaluation.\n4. Decision tree pruning and dropout in neural networks.\n5. Gathering more diverse training samples."
+  },
+  {
+    "id": "faiml-u5-a-11",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "A",
+    "number": 11,
+    "question": "Differentiate between Hold-out validation and K-Fold Cross Validation.",
+    "answer": "• Hold-Out Validation: Splits dataset once into a single training set (e.g., 80%) and testing set (20%). Fast and computationally cheap, but performance is sensitive to the specific random split.\n• K-Fold Cross Validation: Splits data into K equal partitions. Evaluates the model K times, using each partition as the test fold once while training on the other K-1 folds. More computationally intensive, but provides a much more reliable estimate of generalization performance."
+  },
+  {
+    "id": "faiml-u5-a-12",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "A",
+    "number": 12,
+    "question": "Summarize the impact of feature selection on model performance.",
+    "answer": "Impact of feature selection on model performance:\n1. Reduces Overfitting: Prunes irrelevant noise features that models might otherwise memorize.\n2. Improves Accuracy: Focuses model capacity on the strongest predictive signals.\n3. Speeds Up Training: Fewer dimensions mean faster convergence during training.\n4. Enhances Interpretability: Produces simpler, more explainable decision models for domain experts."
+  },
+  {
+    "id": "faiml-u5-a-13",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "A",
+    "number": 13,
+    "question": "Apply a suitable encoding technique to represent the categorical feature \"Color\" with values {Red, Blue, Green}.",
+    "answer": "Recommended Technique: One-Hot Encoding.\nJustification: The categories {Red, Blue, Green} are nominal; they have no intrinsic ranking or natural numerical order. Using Label Encoding (Red=1, Blue=2, Green=3) would introduce an artificial mathematical order (e.g., Green > Red, Blue is average of Red and Green), which can distort distance-based and linear models.\nOne-Hot Encoding maps each color to an independent binary vector:\n• Red → [1, 0, 0]\n• Blue → [0, 1, 0]\n• Green → [0, 0, 1]"
+  },
+  {
+    "id": "faiml-u5-a-14",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "A",
+    "number": 14,
+    "question": "Describe the purpose of the confusion matrix in model evaluation.",
+    "answer": "A confusion matrix is an evaluation layout that tabulates the counts of actual versus predicted class outcomes for a classification model. It categorizes predictions into four distinct quadrants:\n• True Positives (TP): Positive cases correctly classified.\n• True Negatives (TN): Negative cases correctly classified.\n• False Positives (FP) (Type I Error): Negative cases incorrectly flagged as positive.\n• False Negatives (FN) (Type II Error): Positive cases incorrectly missed.\nIt provides the foundation for calculating Accuracy, Precision, Recall, Specificity, and F1-Score."
+  },
+  {
+    "id": "faiml-u5-a-15",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "A",
+    "number": 15,
+    "question": "Compute the Accuracy of the model given: TP = 45, TN = 40, FP = 10, FN = 5.",
+    "answer": "Given:\n• True Positives (TP) = 45\n• True Negatives (TN) = 40\n• False Positives (FP) = 10\n• False Negatives (FN) = 5\nFormula:\nAccuracy = (TP + TN) / (TP + TN + FP + FN)\nCalculation:\nAccuracy = (45 + 40) / (45 + 40 + 10 + 5) = 85 / 100 = 0.85 = 85%\nAnswer: The classification model achieves an overall Accuracy of 85.0% (0.85)."
+  },
+  {
+    "id": "faiml-u5-b-1",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "B",
+    "number": 1,
+    "question": "A hospital wants to predict whether a patient has diabetes based on age, glucose level, BMI, and blood pressure.\n• Apply how categorical variables should be preprocessed before training the model.\n• Apply suitable feature selection techniques to improve model performance.",
+    "answer": "1. Clinical Diagnostic Problem Formulation:\nA healthcare institution aims to predict diabetes onset (Binary: Diabetic / Non-Diabetic) utilizing patient clinical records containing both numerical measures (Age, Glucose, BMI, Blood Pressure) and categorical factors (Gender, Family History of Diabetes, Smoking Status).\n\n2. Preprocessing Strategy for Categorical Attributes:\n• Step 1: Missing Data Imputation\n  - Check for missing values in categorical fields. Replace missing entries with the category mode (most frequent label) to avoid data loss.\n• Step 2: Categorical Type Audit & Encoding\n  - Binary/Nominal Features:\n    - Gender {Male, Female} → Binary One-Hot Encoding [Is_Male, Is_Female].\n    - Smoking Status {Never, Former, Current} → Nominal One-Hot Encoding to avoid introducing artificial numerical ordering.\n  - Ordinal Features:\n    - Family History Severity {None, Distant, Immediate} → Label / Ordinal Encoding [0, 1, 2], preserving clinical risk progression.\n• Step 3: Numerical Normalization\n  - Scale Glucose, BMI, and Blood Pressure using StandardScaler to prevent large numerical ranges from dominating gradient updates.\n\n3. Feature Selection Application:\nTo eliminate clinical noise and isolate high-impact predictors:\n1. Filter Method:\n   - Calculate Chi-Square test statistics for categorical features against the diabetes target.\n   - Calculate Pearson correlation between numerical features and the target.\n   - Observation: Glucose and BMI exhibit high correlation with diabetes; blood pressure shows moderate correlation.\n2. Wrapper Method (Recursive Feature Elimination - RFE):\n   - Fit a Logistic Regression base estimator and iteratively prune the least significant clinical features.\n3. Embedded Method (LASSO / L1 Regularization):\n   - Adds an L1 penalty to shrink non-informative feature coefficients to zero.\n\n4. Clinical Outcome:\nRetaining the top predictors (Glucose, BMI, Age, and Family History) reduces training time by 40% and raises classification F1-Score from 0.76 to 0.86."
+  },
+  {
+    "id": "faiml-u5-b-2",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "B",
+    "number": 2,
+    "question": "Illustrate the application of K-Fold Cross Validation in evaluating a machine learning model and compare its evaluation results with the hold-out method.",
+    "answer": "1. Introduction:\nModel validation assesses generalization performance on unseen data. The two primary techniques are Hold-Out Validation and K-Fold Cross Validation.\n\n2. K-Fold Cross Validation Workflow:\n• The full dataset is partitioned into K equal folds (typically K = 5 or K = 10).\n• The training and validation cycle runs K iterations:\n  - Iteration 1: Train on Folds [2, 3, 4, 5], Validate on Fold 1.\n  - Iteration 2: Train on Folds [1, 3, 4, 5], Validate on Fold 2.\n  - Iteration 3: Train on Folds [1, 2, 4, 5], Validate on Fold 3.\n  - Iteration 4: Train on Folds [1, 2, 3, 5], Validate on Fold 4.\n  - Iteration 5: Train on Folds [1, 2, 3, 4], Validate on Fold 5.\n• Final Performance: The average of the K individual validation scores:\n  Accuracy_CV = (1/K) ∑ Score_i, accompanied by standard deviation σ.\n\n3. Detailed Comparison:\n• Hold-Out Method:\n  - Splits data once (e.g., 80% train, 20% test).\n  - Risk: The 20% test split may accidentally receive an unusually easy or hard subset, producing misleadingly optimistic or pessimistic scores.\n• K-Fold Method:\n  - Every sample is used for validation exactly once, and used for training K-1 times.\n  - Produces a stable, lower-variance estimate of true real-world generalization performance."
+  },
+  {
+    "id": "faiml-u5-b-3",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "B",
+    "number": 3,
+    "question": "Analyze the impact of automatic feature selection on machine learning models by examining how it improves prediction accuracy and reduces model complexity.",
+    "answer": "1. Introduction:\nAutomatic feature selection algorithms evaluate candidate predictors to find the optimal feature subset without human intervention, addressing the Curse of Dimensionality.\n\n2. Three Algorithmic Families:\n1. Filter Methods:\n   - Rank features using statistical scores independent of model training (e.g., Pearson Correlation, Chi-Square, Information Gain / Mutual Information).\n   - Fast and computationally scalable; ignores feature interactions.\n2. Wrapper Methods:\n   - Use a machine learning algorithm as an evaluation engine to test subsets of features (e.g., Recursive Feature Elimination - RFE, Forward Stepwise Selection).\n   - Captures feature interactions; computationally expensive on large feature spaces.\n3. Embedded Methods:\n   - Perform feature selection as an intrinsic part of model training (e.g., LASSO L1 regularization, Random Forest Gini feature importance).\n   - Balances computational speed with feature interaction awareness.\n\n3. Impact on Prediction Accuracy & Complexity:\n• Eliminating Noise: Removing irrelevant features prevents models from learning spurious correlations.\n• Mitigating Multicollinearity: Eliminates redundant, correlated variables that inflate parameter variance.\n• Reducing Latency: Smaller feature matrices speed up training and production scoring.\n• Improving Interpretability: Clearer visibility into the specific drivers behind predictions."
+  },
+  {
+    "id": "faiml-u5-b-4",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "B",
+    "number": 4,
+    "question": "Analyze the different classification evaluation metrics—Accuracy, Precision, Recall, F1-Score, and ROC-AUC—and compare their suitability for assessing machine learning model performance under different scenarios.",
+    "answer": "1. Introduction:\nSelecting appropriate evaluation metrics is critical to assessing classifier performance, especially when class distributions are imbalanced or when Type I and Type II errors carry unequal real-world costs.\n\n2. In-Depth Metric Analysis:\n\n1. Accuracy = (TP + TN) / Total\n• Best for: Balanced datasets with roughly equal class representations.\n• Limitation: Fails on imbalanced data. A model predicting \"No Fraud\" on a dataset with 99% legitimate transactions achieves 99% accuracy while detecting zero actual fraud cases.\n\n2. Precision = TP / (TP + FP)\n• Measures: Out of all instances flagged as positive, what proportion was truly positive?\n• Best when False Positives carry high costs (e.g., Spam filtering, where blocking an important business email is unacceptable).\n\n3. Recall (Sensitivity) = TP / (TP + FN)\n• Measures: Out of all actual positive instances, what proportion did the model successfully identify?\n• Best when False Negatives carry high costs (e.g., Cancer screening or credit card fraud, where missing a positive case has severe consequences).\n\n4. F1-Score = 2 · (Precision · Recall) / (Precision + Recall)\n• Harmonic mean of Precision and Recall.\n• Best for imbalanced datasets when both False Positives and False Negatives need to be balanced.\n\n5. ROC-AUC (Area Under Receiver Operating Characteristic Curve):\n• Plots True Positive Rate (Recall) vs False Positive Rate (1 - Specificity) across all decision thresholds.\n• Evaluates overall class separation capability independent of any single probability cutoff."
+  },
+  {
+    "id": "faiml-u5-b-5",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "B",
+    "number": 5,
+    "question": "Compare the performance of different model evaluation techniques such as Hold-Out Validation, K-Fold Cross Validation, and Stratified K-Fold Validation. Discuss their advantages and limitations.",
+    "answer": "1. Introduction:\nValidation techniques estimate model generalization to prevent overfitting and guide hyperparameter tuning. The choice of strategy depends on dataset size, training cost, and class balance.\n\n2. Methodological Breakdown:\n\n1. Hold-Out Validation:\n• Mechanism: Single partition into Training (70–80%) and Test (20–30%) subsets.\n• Advantages: Fast; requires only one training run. Ideal for massive deep learning datasets.\n• Limitations: High variance; performance estimate depends on the specific random split.\n\n2. K-Fold Cross Validation:\n• Mechanism: Splits data into K equal partitions; rotates training over K-1 folds and validates on the remaining fold K times.\n• Advantages: Efficient data use; every sample is validated once; yields stable mean and variance metrics.\n• Limitations: K times more computationally intensive. In imbalanced datasets, random partitioning can result in folds with few or no positive instances.\n\n3. Stratified K-Fold Cross Validation:\n• Mechanism: Enhances standard K-Fold by enforcing that each fold contains the exact same percentage of each target class as the complete dataset.\n• Advantages: Essential for imbalanced classification problems (e.g., 95% Class 0, 5% Class 1); ensures every fold has representative class ratios.\n• Limitations: Applies only to classification tasks; slightly higher partitioning overhead."
+  },
+  {
+    "id": "faiml-u5-b-6",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "B",
+    "number": 6,
+    "question": "Evaluate the effectiveness of Grid Search in hyperparameter tuning and justify its suitability for improving the performance of machine learning models.",
+    "answer": "1. Introduction:\nHyperparameters are configuration variables set before training that control model architecture and learning dynamics (e.g., tree depth, learning rate, regularization strength). Grid Search systematically searches for the optimal hyperparameter combination.\n\n2. Grid Search Mechanism:\n1. Define Parameter Grid:\n   - Max Depth = {5, 10, 15}\n   - Learning Rate = {0.01, 0.1}\n   - Number of Estimators = {100, 200}\n   - Total Configurations = 3 × 2 × 2 = 12 candidate combinations.\n2. Cross-Validation Loop:\n   - For each parameter combination, run 5-Fold Cross Validation.\n   - Total training runs = 12 × 5 = 60 model fits.\n3. Metric Selection:\n   - Track mean validation score (e.g., F1-Score or ROC-AUC) across folds.\n4. Model Selection:\n   - Select the parameter combination with the highest average validation score and refit on the full training dataset.\n\n3. Strengths & Limitations:\n• Advantages: Exhaustive and deterministic; evaluates all specified combinations; directly paired with cross-validation to prevent validation overfitting.\n• Limitations: Suffers from combinatorial explosion as the number of hyperparameters and values grows (can be addressed using Randomized Search or Bayesian Optimization)."
+  },
+  {
+    "id": "faiml-u5-b-7",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "B",
+    "number": 7,
+    "question": "A bank wants to build a loan approval prediction model.\n• Classify the preprocessing steps required for categorical variables.\n• Justify feature selection and model evaluation techniques to improve prediction accuracy.",
+    "answer": "1. Problem Definition:\nA commercial bank aims to automate retail loan decisions (Target: Approved / Rejected) based on applicant profiles containing categorical and numerical attributes.\n\n2. Categorical Variable Preprocessing:\n• Handling Missing Data: Impute missing categorical attributes using category modes; flag records with missing credit histories for verification.\n• Label Encoding (for Ordinal Variables):\n  - Education Level: {High School: 1, Undergraduate: 2, Postgraduate: 3}.\n• One-Hot Encoding (for Nominal Variables):\n  - Employment Type: {Salaried, Self-Employed, Business} → [Is_Salaried, Is_SelfEmployed, Is_Business].\n  - Marital Status: {Single, Married} → [Is_Single, Is_Married].\n• Numerical Scaling: Apply RobustScaler to Income and Loan Amount to reduce the influence of extreme outlier values.\n\n3. Feature Selection Strategy:\n• Filter Method: Use Information Gain and Mutual Information to rank features against loan approval outcomes.\n• Feature Elimination: Credit Score and Debt-to-Income (DTI) ratio emerge as dominant predictors; drop demographic variables (e.g., Applicant ID) to avoid bias and simplify the model.\n\n4. Model Evaluation Justification:\n• Evaluation Metric: Precision-Recall tradeoff analysis.\n  - False Positive Cost: Approving a high-risk applicant who defaults (financial capital loss).\n  - False Negative Cost: Rejecting a creditworthy applicant (lost interest revenue).\n  - Target: Maximize F1-Score and ROC-AUC.\n• Validation Strategy: Use 5-Fold Stratified Cross Validation to preserve the ratio of approved to defaulted loans across all validation splits."
+  },
+  {
+    "id": "faiml-u5-b-8",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "B",
+    "number": 8,
+    "question": "A company develops a customer churn prediction model.\n• Discuss how you would evaluate the model using different performance metrics.\n• Recommend suitable validation techniques to improve the model performance.",
+    "answer": "1. Business Context:\nA telecommunications provider seeks to identify customers likely to cancel their subscriptions (Churn = 1) versus those who remain active (Churn = 0). Churn is typically an imbalanced class problem (~10% churn rate).\n\n2. Evaluation Metrics Analysis:\n• Accuracy: Unreliable. A naive classifier predicting \"No Churn\" for every customer achieves 90% accuracy while failing to detect a single churning customer.\n• Recall (Sensitivity): Critical. High Recall ensures the company identifies the largest possible share of customers at risk of leaving.\n• Precision: Important for operational efficiency. High Precision ensures retention offers and discounts are not wasted on customers who had no intention of leaving.\n• F1-Score: The primary benchmark metric, balancing Precision and Recall for the minority churn class.\n• ROC-AUC: Measures the model's ability to rank churning customers higher in churn probability than non-churning customers across all possible decision thresholds.\n\n3. Validation Strategy Recommendation:\n• Stratified K-Fold Cross Validation (K = 5 or 10):\n  - Preserves the 10% churn ratio across every training and validation fold, preventing folds with zero churn cases.\n• Cost-Sensitive Threshold Tuning:\n  - Adjust the decision threshold down from the default 0.5 to 0.35 to increase Recall and capture more at-risk accounts."
+  },
+  {
+    "id": "faiml-u5-c-1",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "C",
+    "number": 1,
+    "question": "A bank wants to develop a machine learning model to predict whether a customer is eligible for a loan. The dataset contains categorical variables such as Gender, Marital Status, Education, Employment Type, and numerical variables such as Income, Loan Amount, and Credit Score.\nDesign and justify a complete machine learning pipeline for the loan eligibility prediction system by addressing:\na) An appropriate preprocessing strategy for handling categorical variables.\nb) A feature selection approach and how automatic feature selection improves performance.\nc) A model evaluation and optimization framework using Cross Validation and Grid Search, with performance metrics.",
+    "answer": "1. Comprehensive Architecture for Bank Loan Eligibility Prediction:\nThe objective is to automate loan decisions with high accuracy, low default risk, and full regulatory auditability.\n\n2. Part (a): Preprocessing Strategy for Categorical & Numerical Variables:\n• Step 1: Missing Data Imputation\n  - Numerical features (Income, Loan Amount): Impute using median to prevent outlier distortion.\n  - Categorical features (Gender, Marital Status, Employment): Impute using mode.\n• Step 2: Categorical Encoding\n  - Nominal Features: Apply One-Hot Encoding to Gender {Male, Female}, Marital Status {Single, Married}, and Employment Type {Salaried, Self-Employed}.\n  - Ordinal Features: Apply Label Encoding to Education Level {High School: 1, UG: 2, PG: 3}.\n• Step 3: Numerical Feature Scaling\n  - Apply StandardScaler to Income, Loan Amount, and Credit Score so large dollar amounts do not overshadow credit bureau ratings.\n\n3. Part (b): Feature Selection Approach:\n• Hybrid Two-Stage Feature Selection:\n  - Stage 1: Filter Method (Mutual Information) to drop features with near-zero association with loan outcomes.\n  - Stage 2: Embedded Method (Random Forest Feature Importance and LASSO L1 penalty) to rank feature weights.\n• Justification:\n  - Eliminates noise and prevents models from memorizing non-predictive attributes.\n  - Reduces training latency and lowers risk of regulatory non-compliance.\n\n4. Part (c): Evaluation & Optimization Framework:\n• Optimization via Grid Search CV:\n  - Base Estimator: Gradient Boosted Trees / Random Forest.\n  - Search Space:\n    - n_estimators: [100, 200, 300]\n    - max_depth: [3, 5, 8]\n    - learning_rate: [0.01, 0.05, 0.1]\n  - Validation: 5-Fold Stratified Cross-Validation, preserving the default-to-approval ratio across all folds.\n• Evaluation Metrics Suite:\n  - Confusion Matrix: Tracks False Positives (bad loans approved) and False Negatives (good loans rejected).\n  - Precision: Minimizes defaults by ensuring approved applicants are creditworthy.\n  - Recall: Maximizes revenue by approving as many qualified applicants as possible.\n  - ROC-AUC: Verifies discrimination capability across risk thresholds."
+  },
+  {
+    "id": "faiml-u5-c-2",
+    "unit": 5,
+    "unitTitle": "Unit 5",
+    "part": "C",
+    "number": 2,
+    "question": "Create a comprehensive machine learning application to solve a real-world classification problem by designing and implementing an end-to-end machine learning pipeline. Your solution should include and justify: data preprocessing, encoding methods, automatic feature selection, evaluation framework with performance metrics, Cross Validation, Grid Search hyperparameter tuning, and challenge analysis with improvements.",
+    "answer": "1. Case Study: End-to-End Enterprise Customer Churn Prediction:\nDesign and implement a production pipeline for a telecom provider to identify customers at risk of churn, enabling proactive retention campaigns.\n\n2. Pipeline Design:\nRaw Data Ingestion ──> Preprocessing & Imputation ──> Encoding & Robust Scaling ──> Automatic Feature Selection (RFE) ──> Stratified 10-Fold CV + Grid Search ──> Cost-Sensitive Threshold Tuning ──> Production Serving\n\n3. Component Specifications:\n• Data Preprocessing:\n  - Check schema for tenure, monthly charges, total charges, contract type, and payment methods.\n  - Impute missing TotalCharges using median.\n• Categorical Encoding:\n  - Label Encoding for ordinal tenure tiers (Month-to-month: 1, One-year: 2, Two-year: 3).\n  - One-Hot Encoding for nominal attributes (Payment Method, Tech Support, Internet Service).\n• Automatic Feature Selection:\n  - Use Recursive Feature Elimination (RFE) with Logistic Regression to prune bottom-tier features, retaining top predictors: Contract Type, Tenure, Monthly Charges, and Tech Support.\n• Validation Architecture:\n  - Use Stratified 10-Fold Cross Validation to maintain the 15% churn ratio across every fold.\n• Hyperparameter Optimization:\n  - Run Grid Search over Random Forest hyperparameters (n_estimators ∈ {100, 200}, max_depth ∈ {6, 10, 14}, min_samples_split ∈ {2, 5}).\n\n4. Evaluation Metrics & Optimization Challenges:\n• Primary Metrics: F1-Score, Precision-Recall AUC, and Confusion Matrix.\n• Challenge 1: Severe Class Imbalance (85% retain vs 15% churn):\n  - Addressed via SMOTE (Synthetic Minority Over-sampling) on training folds only.\n• Challenge 2: Shifting Churn Thresholds:\n  - Retention offers cost $20; losing a customer costs $600.\n  - Lower probability threshold from 0.5 to 0.3 to increase Recall and minimize costly False Negatives.\n• Challenge 3: Concept & Data Drift:\n  - Schedule automated weekly pipeline retraining with rolling windows to capture shifting customer habits."
+  }
+]
