@@ -268,7 +268,14 @@ importers:
         specifier: 3.2.7
         version: 3.2.7(@types/debug@4.1.13)(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)(supports-color@7.2.0)(tsx@4.21.0)
 
-  packages/ui: {}
+  packages/ui:
+    dependencies:
+      '@fontsource-variable/inter':
+        specifier: 5.2.8
+        version: 5.2.8
+      '@fontsource/source-serif-4':
+        specifier: 5.2.8
+        version: 5.2.8
 
   packages/validation:
     dependencies:

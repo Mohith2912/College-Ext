@@ -4,5 +4,9 @@
   "private": true,
   "type": "module",
   "exports": { "./styles.css": "./styles.css" },
+  "dependencies": {
+    "@fontsource-variable/inter": "5.2.8",
+    "@fontsource/source-serif-4": "5.2.8"
+  },
   "files": ["styles.css"]
 }
