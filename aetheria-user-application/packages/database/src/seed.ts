@@ -10,7 +10,13 @@ export async function seedDatabase(db:PrismaClient){
   for(const [index,course] of courses.filter(course => publishedCourseSlugs.has(course.slug)).entries()){
     const courseId=stableId(`course:${course.slug}`);
     await db.course.upsert({where:{id:courseId},update:{title:course.title,description:course.description,subject:course.subject,code:course.code,status:'PUBLISHED',deletedAt:null},create:{id:courseId,organizationId,slug:course.slug,title:course.title,description:course.description,subject:course.subject,code:course.code,status:'PUBLISHED'}});
-    await db.courseOffering.upsert({where:{id:stableId(`offering:${course.slug}`)},update:{},create:{id:stableId(`offering:${course.slug}`),organizationId,courseId,termId:stableId(`term:${course.term}`),position:index%4+1}});
+    await db.courseOffering.upsert({where:{id:stableId(`offering:${course.slug}`)},update:{deletedAt:null,termId:stableId(`term:${course.term}`),position:index%4+1},create:{id:stableId(`offering:${course.slug}`),organizationId,courseId,termId:stableId(`term:${course.term}`),position:index%4+1}});
+    if(course.slug==='fundamentals-of-artificial-intelligence-and-machine-learning'){
+      const existingModules=await db.module.findMany({where:{courseId},select:{id:true,slug:true}});
+      for(const [stalePosition,existingModule] of existingModules.entries()){
+        await db.module.update({where:{id:existingModule.id},data:{position:1000+stalePosition,status:'ARCHIVED',deletedAt:new Date()}});
+      }
+    }
     for(const [position,module] of course.modules.entries()){
       const generatedModuleId=stableId(`module:${course.slug}:${module.slug}`);
       const isOopj = course.slug === 'object-oriented-programming-using-java';
@@ -18,7 +24,7 @@ export async function seedDatabase(db:PrismaClient){
       const estimatedMinutes = isOopj ? 35 : isEsd ? 45 : Math.max(4,Math.ceil(module.markdown.split(/\s+/).length/180));
       const license = isOopj ? 'Apache-2.0' : isEsd ? 'Source repository terms not specified' : 'CC BY 4.0';
       const provenance = isOopj ? 'JavaMap EDU source integrated from https://github.com/mrithulavj/oopj at revision 5aac256b135fda5d57a766d451ca1cb10c3ca8d1.' : isEsd ? 'ESD1 source integrated from https://github.com/mrithulavj/ESD1 at revision b05438e88b95ca1c40b03bd8d68fb4ad865ab734.' : 'Original Aetheria demonstration material. All case studies and figures are fictional teaching examples.';
-      const persistedModule = await db.module.upsert({where:{courseId_slug:{courseId,slug:module.slug}},update:{title:module.title,description:module.description,position:position+1,estimatedMinutes,status:'PUBLISHED'},create:{id:generatedModuleId,organizationId,courseId,slug:module.slug,title:module.title,description:module.description,position:position+1,estimatedMinutes,status:'PUBLISHED'}});
+      const persistedModule = await db.module.upsert({where:{courseId_slug:{courseId,slug:module.slug}},update:{title:module.title,description:module.description,position:position+1,estimatedMinutes,status:'PUBLISHED',deletedAt:null},create:{id:generatedModuleId,organizationId,courseId,slug:module.slug,title:module.title,description:module.description,position:position+1,estimatedMinutes,status:'PUBLISHED'}});
       const moduleId=persistedModule.id;const generatedNoteId=stableId(`note:${moduleId}`);
       const persistedNote = await db.noteDocument.upsert({where:{moduleId},update:{title:module.title,markdown:module.markdown,status:'PUBLISHED',license,provenance,publishedAt:new Date('2026-09-01T00:00:00Z')},create:{id:generatedNoteId,organizationId,moduleId,title:module.title,markdown:module.markdown,status:'PUBLISHED',license,provenance,publishedAt:new Date('2026-09-01T00:00:00Z')}});
       const noteId=persistedNote.id;
