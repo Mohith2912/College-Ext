@@ -1,0 +1,6 @@
+{
+  "name": "SynapseAI: AIML Interactive Learning Platform",
+  "description": "Production-grade interactive EdTech platform covering Fundamentals of Artificial Intelligence and Machine Learning (Regulations R2023_V1.2) with hands-on algorithm visualizers, interactive simulations, real-world case studies, and Bloom's taxonomy assessments.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
