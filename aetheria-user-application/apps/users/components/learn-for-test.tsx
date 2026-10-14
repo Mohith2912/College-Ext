@@ -6,7 +6,6 @@ import { BrainCircuit, Check, ChevronRight, CircleHelp, Edit3, Flame, Layers3, M
 import { computerNetworksQuestionBank, questionBankSource, type QuestionBankItem } from '@/lib/question-bank';
 import { oopjQuestionBank, oopjQuestionBankSource } from '@/lib/oopj-question-bank';
 import { esdQuestionBank, esdQuestionBankSource } from '@/lib/esd-question-bank';
-import { faimlQuestionBank, faimlQuestionBankSource } from '@/lib/faiml-question-bank';
 
 type ModuleOption = { id: string; course: string; courseCode: string; courseSlug: string; module: string; moduleSlug: string; termNumber: number };
 type AuthoredItem = QuestionBankItem & { authored: true };
@@ -15,12 +14,11 @@ type Mode = 'quiz' | 'write' | 'flashcards' | 'author';
 const unitNames = ['Foundations and architecture', 'Switching, routing and addressing', 'Transport and congestion control', 'Network security', 'Cloud, IoT and 5G'];
 const oopjUnitNames = ['OOP and Java basics', 'Classes, methods and memory', 'Inheritance and interfaces', 'Exceptions and file streams', 'Threads, generics and JDBC'];
 const esdUnitNames = ['Embedded-system foundations', 'Architecture and automotive control', 'Embedded C and firmware', 'RTOS and industrial control', 'Design, verification and Edge AI'];
-const faimlUnitNames = ['AI foundations and search', 'Knowledge representation', 'Machine learning foundations', 'Unsupervised learning', 'Applied ML and evaluation'];
 const unitColors = ['violet', 'blue', 'amber', 'rose', 'cyan'] as const;
 const storageKey = 'beyond-syllabus-authored-question-bank-v1';
 
 function moduleUnit(moduleSlug: string) {
-  const match = /(?:computer-networks|oopj|esd|faiml)-unit-([1-5])$/.exec(moduleSlug);
+  const match = /(?:computer-networks|oopj|esd)-unit-([1-5])$/.exec(moduleSlug);
   return match ? Number(match[1]) : undefined;
 }
 
@@ -30,28 +28,24 @@ function sourceQuestions(module: ModuleOption, authored: AuthoredItem[]) {
   if (module.courseSlug === 'computer-networks' && unit) return [...computerNetworksQuestionBank.filter(item => item.unit === unit), ...authoredForModule];
   if (module.courseSlug === 'object-oriented-programming-using-java' && unit) return [...oopjQuestionBank.filter(item => item.unit === unit), ...authoredForModule];
   if (module.courseSlug === 'embedded-system-design' && unit) return [...esdQuestionBank.filter(item => item.unit === unit), ...authoredForModule];
-  if (module.courseSlug === 'fundamentals-of-artificial-intelligence-and-machine-learning' && unit) return [...faimlQuestionBank.filter(item => item.unit === unit), ...authoredForModule];
   return authoredForModule;
 }
 
 function sourceForCourse(courseSlug: string) {
   if (courseSlug === 'object-oriented-programming-using-java') return oopjQuestionBankSource;
   if (courseSlug === 'embedded-system-design') return esdQuestionBankSource;
-  if (courseSlug === 'fundamentals-of-artificial-intelligence-and-machine-learning') return faimlQuestionBankSource;
   return questionBankSource;
 }
 
 function sourceFormat(item: QuestionBankItem) {
   if (item.id.startsWith('oopj-')) return 'DOC';
   if (item.id.startsWith('esd-')) return 'DOC';
-  if (item.id.startsWith('faiml-')) return 'PDF';
   return 'PDF';
 }
 
 function modulePrefix(courseSlug: string) {
   if (courseSlug === 'computer-networks') return 'computer-networks';
   if (courseSlug === 'embedded-system-design') return 'esd';
-  if (courseSlug === 'fundamentals-of-artificial-intelligence-and-machine-learning') return 'faiml';
   return 'oopj';
 }
 
@@ -98,7 +92,7 @@ export function LearnForTest({ modules, initialCourse, initialModule }: { module
   const current = items[index] ?? items[0];
   const quizOptions = current ? optionsFor(items, index) : { options: [], answer: 0 };
   const unit = selectedModule ? moduleUnit(selectedModule.moduleSlug) : undefined;
-  const selectedUnitNames = courseSlug === 'object-oriented-programming-using-java' ? oopjUnitNames : courseSlug === 'embedded-system-design' ? esdUnitNames : courseSlug === 'fundamentals-of-artificial-intelligence-and-machine-learning' ? faimlUnitNames : unitNames;
+  const selectedUnitNames = courseSlug === 'object-oriented-programming-using-java' ? oopjUnitNames : courseSlug === 'embedded-system-design' ? esdUnitNames : unitNames;
   const selectedSource = sourceForCourse(courseSlug);
   const color = unit ? unitColors[unit - 1] : 'violet';
   const answered = selected !== null;
