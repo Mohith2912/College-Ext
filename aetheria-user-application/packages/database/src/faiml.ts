@@ -1,5 +1,3 @@
-import type { SeedCourse } from './content';
-
 const note = (title: string, description: string, focus: string, takeaways: string[]) => ({
   slug: title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
   title,
@@ -7,7 +5,7 @@ const note = (title: string, description: string, focus: string, takeaways: stri
   markdown: `## Learning objectives\n\n${description}\n\n## Syllabus focus\n\n${focus}\n\n## Revision checklist\n\n${takeaways.map((item) => `- ${item}`).join('\n')}\n\n## Practice prompt\n\nExplain the central idea in your own words, work one small example by hand, and connect it to a real system. Then state one assumption or limitation that could change the result.`,
 });
 
-export const faiml: SeedCourse = {
+export const faiml = {
   slug: 'fundamentals-of-artificial-intelligence-and-machine-learning',
   title: 'Fundamentals of Artificial Intelligence and Machine Learning',
   subject: 'Artificial Intelligence and Machine Learning',
