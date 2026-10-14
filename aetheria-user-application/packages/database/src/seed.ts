@@ -6,7 +6,6 @@ export async function seedDatabase(db:PrismaClient){
   const organizationId=stableId('organization');
   await db.organization.upsert({where:{id:organizationId},update:{},create:{id:organizationId,slug:'aetheria',name:'Aetheria Independent Study Companion'}});
   for(let number=1;number<=3;number++){await db.academicTerm.upsert({where:{id:stableId(`term:${number}`)},update:{},create:{id:stableId(`term:${number}`),organizationId,slug:`term-${number}`,name:`Term ${number}`,number,description:['Build your business foundations.','Connect ideas to decisions.','Design responsible growth.'][number-1]}});}
-  await db.course.updateMany({where:{organizationId,slug:'fundamentals-of-artificial-intelligence-and-machine-learning'},data:{status:'ARCHIVED',deletedAt:new Date()}});
   const publishedCourseSlugs = new Set(['object-oriented-programming-using-java', 'embedded-system-design']);
   for(const [index,course] of courses.filter(course => publishedCourseSlugs.has(course.slug)).entries()){
     const courseId=stableId(`course:${course.slug}`);
