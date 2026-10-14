@@ -6,7 +6,7 @@ export async function seedDatabase(db:PrismaClient){
   const organizationId=stableId('organization');
   await db.organization.upsert({where:{id:organizationId},update:{},create:{id:organizationId,slug:'aetheria',name:'Aetheria Independent Study Companion'}});
   for(let number=1;number<=3;number++){await db.academicTerm.upsert({where:{id:stableId(`term:${number}`)},update:{},create:{id:stableId(`term:${number}`),organizationId,slug:`term-${number}`,name:`Term ${number}`,number,description:['Build your business foundations.','Connect ideas to decisions.','Design responsible growth.'][number-1]}});}
-  const publishedCourseSlugs = new Set(['object-oriented-programming-using-java', 'embedded-system-design', 'fundamentals-of-artificial-intelligence-and-machine-learning']);
+  const publishedCourseSlugs = new Set(['object-oriented-programming-using-java', 'embedded-system-design']);
   for(const [index,course] of courses.filter(course => publishedCourseSlugs.has(course.slug)).entries()){
     const courseId=stableId(`course:${course.slug}`);
     await db.course.upsert({where:{id:courseId},update:{},create:{id:courseId,organizationId,slug:course.slug,title:course.title,description:course.description,subject:course.subject,code:course.code,status:'PUBLISHED'}});
@@ -14,11 +14,10 @@ export async function seedDatabase(db:PrismaClient){
     for(const [position,module] of course.modules.entries()){
       const generatedModuleId=stableId(`module:${course.slug}:${module.slug}`);
       const isOopj = course.slug === 'object-oriented-programming-using-java';
-      const isFaiml = course.slug === 'fundamentals-of-artificial-intelligence-and-machine-learning';
       const isEsd = course.slug === 'embedded-system-design';
-      const estimatedMinutes = isOopj ? 35 : isEsd ? 45 : isFaiml ? 40 : Math.max(4,Math.ceil(module.markdown.split(/\s+/).length/180));
+      const estimatedMinutes = isOopj ? 35 : isEsd ? 45 : Math.max(4,Math.ceil(module.markdown.split(/\s+/).length/180));
       const license = isOopj ? 'Apache-2.0' : isEsd ? 'Source repository terms not specified' : 'CC BY 4.0';
-      const provenance = isOopj ? 'JavaMap EDU source integrated from https://github.com/mrithulavj/oopj at revision 5aac256b135fda5d57a766d451ca1cb10c3ca8d1.' : isEsd ? 'ESD1 source integrated from https://github.com/mrithulavj/ESD1 at revision b05438e88b95ca1c40b03bd8d68fb4ad865ab734.' : isFaiml ? 'Original FAIML teaching material structured from the supplied 2311CSC303J question bank PDF. Case studies are fictional learning examples.' : 'Original Aetheria demonstration material. All case studies and figures are fictional teaching examples.';
+      const provenance = isOopj ? 'JavaMap EDU source integrated from https://github.com/mrithulavj/oopj at revision 5aac256b135fda5d57a766d451ca1cb10c3ca8d1.' : isEsd ? 'ESD1 source integrated from https://github.com/mrithulavj/ESD1 at revision b05438e88b95ca1c40b03bd8d68fb4ad865ab734.' : 'Original Aetheria demonstration material. All case studies and figures are fictional teaching examples.';
       const persistedModule = await db.module.upsert({where:{courseId_slug:{courseId,slug:module.slug}},update:{title:module.title,description:module.description,position:position+1,estimatedMinutes,status:'PUBLISHED'},create:{id:generatedModuleId,organizationId,courseId,slug:module.slug,title:module.title,description:module.description,position:position+1,estimatedMinutes,status:'PUBLISHED'}});
       const moduleId=persistedModule.id;const generatedNoteId=stableId(`note:${moduleId}`);
       const persistedNote = await db.noteDocument.upsert({where:{moduleId},update:{title:module.title,markdown:module.markdown,status:'PUBLISHED',license,provenance,publishedAt:new Date('2026-09-01T00:00:00Z')},create:{id:generatedNoteId,organizationId,moduleId,title:module.title,markdown:module.markdown,status:'PUBLISHED',license,provenance,publishedAt:new Date('2026-09-01T00:00:00Z')}});
