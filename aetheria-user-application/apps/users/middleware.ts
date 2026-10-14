@@ -33,7 +33,7 @@ export const config = {
   matcher: [
     {
       source:
-        "/((?!api|_next/static|_next/image|favicon.ico|icon.svg|manifest.webmanifest|robots.txt|sitemap.xml|cn-units|CN-Unit|CN-Unit-two|CN-Unit-3|CN-unit-4|CN-Unit-5|OOPJ|ESD1|FAIML).*)",
+        "/((?!api|_next/static|_next/image|favicon.ico|icon.svg|manifest.webmanifest|robots.txt|sitemap.xml|cn-units|CN-Unit|CN-Unit-two|CN-Unit-3|CN-unit-4|CN-Unit-5|OOPJ|ESD1).*)",
       missing: [
         { type: "header", key: "next-router-prefetch" },
         { type: "header", key: "purpose", value: "prefetch" },
