@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node ../../tooling/build-cn-units.mjs && node ../../tooling/build-oopj.mjs && node ../../tooling/build-esd.mjs && next dev --port 3000",
-    "build": "node ../../tooling/build-cn-units.mjs && node ../../tooling/build-oopj.mjs && node ../../tooling/build-esd.mjs && next build && node ../../tooling/publish-curriculum.mjs",
+    "dev": "node ../../tooling/build-cn-units.mjs && node ../../tooling/build-oopj.mjs && node ../../tooling/build-esd.mjs && node ../../tooling/build-faiml.mjs && next dev --port 3000",
+    "build": "node ../../tooling/build-cn-units.mjs && node ../../tooling/build-oopj.mjs && node ../../tooling/build-esd.mjs && node ../../tooling/build-faiml.mjs && next build && node ../../tooling/publish-curriculum.mjs",
     "start": "next start --port 3000",
     "typecheck": "tsc --noEmit",
     "lint": "eslint ."
@@ -17,6 +17,7 @@
     "@aetheria/ui": "workspace:*",
     "@fontsource/source-serif-4": "5.2.8",
     "@fontsource-variable/inter": "5.2.8",
+    "canvas-confetti": "1.9.4",
     "github-slugger": "2.0.0",
     "katex": "0.16.38",
     "lucide-react": "0.577.0",
