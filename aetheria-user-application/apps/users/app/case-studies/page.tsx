@@ -8,7 +8,7 @@ import { FaimlCaseStudySession } from '@/components/faiml-case-study-session';
 
 export const metadata: Metadata = {
   title: 'Interactive Case Studies',
-  description: 'Practise Computer Networks, Object-Oriented Programming, and Embedded Systems Design through detailed interactive sessions.',
+  description: 'Practise Computer Networks, OOP using Java, Embedded Systems Design, and FAIML through detailed interactive sessions.',
 };
 
 export default async function CasesPage({ searchParams }: { searchParams: Promise<{ course?: string }> }) {
