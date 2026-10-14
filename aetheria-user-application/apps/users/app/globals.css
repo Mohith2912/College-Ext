@@ -11,7 +11,6 @@
 @import './esd-accessibility.css';
 @import './esd-mobile-fixes.css';
 @import './esd-studio-theme.css';
-@import './faiml-concept-map.css';
 
 /* Refined transparent wordmark: crisp, aligned, and visually stable in every theme. */
 .brand{display:block;width:178px;height:auto;line-height:0}
