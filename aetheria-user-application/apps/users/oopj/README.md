@@ -6,7 +6,7 @@ The embedded JavaMap EDU application is sourced from:
 - Reviewed revision: `5aac256b135fda5d57a766d451ca1cb10c3ca8d1`
 - Course: `2321CSC304R Object Oriented Programming using JAVA`
 
-The source is retained under the repository-level `OOPJ` folder. The host build
+The source is retained under the repository-level `Object-Oriented-Programming-Java` folder. The host build
 verifies every retained source file and asset against `source-integrity.json`
 before producing the same-origin static application in `public/OOPJ`.
 

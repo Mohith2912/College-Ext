@@ -6,7 +6,8 @@ import { createHash } from 'node:crypto';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const appRoot = path.join(root, 'apps/users');
-const repositoryFolders = ['CN-Unit', 'CN-Unit-two', 'CN-Unit-3', 'CN-unit-4', 'CN-Unit-5'];
+const repositoryFolders = ['Computer-Networks/unit-1', 'Computer-Networks/unit-2', 'Computer-Networks/unit-3', 'Computer-Networks/unit-4', 'Computer-Networks/unit-5'];
+const outputFolders = ['CN-Unit', 'CN-Unit-two', 'CN-Unit-3', 'CN-unit-4', 'CN-Unit-5'];
 const repositoryRoot = path.dirname(root);
 const appRequire = createRequire(path.join(appRoot, 'package.json'));
 const require = createRequire(import.meta.url);
@@ -37,7 +38,9 @@ for (const [unit, { files }] of Object.entries(sourceIntegrity)) {
 
 for (const unit of [1, 2, 3, 4, 5]) {
   const source = path.join(repositoryRoot, repositoryFolders[unit - 1]);
-  const output = path.join(appRoot, 'public', repositoryFolders[unit - 1]);
+  // Keep the public route folders stable while the source repository follows
+  // the clearer unit-wise structure above.
+  const output = path.join(appRoot, 'public', outputFolders[unit - 1]);
   await mkdir(output, { recursive: true });
   await build({
     entryPoints: [path.join(source, 'src/main.tsx')],

@@ -1,9 +1,9 @@
 import { ConceptNode, ConceptEdge, ExamQuestion, FillupExercise } from '../types/concept';
-import { UNIT1_NODES, UNIT1_EDGES, UNIT1_QUESTIONS, UNIT1_FILLUPS } from './unit1/data';
-import { UNIT2_NODES, UNIT2_EDGES, UNIT2_QUESTIONS, UNIT2_FILLUPS } from './unit2/data';
-import { UNIT3_NODES, UNIT3_EDGES, UNIT3_QUESTIONS, UNIT3_FILLUPS } from './unit3/data';
-import { UNIT4_NODES, UNIT4_EDGES, UNIT4_QUESTIONS, UNIT4_FILLUPS } from './unit4/data';
-import { UNIT5_NODES, UNIT5_EDGES, UNIT5_QUESTIONS, UNIT5_FILLUPS } from './unit5/data';
+import { UNIT1_NODES, UNIT1_EDGES, UNIT1_QUESTIONS, UNIT1_FILLUPS } from './unit-1/data';
+import { UNIT2_NODES, UNIT2_EDGES, UNIT2_QUESTIONS, UNIT2_FILLUPS } from './unit-2/data';
+import { UNIT3_NODES, UNIT3_EDGES, UNIT3_QUESTIONS, UNIT3_FILLUPS } from './unit-3/data';
+import { UNIT4_NODES, UNIT4_EDGES, UNIT4_QUESTIONS, UNIT4_FILLUPS } from './unit-4/data';
+import { UNIT5_NODES, UNIT5_EDGES, UNIT5_QUESTIONS, UNIT5_FILLUPS } from './unit-5/data';
 
 export const ALL_CONCEPT_NODES: ConceptNode[] = [
   ...UNIT1_NODES,

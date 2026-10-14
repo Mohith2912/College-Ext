@@ -53,11 +53,11 @@ The project goes beyond displaying static notes. Learners can move from structur
 
 | Unit | Integrated source | Status |
 | ---: | --- | --- |
-| 1 | `CN-Unit` | Available |
-| 2 | `CN-Unit-two` | Available |
-| 3 | `CN-Unit-3` | Available |
-| 4 | `CN-unit-4` | Available |
-| 5 | `CN-Unit-5` | Available |
+| 1 | `Computer-Networks/unit-1` | Available |
+| 2 | `Computer-Networks/unit-2` | Available |
+| 3 | `Computer-Networks/unit-3` | Available |
+| 4 | `Computer-Networks/unit-4` | Available |
+| 5 | `Computer-Networks/unit-5` | Available |
 
 The five source applications are compiled into the host project during the build. Their original educational content, controls, and simulation behavior remain separated from the surrounding Beyond Syllabus interface.
 
@@ -78,11 +78,26 @@ The five source applications are compiled into the host project during the build
 
 ```text
 College-Ext/
-├── CN-Unit/                         # Original Computer Networks Unit 1
-├── CN-Unit-two/                     # Original Computer Networks Unit 2
-├── CN-Unit-3/                       # Original Computer Networks Unit 3
-├── CN-unit-4/                       # Original Computer Networks Unit 4
-├── CN-Unit-5/                       # Original Computer Networks Unit 5
+├── Computer-Networks/              # Five isolated Computer Networks unit applications
+│   ├── unit-1/
+│   ├── unit-2/
+│   ├── unit-3/
+│   ├── unit-4/
+│   └── unit-5/
+├── Embedded-System-Design/         # Shared ESD shell with unit-1 through unit-5
+│   └── src/units/
+│       ├── unit-1/
+│       ├── unit-2/
+│       ├── unit-3/
+│       ├── unit-4/
+│       └── unit-5/
+├── Object-Oriented-Programming-Java/ # Shared OOPJ shell with unit-1 through unit-5
+│   └── src/units/
+│       ├── unit-1/
+│       ├── unit-2/
+│       ├── unit-3/
+│       ├── unit-4/
+│       └── unit-5/
 └── aetheria-user-application/
     ├── apps/users/                  # Learner-facing Next.js application
     ├── packages/ai/                 # Grounded study-response utilities

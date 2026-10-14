@@ -6,7 +6,7 @@ The embedded ESD application is sourced from:
 - Reviewed revision: `b05438e88b95ca1c40b03bd8d68fb4ad865ab734`
 - Course: Embedded System Design
 
-The reviewed source is retained in the repository-level `ESD1` folder. The
+The reviewed source is retained in the repository-level `Embedded-System-Design` folder. The
 host build verifies every retained source file against `source-integrity.json`
 before producing the same-origin static application in `public/ESD1`.
 

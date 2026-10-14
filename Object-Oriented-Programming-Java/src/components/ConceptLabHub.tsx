@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { ConceptSim1 } from '../units/unit1/ConceptSim1';
-import { ConceptSim2 } from '../units/unit2/ConceptSim2';
-import { ConceptSim3 } from '../units/unit3/ConceptSim3';
-import { ConceptSim4 } from '../units/unit4/ConceptSim4';
-import { ConceptSim5 } from '../units/unit5/ConceptSim5';
+import { ConceptSim1 } from '../units/unit-1/ConceptSim1';
+import { ConceptSim2 } from '../units/unit-2/ConceptSim2';
+import { ConceptSim3 } from '../units/unit-3/ConceptSim3';
+import { ConceptSim4 } from '../units/unit-4/ConceptSim4';
+import { ConceptSim5 } from '../units/unit-5/ConceptSim5';
 import { UnitId } from '../types/concept';
 import { 
   Sparkles, 

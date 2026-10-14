@@ -6,11 +6,11 @@ import { GlobalSearchModal } from './components/GlobalSearchModal';
 import { HardwareGlossaryModal } from './components/HardwareGlossaryModal';
 
 // Dedicated Per-Unit Page Modules
-import { Unit1Page } from './units/unit1/Unit1Page';
-import { Unit2Page } from './units/unit2/Unit2Page';
-import { Unit3Page } from './units/unit3/Unit3Page';
-import { Unit4Page } from './units/unit4/Unit4Page';
-import { Unit5Page } from './units/unit5/Unit5Page';
+import { Unit1Page } from './units/unit-1/Unit1Page';
+import { Unit2Page } from './units/unit-2/Unit2Page';
+import { Unit3Page } from './units/unit-3/Unit3Page';
+import { Unit4Page } from './units/unit-4/Unit4Page';
+import { Unit5Page } from './units/unit-5/Unit5Page';
 
 export default function App() {
   const [lockedUnit] = useState<UnitId | undefined>(() => {

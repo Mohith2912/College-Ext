@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const repositoryRoot = path.dirname(root);
 const appRoot = path.join(root, 'apps/users');
-const source = path.join(repositoryRoot, 'OOPJ');
+const source = path.join(repositoryRoot, 'Object-Oriented-Programming-Java');
 const output = path.join(appRoot, 'public/OOPJ');
 const appRequire = createRequire(path.join(appRoot, 'package.json'));
 const require = createRequire(import.meta.url);
