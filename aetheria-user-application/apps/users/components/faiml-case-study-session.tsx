@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { BrainCircuit, Check, ChevronRight, CircleHelp, FlaskConical, RotateCcw, Sparkles } from 'lucide-react';
 
 const stages = [
@@ -20,18 +20,6 @@ export function FaimlCaseStudySession() {
   const progress = Math.round((submitted.length / stages.length) * 100);
   const current = useMemo(() => stages[stageIndex], [stageIndex]);
 
-  useEffect(() => {
-    try {
-      const saved = JSON.parse(window.localStorage.getItem('beyond-syllabus-faiml-case-v1') ?? '{}');
-      if (saved.answers) setAnswers(saved.answers);
-      if (Array.isArray(saved.submitted)) setSubmitted(saved.submitted);
-    } catch { /* local progress is optional */ }
-  }, []);
-
-  useEffect(() => {
-    try { window.localStorage.setItem('beyond-syllabus-faiml-case-v1', JSON.stringify({ answers, submitted })); } catch { /* local progress is optional */ }
-  }, [answers, submitted]);
-
   function submit() {
     if (!answers[activeStage]) return;
     setSubmitted(value => value.includes(activeStage) ? value : [...value, activeStage]);
@@ -41,7 +29,6 @@ export function FaimlCaseStudySession() {
     setAnswers({ search: '', features: '', metrics: '', clusters: '' });
     setSubmitted([]);
     setActiveStage('search');
-    try { window.localStorage.removeItem('beyond-syllabus-faiml-case-v1'); } catch { /* local progress is optional */ }
   }
 
   return <div className="faiml-case-shell">
