@@ -1,0 +1,915 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  VERIFIED_STUDENT
+  CONTENT_EDITOR
+  REVIEWER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum PublicationStatus {
+  DRAFT
+  IN_REVIEW
+  PUBLISHED
+  ARCHIVED
+}
+
+enum TranscriptVisibility {
+  PRIVATE
+  VERIFIED_STUDENTS
+  ENROLLED_STUDENTS
+  PUBLIC
+}
+
+enum ContentType {
+  NOTE
+  TRANSCRIPT
+  GLOSSARY
+  RESOURCE
+}
+
+enum ConceptEdgeType {
+  PREREQUISITE
+  BUILDS_ON
+  RELATED_TO
+  CONTRASTS_WITH
+  APPLIES_TO
+  EXAMPLE_OF
+}
+
+enum VerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  REVOKED
+  EXPIRED
+}
+
+enum ReviewDecision {
+  PENDING
+  APPROVED
+  CHANGES_REQUESTED
+  REJECTED
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+}
+
+enum QuizQuestionType {
+  SINGLE_CHOICE
+  MULTIPLE_CHOICE
+  SHORT_ANSWER
+}
+
+model User {
+  id                         String                      @id @default(uuid()) @db.Char(36)
+  email                      String                      @unique @db.VarChar(320)
+  name                       String?                     @db.VarChar(120)
+  sessionVersion             Int                         @default(0)
+  passwordHash               String?
+  emailVerified              DateTime?                   @db.DateTime(3)
+  image                      String?                     @db.Text
+  activeTermId               String?                     @db.Char(36)
+  preferences                Json                        @default("{}")
+  createdAt                  DateTime                    @default(now()) @db.DateTime(3)
+  updatedAt                  DateTime                    @updatedAt @db.DateTime(3)
+  deletedAt                  DateTime?                   @db.DateTime(3)
+  activeTerm                 AcademicTerm?               @relation(fields: [activeTermId], references: [id], onDelete: SetNull)
+  accounts                   Account[]
+  sessions                   Session[]
+  memberships                OrganizationMembership[]
+  enrollments                Enrollment[]
+  courseSelections           CourseSelection[]
+  institutionalVerifications InstitutionalVerification[]
+  bookmarks                  Bookmark[]
+  readingProgress            ReadingProgress[]
+  studyActivities            StudyActivity[]
+  aiConversations            AiConversation[]
+  quizzes                    Quiz[]
+  quizAttempts               QuizAttempt[]
+  contentReviews             ContentReview[]
+  contentIssues              ContentIssue[]
+  consentRecords             ConsentRecord[]
+  auditLogs                  AuditLog[]
+  noteVersions               NoteVersion[]
+
+  @@index([deletedAt, createdAt, id])
+}
+
+model Account {
+  id                String   @id @default(uuid()) @db.Char(36)
+  userId            String   @db.Char(36)
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?  @db.Text
+  access_token      String?  @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?  @db.Text
+  session_state     String?
+  createdAt         DateTime @default(now()) @db.DateTime(3)
+  updatedAt         DateTime @updatedAt @db.DateTime(3)
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(uuid()) @db.Char(36)
+  sessionToken String   @unique
+  userId       String   @db.Char(36)
+  expires      DateTime @db.DateTime(3)
+  createdAt    DateTime @default(now()) @db.DateTime(3)
+  updatedAt    DateTime @updatedAt @db.DateTime(3)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expires])
+}
+
+model VerificationToken {
+  id         String   @id @default(uuid()) @db.Char(36)
+  identifier String
+  token      String   @unique
+  expires    DateTime @db.DateTime(3)
+  createdAt  DateTime @default(now()) @db.DateTime(3)
+  updatedAt  DateTime @updatedAt @db.DateTime(3)
+
+  @@unique([identifier, token])
+  @@index([expires])
+}
+
+model RateLimitBucket {
+  id        String   @id @default(uuid()) @db.Char(36)
+  key       String   @unique
+  count     Int      @default(0)
+  resetAt   DateTime @db.DateTime(3)
+  createdAt DateTime @default(now()) @db.DateTime(3)
+  updatedAt DateTime @updatedAt @db.DateTime(3)
+
+  @@index([resetAt])
+}
+
+model Organization {
+  id                        String                      @id @default(uuid()) @db.Char(36)
+  slug                      String                      @unique @db.VarChar(100)
+  name                      String                      @db.VarChar(180)
+  description               String?                     @db.Text
+  allowedEmailDomains       Json                        @default("[]")
+  verificationPolicyVersion String                      @default("1")
+  createdAt                 DateTime                    @default(now()) @db.DateTime(3)
+  updatedAt                 DateTime                    @updatedAt @db.DateTime(3)
+  deletedAt                 DateTime?                   @db.DateTime(3)
+  memberships               OrganizationMembership[]
+  terms                     AcademicTerm[]
+  courses                   Course[]
+  courseOfferings           CourseOffering[]
+  modules                   Module[]
+  notes                     NoteDocument[]
+  enrollments               Enrollment[]
+  selections                CourseSelection[]
+  glossaryEntries           GlossaryEntry[]
+  resources                 LearningResource[]
+  conceptNodes              ConceptNode[]
+  conceptEdges              ConceptEdge[]
+  transcripts               Transcript[]
+  verifications             InstitutionalVerification[]
+  bookmarks                 Bookmark[]
+  readingProgress           ReadingProgress[]
+  studyActivities           StudyActivity[]
+  searchDocuments           SearchDocument[]
+  aiConversations           AiConversation[]
+  quizzes                   Quiz[]
+  quizAttempts              QuizAttempt[]
+  contentReviews            ContentReview[]
+  contentIssues             ContentIssue[]
+  consentRecords            ConsentRecord[]
+  featureSettings           FeatureSetting[]
+  auditLogs                 AuditLog[]
+}
+
+model OrganizationMembership {
+  id             String       @id @default(uuid()) @db.Char(36)
+  organizationId String       @db.Char(36)
+  userId         String       @db.Char(36)
+  role           Role         @default(STUDENT)
+  revokedAt      DateTime?    @db.DateTime(3)
+  createdAt      DateTime     @default(now()) @db.DateTime(3)
+  updatedAt      DateTime     @updatedAt @db.DateTime(3)
+  deletedAt      DateTime?    @db.DateTime(3)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId])
+  @@index([organizationId, role, createdAt, id])
+}
+
+model AcademicTerm {
+  id             String           @id @default(uuid()) @db.Char(36)
+  organizationId String           @db.Char(36)
+  slug           String           @db.VarChar(120)
+  name           String           @db.VarChar(160)
+  number         Int
+  description    String?          @db.Text
+  startsAt       DateTime?        @db.DateTime(3)
+  endsAt         DateTime?        @db.DateTime(3)
+  createdAt      DateTime         @default(now()) @db.DateTime(3)
+  updatedAt      DateTime         @updatedAt @db.DateTime(3)
+  deletedAt      DateTime?        @db.DateTime(3)
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  offerings      CourseOffering[]
+  activeUsers    User[]
+
+  @@unique([organizationId, slug])
+  @@unique([organizationId, number])
+  @@unique([id, organizationId])
+  @@index([organizationId, number, id])
+}
+
+model Course {
+  id              String             @id @default(uuid()) @db.Char(36)
+  organizationId  String             @db.Char(36)
+  slug            String             @db.VarChar(160)
+  title           String             @db.VarChar(200)
+  description     String             @db.Text
+  subject         String             @db.VarChar(100)
+  code            String?            @db.VarChar(40)
+  status          PublicationStatus  @default(DRAFT)
+  createdAt       DateTime           @default(now()) @db.DateTime(3)
+  updatedAt       DateTime           @updatedAt @db.DateTime(3)
+  deletedAt       DateTime?          @db.DateTime(3)
+  organization    Organization       @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  offerings       CourseOffering[]
+  modules         Module[]
+  glossaryEntries GlossaryEntry[]
+  resources       LearningResource[]
+  concepts        ConceptNode[]
+  quizzes         Quiz[]
+
+  @@unique([organizationId, slug])
+  @@unique([id, organizationId])
+  @@index([organizationId, status, deletedAt, title, id])
+}
+
+model CourseOffering {
+  id             String            @id @default(uuid()) @db.Char(36)
+  organizationId String            @db.Char(36)
+  termId         String            @db.Char(36)
+  courseId       String            @db.Char(36)
+  position       Int               @default(1)
+  createdAt      DateTime          @default(now()) @db.DateTime(3)
+  updatedAt      DateTime          @updatedAt @db.DateTime(3)
+  deletedAt      DateTime?         @db.DateTime(3)
+  organization   Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  term           AcademicTerm      @relation(fields: [termId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  course         Course            @relation(fields: [courseId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  enrollments    Enrollment[]
+  selections     CourseSelection[]
+
+  @@unique([termId, courseId])
+  @@unique([id, organizationId])
+  @@index([organizationId, termId, position, id])
+}
+
+model Enrollment {
+  id             String         @id @default(uuid()) @db.Char(36)
+  organizationId String         @db.Char(36)
+  userId         String         @db.Char(36)
+  offeringId     String         @db.Char(36)
+  enrolledAt     DateTime       @default(now()) @db.DateTime(3)
+  revokedAt      DateTime?      @db.DateTime(3)
+  createdAt      DateTime       @default(now()) @db.DateTime(3)
+  updatedAt      DateTime       @updatedAt @db.DateTime(3)
+  deletedAt      DateTime?      @db.DateTime(3)
+  organization   Organization   @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  offering       CourseOffering @relation(fields: [offeringId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([userId, offeringId])
+  @@index([organizationId, offeringId, createdAt, id])
+}
+
+model CourseSelection {
+  id             String         @id @default(uuid()) @db.Char(36)
+  organizationId String         @db.Char(36)
+  userId         String         @db.Char(36)
+  offeringId     String         @db.Char(36)
+  createdAt      DateTime       @default(now()) @db.DateTime(3)
+  updatedAt      DateTime       @updatedAt @db.DateTime(3)
+  organization   Organization   @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  offering       CourseOffering @relation(fields: [offeringId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([userId, offeringId])
+  @@index([organizationId, userId])
+}
+
+model Module {
+  id               String            @id @default(uuid()) @db.Char(36)
+  organizationId   String            @db.Char(36)
+  courseId         String            @db.Char(36)
+  slug             String            @db.VarChar(160)
+  title            String            @db.VarChar(200)
+  description      String            @db.Text
+  position         Int
+  estimatedMinutes Int               @default(15)
+  status           PublicationStatus @default(DRAFT)
+  createdAt        DateTime          @default(now()) @db.DateTime(3)
+  updatedAt        DateTime          @updatedAt @db.DateTime(3)
+  deletedAt        DateTime?         @db.DateTime(3)
+  organization     Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  course           Course            @relation(fields: [courseId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  sections         ModuleSection[]
+  note             NoteDocument?
+  transcripts      Transcript[]
+  concepts         ConceptNode[]
+  bookmarks        Bookmark[]
+  readingProgress  ReadingProgress[]
+  studyActivities  StudyActivity[]
+  quizzes          Quiz[]
+  contentIssues    ContentIssue[]
+
+  @@unique([courseId, slug])
+  @@unique([courseId, position])
+  @@unique([id, organizationId])
+  @@index([organizationId, status, createdAt, id])
+}
+
+model ModuleSection {
+  id        String    @id @default(uuid()) @db.Char(36)
+  moduleId  String    @db.Char(36)
+  slug      String    @db.VarChar(160)
+  title     String    @db.VarChar(200)
+  position  Int
+  createdAt DateTime  @default(now()) @db.DateTime(3)
+  updatedAt DateTime  @updatedAt @db.DateTime(3)
+  deletedAt DateTime? @db.DateTime(3)
+  module    Module    @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  topics    Topic[]
+
+  @@unique([moduleId, slug])
+  @@unique([moduleId, position])
+}
+
+model Topic {
+  id        String        @id @default(uuid()) @db.Char(36)
+  sectionId String        @db.Char(36)
+  slug      String        @db.VarChar(160)
+  title     String        @db.VarChar(200)
+  position  Int
+  summary   String?
+  createdAt DateTime      @default(now()) @db.DateTime(3)
+  updatedAt DateTime      @updatedAt @db.DateTime(3)
+  deletedAt DateTime?     @db.DateTime(3)
+  section   ModuleSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  concepts  ConceptNode[]
+
+  @@unique([sectionId, slug])
+  @@unique([sectionId, position])
+}
+
+model NoteDocument {
+  id             String            @id @default(uuid()) @db.Char(36)
+  organizationId String            @db.Char(36)
+  moduleId       String            @unique @db.Char(36)
+  title          String            @db.VarChar(200)
+  markdown       String            @db.Text
+  status         PublicationStatus @default(DRAFT)
+  currentVersion Int               @default(1)
+  license        String            @default("All rights reserved")
+  provenance     String            @db.Text
+  publishedAt    DateTime?         @db.DateTime(3)
+  createdAt      DateTime          @default(now()) @db.DateTime(3)
+  updatedAt      DateTime          @updatedAt @db.DateTime(3)
+  deletedAt      DateTime?         @db.DateTime(3)
+  organization   Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  module         Module            @relation(fields: [moduleId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  versions       NoteVersion[]
+  reviews        ContentReview[]
+
+  @@unique([id, organizationId])
+  @@unique([moduleId, organizationId])
+  @@index([organizationId, status, updatedAt, id])
+}
+
+model NoteVersion {
+  id             String         @id @default(uuid()) @db.Char(36)
+  noteDocumentId String         @db.Char(36)
+  version        Int
+  title          String         @db.VarChar(200)
+  markdown       String         @db.Text
+  changeSummary  String?        @db.Text
+  authorId       String?        @db.Char(36)
+  checksum       String         @db.VarChar(64)
+  createdAt      DateTime       @default(now()) @db.DateTime(3)
+  updatedAt      DateTime       @updatedAt @db.DateTime(3)
+  noteDocument   NoteDocument   @relation(fields: [noteDocumentId], references: [id], onDelete: Restrict)
+  author         User?          @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  chunks         ContentChunk[]
+
+  @@unique([noteDocumentId, version])
+  @@index([noteDocumentId, createdAt, id])
+}
+
+model ContentChunk {
+  id              String           @id @default(uuid()) @db.Char(36)
+  noteVersionId   String           @db.Char(36)
+  position        Int
+  heading         String?
+  anchor          String?
+  text            String           @db.Text
+  tokenCount      Int
+  checksum        String           @db.VarChar(64)
+  createdAt       DateTime         @default(now()) @db.DateTime(3)
+  updatedAt       DateTime         @updatedAt @db.DateTime(3)
+  noteVersion     NoteVersion      @relation(fields: [noteVersionId], references: [id], onDelete: Cascade)
+  searchDocuments SearchDocument[]
+  citations       AiCitation[]
+
+  @@unique([noteVersionId, position])
+}
+
+model GlossaryEntry {
+  id              String            @id @default(uuid()) @db.Char(36)
+  organizationId  String            @db.Char(36)
+  courseId        String?           @db.Char(36)
+  slug            String            @db.VarChar(160)
+  term            String            @db.VarChar(180)
+  definition      String            @db.Text
+  status          PublicationStatus @default(DRAFT)
+  createdAt       DateTime          @default(now()) @db.DateTime(3)
+  updatedAt       DateTime          @updatedAt @db.DateTime(3)
+  deletedAt       DateTime?         @db.DateTime(3)
+  organization    Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  course          Course?           @relation(fields: [courseId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  searchDocuments SearchDocument[]
+
+  @@unique([organizationId, slug])
+  @@index([organizationId, status, term, id])
+}
+
+model LearningResource {
+  id              String            @id @default(uuid()) @db.Char(36)
+  organizationId  String            @db.Char(36)
+  courseId        String?           @db.Char(36)
+  title           String            @db.VarChar(200)
+  url             String            @db.Text
+  description     String?           @db.Text
+  license         String
+  status          PublicationStatus @default(DRAFT)
+  createdAt       DateTime          @default(now()) @db.DateTime(3)
+  updatedAt       DateTime          @updatedAt @db.DateTime(3)
+  deletedAt       DateTime?         @db.DateTime(3)
+  organization    Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  course          Course?           @relation(fields: [courseId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  searchDocuments SearchDocument[]
+
+  @@unique([organizationId, url(length: 500)])
+  @@index([organizationId, status, createdAt, id])
+}
+
+model ConceptNode {
+  id             String            @id @default(uuid()) @db.Char(36)
+  organizationId String            @db.Char(36)
+  courseId       String            @db.Char(36)
+  moduleId       String?           @db.Char(36)
+  topicId        String?           @db.Char(36)
+  slug           String            @db.VarChar(160)
+  label          String            @db.VarChar(200)
+  definition     String            @db.Text
+  status         PublicationStatus @default(DRAFT)
+  createdAt      DateTime          @default(now()) @db.DateTime(3)
+  updatedAt      DateTime          @updatedAt @db.DateTime(3)
+  deletedAt      DateTime?         @db.DateTime(3)
+  organization   Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  course         Course            @relation(fields: [courseId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  module         Module?           @relation(fields: [moduleId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  topic          Topic?            @relation(fields: [topicId], references: [id], onDelete: SetNull)
+  outgoingEdges  ConceptEdge[]     @relation("ConceptSource")
+  incomingEdges  ConceptEdge[]     @relation("ConceptTarget")
+
+  @@unique([organizationId, slug])
+  @@unique([id, organizationId])
+  @@index([organizationId, courseId, status, id])
+}
+
+model ConceptEdge {
+  id             String            @id @default(uuid()) @db.Char(36)
+  organizationId String            @db.Char(36)
+  sourceId       String            @db.Char(36)
+  targetId       String            @db.Char(36)
+  type           ConceptEdgeType
+  explanation    String?           @db.Text
+  status         PublicationStatus @default(DRAFT)
+  createdAt      DateTime          @default(now()) @db.DateTime(3)
+  updatedAt      DateTime          @updatedAt @db.DateTime(3)
+  deletedAt      DateTime?         @db.DateTime(3)
+  organization   Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  source         ConceptNode       @relation("ConceptSource", fields: [sourceId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  target         ConceptNode       @relation("ConceptTarget", fields: [targetId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([sourceId, targetId, type])
+  @@index([organizationId, status, targetId])
+}
+
+model Transcript {
+  id              String               @id @default(uuid()) @db.Char(36)
+  organizationId  String               @db.Char(36)
+  moduleId        String               @db.Char(36)
+  title           String               @db.VarChar(200)
+  sourceLabel     String
+  license         String
+  provenance      String               @db.Text
+  visibility      TranscriptVisibility @default(PRIVATE)
+  status          PublicationStatus    @default(DRAFT)
+  durationSeconds Int?
+  storageKey      String?              @db.Text
+  createdAt       DateTime             @default(now()) @db.DateTime(3)
+  updatedAt       DateTime             @updatedAt @db.DateTime(3)
+  deletedAt       DateTime?            @db.DateTime(3)
+  organization    Organization         @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  module          Module               @relation(fields: [moduleId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  chunks          TranscriptChunk[]
+  reviews         ContentReview[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, moduleId, status, createdAt, id])
+}
+
+model TranscriptChunk {
+  id                String           @id @default(uuid()) @db.Char(36)
+  transcriptId      String           @db.Char(36)
+  position          Int
+  startSeconds      Int
+  endSeconds        Int
+  speaker           String?
+  text              String           @db.Text
+  generatedMetadata Json             @default("{}")
+  createdAt         DateTime         @default(now()) @db.DateTime(3)
+  updatedAt         DateTime         @updatedAt @db.DateTime(3)
+  transcript        Transcript       @relation(fields: [transcriptId], references: [id], onDelete: Cascade)
+  searchDocuments   SearchDocument[]
+  citations         AiCitation[]
+
+  @@unique([transcriptId, position])
+  @@index([transcriptId, startSeconds])
+}
+
+model InstitutionalVerification {
+  id             String             @id @default(uuid()) @db.Char(36)
+  organizationId String             @db.Char(36)
+  userId         String             @db.Char(36)
+  email          String             @db.VarChar(320)
+  domain         String             @db.VarChar(253)
+  status         VerificationStatus @default(PENDING)
+  policyVersion  String
+  verifiedAt     DateTime?          @db.DateTime(3)
+  expiresAt      DateTime?          @db.DateTime(3)
+  revokedAt      DateTime?          @db.DateTime(3)
+  createdAt      DateTime           @default(now()) @db.DateTime(3)
+  updatedAt      DateTime           @updatedAt @db.DateTime(3)
+  deletedAt      DateTime?          @db.DateTime(3)
+  organization   Organization       @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  user           User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId])
+  @@index([organizationId, status, expiresAt, id])
+}
+
+model Bookmark {
+  id             String       @id @default(uuid()) @db.Char(36)
+  organizationId String       @db.Char(36)
+  userId         String       @db.Char(36)
+  moduleId       String       @db.Char(36)
+  anchor         String       @default("") @db.VarChar(200)
+  note           String?      @db.Text
+  tags           Json         @default("[]")
+  createdAt      DateTime     @default(now()) @db.DateTime(3)
+  updatedAt      DateTime     @updatedAt @db.DateTime(3)
+  deletedAt      DateTime?    @db.DateTime(3)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  module         Module       @relation(fields: [moduleId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([userId, moduleId, anchor])
+  @@index([organizationId, userId, createdAt, id])
+}
+
+model ReadingProgress {
+  id             String       @id @default(uuid()) @db.Char(36)
+  organizationId String       @db.Char(36)
+  userId         String       @db.Char(36)
+  moduleId       String       @db.Char(36)
+  percent        Int          @default(0)
+  lastAnchor     String?
+  completedAt    DateTime?    @db.DateTime(3)
+  createdAt      DateTime     @default(now()) @db.DateTime(3)
+  updatedAt      DateTime     @updatedAt @db.DateTime(3)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  module         Module       @relation(fields: [moduleId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@unique([userId, moduleId])
+  @@index([organizationId, userId, updatedAt, id])
+}
+
+model StudyActivity {
+  id             String       @id @default(uuid()) @db.Char(36)
+  organizationId String       @db.Char(36)
+  userId         String       @db.Char(36)
+  moduleId       String?      @db.Char(36)
+  kind           String       @db.VarChar(50)
+  seconds        Int          @default(0)
+  metadata       Json         @default("{}")
+  createdAt      DateTime     @default(now()) @db.DateTime(3)
+  updatedAt      DateTime     @updatedAt @db.DateTime(3)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  module         Module?      @relation(fields: [moduleId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@index([organizationId, userId, createdAt, id])
+}
+
+model SearchDocument {
+  id                String               @id @default(uuid()) @db.Char(36)
+  organizationId    String               @db.Char(36)
+  type              ContentType
+  contentChunkId    String?              @db.Char(36)
+  transcriptChunkId String?              @db.Char(36)
+  glossaryEntryId   String?              @db.Char(36)
+  resourceId        String?              @db.Char(36)
+  title             String
+  text              String               @db.Text
+  url               String               @db.Text
+  visibility        TranscriptVisibility @default(PRIVATE)
+  sourceVersion     Int                  @default(1)
+  indexedAt         DateTime?            @db.DateTime(3)
+  createdAt         DateTime             @default(now()) @db.DateTime(3)
+  updatedAt         DateTime             @updatedAt @db.DateTime(3)
+  deletedAt         DateTime?            @db.DateTime(3)
+  organization      Organization         @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  contentChunk      ContentChunk?        @relation(fields: [contentChunkId], references: [id], onDelete: Cascade)
+  transcriptChunk   TranscriptChunk?     @relation(fields: [transcriptChunkId], references: [id], onDelete: Cascade)
+  glossaryEntry     GlossaryEntry?       @relation(fields: [glossaryEntryId], references: [id], onDelete: Cascade)
+  resource          LearningResource?    @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  embeddings        Embedding[]
+
+  @@unique([contentChunkId])
+  @@unique([transcriptChunkId])
+  @@unique([glossaryEntryId])
+  @@unique([resourceId])
+  @@index([organizationId, visibility, type, updatedAt, id])
+}
+
+model Embedding {
+  id               String         @id @default(uuid()) @db.Char(36)
+  searchDocumentId String         @db.Char(36)
+  provider         String
+  model            String
+  dimensions       Int
+  vector           Json?
+  checksum         String         @db.VarChar(64)
+  createdAt        DateTime       @default(now()) @db.DateTime(3)
+  updatedAt        DateTime       @updatedAt @db.DateTime(3)
+  searchDocument   SearchDocument @relation(fields: [searchDocumentId], references: [id], onDelete: Cascade)
+
+  @@unique([searchDocumentId, provider, model])
+}
+
+model AiConversation {
+  id             String       @id @default(uuid()) @db.Char(36)
+  organizationId String       @db.Char(36)
+  userId         String       @db.Char(36)
+  title          String       @db.VarChar(200)
+  scope          Json         @default("{}")
+  createdAt      DateTime     @default(now()) @db.DateTime(3)
+  updatedAt      DateTime     @updatedAt @db.DateTime(3)
+  deletedAt      DateTime?    @db.DateTime(3)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages       AiMessage[]
+
+  @@index([organizationId, userId, deletedAt, updatedAt, id])
+}
+
+model AiMessage {
+  id             String          @id @default(uuid()) @db.Char(36)
+  conversationId String          @db.Char(36)
+  role           MessageRole
+  text           String          @db.Text
+  provider       String?
+  model          String?
+  promptVersion  String?
+  inputTokens    Int             @default(0)
+  outputTokens   Int             @default(0)
+  latencyMs      Int?
+  createdAt      DateTime        @default(now()) @db.DateTime(3)
+  updatedAt      DateTime        @updatedAt @db.DateTime(3)
+  deletedAt      DateTime?       @db.DateTime(3)
+  conversation   AiConversation  @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  citations      AiCitation[]
+  reviews        ContentReview[]
+
+  @@index([conversationId, createdAt, id])
+}
+
+model AiCitation {
+  id                String           @id @default(uuid()) @db.Char(36)
+  messageId         String           @db.Char(36)
+  contentChunkId    String?          @db.Char(36)
+  transcriptChunkId String?          @db.Char(36)
+  position          Int
+  quote             String           @db.Text
+  createdAt         DateTime         @default(now()) @db.DateTime(3)
+  updatedAt         DateTime         @updatedAt @db.DateTime(3)
+  message           AiMessage        @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  contentChunk      ContentChunk?    @relation(fields: [contentChunkId], references: [id], onDelete: Restrict)
+  transcriptChunk   TranscriptChunk? @relation(fields: [transcriptChunkId], references: [id], onDelete: Restrict)
+
+  @@unique([messageId, position])
+}
+
+model Quiz {
+  id             String            @id @default(uuid()) @db.Char(36)
+  organizationId String            @db.Char(36)
+  userId         String?           @db.Char(36)
+  courseId       String            @db.Char(36)
+  moduleId       String?           @db.Char(36)
+  title          String            @db.VarChar(200)
+  status         PublicationStatus @default(DRAFT)
+  generated      Boolean           @default(false)
+  provider       String?
+  model          String?
+  promptVersion  String?
+  createdAt      DateTime          @default(now()) @db.DateTime(3)
+  updatedAt      DateTime          @updatedAt @db.DateTime(3)
+  deletedAt      DateTime?         @db.DateTime(3)
+  organization   Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  user           User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  course         Course            @relation(fields: [courseId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  module         Module?           @relation(fields: [moduleId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  questions      QuizQuestion[]
+  attempts       QuizAttempt[]
+  reviews        ContentReview[]
+
+  @@unique([id, organizationId])
+  @@index([organizationId, userId, status, createdAt, id])
+}
+
+model QuizQuestion {
+  id                  String           @id @default(uuid()) @db.Char(36)
+  quizId              String           @db.Char(36)
+  position            Int
+  type                QuizQuestionType @default(SINGLE_CHOICE)
+  prompt              String           @db.Text
+  options             Json
+  answer              Json
+  explanation         String           @db.Text
+  points              Int              @default(1)
+  sourceNoteVersionId String?          @db.Char(36)
+  createdAt           DateTime         @default(now()) @db.DateTime(3)
+  updatedAt           DateTime         @updatedAt @db.DateTime(3)
+  quiz                Quiz             @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  responses           QuizResponse[]
+
+  @@unique([quizId, position])
+  @@unique([id, quizId])
+}
+
+model QuizAttempt {
+  id             String         @id @default(uuid()) @db.Char(36)
+  organizationId String         @db.Char(36)
+  userId         String         @db.Char(36)
+  quizId         String         @db.Char(36)
+  completedAt    DateTime?      @db.DateTime(3)
+  score          Int?
+  maximumScore   Int
+  createdAt      DateTime       @default(now()) @db.DateTime(3)
+  updatedAt      DateTime       @updatedAt @db.DateTime(3)
+  deletedAt      DateTime?      @db.DateTime(3)
+  organization   Organization   @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz           Quiz           @relation(fields: [quizId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  responses      QuizResponse[]
+
+  @@unique([id, quizId])
+  @@index([organizationId, userId, createdAt, id])
+}
+
+model QuizResponse {
+  id            String       @id @default(uuid()) @db.Char(36)
+  attemptId     String       @db.Char(36)
+  questionId    String       @db.Char(36)
+  quizId        String       @db.Char(36)
+  answer        Json
+  correct       Boolean?
+  awardedPoints Int          @default(0)
+  createdAt     DateTime     @default(now()) @db.DateTime(3)
+  updatedAt     DateTime     @updatedAt @db.DateTime(3)
+  attempt       QuizAttempt  @relation(fields: [attemptId, quizId], references: [id, quizId], onDelete: Cascade)
+  question      QuizQuestion @relation(fields: [questionId, quizId], references: [id, quizId], onDelete: Restrict)
+
+  @@unique([attemptId, questionId])
+}
+
+model ContentReview {
+  id             String         @id @default(uuid()) @db.Char(36)
+  organizationId String         @db.Char(36)
+  reviewerId     String?        @db.Char(36)
+  noteDocumentId String?        @db.Char(36)
+  transcriptId   String?        @db.Char(36)
+  quizId         String?        @db.Char(36)
+  aiMessageId    String?        @db.Char(36)
+  decision       ReviewDecision @default(PENDING)
+  comment        String?        @db.Text
+  reviewedAt     DateTime?      @db.DateTime(3)
+  createdAt      DateTime       @default(now()) @db.DateTime(3)
+  updatedAt      DateTime       @updatedAt @db.DateTime(3)
+  deletedAt      DateTime?      @db.DateTime(3)
+  organization   Organization   @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  reviewer       User?          @relation(fields: [reviewerId], references: [id], onDelete: SetNull)
+  noteDocument   NoteDocument?  @relation(fields: [noteDocumentId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  transcript     Transcript?    @relation(fields: [transcriptId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  quiz           Quiz?          @relation(fields: [quizId, organizationId], references: [id, organizationId], onDelete: Restrict)
+  aiMessage      AiMessage?     @relation(fields: [aiMessageId], references: [id], onDelete: Restrict)
+
+  @@index([organizationId, decision, createdAt, id])
+}
+
+model ContentIssue {
+  id             String       @id @default(uuid()) @db.Char(36)
+  organizationId String       @db.Char(36)
+  userId         String?      @db.Char(36)
+  moduleId       String       @db.Char(36)
+  anchor         String?
+  description    String       @db.Text
+  resolvedAt     DateTime?    @db.DateTime(3)
+  resolution     String?      @db.Text
+  createdAt      DateTime     @default(now()) @db.DateTime(3)
+  updatedAt      DateTime     @updatedAt @db.DateTime(3)
+  deletedAt      DateTime?    @db.DateTime(3)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  user           User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  module         Module       @relation(fields: [moduleId, organizationId], references: [id, organizationId], onDelete: Restrict)
+
+  @@index([organizationId, resolvedAt, createdAt, id])
+}
+
+model ConsentRecord {
+  id             String       @id @default(uuid()) @db.Char(36)
+  organizationId String       @db.Char(36)
+  userId         String       @db.Char(36)
+  purpose        String       @db.VarChar(100)
+  policyVersion  String
+  granted        Boolean
+  createdAt      DateTime     @default(now()) @db.DateTime(3)
+  updatedAt      DateTime     @updatedAt @db.DateTime(3)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, userId, purpose, createdAt, id])
+}
+
+model FeatureSetting {
+  id             String       @id @default(uuid()) @db.Char(36)
+  organizationId String       @db.Char(36)
+  key            String       @db.VarChar(100)
+  value          Json
+  createdAt      DateTime     @default(now()) @db.DateTime(3)
+  updatedAt      DateTime     @updatedAt @db.DateTime(3)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+
+  @@unique([organizationId, key])
+}
+
+model AuditLog {
+  id             String       @id @default(uuid()) @db.Char(36)
+  organizationId String       @db.Char(36)
+  actorId        String?      @db.Char(36)
+  action         String       @db.VarChar(120)
+  entityType     String       @db.VarChar(80)
+  entityId       String?
+  metadata       Json         @default("{}")
+  requestId      String?      @db.VarChar(100)
+  createdAt      DateTime     @default(now()) @db.DateTime(3)
+  updatedAt      DateTime     @updatedAt @db.DateTime(3)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  actor          User?        @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, createdAt, id])
+  @@index([organizationId, entityType, entityId])
+  @@index([actorId, createdAt])
+}

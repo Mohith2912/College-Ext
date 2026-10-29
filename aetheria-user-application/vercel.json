@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "buildCommand": "corepack pnpm --filter @aetheria/database build && corepack pnpm --filter @aetheria/validation build && corepack pnpm --filter @aetheria/auth build && corepack pnpm --filter @aetheria/ai build && corepack pnpm --filter @aetheria/users build",
+  "outputDirectory": "apps/users/.next"
+}

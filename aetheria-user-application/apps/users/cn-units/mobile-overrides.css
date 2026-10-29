@@ -1,0 +1,51 @@
+/* Responsive containment only. The original unit visuals and interactions stay unchanged. */
+@media (max-width: 767px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  #root > div,
+  header,
+  header > div,
+  main,
+  section,
+  article,
+  .flex-1,
+  .grid > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  main {
+    width: 100%;
+  }
+
+  .overflow-x-auto {
+    max-width: 100%;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: thin;
+  }
+
+  img,
+  svg,
+  canvas,
+  video {
+    max-width: 100%;
+  }
+
+  input,
+  select,
+  textarea,
+  pre {
+    max-width: 100%;
+  }
+
+  button,
+  a {
+    touch-action: manipulation;
+  }
+}

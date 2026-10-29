@@ -1,0 +1,16 @@
+packages:
+  - apps/*
+  - packages/*
+allowBuilds:
+  '@prisma/client': true
+  '@prisma/engines': true
+  esbuild: true
+  prisma: true
+  unrs-resolver: true
+overrides:
+  deepmerge-ts: 8.0.2
+  effect: 3.20.0
+  nodemailer: 10.0.14
+  postcss: 8.5.28
+minimumReleaseAgeExclude:
+  - nodemailer@10.0.14

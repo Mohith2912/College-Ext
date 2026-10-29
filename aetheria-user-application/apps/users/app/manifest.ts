@@ -1,0 +1,2 @@
+import type { MetadataRoute } from 'next';
+export default function manifest():MetadataRoute.Manifest{return{name:'Beyond Syllabus',short_name:'Beyond Syllabus',description:'Learn, explore, and apply with course notes, conversations, and Learn for a Test practice.',start_url:'/notes',display:'standalone',background_color:'#f7f8fa',theme_color:'#173b73',icons:[{src:'/icon.svg',sizes:'any',type:'image/svg+xml'}]}}

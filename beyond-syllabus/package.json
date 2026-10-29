@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "node --env-file=.env tooling/dev.mjs",
-    "build": "node --env-file-if-exists=.env node_modules/turbo/bin/turbo run build",
+    "build": "pnpm --filter @beyond-syllabus/database build && pnpm --filter @beyond-syllabus/validation build && pnpm --filter @beyond-syllabus/auth build && pnpm --filter @beyond-syllabus/ai build && pnpm --filter @beyond-syllabus/users build",
     "lint": "eslint .",
     "typecheck": "turbo run typecheck",
     "format": "prettier --write .",
