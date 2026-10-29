@@ -9,6 +9,7 @@ This repository contains the learner-facing application in `apps/users`, backed 
 - Responsive course library with 12 demonstration courses and 48 modules
 - Focused Markdown note reader with reading preferences
 - Original fictional case studies connected to course modules
+- Interactive multi-discipline case study studio across AI & ML (FAIML), OOP using Java, Embedded Systems Design, and Computer Networks
 - Semester-based course podcasts presented as a two-host spoken conversation
 - Interactive step-by-step sessions generated from the latest published module content
 - Account registration, email verification, and private study workspace
