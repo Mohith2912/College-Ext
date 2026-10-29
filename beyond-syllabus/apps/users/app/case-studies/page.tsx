@@ -11,9 +11,10 @@ export const metadata: Metadata = {
   description: 'Practise AI & Machine Learning, Computer Networks, Object-Oriented Programming, and Embedded Systems Design through detailed interactive sessions.',
 };
 
-export default async function CasesPage({ searchParams }: { searchParams: Promise<{ course?: string }> }) {
-  const { course } = await searchParams;
+export default async function CasesPage({ searchParams }: { searchParams: Promise<{ course?: string; unit?: string }> }) {
+  const { course, unit } = await searchParams;
   const selectedCourse = course === 'faiml' ? 'faiml' : course === 'cn' ? 'cn' : course === 'esd' ? 'esd' : 'oopj';
+  const initialUnit = unit ? Math.min(Math.max(parseInt(unit, 10) || 1, 1), 5) as 1 | 2 | 3 | 4 | 5 : 1;
 
   return <>
     <nav className="case-course-switcher" aria-label="Choose a case study course">
@@ -25,6 +26,6 @@ export default async function CasesPage({ searchParams }: { searchParams: Promis
         <Link href="/case-studies?course=cn" aria-current={selectedCourse === 'cn' ? 'page' : undefined}><Network size={17} aria-hidden="true" /><span><strong>Computer Networks</strong><small>Diagnose a streaming incident</small></span></Link>
       </div>
     </nav>
-    {selectedCourse === 'faiml' ? <FaimlCaseStudySession /> : selectedCourse === 'oopj' ? <OopjCaseStudySession /> : selectedCourse === 'esd' ? <EsdCaseStudySession /> : <CnCaseStudySession />}
+    {selectedCourse === 'faiml' ? <FaimlCaseStudySession initialUnit={initialUnit} /> : selectedCourse === 'oopj' ? <OopjCaseStudySession /> : selectedCourse === 'esd' ? <EsdCaseStudySession /> : <CnCaseStudySession />}
   </>;
 }

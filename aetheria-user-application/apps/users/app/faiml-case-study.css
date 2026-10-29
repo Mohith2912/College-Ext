@@ -211,6 +211,68 @@ html[data-theme='dark'] .faiml-search-options button.wrong,html[data-theme='dark
 html[data-theme='dark'] .faiml-matrix-cell.danger{background:#381414;border-color:#7f1d1d}
 html[data-theme='dark'] .faiml-matrix-cell.safe{background:#271442;border-color:#6b21a8}
 
+/* FAIML Unit Switcher Tabs */
+.faiml-unit-nav{display:flex;align-items:stretch;gap:8px;overflow-x:auto;padding:6px;border:1px solid var(--faiml-line);border-radius:18px;background:var(--faiml-surface);scrollbar-width:none}
+.faiml-unit-nav::-webkit-scrollbar{display:none}
+.faiml-unit-tab{display:flex;align-items:center;gap:10px;flex:1;min-width:180px;padding:12px 16px;border:1px solid transparent;border-radius:12px;background:transparent;color:var(--faiml-muted);font-size:12px;font-weight:700;text-align:left;cursor:pointer;transition:all .18s ease}
+.faiml-unit-tab:hover{background:var(--faiml-tint);color:var(--faiml-ink)}
+.faiml-unit-tab[aria-selected='true']{border-color:color-mix(in srgb,var(--faiml-accent) 45%,var(--faiml-line));background:linear-gradient(135deg,var(--faiml-tint),color-mix(in srgb,var(--faiml-accent-soft) 40%,var(--faiml-surface)));color:var(--faiml-accent);box-shadow:0 4px 14px color-mix(in srgb,var(--faiml-accent) 15%,transparent)}
+.faiml-unit-tab svg{flex-shrink:0;color:var(--faiml-accent)}
+.faiml-unit-tab span{display:grid;gap:2px}
+.faiml-unit-tab strong{font-size:12px;line-height:1.2}
+.faiml-unit-tab small{color:var(--faiml-muted);font-size:9px;font-weight:500}
+
+/* Unit 1-4 interactive panels */
+.faiml-interactive-card{display:grid;gap:20px;padding:26px 28px;border:1px solid var(--faiml-line);border-radius:18px;background:var(--faiml-surface)}
+.faiml-interactive-card header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.faiml-interactive-card h3{margin:0;font-size:20px;font-weight:800;letter-spacing:-.4px}
+.faiml-interactive-card p{margin:4px 0 0;color:var(--faiml-muted);font-size:12px;line-height:1.6}
+
+/* PEAS Grid */
+.faiml-peas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.faiml-peas-col{padding:16px;border:1px solid var(--faiml-line);border-radius:14px;background:var(--faiml-tint)}
+.faiml-peas-col h4{display:flex;align-items:center;gap:8px;margin:0 0 10px;color:var(--faiml-accent);font-size:11px;font-weight:850;letter-spacing:.8px;text-transform:uppercase}
+.faiml-peas-col ul{margin:0;padding-left:18px;font-size:11px;line-height:1.55;color:var(--faiml-muted)}
+.faiml-peas-col li{margin-bottom:6px}
+
+/* Slider and live display */
+.faiml-slider-container{padding:20px;border:1px solid var(--faiml-line);border-radius:14px;background:var(--faiml-tint)}
+.faiml-slider-container label{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:12px;font-weight:750}
+.faiml-slider-container input[type=range]{width:100%;accent-color:var(--faiml-accent);cursor:pointer}
+.faiml-slider-ticks{display:flex;justify-content:space-between;margin-top:6px;color:var(--faiml-muted);font-size:10px;font-family:Consolas,monospace}
+
+/* Route compare cards */
+.faiml-route-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.faiml-route-card{position:relative;padding:18px;border:1px solid var(--faiml-line);border-radius:14px;background:var(--faiml-surface);transition:all .2s ease}
+.faiml-route-card.recommended{border-color:var(--faiml-accent);background:linear-gradient(135deg,var(--faiml-surface),var(--faiml-tint));box-shadow:0 6px 18px color-mix(in srgb,var(--faiml-accent) 16%,transparent)}
+.faiml-route-card h4{margin:0 0 4px;font-size:15px;font-weight:800}
+.faiml-route-card p{margin:0 0 12px;color:var(--faiml-muted);font-size:11px}
+.faiml-route-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--faiml-line);font-size:11px}
+.faiml-route-badge{position:absolute;top:12px;right:12px;padding:3px 8px;border-radius:999px;background:var(--faiml-accent);color:#fff;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase}
+
+/* Bayes CPT & Posterior gauges */
+.faiml-bayes-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:18px}
+.faiml-symptom-toggles{display:grid;gap:8px}
+.faiml-symptom-toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border:1px solid var(--faiml-line);border-radius:12px;background:var(--faiml-surface);font-size:12px;font-weight:650;cursor:pointer;transition:all .15s}
+.faiml-symptom-toggle:hover{border-color:var(--faiml-accent);background:var(--faiml-tint)}
+.faiml-symptom-toggle input{accent-color:var(--faiml-accent);width:17px;height:17px}
+.faiml-posterior-card{display:grid;gap:14px;padding:20px;border:1px solid var(--faiml-line);border-radius:14px;background:var(--faiml-tint)}
+.faiml-posterior-item{display:grid;gap:6px}
+.faiml-posterior-header{display:flex;justify-content:space-between;font-size:12px;font-weight:750}
+.faiml-posterior-bar{height:10px;overflow:hidden;border-radius:999px;background:color-mix(in srgb,var(--faiml-line) 80%,transparent)}
+.faiml-posterior-bar span{display:block;height:100%;border-radius:inherit;transition:width .25s ease}
+
+/* Regression controls */
+.faiml-reg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.faiml-price-card{display:flex;justify-content:space-between;align-items:center;padding:22px 26px;border:1px solid color-mix(in srgb,var(--faiml-accent) 45%,var(--faiml-line));border-radius:16px;background:linear-gradient(135deg,var(--faiml-tint),var(--faiml-surface))}
+.faiml-price-val{font-size:clamp(28px,3.5vw,42px);font-weight:900;font-family:Consolas,monospace;color:var(--faiml-accent)}
+
+/* Cluster cards */
+.faiml-cluster-tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.faiml-cluster-btn{padding:14px;border:1px solid var(--faiml-line);border-radius:12px;background:var(--faiml-surface);text-align:left;cursor:pointer;transition:all .18s}
+.faiml-cluster-btn:hover{background:var(--faiml-tint)}
+.faiml-cluster-btn.active{border-color:var(--faiml-accent);background:var(--faiml-tint);box-shadow:0 4px 14px color-mix(in srgb,var(--faiml-accent) 16%,transparent)}
+
 @media(max-width:1080px){
   .faiml-case-hero{grid-template-columns:minmax(0,1fr) 270px;padding:40px}
   .faiml-case-progress ol{display:flex;max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin}
