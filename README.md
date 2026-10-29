@@ -41,6 +41,7 @@ The project goes beyond displaying static notes. Learners can move from structur
 | --- | --- |
 | **Course notes** | Structured Computer Networks content organized across five units |
 | **Original unit modules** | Existing interactive applications preserved and integrated into the learning platform |
+| **Interactive Case Studies** | Guided design and triage labs across AI & ML (FAIML), Java OOP, Embedded Systems, and Computer Networks |
 | **Learn for a Test** | Unit-specific quizzes, flashcards, and written-answer recall based on the supplied question bank |
 | **Course podcasts** | A unit-based audio player with seeking, 15-second controls, playback speed, and downloads |
 | **Reading preferences** | Light, sepia, and dark themes with adjustable reading support |
