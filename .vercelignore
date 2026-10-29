@@ -13,6 +13,16 @@
 **/*.tsbuildinfo
 **/aiven-ca.pem
 .vercel/**
+beyond-syllabus/ANTIGRAVITY_MASTER_HANDOFF.md
+beyond-syllabus/apps/users/public/CN-Unit/**
+beyond-syllabus/apps/users/public/CN-Unit-two/**
+beyond-syllabus/apps/users/public/CN-Unit-3/**
+beyond-syllabus/apps/users/public/CN-unit-4/**
+beyond-syllabus/apps/users/public/CN-Unit-5/**
+beyond-syllabus/apps/users/public/OOPJ/**
+beyond-syllabus/apps/users/public/ESD1/**
+beyond-syllabus/apps/users/public/cn-units/**
+beyond-syllabus/apps/users/cn-units/unit-*/**
 aetheria-user-application/ANTIGRAVITY_MASTER_HANDOFF.md
 aetheria-user-application/apps/users/public/CN-Unit/**
 aetheria-user-application/apps/users/public/CN-Unit-two/**
