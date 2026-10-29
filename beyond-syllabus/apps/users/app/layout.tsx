@@ -14,7 +14,22 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.USERS_URL ?? 'http://localhost:3000'),
   title: { default: 'Beyond Syllabus — Learn, Explore, Apply', template: '%s | Beyond Syllabus' },
   description: 'Learn, explore, and apply with clear course notes, practical explanations, and interactive study tools from Beyond Syllabus.',
-  icons: { icon: '/icon.svg', apple: '/icon.svg' },
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+      { url: '/beyond-syllabus-logo.png', sizes: '512x512', type: 'image/png' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    shortcut: ['/favicon.ico'],
+  },
   openGraph: { title: 'Beyond Syllabus', description: 'Learn, explore, and apply beyond the syllabus.', type: 'website', siteName: 'Beyond Syllabus' },
   twitter: { card: 'summary', title: 'Beyond Syllabus', description: 'Learn, explore, and apply beyond the syllabus.' },
 };
