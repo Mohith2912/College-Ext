@@ -1,6 +1,6 @@
-# Aetheria Study Companion
-
-Aetheria is an independent study companion for exploring original course notes, fictional case studies, and grounded AI-assisted explanations. It is not an official institutional platform.
+# Beyond Syllabus
+ 
+Beyond Syllabus is an independent learning platform for exploring original course notes, interactive unit modules, fictional case studies, and grounded study explanations. It is not an official institutional platform.
 
 This repository contains the learner-facing application in `apps/users`, backed by MySQL.
 

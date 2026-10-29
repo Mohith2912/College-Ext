@@ -1,5 +1,5 @@
 import 'server-only';
-import { prisma } from '@aetheria/database';
+import { prisma } from '@beyond-syllabus/database';
 import { unstable_cache } from 'next/cache';
 import { organizationScope } from './library';
 
@@ -116,4 +116,4 @@ async function loadLearningStudio() {
   return { terms: terms.map(term => ({ title: term.name, number: term.number })), modules };
 }
 
-export const getLearningStudio = unstable_cache(loadLearningStudio, ['aetheria-learning-studio-v6'], { revalidate: 300, tags: ['aetheria-curriculum'] });
+export const getLearningStudio = unstable_cache(loadLearningStudio, ['beyond-syllabus-learning-studio-v6'], { revalidate: 300, tags: ['beyond-syllabus-curriculum'] });

@@ -1,14 +1,13 @@
-# Aetheria Study Companion — Antigravity Master Handoff
+# Beyond Syllabus — Antigravity Master Handoff
 
-Last verified: 25 September 2026  
+Last verified: 29 October 2026  
 Repository: https://github.com/Mohith2912/College-Ext  
 Production: https://college-ext-users.vercel.app  
 Branch: `main`  
-Current revision when this document was created: `9cc7ead`
 
 ## 1. Continuation brief for Antigravity
 
-Continue developing **Aetheria**, an independent study companion. Work directly in this repository and preserve the existing product language, data model, responsive design, and security controls.
+Continue developing **Beyond Syllabus**, an independent study companion. Work directly in this repository and preserve the existing product language, data model, responsive design, and security controls.
 
 The application is a learner-facing study platform built with Next.js, React, TypeScript, Prisma, and MySQL. Production uses an Aiven MySQL database and Vercel. Docker is intentionally not used. The former admin application has been completely removed and must not be recreated unless the owner gives a new explicit instruction.
 
@@ -60,7 +59,7 @@ The deleted Vercel admin project was named `college-ext-admin`. Do not depend on
 ## 4. Repository architecture
 
 ```text
-aetheria-user-application/
+beyond-syllabus/
 ├─ apps/
 │  └─ users/                    Next.js learner application
 │     ├─ app/                   App Router pages and API routes
@@ -423,7 +422,7 @@ The production project is hosted by Vercel. The effective configuration is:
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "installCommand": "pnpm install",
-  "buildCommand": "pnpm db:migrate && pnpm --filter @aetheria/users build",
+  "buildCommand": "pnpm db:migrate && pnpm --filter @beyond-syllabus/users build",
   "outputDirectory": "apps/users/.next"
 }
 ```

@@ -19,7 +19,7 @@ Unit 4 `3e33fcac63bf8553adb3ca40e2eec2919af66c02`, and
 Unit 5 `b128093826a8afbaae92b21dfa0d4edc06bd3359`.
 
 `tooling/build-cn-units.mjs` reads the five actual repository folders next to
-`aetheria-user-application`, bundles their original entry points, and compiles their
+`beyond-syllabus`, bundles their original entry points, and compiles their
 Tailwind stylesheets independently. It never writes into those folders.
 Generated output lives in `apps/users/public/<repository-folder>` and is recreated
 by both the build and development commands. The original configuration and

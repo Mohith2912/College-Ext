@@ -8,7 +8,7 @@ export function ReaderControls({ title, course }: { title: string; course: strin
   const [progress, setProgress] = useState(0);
   const [copied, setCopied] = useState(false);
   useEffect(() => {
-    try { const saved = Number(localStorage.getItem('aetheria-reading-scale')); if (saved >= 85 && saved <= 140) { setScale(saved); document.documentElement.style.setProperty('--reading-scale', String(saved / 100)); } } catch { /* Reading controls remain available without local storage. */ }
+    try { const saved = Number(localStorage.getItem('beyond-syllabus-reading-scale') || localStorage.getItem('aetheria-reading-scale')); if (saved >= 85 && saved <= 140) { setScale(saved); document.documentElement.style.setProperty('--reading-scale', String(saved / 100)); } } catch { /* Reading controls remain available without local storage. */ }
     function updateProgress() {
       const article = document.getElementById('note-content');
       if (!article) return;
@@ -19,7 +19,7 @@ export function ReaderControls({ title, course }: { title: string; course: strin
     window.addEventListener('scroll', updateProgress, { passive: true }); window.addEventListener('resize', updateProgress); updateProgress();
     return () => { window.removeEventListener('scroll', updateProgress); window.removeEventListener('resize', updateProgress); };
   }, []);
-  function updateScale(value: number) { setScale(value); document.documentElement.style.setProperty('--reading-scale', String(value / 100)); try { localStorage.setItem('aetheria-reading-scale', String(value)); } catch { /* The current reading size still changes. */ } }
+  function updateScale(value: number) { setScale(value); document.documentElement.style.setProperty('--reading-scale', String(value / 100)); try { localStorage.setItem('beyond-syllabus-reading-scale', String(value)); } catch { /* The current reading size still changes. */ } }
   async function copyCitation() { try { await navigator.clipboard.writeText(`Beyond Syllabus. “${title}.” ${course}. ${window.location.origin}${window.location.pathname} (accessed ${new Date().toISOString().slice(0, 10)}). Independent original study material.`); setCopied(true); setTimeout(() => setCopied(false), 2500); } catch { setCopied(false); } }
   return <>
     <div className="reader-progress" aria-label="Position in this note" role="progressbar" aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100}><div className="reader-progress-fill" style={{ width: `${progress}%` }} /></div>

@@ -9,11 +9,11 @@ export function ThemePicker() {
   const [theme, setTheme] = useState<Theme>('light');
   const menu = useRef<HTMLDetailsElement>(null);
   useEffect(() => {
-    try { const saved = localStorage.getItem('aetheria-theme'); if (saved === 'light' || saved === 'sepia' || saved === 'dark') { setTheme(saved); document.documentElement.dataset.theme = saved; } } catch { /* Private browsing can disable local storage. */ }
+    try { const saved = localStorage.getItem('beyond-syllabus-theme') || localStorage.getItem('aetheria-theme'); if (saved === 'light' || saved === 'sepia' || saved === 'dark') { setTheme(saved); document.documentElement.dataset.theme = saved; } } catch { /* Private browsing can disable local storage. */ }
   }, []);
   function changeTheme(value: Theme) {
     setTheme(value); document.documentElement.dataset.theme = value;
-    try { localStorage.setItem('aetheria-theme', value); } catch { /* Theme still applies in memory. */ }
+    try { localStorage.setItem('beyond-syllabus-theme', value); } catch { /* Theme still applies in memory. */ }
     if (menu.current) menu.current.open = false;
   }
   return <details ref={menu} className="theme-picker" onKeyDown={event => { if (event.key === 'Escape' && menu.current) menu.current.open = false; }}>

@@ -83,19 +83,19 @@ importers:
 
   apps/users:
     dependencies:
-      '@aetheria/ai':
+      '@beyond-syllabus/ai':
         specifier: workspace:*
         version: link:../../packages/ai
-      '@aetheria/auth':
+      '@beyond-syllabus/auth':
         specifier: workspace:*
         version: link:../../packages/auth
-      '@aetheria/database':
+      '@beyond-syllabus/database':
         specifier: workspace:*
         version: link:../../packages/database
-      '@aetheria/ui':
+      '@beyond-syllabus/ui':
         specifier: workspace:*
         version: link:../../packages/ui
-      '@aetheria/validation':
+      '@beyond-syllabus/validation':
         specifier: workspace:*
         version: link:../../packages/validation
       '@fontsource-variable/inter':
@@ -205,10 +205,10 @@ importers:
 
   packages/auth:
     dependencies:
-      '@aetheria/database':
+      '@beyond-syllabus/database':
         specifier: workspace:*
         version: link:../database
-      '@aetheria/validation':
+      '@beyond-syllabus/validation':
         specifier: workspace:*
         version: link:../validation
       '@node-rs/argon2':

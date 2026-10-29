@@ -1,7 +1,7 @@
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./aetheria-user-application/apps/users/public/beyond-syllabus-lockup-dark.png">
-    <img src="./aetheria-user-application/apps/users/public/beyond-syllabus-lockup.png" alt="Beyond Syllabus — Apply, Explore, Learn" width="520">
+    <source media="(prefers-color-scheme: dark)" srcset="./beyond-syllabus/apps/users/public/beyond-syllabus-lockup-dark.png">
+    <img src="./beyond-syllabus/apps/users/public/beyond-syllabus-lockup.png" alt="Beyond Syllabus — Apply, Explore, Learn" width="520">
   </picture>
 
   <p><strong>A focused learning platform that turns Computer Networks material into notes, interactive revision, visual modules, and unit-based podcasts.</strong></p>
@@ -99,7 +99,7 @@ College-Ext/
 │       ├── unit-3/
 │       ├── unit-4/
 │       └── unit-5/
-└── aetheria-user-application/
+└── beyond-syllabus/
     ├── apps/users/                  # Learner-facing Next.js application
     ├── packages/ai/                 # Grounded study-response utilities
     ├── packages/auth/               # Authentication services
@@ -135,7 +135,7 @@ Git LFS retrieves the Unit 1 podcast recording. Without it, the repository conta
 ### 2. Install dependencies
 
 ```powershell
-cd aetheria-user-application
+cd beyond-syllabus
 pnpm install
 ```
 
@@ -182,7 +182,7 @@ pnpm dev
 
 ## Useful commands
 
-Run these commands from `aetheria-user-application`.
+Run these commands from `beyond-syllabus`.
 
 | Command | Purpose |
 | --- | --- |

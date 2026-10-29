@@ -1,5 +1,5 @@
 {
-  "name": "aetheria-user-application",
+  "name": "beyond-syllabus",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -14,7 +14,7 @@
     "typecheck": "turbo run typecheck",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "turbo run build --filter=@aetheria/database --filter=@aetheria/validation --filter=@aetheria/auth --filter=@aetheria/ai && vitest run --config vitest.config.ts",
+    "test": "turbo run build --filter=@beyond-syllabus/database --filter=@beyond-syllabus/validation --filter=@beyond-syllabus/auth --filter=@beyond-syllabus/ai && vitest run --config vitest.config.ts",
     "test:e2e": "node --env-file=.env node_modules/@playwright/test/cli.js test",
     "db:generate": "prisma generate",
     "db:validate": "prisma validate",

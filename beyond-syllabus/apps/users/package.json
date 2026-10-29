@@ -1,5 +1,5 @@
 {
-  "name": "@aetheria/users",
+  "name": "@beyond-syllabus/users",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -11,10 +11,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@aetheria/auth": "workspace:*",
-    "@aetheria/ai": "workspace:*",
-    "@aetheria/database": "workspace:*",
-    "@aetheria/ui": "workspace:*",
+    "@beyond-syllabus/auth": "workspace:*",
+    "@beyond-syllabus/ai": "workspace:*",
+    "@beyond-syllabus/database": "workspace:*",
+    "@beyond-syllabus/ui": "workspace:*",
     "@fontsource/source-serif-4": "5.2.8",
     "@fontsource-variable/inter": "5.2.8",
     "github-slugger": "2.0.0",
@@ -34,7 +34,7 @@
     "remark-parse": "11.0.0",
     "mdast-util-to-string": "4.0.0",
     "server-only": "0.0.1",
-    "@aetheria/validation": "workspace:*",
+    "@beyond-syllabus/validation": "workspace:*",
     "@node-rs/argon2": "2.2.1",
     "@prisma/client": "6.19.0",
     "nodemailer": "10.0.14"

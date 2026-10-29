@@ -1,4 +1,4 @@
-import questionBank from '../../../aetheria-user-application/apps/users/lib/oopj-question-bank-data.json';
+import questionBank from '../../../beyond-syllabus/apps/users/lib/oopj-question-bank-data.json';
 import { BloomsLevel, CourseOutcome, ExamQuestion, UnitId } from '../types/concept';
 
 type SourceQuestion = {

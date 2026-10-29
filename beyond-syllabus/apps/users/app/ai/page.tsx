@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { prisma } from '@aetheria/database';
+import { prisma } from '@beyond-syllabus/database';
 import { auth } from '@/lib/auth';
 import { organizationScope } from '@/lib/library';
 import { Tutor } from '@/components/tutor';
