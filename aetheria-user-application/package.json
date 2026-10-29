@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "node --env-file=.env tooling/dev.mjs",
-    "build": "pnpm --filter @aetheria/database build && pnpm --filter @aetheria/validation build && pnpm --filter @aetheria/auth build && pnpm --filter @aetheria/ai build && pnpm --filter @aetheria/users build",
+    "build": "node --env-file-if-exists=.env node_modules/turbo/bin/turbo run build || (pnpm --filter @aetheria/database build && pnpm --filter @aetheria/validation build && pnpm --filter @aetheria/auth build && pnpm --filter @aetheria/ai build && pnpm --filter @aetheria/users build)",
     "lint": "eslint .",
     "typecheck": "turbo run typecheck",
     "format": "prettier --write .",
