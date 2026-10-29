@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from 'react';
 import {
-  Activity,
   AlertTriangle,
   ArrowRight,
   Award,
@@ -11,7 +10,6 @@ import {
   Check,
   CheckCircle2,
   Clock3,
-  Cpu,
   Layers,
   Network,
   RotateCcw,
@@ -53,7 +51,6 @@ export function FaimlCaseStudySession() {
 
   // Stage 3: Candidate Model Architecture
   const [inspectedModelIndex, setInspectedModelIndex] = useState(0);
-  const [inspectedModels, setInspectedModels] = useState<number[]>([0]);
   const [selectedModelId, setSelectedModelId] = useState<string | null>(null);
   const modelCorrect = selectedModelId === 'gradient-boost';
 
@@ -102,7 +99,6 @@ export function FaimlCaseStudySession() {
     setIncidentAnswers([]);
     setSearchAnswers({});
     setInspectedModelIndex(0);
-    setInspectedModels([0]);
     setSelectedModelId(null);
     setSelectedThresholdId('standard');
     setInspectedCohortId('cluster-1');
@@ -114,8 +110,6 @@ export function FaimlCaseStudySession() {
   const currentThreshold =
     thresholdScenarios.find(item => item.id === selectedThresholdId) ?? thresholdScenarios[0];
   const currentModel = candidateModels[inspectedModelIndex];
-  const currentCohort =
-    cohortClusters.find(c => c.id === inspectedCohortId) ?? cohortClusters[0];
 
   return (
     <div className="faiml-case-shell">
@@ -404,7 +398,6 @@ export function FaimlCaseStudySession() {
                     className={inspectedModelIndex === idx ? 'active' : ''}
                     onClick={() => {
                       setInspectedModelIndex(idx);
-                      setInspectedModels(curr => (curr.includes(idx) ? curr : [...curr, idx]));
                     }}
                   >
                     <span>{model.family}</span>
