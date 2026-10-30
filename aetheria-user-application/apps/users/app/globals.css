@@ -269,3 +269,67 @@ html[data-theme='dark'] .cn-case-complete{background:linear-gradient(135deg,#173
   .about-value-card:hover,.about-feature-card:hover{transform:none}
 }
 @media print{.about-hero__orbits,.about-hero__visual,.about-cta__glow{display:none!important}.about-hero,.about-mission,.about-values,.about-features,.about-philosophy,.about-independence,.about-cta{border:0;padding:20px 0}.about-value-card,.about-feature-card{border:1px solid #ccc}}
+
+
+/* Distinctive branded hover micro-interactions for courses */
+.course-card{transition:transform .2s cubic-bezier(.16,1,.3,1),border-color .2s ease,box-shadow .2s ease,background .2s ease}
+.course-card .course-icon{transition:transform .2s ease,color .2s ease}
+.course-card .course-open{transition:transform .2s ease,color .2s ease}
+.course-card:hover .course-open svg{transform:translate(2px,-2px)}
+
+/* OOPJ / Java Course Cards */
+.course-card[href*="java"]:hover,.course-card[href*="oopj"]:hover{
+  border-color:#5eead4;
+  background:linear-gradient(175deg,var(--surface) 0%,var(--surface) 65%,rgba(20,184,166,0.06) 100%);
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(15,118,110,0.12);
+}
+.course-card[href*="java"]:hover .course-icon,.course-card[href*="oopj"]:hover .course-icon{color:#0f766e;transform:scale(1.1)}
+.course-card[href*="java"]:hover .course-open,.course-card[href*="oopj"]:hover .course-open{color:#0f766e;font-weight:600}
+
+/* CN / Computer Networks Course Cards */
+.course-card[href*="network"]:hover,.course-card[href*="cn"]:hover{
+  border-color:#7dd3fc;
+  background:linear-gradient(175deg,var(--surface) 0%,var(--surface) 65%,rgba(2,132,199,0.06) 100%);
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(2,132,199,0.12);
+}
+.course-card[href*="network"]:hover .course-icon,.course-card[href*="cn"]:hover .course-icon{color:#0284c7;transform:scale(1.1)}
+.course-card[href*="network"]:hover .course-open,.course-card[href*="cn"]:hover .course-open{color:#0284c7;font-weight:600}
+
+/* ESD / Embedded Systems Design Course Cards */
+.course-card[href*="embedded"]:hover,.course-card[href*="esd"]:hover{
+  border-color:#f472b6;
+  background:linear-gradient(175deg,var(--surface) 0%,var(--surface) 65%,rgba(155,49,93,0.06) 100%);
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(155,49,93,0.12);
+}
+.course-card[href*="embedded"]:hover .course-icon,.course-card[href*="esd"]:hover .course-icon{color:#9b315d;transform:scale(1.1)}
+.course-card[href*="embedded"]:hover .course-open,.course-card[href*="esd"]:hover .course-open{color:#9b315d;font-weight:600}
+
+/* FAIML / Machine Learning Course Cards */
+.course-card[href*="artificial-intelligence"]:hover,.course-card[href*="machine-learning"]:hover,.course-card[href*="faiml"]:hover{
+  border-color:#c4b5fd;
+  background:linear-gradient(175deg,var(--surface) 0%,var(--surface) 65%,rgba(124,58,237,0.06) 100%);
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(124,58,237,0.12);
+}
+.course-card[href*="artificial-intelligence"]:hover .course-icon,.course-card[href*="machine-learning"]:hover .course-icon,.course-card[href*="faiml"]:hover .course-icon{color:#7c3aed;transform:scale(1.1)}
+.course-card[href*="artificial-intelligence"]:hover .course-open,.course-card[href*="machine-learning"]:hover .course-open,.course-card[href*="faiml"]:hover .course-open{color:#7c3aed;font-weight:600}
+
+/* Dark mode overrides for course cards */
+html[data-theme='dark'] .course-card[href*="java"]:hover,html[data-theme='dark'] .course-card[href*="oopj"]:hover{border-color:#2dd4bf;background:linear-gradient(175deg,var(--surface) 0%,rgba(15,118,110,0.18) 100%);box-shadow:0 12px 28px rgba(0,0,0,0.35)}
+html[data-theme='dark'] .course-card[href*="java"]:hover .course-icon,html[data-theme='dark'] .course-card[href*="oopj"]:hover .course-icon{color:#5eead4}
+html[data-theme='dark'] .course-card[href*="java"]:hover .course-open,html[data-theme='dark'] .course-card[href*="oopj"]:hover .course-open{color:#5eead4}
+
+html[data-theme='dark'] .course-card[href*="network"]:hover,html[data-theme='dark'] .course-card[href*="cn"]:hover{border-color:#38bdf8;background:linear-gradient(175deg,var(--surface) 0%,rgba(2,132,199,0.18) 100%);box-shadow:0 12px 28px rgba(0,0,0,0.35)}
+html[data-theme='dark'] .course-card[href*="network"]:hover .course-icon,html[data-theme='dark'] .course-card[href*="cn"]:hover .course-icon{color:#7dd3fc}
+html[data-theme='dark'] .course-card[href*="network"]:hover .course-open,html[data-theme='dark'] .course-card[href*="cn"]:hover .course-open{color:#7dd3fc}
+
+html[data-theme='dark'] .course-card[href*="embedded"]:hover,html[data-theme='dark'] .course-card[href*="esd"]:hover{border-color:#f472b6;background:linear-gradient(175deg,var(--surface) 0%,rgba(155,49,93,0.18) 100%);box-shadow:0 12px 28px rgba(0,0,0,0.35)}
+html[data-theme='dark'] .course-card[href*="embedded"]:hover .course-icon,html[data-theme='dark'] .course-card[href*="esd"]:hover .course-icon{color:#f9a8d4}
+html[data-theme='dark'] .course-card[href*="embedded"]:hover .course-open,html[data-theme='dark'] .course-card[href*="esd"]:hover .course-open{color:#f9a8d4}
+
+html[data-theme='dark'] .course-card[href*="artificial-intelligence"]:hover,html[data-theme='dark'] .course-card[href*="machine-learning"]:hover,html[data-theme='dark'] .course-card[href*="faiml"]:hover{border-color:#a78bfa;background:linear-gradient(175deg,var(--surface) 0%,rgba(124,58,237,0.18) 100%);box-shadow:0 12px 28px rgba(0,0,0,0.35)}
+html[data-theme='dark'] .course-card[href*="artificial-intelligence"]:hover .course-icon,html[data-theme='dark'] .course-card[href*="machine-learning"]:hover .course-icon,html[data-theme='dark'] .course-card[href*="faiml"]:hover .course-icon{color:#c4b5fd}
+html[data-theme='dark'] .course-card[href*="artificial-intelligence"]:hover .course-open,html[data-theme='dark'] .course-card[href*="machine-learning"]:hover .course-open,html[data-theme='dark'] .course-card[href*="faiml"]:hover .course-open{color:#c4b5fd}

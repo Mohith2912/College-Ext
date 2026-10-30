@@ -1,5 +1,47 @@
 .case-course-switcher>div:last-child{display:flex;gap:8px;flex-wrap:wrap}
-.case-course-switcher a{min-width:175px;flex:1 1 175px}
+.case-course-switcher a{min-width:175px;flex:1 1 175px;transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease,color .18s ease}
+
+/* 1. FAIML (Artificial Intelligence & Machine Learning) - Violet Theme */
+.case-course-switcher a[href*="course=faiml"]{border-color:var(--border);background:var(--surface)}
+.case-course-switcher a[href*="course=faiml"]>svg{color:#7c3aed;transition:transform .18s ease,color .18s ease}
+.case-course-switcher a[href*="course=faiml"]:hover{transform:translateY(-2px);border-color:#c4b5fd;background:linear-gradient(145deg,#fff,#f5f3ff);box-shadow:0 9px 22px rgba(124,58,237,.12)}
+.case-course-switcher a[href*="course=faiml"]:hover>svg{transform:scale(1.12);color:#6d28d9}
+.case-course-switcher a[href*="course=faiml"][aria-current='page']{border-color:#7c3aed;background:linear-gradient(135deg,#faf5ff,#ede9fe);box-shadow:inset 0 -3px #7c3aed,0 8px 20px rgba(124,58,237,.14);color:#6d28d9}
+
+/* 2. OOPJ (Object-Oriented Programming using Java) - Emerald/Teal Theme */
+.case-course-switcher a[href*="course=oopj"]{border-color:var(--border);background:var(--surface)}
+.case-course-switcher a[href*="course=oopj"]>svg{color:#0f766e;transition:transform .18s ease,color .18s ease}
+.case-course-switcher a[href*="course=oopj"]:hover{transform:translateY(-2px);border-color:#5eead4;background:linear-gradient(145deg,#fff,#f0fdfa);box-shadow:0 9px 22px rgba(15,118,110,.13)}
+.case-course-switcher a[href*="course=oopj"]:hover>svg{transform:scale(1.12);color:#0d9488}
+.case-course-switcher a[href*="course=oopj"][aria-current='page']{border-color:#0f766e;background:linear-gradient(135deg,#f0fdfa,#ccfbf1);box-shadow:inset 0 -3px #0f766e,0 8px 20px rgba(15,118,110,.14);color:#0f766e}
+
+/* 3. ESD (Embedded Systems Design) - Rose/Crimson Theme */
+.case-course-switcher a[href*="course=esd"]{border-color:var(--border);background:var(--surface)}
+.case-course-switcher a[href*="course=esd"]>svg{color:#9b315d;transition:transform .18s ease,color .18s ease}
+.case-course-switcher a[href*="course=esd"]:hover{transform:translateY(-2px);border-color:#cb91aa;background:linear-gradient(145deg,#fff,#fff2f7);box-shadow:0 9px 22px rgba(155,49,93,.12)}
+.case-course-switcher a[href*="course=esd"]:hover>svg{transform:scale(1.12);color:#be185d}
+.case-course-switcher a[href*="course=esd"][aria-current='page']{border-color:#bd7192;background:linear-gradient(135deg,#fff8fb,#f9e7ef);box-shadow:inset 0 -3px #9b315d,0 8px 20px rgba(155,49,93,.14);color:#9b315d}
+
+/* 4. CN (Computer Networks) - Sky/Cobalt Theme */
+.case-course-switcher a[href*="course=cn"]{border-color:var(--border);background:var(--surface)}
+.case-course-switcher a[href*="course=cn"]>svg{color:#0284c7;transition:transform .18s ease,color .18s ease}
+.case-course-switcher a[href*="course=cn"]:hover{transform:translateY(-2px);border-color:#7dd3fc;background:linear-gradient(145deg,#fff,#f0f9ff);box-shadow:0 9px 22px rgba(2,132,199,.13)}
+.case-course-switcher a[href*="course=cn"]:hover>svg{transform:scale(1.12);color:#0284c7}
+.case-course-switcher a[href*="course=cn"][aria-current='page']{border-color:#0284c7;background:linear-gradient(135deg,#f0f9ff,#e0f2fe);box-shadow:inset 0 -3px #0284c7,0 8px 20px rgba(2,132,199,.14);color:#0369a1}
+
+/* Dark mode variations for course switcher */
+html[data-theme='dark'] .case-course-switcher a[href*="course=faiml"]:hover{border-color:#a78bfa;background:linear-gradient(145deg,#211c2e,#2d2442)}
+html[data-theme='dark'] .case-course-switcher a[href*="course=faiml"][aria-current='page']{border-color:#a78bfa;background:linear-gradient(135deg,#2a2240,#382c57);box-shadow:inset 0 -3px #c4b5fd;color:#c4b5fd}
+
+html[data-theme='dark'] .case-course-switcher a[href*="course=oopj"]:hover{border-color:#2dd4bf;background:linear-gradient(145deg,#1b2626,#163633)}
+html[data-theme='dark'] .case-course-switcher a[href*="course=oopj"][aria-current='page']{border-color:#2dd4bf;background:linear-gradient(135deg,#163633,#0f4540);box-shadow:inset 0 -3px #2dd4bf;color:#5eead4}
+
+html[data-theme='dark'] .case-course-switcher a[href*="course=esd"]:hover{border-color:#f472b6;background:linear-gradient(145deg,#25252c,#3a2932)}
+html[data-theme='dark'] .case-course-switcher a[href*="course=esd"][aria-current='page']{border-color:#a96884;background:linear-gradient(135deg,#2a282f,#3e2933);box-shadow:inset 0 -3px #ed91b8;color:#f9a8d4}
+
+html[data-theme='dark'] .case-course-switcher a[href*="course=cn"]:hover{border-color:#38bdf8;background:linear-gradient(145deg,#162432,#14354e)}
+html[data-theme='dark'] .case-course-switcher a[href*="course=cn"][aria-current='page']{border-color:#38bdf8;background:linear-gradient(135deg,#14354e,#0c4366);box-shadow:inset 0 -3px #38bdf8;color:#7dd3fc}
+
 @media(max-width:1120px){.case-course-switcher{flex-direction:column;align-items:stretch;gap:14px}.case-course-switcher>div:last-child{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}}
 @media(max-width:820px){.case-course-switcher>div:last-child{grid-template-columns:repeat(2,minmax(0,1fr))}.case-course-switcher a{min-height:56px}}
 @media(max-width:610px){.case-course-switcher>div:last-child{grid-template-columns:1fr}.case-course-switcher a{min-height:50px}.case-course-switcher a small{display:block}}
