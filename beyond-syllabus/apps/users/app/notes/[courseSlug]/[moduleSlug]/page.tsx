@@ -12,6 +12,7 @@ import { cnRepositoryUrl, cnEmbeddedUrl } from '@/lib/cn-repositories';
 import { oopjCourseSlug, oopjEmbeddedUrl, oopjStandaloneUrl, oopjUnit } from '@/lib/oopj-reference';
 import { esdCourseSlug, esdEmbeddedUrl, esdStandaloneUrl, esdUnit } from '@/lib/esd-reference';
 import { faimlCourseSlug, faimlEmbeddedUrl, faimlStandaloneUrl, faimlUnit } from '@/lib/faiml-reference';
+import { adsaCourseSlug, adsaEmbeddedUrl, adsaStandaloneUrl, adsaUnit } from '@/lib/adsa-reference';
 
 type Props = { params: Promise<{ courseSlug: string; moduleSlug: string }>; searchParams: Promise<{ view?: string }> };
 export const dynamic = 'force-dynamic';
