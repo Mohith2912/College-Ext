@@ -15,3 +15,4 @@ export function adsaStandaloneUrl(moduleSlug: string): string | undefined {
   const unit = adsaUnit(moduleSlug);
   return unit ? `/ADSA/index.html?unit=${unit}` : undefined;
 }
+
