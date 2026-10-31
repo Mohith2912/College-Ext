@@ -7,6 +7,7 @@ import { FaimlCaseStudySession } from '@/components/faiml-case-study-session';
 import { OopjCaseStudySession } from '@/components/oopj-case-study-session';
 import { AdsaCaseStudySession } from '@/components/adsa-case-study-session';
 
+export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Interactive Case Studies',
   description: 'Practise Algorithms & Data Structures, AI & ML, Computer Networks, OOP using Java, and Embedded Systems Design through detailed interactive sessions.',
