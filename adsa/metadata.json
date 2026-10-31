@@ -1,0 +1,7 @@
+{
+  "name": "Algorithmic Workbench: Interactive DAA Lab",
+  "description": "Production-grade interactive virtual laboratory for Design and Analysis of Algorithms, featuring step-by-step algorithm visualizers, Java code tracing, DP tables, graph traversals, and complexity analysis.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
