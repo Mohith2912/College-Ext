@@ -5,11 +5,11 @@ function contentSecurityPolicy(nonce: string): string {
   return [
     "default-src 'self'",
     `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${development ? " 'unsafe-eval'" : ""}`,
-    "style-src 'self' 'unsafe-inline'",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "img-src 'self' data:",
-    "font-src 'self'",
+    "font-src 'self' https://fonts.gstatic.com",
     "connect-src 'self'",
-    "frame-ancestors 'none'",
+    "frame-ancestors 'self'",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
@@ -18,6 +18,20 @@ function contentSecurityPolicy(nonce: string): string {
 }
 
 export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+
+  // Static course assets should never have restrictive middleware CSP applied
+  if (
+    pathname.startsWith('/ADSA') ||
+    pathname.startsWith('/FAIML') ||
+    pathname.startsWith('/OOPJ') ||
+    pathname.startsWith('/ESD1') ||
+    pathname.startsWith('/CN-') ||
+    pathname.startsWith('/cn-')
+  ) {
+    return NextResponse.next();
+  }
+
   const nonce = crypto.randomUUID();
   const policy = contentSecurityPolicy(nonce);
   const requestHeaders = new Headers(request.headers);
