@@ -1,6 +1,6 @@
 {
   "name": "Beyond Syllabus",
-  "short_name": "Beyond Syllabus",
+  "short_name": "Beyond",
   "description": "A modern educational platform for engineering students.",
   "icons": [
     { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
