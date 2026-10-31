@@ -3,18 +3,12 @@
 import { useState } from 'react';
 import {
   Activity,
-  ArrowRight,
-  Award,
   Binary,
-  CheckCircle2,
-  Clock3,
   Cpu,
   Layers,
   Network,
-  RotateCcw,
   Sliders,
-  Sparkles,
-  Zap
+  Sparkles
 } from 'lucide-react';
 import {
   adsaCaseUnits,
@@ -22,8 +16,7 @@ import {
   u2Questions,
   u3Questions,
   u4Questions,
-  type AdsaUnitId,
-  type CaseQuestion
+  type AdsaUnitId
 } from '@/lib/adsa-case-study-session';
 import '@/app/adsa-case-study.css';
 
@@ -81,10 +74,6 @@ export function AdsaCaseStudySession({ initialUnit = 1 }: AdsaCaseStudySessionPr
     if (unitId === 2) setU2Answers(prev => ({ ...prev, [questionId]: optionIndex }));
     if (unitId === 3) setU3Answers(prev => ({ ...prev, [questionId]: optionIndex }));
     if (unitId === 4) setU4Answers(prev => ({ ...prev, [questionId]: optionIndex }));
-  };
-
-  const getUnitScore = (questions: CaseQuestion[], answers: Record<string, number>) => {
-    return questions.filter(q => answers[q.id] === q.answer).length;
   };
 
   return (
