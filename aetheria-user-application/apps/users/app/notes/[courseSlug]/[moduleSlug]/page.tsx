@@ -36,6 +36,10 @@ export default async function NotePage({ params }: Props) {
   if (aimlUnit) {
     return <><nav className="breadcrumbs" aria-label="Breadcrumb"><Link href="/notes">Course notes</Link><ChevronRight size={12}/><Link href={`/notes/${faimlCourseSlug}`}>Fundamentals of Artificial Intelligence and Machine Learning</Link><ChevronRight size={12}/><span>Unit {aimlUnit}</span></nav><div className="mb-4 flex flex-wrap gap-3"><Link className="btn btn-secondary" href={`/learn?course=${faimlCourseSlug}&module=${moduleSlug}`}>Learn Unit {aimlUnit} for a test</Link><a className="btn btn-secondary" href={faimlStandaloneUrl(moduleSlug)} target="_blank" rel="noopener noreferrer">Open original unit full screen</a></div><iframe className="cn-unit-embed" title={`Complete FAIML Unit ${aimlUnit} interactive studio`} src={faimlEmbeddedUrl(moduleSlug)} /></>;
   }
+  const dsaUnit = courseSlug === adsaCourseSlug ? adsaUnit(moduleSlug) : undefined;
+  if (dsaUnit) {
+    return <><nav className="breadcrumbs" aria-label="Breadcrumb"><Link href="/notes">Course notes</Link><ChevronRight size={12}/><Link href={`/notes/${adsaCourseSlug}`}>Advanced Data Structures and Algorithms</Link><ChevronRight size={12}/><span>Unit {dsaUnit}</span></nav><div className="mb-4 flex flex-wrap gap-3"><Link className="btn btn-secondary" href={`/learn?course=${adsaCourseSlug}&module=${moduleSlug}`}>Learn Unit {dsaUnit} for a test</Link><a className="btn btn-secondary" href={adsaStandaloneUrl(moduleSlug)} target="_blank" rel="noopener noreferrer">Open original unit full screen</a></div><iframe className="cn-unit-embed" title={`Complete ADSA Unit ${dsaUnit} interactive workbench`} src={adsaEmbeddedUrl(moduleSlug)} /></>;
+  }
   const toc = getTableOfContents(module.note.markdown);
   const index = module.course.modules.findIndex(item => item.slug === moduleSlug);
   const previous = module.course.modules[index - 1], next = module.course.modules[index + 1];
