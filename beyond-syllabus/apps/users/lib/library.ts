@@ -16,7 +16,7 @@ export async function getLibrary({ term, subject, q, availability }: { term?: st
     }),
     prisma.course.findMany({ where: publicCourse, select: { subject: true } }),
     prisma.module.count({ where: { ...publicModule, course: publicCourse } }),
-  ]), ['beyond-syllabus-library-v5', term ?? '', subject ?? '', q ?? '', availability ?? ''], { revalidate: 60, tags: ['beyond-syllabus-curriculum'] });
+  ]), ['beyond-syllabus-library-v6', term ?? '', subject ?? '', q ?? '', availability ?? ''], { revalidate: 60, tags: ['beyond-syllabus-curriculum'] });
   const [terms, courses, allCourses, moduleCount] = await load();
   return { terms, courses, courseCount: allCourses.length, moduleCount, subjects: [...new Set(allCourses.map(course => course.subject))].sort() };
 }
@@ -28,7 +28,7 @@ export async function getCourse(slug: string) {
       offerings: { where: { deletedAt: null, term: { deletedAt: null } }, include: { term: true }, orderBy: { position: 'asc' } },
       modules: { where: publicModule, orderBy: { position: 'asc' }, include: { note: { select: { status: true, deletedAt: true } }, _count: { select: { sections: true } } } },
     },
-  }), ['beyond-syllabus-course-v6', slug], { revalidate: 120, tags: ['beyond-syllabus-curriculum'] });
+  }), ['beyond-syllabus-course-v7', slug], { revalidate: 120, tags: ['beyond-syllabus-curriculum'] });
   return load();
 }
 
@@ -36,7 +36,7 @@ export async function getModule(courseSlug: string, moduleSlug: string) {
   const load = unstable_cache(() => prisma.module.findFirst({
     where: { ...publicModule, slug: moduleSlug, course: { ...publicCourse, slug: courseSlug }, note: { status: 'PUBLISHED', deletedAt: null, organization: organizationScope } },
     include: { note: true, course: { include: { offerings: { where: { deletedAt: null, term: { deletedAt: null } }, include: { term: true } }, modules: { where: { ...publicModule, note: { status: 'PUBLISHED', deletedAt: null } }, select: { slug: true, title: true, position: true }, orderBy: { position: 'asc' } } } } },
-  }), ['beyond-syllabus-module-v6', courseSlug, moduleSlug], { revalidate: 120, tags: ['beyond-syllabus-curriculum'] });
+  }), ['beyond-syllabus-module-v7', courseSlug, moduleSlug], { revalidate: 120, tags: ['beyond-syllabus-curriculum'] });
   return load();
 }
 
