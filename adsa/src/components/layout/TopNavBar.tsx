@@ -24,6 +24,7 @@ interface TopNavBarProps {
   onOpenSearch: () => void;
   onOpenRecurrenceCalc: () => void;
   onOpenComplexityCompare: () => void;
+  lockedUnitId?: UnitId;
 }
 
 export const TopNavBar: React.FC<TopNavBarProps> = ({
@@ -37,36 +38,63 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
   onOpenSearch,
   onOpenRecurrenceCalc,
   onOpenComplexityCompare,
+  lockedUnitId,
 }) => {
   const currentUnit = UNITS.find((u) => u.id === currentUnitId) || UNITS[0];
-  const allLabIds = UNITS.flatMap((u) => u.labs);
-  const currentLabGlobalIndex = allLabIds.indexOf(currentLabId);
+
+  // If locked to a specific unit, navigation is strictly within that unit
+  const activeLabIds = lockedUnitId ? currentUnit.labs : UNITS.flatMap((u) => u.labs);
+  const currentLabUnitIndex = currentUnit.labs.indexOf(currentLabId);
+  const currentLabActiveIndex = activeLabIds.indexOf(currentLabId);
 
   const handlePrevLab = () => {
-    if (currentLabGlobalIndex > 0) {
-      const prevId = allLabIds[currentLabGlobalIndex - 1];
-      const prevMeta = LAB_METADATA[prevId];
-      if (prevMeta.unitId !== currentUnitId) {
-        onSelectUnit(prevMeta.unitId);
+    if (lockedUnitId) {
+      if (currentLabUnitIndex > 0) {
+        onSelectLab(currentUnit.labs[currentLabUnitIndex - 1]);
       }
-      onSelectLab(prevId);
+    } else {
+      if (currentLabActiveIndex > 0) {
+        const prevId = activeLabIds[currentLabActiveIndex - 1];
+        const prevMeta = LAB_METADATA[prevId];
+        if (prevMeta.unitId !== currentUnitId) {
+          onSelectUnit(prevMeta.unitId);
+        }
+        onSelectLab(prevId);
+      }
     }
   };
 
   const handleNextLab = () => {
-    if (currentLabGlobalIndex < allLabIds.length - 1) {
-      const nextId = allLabIds[currentLabGlobalIndex + 1];
-      const nextMeta = LAB_METADATA[nextId];
-      if (nextMeta.unitId !== currentUnitId) {
-        onSelectUnit(nextMeta.unitId);
+    if (lockedUnitId) {
+      if (currentLabUnitIndex < currentUnit.labs.length - 1) {
+        onSelectLab(currentUnit.labs[currentLabUnitIndex + 1]);
       }
-      onSelectLab(nextId);
+    } else {
+      if (currentLabActiveIndex < activeLabIds.length - 1) {
+        const nextId = activeLabIds[currentLabActiveIndex + 1];
+        const nextMeta = LAB_METADATA[nextId];
+        if (nextMeta.unitId !== currentUnitId) {
+          onSelectUnit(nextMeta.unitId);
+        }
+        onSelectLab(nextId);
+      }
     }
   };
 
+  const isPrevDisabled = lockedUnitId
+    ? currentLabUnitIndex <= 0
+    : currentLabActiveIndex <= 0;
+
+  const isNextDisabled = lockedUnitId
+    ? currentLabUnitIndex >= currentUnit.labs.length - 1
+    : currentLabActiveIndex >= activeLabIds.length - 1;
+
+  const unitCompletedCount = currentUnit.labs.filter((l) => completedLabs.has(l)).length;
+  const totalCompletedCount = completedLabs.size;
+
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-2xs">
-      {/* Upper Row: Brand & Unit Tabs & Global Action Controls */}
+      {/* Upper Row: Brand & Unit Module Display & Global Action Controls */}
       <div className="flex items-center justify-between gap-6 px-5 py-3 border-b border-slate-100">
         {/* Zone 1: Wordmark */}
         <div className="flex items-center gap-3 shrink-0">
@@ -76,8 +104,12 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                onSelectUnit('unit-1');
-                onSelectLab('linear-search');
+                if (!lockedUnitId) {
+                  onSelectUnit('unit-1');
+                  onSelectLab('linear-search');
+                } else {
+                  onSelectLab(currentUnit.labs[0]);
+                }
               }}
               className="text-base sm:text-lg font-bold tracking-tight text-slate-900 whitespace-nowrap"
             >
@@ -85,41 +117,48 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
             </a>
           </div>
           <span className="hidden md:inline-block text-xs font-mono text-slate-500 border-l border-slate-200 pl-3">
-            DAA Virtual Lab
+            {lockedUnitId ? `Unit 0${currentUnit.number}` : 'DAA Virtual Lab'}
           </span>
         </div>
 
-        {/* Zone 2: 5 Unit Tabs */}
-        <nav className="hidden lg:flex items-center gap-1.5 p-1 bg-slate-100 rounded-lg">
-          {UNITS.map((unit) => {
-            const isSelected = unit.id === currentUnitId;
-            const unitDoneCount = unit.labs.filter((l) => completedLabs.has(l)).length;
+        {/* Zone 2: Unit Indicator / Selector */}
+        {lockedUnitId ? (
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-sky-50 border border-sky-200/80 rounded-lg text-sky-950 font-semibold text-xs tracking-tight shadow-2xs">
+            <span className="w-2 h-2 rounded-full bg-sky-600 animate-pulse" />
+            <span>Unit 0{currentUnit.number}: {currentUnit.title}</span>
+          </div>
+        ) : (
+          <nav className="hidden lg:flex items-center gap-1.5 p-1 bg-slate-100 rounded-lg">
+            {UNITS.map((unit) => {
+              const isSelected = unit.id === currentUnitId;
+              const unitDoneCount = unit.labs.filter((l) => completedLabs.has(l)).length;
 
-            return (
-              <button
-                key={unit.id}
-                onClick={() => {
-                  onSelectUnit(unit.id);
-                  if (!unit.labs.includes(currentLabId)) {
-                    onSelectLab(unit.labs[0]);
-                  }
-                }}
-                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all whitespace-nowrap flex items-center gap-2 cursor-pointer ${
-                  isSelected
-                    ? 'bg-white text-slate-900 shadow-xs font-semibold'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
-                }`}
-              >
-                <span>0{unit.number}. {unit.title.split(' ')[0]}</span>
-                {unitDoneCount > 0 && (
-                  <span className="text-[10px] font-mono px-1 py-0.2 rounded bg-sky-100 text-sky-800">
-                    {unitDoneCount}/{unit.labCount}
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </nav>
+              return (
+                <button
+                  key={unit.id}
+                  onClick={() => {
+                    onSelectUnit(unit.id);
+                    if (!unit.labs.includes(currentLabId)) {
+                      onSelectLab(unit.labs[0]);
+                    }
+                  }}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all whitespace-nowrap flex items-center gap-2 cursor-pointer ${
+                    isSelected
+                      ? 'bg-white text-slate-900 shadow-xs font-semibold'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
+                  }`}
+                >
+                  <span>0{unit.number}. {unit.title.split(' ')[0]}</span>
+                  {unitDoneCount > 0 && (
+                    <span className="text-[10px] font-mono px-1 py-0.2 rounded bg-sky-100 text-sky-800">
+                      {unitDoneCount}/{unit.labCount}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </nav>
+        )}
 
         {/* Zone 3: Workbench Actions */}
         <div className="flex items-center gap-2 shrink-0">
@@ -127,7 +166,7 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
           <button
             onClick={onToggleSound}
             title={soundEnabled ? 'Mute Audio Effects' : 'Enable Tactile Audio Effects'}
-            className={`p-1.5 rounded-md text-xs font-medium border transition-colors ${
+            className={`p-1.5 rounded-md text-xs font-medium border transition-colors cursor-pointer ${
               soundEnabled
                 ? 'bg-sky-50 border-sky-300 text-sky-700'
                 : 'bg-slate-50 border-slate-200 text-slate-500 hover:text-slate-800'
@@ -140,7 +179,7 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
           <button
             onClick={onOpenRecurrenceCalc}
             title="Master Theorem Recurrence Calculator"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-md transition-colors whitespace-nowrap"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-md transition-colors whitespace-nowrap cursor-pointer"
           >
             <BookOpen className="w-3.5 h-3.5 text-slate-500" />
             <span>Master Recurrence</span>
@@ -150,7 +189,7 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
           <button
             onClick={onOpenComplexityCompare}
             title="Compare Asymptotic Complexity Curves"
-            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-md transition-colors whitespace-nowrap"
+            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-md transition-colors whitespace-nowrap cursor-pointer"
           >
             <SlidersHorizontal className="w-3.5 h-3.5 text-slate-500" />
             <span>Complexity Curves</span>
@@ -159,7 +198,7 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
           {/* Search Button */}
           <button
             onClick={onOpenSearch}
-            className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-white bg-slate-900 hover:bg-slate-800 rounded-md transition-colors whitespace-nowrap"
+            className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-white bg-slate-900 hover:bg-slate-800 rounded-md transition-colors whitespace-nowrap cursor-pointer"
           >
             <Search className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">Search Labs</span>
@@ -176,20 +215,22 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
         <div className="flex items-center gap-1 shrink-0 mr-4">
           <button
             onClick={handlePrevLab}
-            disabled={currentLabGlobalIndex === 0}
+            disabled={isPrevDisabled}
             title="Previous Lab"
-            className="p-1 rounded text-slate-500 hover:text-slate-900 hover:bg-slate-200/60 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="p-1 rounded text-slate-500 hover:text-slate-900 hover:bg-slate-200/60 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
           <span className="text-[11px] font-mono text-slate-500 tabular-nums px-1">
-            {currentLabGlobalIndex + 1}/{allLabIds.length}
+            {lockedUnitId
+              ? `${currentLabUnitIndex + 1}/${currentUnit.labs.length}`
+              : `${currentLabActiveIndex + 1}/${activeLabIds.length}`}
           </span>
           <button
             onClick={handleNextLab}
-            disabled={currentLabGlobalIndex === allLabIds.length - 1}
+            disabled={isNextDisabled}
             title="Next Lab"
-            className="p-1 rounded text-slate-500 hover:text-slate-900 hover:bg-slate-200/60 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="p-1 rounded text-slate-500 hover:text-slate-900 hover:bg-slate-200/60 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
           >
             <ChevronRight className="w-4 h-4" />
           </button>
@@ -197,8 +238,8 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
 
         {/* Center: Horizontal Lab Buttons for the Active Unit */}
         <div className="flex items-center gap-1.5 overflow-x-auto py-0.5 flex-1 min-w-0">
-          <span className="text-slate-400 font-medium whitespace-nowrap mr-1 hidden sm:inline">
-            Unit 0{currentUnit.number}:
+          <span className="text-slate-500 font-semibold whitespace-nowrap mr-1 hidden sm:inline">
+            Unit 0{currentUnit.number} Labs:
           </span>
           {currentUnit.labs.map((labId) => {
             const lab = LAB_METADATA[labId];
@@ -241,15 +282,24 @@ export const TopNavBar: React.FC<TopNavBarProps> = ({
           })}
         </div>
 
-        {/* Right: Overall Progress Metric */}
+        {/* Right: Module Progress Metric */}
         <div className="hidden md:flex items-center gap-3 shrink-0 ml-4 border-l border-slate-200 pl-4">
           <div className="text-[11px] text-slate-600">
-            Progress: <span className="font-mono font-bold text-sky-700">{completedLabs.size}/17</span>
+            {lockedUnitId ? `Unit ${currentUnit.number}: ` : 'Progress: '}
+            <span className="font-mono font-bold text-sky-700">
+              {lockedUnitId
+                ? `${unitCompletedCount}/${currentUnit.labs.length}`
+                : `${totalCompletedCount}/17`}
+            </span>
           </div>
           <div className="w-16 bg-slate-200 rounded-full h-1.5 overflow-hidden">
             <div
               className="bg-sky-600 h-1.5 rounded-full transition-all duration-300"
-              style={{ width: `${(completedLabs.size / 17) * 100}%` }}
+              style={{
+                width: lockedUnitId
+                  ? `${(unitCompletedCount / currentUnit.labs.length) * 100}%`
+                  : `${(totalCompletedCount / 17) * 100}%`,
+              }}
             />
           </div>
         </div>

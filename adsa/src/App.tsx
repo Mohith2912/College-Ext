@@ -8,9 +8,42 @@ import { MasterRecurrenceCalc } from './components/workbench/MasterRecurrenceCal
 import { ComplexityComparator } from './components/workbench/ComplexityComparator';
 import { soundFx } from './lib/sound';
 
+function parseInitialUnit(): UnitId | undefined {
+  if (typeof window !== 'undefined' && window.location.search) {
+    const params = new URLSearchParams(window.location.search);
+    const unitParam = params.get('unit');
+    if (unitParam) {
+      const uId = ('unit-' + unitParam) as UnitId;
+      if (UNITS.some((u) => u.id === uId)) {
+        return uId;
+      }
+    }
+  }
+  return undefined;
+}
+
+function parseInitialLab(lockedUnit?: UnitId): LabId {
+  if (typeof window !== 'undefined' && window.location.search) {
+    const params = new URLSearchParams(window.location.search);
+    const labParam = params.get('lab') as LabId;
+    if (labParam && LAB_METADATA[labParam]) {
+      if (!lockedUnit || LAB_METADATA[labParam].unitId === lockedUnit) {
+        return labParam;
+      }
+    }
+  }
+  if (lockedUnit) {
+    const found = UNITS.find((u) => u.id === lockedUnit);
+    if (found && found.labs.length > 0) return found.labs[0];
+  }
+  return 'linear-search';
+}
+
 export default function App() {
-  const [currentUnitId, setCurrentUnitId] = useState<UnitId>('unit-1');
-  const [currentLabId, setCurrentLabId] = useState<LabId>('linear-search');
+  const [lockedUnitId] = useState<UnitId | undefined>(parseInitialUnit);
+  const [currentUnitId, setCurrentUnitId] = useState<UnitId>(() => lockedUnitId ?? 'unit-1');
+  const [currentLabId, setCurrentLabId] = useState<LabId>(() => parseInitialLab(lockedUnitId));
+
   const [completedLabs, setCompletedLabs] = useState<Set<LabId>>(() => {
     try {
       const saved = localStorage.getItem('daa_completed_labs_v2');
@@ -27,30 +60,6 @@ export default function App() {
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [isRecurrenceCalcOpen, setIsRecurrenceCalcOpen] = useState<boolean>(false);
   const [isComplexityCompareOpen, setIsComplexityCompareOpen] = useState<boolean>(false);
-
-  // Sync unit and lab selection from URL query parameters (e.g. ?unit=1 or ?lab=linear-search)
-  useEffect(() => {
-    try {
-      if (typeof window !== 'undefined' && window.location.search) {
-        const params = new URLSearchParams(window.location.search);
-        const unitParam = params.get('unit');
-        if (unitParam) {
-          const uId = ('unit-' + unitParam);
-          const foundUnit = UNITS.find((u) => u.id === uId);
-          if (foundUnit && foundUnit.labs.length > 0) {
-            setCurrentUnitId(uId);
-            setCurrentLabId(foundUnit.labs[0]);
-          }
-        }
-        const labParam = params.get('lab');
-        if (labParam && LAB_METADATA[labParam]) {
-          setCurrentLabId(labParam);
-          const meta = LAB_METADATA[labParam];
-          if (meta) setCurrentUnitId(meta.unitId);
-        }
-      }
-    } catch {}
-  }, []);
 
   // Toggle Sound FX
   const handleToggleSound = () => {
@@ -90,15 +99,22 @@ export default function App() {
   };
 
   const handleSelectLab = (labId: LabId) => {
-    setCurrentLabId(labId);
     const labMeta = LAB_METADATA[labId];
-    if (labMeta && labMeta.unitId !== currentUnitId) {
-      setCurrentUnitId(labMeta.unitId);
+    if (lockedUnitId) {
+      if (labMeta && labMeta.unitId === lockedUnitId) {
+        setCurrentLabId(labId);
+      }
+    } else {
+      setCurrentLabId(labId);
+      if (labMeta && labMeta.unitId !== currentUnitId) {
+        setCurrentUnitId(labMeta.unitId);
+      }
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSelectUnit = (unitId: UnitId) => {
+    if (lockedUnitId) return; // Disallow changing unit when locked to an individual module
     setCurrentUnitId(unitId);
     const unit = UNITS.find((u) => u.id === unitId);
     if (unit && !unit.labs.includes(currentLabId)) {
@@ -109,7 +125,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-sky-100 selection:text-sky-900">
-      {/* Top Navigation Bar with Unit & Lab Ribbons on Top */}
+      {/* Top Navigation Bar with Unit & Lab Ribbons */}
       <TopNavBar
         currentUnitId={currentUnitId}
         currentLabId={currentLabId}
@@ -121,6 +137,7 @@ export default function App() {
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenRecurrenceCalc={() => setIsRecurrenceCalcOpen(true)}
         onOpenComplexityCompare={() => setIsComplexityCompareOpen(true)}
+        lockedUnitId={lockedUnitId}
       />
 
       {/* Main Full-Width Laboratory Workspace */}
@@ -138,6 +155,7 @@ export default function App() {
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
         onSelectLab={handleSelectLab}
+        lockedUnitId={lockedUnitId}
       />
 
       <MasterRecurrenceCalc

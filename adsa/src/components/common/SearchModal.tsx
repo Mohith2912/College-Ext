@@ -1,18 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, X, ChevronRight } from 'lucide-react';
 import { UNITS, LAB_METADATA } from '../../data/curriculum';
-import { LabId } from '../../types/algorithm';
+import { LabId, UnitId } from '../../types/algorithm';
 
 interface SearchModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSelectLab: (labId: LabId) => void;
+  lockedUnitId?: UnitId;
 }
 
 export const SearchModal: React.FC<SearchModalProps> = ({
   isOpen,
   onClose,
   onSelectLab,
+  lockedUnitId,
 }) => {
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -27,8 +29,10 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   if (!isOpen) return null;
 
-  const allLabIds = Object.keys(LAB_METADATA) as LabId[];
-  const filteredLabs = allLabIds.filter((id) => {
+  const currentUnit = lockedUnitId ? UNITS.find((u) => u.id === lockedUnitId) : undefined;
+  const labPool: LabId[] = currentUnit ? currentUnit.labs : (Object.keys(LAB_METADATA) as LabId[]);
+
+  const filteredLabs = labPool.filter((id) => {
     const meta = LAB_METADATA[id];
     const q = query.toLowerCase();
     return (
@@ -50,7 +54,11 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           <input
             ref={inputRef}
             type="text"
-            placeholder="Search algorithms, paradigms, Java classes, or Big O bounds..."
+            placeholder={
+              currentUnit
+                ? `Search within Unit 0${currentUnit.number}: ${currentUnit.title}...`
+                : 'Search algorithms, paradigms, Java classes, or Big O bounds...'
+            }
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className="w-full text-sm text-slate-900 placeholder-slate-400 bg-transparent focus:outline-hidden"
@@ -58,58 +66,63 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           {query && (
             <button
               onClick={() => setQuery('')}
-              className="p-1 text-slate-400 hover:text-slate-600 rounded"
+              className="text-xs text-slate-400 hover:text-slate-600 px-1.5 py-0.5 rounded bg-slate-100"
             >
-              <X className="w-4 h-4" />
+              Clear
             </button>
           )}
-          <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono bg-slate-100 rounded text-slate-500 border border-slate-200">
-            ESC
-          </kbd>
+          <button
+            onClick={onClose}
+            className="p-1 rounded-md text-slate-400 hover:text-slate-600 hover:bg-slate-100 ml-1"
+          >
+            <X className="w-4 h-4" />
+          </button>
         </div>
 
         {/* Results List */}
-        <div className="max-h-96 overflow-y-auto divide-y divide-slate-100 p-2">
+        <div className="max-h-96 overflow-y-auto divide-y divide-slate-100">
           {filteredLabs.length === 0 ? (
-            <div className="py-8 text-center text-xs text-slate-400">
-              No matching labs found for &quot;{query}&quot;.
+            <div className="p-8 text-center text-sm text-slate-500">
+              No algorithm lab matched "{query}".
             </div>
           ) : (
-            filteredLabs.map((labId) => {
-              const lab = LAB_METADATA[labId];
-              const unit = UNITS.find((u) => u.id === lab.unitId);
+            filteredLabs.map((id) => {
+              const meta = LAB_METADATA[id];
+              const unit = UNITS.find((u) => u.id === meta.unitId);
 
               return (
                 <button
-                  key={labId}
+                  key={id}
                   onClick={() => {
-                    onSelectLab(labId);
+                    onSelectLab(id);
                     onClose();
                   }}
-                  className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 text-left transition-colors cursor-pointer group"
+                  className="w-full px-4 py-3 text-left hover:bg-slate-50 transition-colors flex items-center justify-between group"
                 >
-                  <div className="flex-1 min-w-0 pr-3">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[11px] font-semibold text-sky-700">
-                        Unit 0{unit?.number} · {lab.category}
+                  <div className="min-w-0 pr-3">
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className="text-xs font-mono font-semibold text-sky-700 bg-sky-50 px-1.5 py-0.5 rounded border border-sky-200/60">
+                        {meta.badge}
                       </span>
-                      <span className="text-slate-300">·</span>
-                      <span className="text-[11px] font-mono text-slate-500">
-                        {lab.badge}
+                      <span className="text-sm font-semibold text-slate-900 group-hover:text-sky-700 transition-colors truncate">
+                        {meta.title}
                       </span>
                     </div>
-                    <div className="text-sm font-bold text-slate-900 group-hover:text-sky-600 transition-colors">
-                      {lab.title}
-                    </div>
-                    <div className="text-xs text-slate-500 truncate mt-0.5">
-                      {lab.summary}
+                    <div className="text-xs text-slate-500 truncate">
+                      {unit?.title} • {meta.category} • Worst: {meta.complexity.timeWorst}
                     </div>
                   </div>
-                  <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-sky-600 shrink-0 transition-transform group-hover:translate-x-0.5" />
+                  <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-slate-600 shrink-0 transition-transform group-hover:translate-x-0.5" />
                 </button>
               );
             })
           )}
+        </div>
+
+        {/* Modal Footer */}
+        <div className="px-4 py-2 bg-slate-50 border-t border-slate-200 text-[11px] text-slate-500 flex items-center justify-between">
+          <span>{filteredLabs.length} algorithm labs available</span>
+          <span>ESC to close</span>
         </div>
       </div>
     </div>
